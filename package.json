@@ -2,7 +2,7 @@
   "name": "Zprotect",
   "version": "1.2",
   "description": "Un bot Discord pour la gestion des serveurs",
-  "author": "zsfq",
+  "author": "zsfeq",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
