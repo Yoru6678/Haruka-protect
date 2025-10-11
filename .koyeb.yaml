@@ -1,0 +1,6 @@
+name: harukaprotect
+build:
+  type: nodejs
+  command: npm install --force
+run:
+  command: node index.js
