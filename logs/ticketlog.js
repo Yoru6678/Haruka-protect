@@ -2,9 +2,9 @@ const { MessageEmbed } = require('discord.js')
 const Discord = require('discord.js')
 const db = require('quick.db')
 const config = require("../config")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const ticketlog = new db.table("ticketlog")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const ticketlog = db.table("ticketlog")
 const footer = config.bot.footer
 
 

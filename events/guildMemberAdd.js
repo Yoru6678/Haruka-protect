@@ -2,12 +2,12 @@ const Discord = require('discord.js')
 const moment = require('moment');
 const config = require('../config')
 const db = require("quick.db")
-const cl = new db.table("Color")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const lock = new db.table("Serverlock")
-const atb = new db.table("Antibot")
+const cl = db.table("Color")
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const lock = db.table("Serverlock")
+const atb = db.table("Antibot")
 
 module.exports = {
     name: 'guildMemberAdd',

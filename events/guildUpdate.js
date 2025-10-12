@@ -1,11 +1,11 @@
 const Discord = require('discord.js')
 const config = require('../config')
 const db = require("quick.db")
-const cl = new db.table("Color")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const agu = new db.table("Guildupdate")
+const cl = db.table("Color")
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const agu = db.table("Guildupdate")
 
 module.exports = {
     name: 'guildUpdate',

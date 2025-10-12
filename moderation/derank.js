@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const db = require('quick.db');
-const owner = new db.table("Owner");
-const cl = new db.table("Color");
-const modlog = new db.table("modlog")
+const owner = db.table("Owner");
+const cl = db.table("Color");
+const modlog = db.table("modlog")
 const config = require("../config");
 const footer = config.bot.footer;
  ;

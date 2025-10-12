@@ -1,10 +1,10 @@
 const Discord = require("discord.js")
 const config = require("../config")
 const db = require("quick.db")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const p = new db.table("Prefix")
-const agu = new db.table("Guildupdate")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const p = db.table("Prefix")
+const agu = db.table("Guildupdate")
 
 module.exports = {
     name: 'antiupdate',

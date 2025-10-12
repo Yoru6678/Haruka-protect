@@ -1,12 +1,12 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
-const owner = new db.table("Owner")
-const modlog = new db.table("modlog")
+const owner = db.table("Owner")
+const modlog = db.table("modlog")
 const config = require("../config")
 const fs = require('fs')
 const moment = require('moment')
-const p2 = new db.table("Perm2")
-const p3 = new db.table("Perm3")
+const p2 = db.table("Perm2")
+const p3 = db.table("Perm3")
 
 module.exports = {
     name: 'unhide',

@@ -1,11 +1,13 @@
+require("dotenv").config();
 const { Client, Intents, guild, Collection } = require('discord.js');
 const Discord = require("discord.js")
 const config = require('./config')
 const ping = require('./ping.js')
 const { readdirSync } = require("fs")
-const db = require('quick.db')
-const p = new db.table("Prefix")
-const logembed = new db.table("embedlog")
+const { QuickDB } = require('quick.db');
+const db = new QuickDB();
+const p = db.table("Prefix")
+const logembed = db.table("embedlog")
 ms = require("ms")
 const color = config.bot.couleur
 const client = new Client({
@@ -14,7 +16,7 @@ const client = new Client({
     partials: ["USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"]
 });
 
-client.login(process.env.token);// remplacer par le token du bot
+client.login(process.env.TOKEN);
 client.commands = new Collection();
 
 const { GiveawaysManager } = require('discord-giveaways');

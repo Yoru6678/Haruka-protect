@@ -1,9 +1,9 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const config = require("../config");
 const db = require('quick.db');
-const cl = new db.table("Color");
-const p3 = new db.table("Perm3");
-const owner = new db.table("Owner");
+const cl = db.table("Color");
+const p3 = db.table("Perm3");
+const owner = db.table("Owner");
 
 module.exports = {
     name: 'role',

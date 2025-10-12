@@ -1,10 +1,10 @@
 const Discord = require('discord.js')
 const db = require("quick.db")
-const owner = new db.table("Owner")
-const rlog = new db.table("raidlog")
-const punish = new db.table("Punition")
-const wl = new db.table("Whitelist")
-const atd = new db.table("antichanneldelete")
+const owner = db.table("Owner")
+const rlog = db.table("raidlog")
+const punish = db.table("Punition")
+const wl = db.table("Whitelist")
+const atd = db.table("antichanneldelete")
 const config = require('../config')
 
 module.exports = {

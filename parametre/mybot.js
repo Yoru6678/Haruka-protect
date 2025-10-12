@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 require("moment-duration-format");
 const config = require("../config")
 const db = require('quick.db')
-const cl = new db.table("Color")
+const cl = db.table("Color")
 const footer = config.bot.footer
 
 module.exports = {

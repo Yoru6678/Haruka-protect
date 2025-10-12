@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
-const cl = new db.table("Color")
-const p = new db.table("Prefix")
+const cl = db.table("Color")
+const p = db.table("Prefix")
 const config = require("../config")
 
 module.exports = {

@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const db = require("quick.db")
-const owner = new db.table("Owner")
+const owner = db.table("Owner")
 const config = require('../config')
 
 

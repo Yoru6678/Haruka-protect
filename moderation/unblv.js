@@ -1,10 +1,10 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
 const config = require("../config")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const p3 = new db.table("Perm3")
-const blv = new db.table("blvoc")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const p3 = db.table("Perm3")
+const blv = db.table("blvoc")
 const footer = config.bot.footer
 
 

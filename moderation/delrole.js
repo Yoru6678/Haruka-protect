@@ -1,10 +1,10 @@
 const Discord = require("discord.js")
 const config = require("../config")
 const db = require("quick.db")
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const ml = new db.table("modlog")
-const pgs = new db.table("PermGs")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const ml = db.table("modlog")
+const pgs = db.table("PermGs")
 
 module.exports = {
     name: 'delrole',

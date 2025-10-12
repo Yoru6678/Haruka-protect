@@ -3,12 +3,12 @@ const Discord = require('discord.js')
 const messageCreate = require('./messageCreate');
 const config = require('../config')
 const db = require('quick.db')
-const cl = new db.table("Color")
-const ct = new db.table("CategorieTicket")
+const cl = db.table("Color")
+const ct = db.table("CategorieTicket")
 const moment = require('moment')
 const fs = require('fs')
-const ticketlogg = new db.table("ticketlog")
-const dbrolestaff = new db.table("Rolestaff")
+const ticketlogg = db.table("ticketlog")
+const dbrolestaff = db.table("Rolestaff")
  
 
 module.exports = {

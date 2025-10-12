@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const moment = require('moment');
 const db = require('quick.db');
-const cl = new db.table("Color");
+const cl = db.table("Color");
 const config = require("../config");
-const p1 = new db.table("Perm1");
-const p2 = new db.table("Perm2");
-const p3 = new db.table("Perm3");
-const owner = new db.table("Owner");
+const p1 = db.table("Perm1");
+const p2 = db.table("Perm2");
+const p3 = db.table("Perm3");
+const owner = db.table("Owner");
 
 module.exports = {
     name: 'lookup',

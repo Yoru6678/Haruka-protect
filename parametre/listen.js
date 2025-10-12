@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../config");
 const db = require('quick.db');
-const owner = new db.table("Owner");
+const owner = db.table("Owner");
 
 function sleep(ms) {
   return new Promise((resolve) => {

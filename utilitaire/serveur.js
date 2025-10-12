@@ -1,12 +1,12 @@
 const { MessageEmbed } = require('discord.js');
 const db = require('quick.db');
-const cl = new db.table("Color");
+const cl = db.table("Color");
 const config = require("../config");
 const moment = require('moment');
-const p1 = new db.table("Perm1");
-const p2 = new db.table("Perm2");
-const owner = new db.table("Owner");
-const p3 = new db.table("Perm3");
+const p1 = db.table("Perm1");
+const p2 = db.table("Perm2");
+const owner = db.table("Owner");
+const p3 = db.table("Perm3");
 require('moment/locale/fr');
 moment.locale('fr');
 

@@ -1,12 +1,12 @@
 const Discord = require("discord.js")
 const config = require("../config")
 const db = require("quick.db")
-const owner = new db.table("Owner")
-const p = new db.table("Prefix")
-const cl = new db.table("Color")
-const atr = new db.table("antirolecreate")
-const ard = new db.table("antiroledelete")
-const aru = new db.table("antiroleupdate")
+const owner = db.table("Owner")
+const p = db.table("Prefix")
+const cl = db.table("Color")
+const atr = db.table("antirolecreate")
+const ard = db.table("antiroledelete")
+const aru = db.table("antiroleupdate")
 
 module.exports = {
     name: 'antirôle',

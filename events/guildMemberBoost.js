@@ -1,5 +1,5 @@
 const db = require("quick.db")
-const boostlog = new db.table("boostlog")
+const boostlog = db.table("boostlog")
 
 module.exports = {
     name: 'guildMemberUpdate',

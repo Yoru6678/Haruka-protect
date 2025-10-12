@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const db = require('quick.db');
-const owner = new db.table("Owner");
+const owner = db.table("Owner");
 const config = require("../config");
-const cl = new db.table("Color");
-const p2 = new db.table("Perm2");
-const p3 = new db.table("Perm3");
+const cl = db.table("Color");
+const p2 = db.table("Perm2");
+const p3 = db.table("Perm3");
 
 module.exports = {
     name: 'all',

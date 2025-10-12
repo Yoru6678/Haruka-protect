@@ -1,12 +1,12 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
-const owner = new db.table("Owner")
-const cl = new db.table("Color")
-const ml = new db.table("modlog")
+const owner = db.table("Owner")
+const cl = db.table("Color")
+const ml = db.table("modlog")
 const config = require("../config")
 const fs = require('fs')
 const moment = require('moment')
-const p3 = new db.table("Perm3")
+const p3 = db.table("Perm3")
 
 module.exports = {
     name: 'kick',
