@@ -4,6 +4,9 @@ const path = require("path");
 const baseDir = process.cwd();
 const extensions = [".js"];
 
+const bug = `} else if (message.member.roles.cache.has(pgs.get(\`permgs_\${message.guild.id}\`) === true) {`;
+const fix = `} else if (pgs.get(\`permgs_\${message.guild.id}\`) === true && message.member.roles.cache.has(pgs.get(\`permgs_\${message.guild.id}\`))) {`;
+
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, file);
@@ -18,19 +21,15 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixExtraClosingParenthesis(filePath) {
+function fixBug(filePath) {
   if (filePath === __filename) return;
   let content = fs.readFileSync(filePath, "utf8");
-  let original = content;
-
-  // Corrige ...get(...)) → ...get(...);
-  content = content.replace(/\.get\(([^)]+)\)\)/g, (_, inner) => `.get(${inner})`);
-
-  if (content !== original) {
+  if (content.includes(bug)) {
+    content = content.replace(bug, fix);
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ parenthèse en trop supprimée : ${filePath}`);
+    console.log(`✅ corrigé dans : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixExtraClosingParenthesis);
+allFiles.forEach(fixBug);
