@@ -37,7 +37,9 @@ module.exports = {
                     .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`addrole\` sur ${member}\nRôle ajouté : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` });
-                const logchannel = client.channels.cache.get(await ml.get(`${message.guild.id}.modlog`));
+                const raidlogId = await ml.get(`${message.guild.id}.modlog`;
+const logchannel = client.channels.cache.get(raidlogId);
+const channel = client.channels.cache.get(raidlogId));
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
 
             } else if (message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) === true) {

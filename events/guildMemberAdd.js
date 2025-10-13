@@ -82,7 +82,9 @@ const raidlogChannel4 = client.channels.cache.get(raidlogId);
                     const embed = new Discord.MessageEmbed()
                         .setDescription(`<@${action.executor.id}> a ajouté un \`bot\` au serveur\nBot ajouté: <@${member.id}>`)
                         .setTimestamp()
-                    const raidlogChannel5 = client.channels.cache.get(await db.get(`${member.guild.id}.raidlog`))
+                    const raidlogId = await db.get(`${member.guild.id}.raidlog`;
+const raidlogChannel5 = client.channels.cache.get(raidlogId);
+const channel = client.channels.cache.get(raidlogId))
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
                 }
