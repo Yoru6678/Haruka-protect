@@ -18,20 +18,35 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixChannelRedeclaration(filePath) {
+function fixDuplicateRaidlogChannel(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Remplace const channel = ... par const raidlogChannel = ...
-  content = content.replace(/const\s+channel\s*=\s*/g, "const raidlogChannel = ");
+  const lines = content.split("\n");
+  let seen = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes("const raidlogChannel")) {
+      seen++;
+      if (seen > 1) {
+        lines[i] = lines[i].replace(/const\s+raidlogChannel/, `const raidlogChannel${seen}`);
+        // remplace aussi les usages sur la même ligne
+        lines[i] = lines[i].replace(/\braidlogChannel\b/g, `raidlogChannel${seen}`);
+      }
+    } else if (seen > 1 && lines[i].includes("raidlogChannel")) {
+      lines[i] = lines[i].replace(/\braidlogChannel\b/g, `raidlogChannel${seen}`);
+    }
+  }
+
+  content = lines.join("\n");
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ variable channel renommée : ${filePath}`);
+    console.log(`✅ redéclaration raidlogChannel renommée : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixChannelRedeclaration);
+allFiles.forEach(fixDuplicateRaidlogChannel);

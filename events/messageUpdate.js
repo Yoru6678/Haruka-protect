@@ -65,7 +65,7 @@ send({ embeds: [embed] }).catch(() => false)
         const chan = await msglog.get(`${oldMessage.guild.id}.messagelog`)
         if (chan == null) return
 
-        const raidlogChannel = oldMessage.guild.channels.cache.get(chan)
+        const raidlogChannel2 = oldMessage.guild.channels.cache.get(chan)
         if (channel == null) return
 
         if (oldMessage.content === newMessage.content) return;

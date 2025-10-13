@@ -82,8 +82,8 @@ module.exports = {
                     .setDescription(`<@${audit.executor.id}> a tenté de \`modifier un rôle\`, il a été sanctionné`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${oldRole.guild.id}.raidlog`);
-const raidlogChannel = client.channels.cache.get(raidlogId);
-const raidlogChannel = client.channels.cache.get(raidlogId);
+const raidlogChannel2 = client.channels.cache.get(raidlogId);
+const raidlogChannel3 = client.channels.cache.get(raidlogId);
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }
