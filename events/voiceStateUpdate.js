@@ -14,7 +14,7 @@ module.exports = {
 
     async execute(client, oldState, newState) {
 
-        if (await db.get(`${newState.guild.id}.antivoc.${newState.channelId}`)) {
+        if (await db.get(`${newState.guild.id}.antivoc.${newState.channelId}`) {
             if (owner.get(`owners.${newState.id}`) || wl.get(`${newState.guild.id}.${newState.id}.vl`) || config.bot.buyer === newState.id === true || client.user.id === newState.id === true) return
             newState.disconnect()
             const embed = new Discord.MessageEmbed()
@@ -24,7 +24,7 @@ module.exports = {
             newState.member.send({ embeds: [embed] })
         }
 
-        if (blv.get(`${newState.guild.id}.${newState.id}.blv`)) {
+        if (blv.get(`${newState.guild.id}.${newState.id}.blv`) {
 
             newState.disconnect()
 
@@ -70,7 +70,7 @@ module.exports = {
             }
 
             if (!oldState.channel) return;
-            if (oldState.channel.id == db.get(`tempvoc_${newState.guild.id}_${newState.member.id}`)) {
+            if (oldState.channel.id == db.get(`tempvoc_${newState.guild.id}_${newState.member.id}`) {
 
                 if (oldState.channel.id === salontempvoc) return;
                 if (oldState.channel.members.size === 0) {

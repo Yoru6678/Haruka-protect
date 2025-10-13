@@ -16,7 +16,7 @@ module.exports = {
     description: `Permet de lancer un giveaway sur le serveur.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await pga.get(`permga_${message.guild.id}`)) || config.bot.buyer.includes(message.author.id)   === true) {
+        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await pga.get(`permga_${message.guild.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
             let pf = await p.get(`prefix_${message.guild.id}`)
             if (pf == null) pf = config.bot.prefixe
@@ -76,7 +76,7 @@ module.exports = {
                 .setDescription(`<@${message.author.id}> a \`lancé un giveaway\` dans <#${giveawayChannel.id}>`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
-            const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.giveawaylog`))
+            const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.giveawaylog`)
             if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
         }

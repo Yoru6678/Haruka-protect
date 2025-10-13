@@ -19,7 +19,7 @@ module.exports = {
                 return message.channel.send("Veuillez mentionner un rôle valide ou fournir son ID.");
             }
 
-            if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`)) || config.bot.buyer.includes(message.author.id)) {
+            if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`) || config.bot.buyer.includes(message.author.id)) {
 
                 let membersWithRole = role.members.map(member => member.user.tag).filter((value, index, self) => self.indexOf(value) === index);
 

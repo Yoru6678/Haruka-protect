@@ -15,7 +15,7 @@ module.exports = {
     description: `Permet de relancer un giveaway sur le serveur.`,
     async execute(client, message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await pga.get(`permga_${message.guild.id}`)) || config.bot.buyer.includes(message.author.id)   === true) {
+        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(await pga.get(`permga_${message.guild.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
             let pf = await p.get(`prefix_${message.guild.id}`)
             if (pf == null) pf = config.bot.prefixe

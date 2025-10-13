@@ -34,7 +34,7 @@ module.exports = {
                     .setDescription(`Le rôle ${newRole.name} a été déplacé de la position ${oldRole.rawPosition} à ${newRole.rawPosition}\nJ'ai désactivé les permissions __administrateur__ et __rôle__`)
                     .setColor(color)
 
-                const raidlogChannel = client.channels.cache.get(modlog.get(`${oldRole.guild.id}.modlog`))
+                const raidlogChannel = client.channels.cache.get(modlog.get(`${oldRole.guild.id}.modlog`)
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }

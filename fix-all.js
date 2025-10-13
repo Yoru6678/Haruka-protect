@@ -1,12 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const target = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
-const broken = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
-const bugged = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
-const wrong = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
-const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));";
-
 const baseDir = process.cwd();
 const extensions = [".js"];
 
@@ -24,15 +18,19 @@ function walk(dir, files = []) {
   return files;
 }
 
-function brutalReplace(filePath) {
+function fixExtraClosingParenthesis(filePath) {
   if (filePath === __filename) return;
   let content = fs.readFileSync(filePath, "utf8");
-  if (content.includes(wrong)) {
-    content = content.replace(wrong, fix);
+  let original = content;
+
+  // Corrige ...get(...)) → ...get(...);
+  content = content.replace(/\.get\(([^)]+)\)\)/g, (_, inner) => `.get(${inner})`);
+
+  if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ ligne corrigée dans : ${filePath}`);
+    console.log(`✅ parenthèse en trop supprimée : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(brutalReplace);
+allFiles.forEach(fixExtraClosingParenthesis);

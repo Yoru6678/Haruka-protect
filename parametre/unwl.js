@@ -37,7 +37,7 @@ module.exports = {
 
                 if (mor instanceof Discord.Role) {
                   
-                    if (!wl.get(`${message.guild.id}.${mor.id}.wl`)) {
+                    if (!wl.get(`${message.guild.id}.${mor.id}.wl`) {
                         return message.channel.send(`Le rôle ${mor.name} n'est pas dans la Whitelist.`);
                     } else {
                         wl.delete(`${message.guild.id}.${mor.id}.wl`);
@@ -45,7 +45,7 @@ module.exports = {
                     }
                 } else if (mor instanceof Discord.GuildMember) {
               
-                    if (!wl.get(`${message.guild.id}.${mor.id}.wl`)) {
+                    if (!wl.get(`${message.guild.id}.${mor.id}.wl`) {
                         return message.channel.send(`${mor.user.username} n'est pas dans la Whitelist.`);
                     } else {
                         wl.delete(`${message.guild.id}.${mor.id}.wl`);

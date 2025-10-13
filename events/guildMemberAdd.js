@@ -20,7 +20,7 @@ module.exports = {
         if (color == null) color = config.bot.couleur
 
         
-        let rr = member.guild.roles.cache.get(db.get(`joinrole_${member.guild.id}`))
+        let rr = member.guild.roles.cache.get(db.get(`joinrole_${member.guild.id}`)
         if(rr) member.roles.add(rr.id)
 
 
@@ -35,7 +35,7 @@ const raidlogChannel2 = client.channels.cache.get(raidlogId);
             if (channel) channel.send({ embeds: [embed] }).catch(() => false)
         }
 
-        if (db.get(`blacklist.${member.id}`)) {
+        if (db.get(`blacklist.${member.id}`) {
 
             member.send({ content: `Vous êtes blacklist de **${member.guild.name}** vous ne pouvez pas rejoindre le serveur` })
             member.guild.members.ban(member.id, { reason: `Blacklist` })
@@ -84,7 +84,7 @@ const raidlogChannel4 = client.channels.cache.get(raidlogId);
                         .setTimestamp()
                     const raidlogId = await db.get(`${member.guild.id}.raidlog`;
 const raidlogChannel5 = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId))
+const channel = client.channels.cache.get(raidlogId)
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
                 }

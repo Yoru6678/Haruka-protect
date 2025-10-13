@@ -41,11 +41,11 @@ module.exports = {
                 .setDescription(`<@${message.author.id}> a \`expulsé\` ${member} du serveur\nRaison : ${reason}`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
         }
 
-        else if (message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`)) === true) {
+        else if (message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`) === true) {
 
             let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
@@ -71,7 +71,7 @@ module.exports = {
                 .setDescription(`<@${message.author.id}> a \`expulsé\` ${member} du serveur\nRaison : ${reason}`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
         }
