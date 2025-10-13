@@ -20,7 +20,7 @@ module.exports = {
             if (args[0]) {
                 let member = message.mentions.users.first() || client.users.cache.get(args[0]);
                 if (!member) try{
-                    member = await client.await users.get(args[0])
+                    member = await client.users.fetch(args[0])
                 }
                 catch(e){
                     return message.channel.send(`Aucun utilisateur trouvé pour \`${args[0] || "rien"}\``)

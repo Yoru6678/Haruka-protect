@@ -24,7 +24,7 @@ module.exports = {
 
             let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
             if (!member) try{
-                member = await client.await users.get(args[0])
+                member = await client.users.fetch(args[0])
             }
             catch(e){
                 member = null

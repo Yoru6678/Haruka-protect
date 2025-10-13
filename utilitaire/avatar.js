@@ -13,7 +13,7 @@ module.exports = {
     async execute(client, message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
-        let member = message.mentions.users.first() || (args[0] ? await client.await users.get(args[0]).catch(() => null) : null) || message.author;
+        let member = message.mentions.users.first() || (args[0] ? await client.users.fetch(args[0]).catch(() => null) : null) || message.author;
 
         if (!member) {
             return message.channel.send("Veuillez mentionner un utilisateur ou fournir un ID valide.");

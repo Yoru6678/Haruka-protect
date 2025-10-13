@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const baseDir = process.cwd();
+const scriptName = "fix-all.js"; // ← nom du fichier à ignorer
 const extensions = [".js", ".ts", ".jsx", ".cjs", ".mjs"];
 
 function walk(dir, files = []) {
@@ -18,25 +19,28 @@ function walk(dir, files = []) {
 }
 
 function fixFile(filePath) {
+  if (path.basename(filePath) === scriptName) return; // ← protection
+
   let content = fs.readFileSync(filePath, "utf8");
-  let modified = false;
+  let original = content;
 
-  // Corriger .fetch(...) → await .get(...)
-  const fetchRegex = /(\b\w+)\.fetch\(([^)]+)\)/g;
-  if (fetchRegex.test(content)) {
-    content = content.replace(fetchRegex, "await $1.get($2)");
-    modified = true;
-  }
+  // 1. Remplacer .fetch(...) par await .get(...)
+  content = content.replace(/(\b\w+)\.fetch\(([^)]+)\)/g, "await $1.get($2)");
 
-  // Ajouter async aux fonctions si nécessaire
+  // 2. Corriger client.await users.get(...) → client.users.fetch(...)
+  content = content.replace(/client\.await\s+users\.get\(/g, "client.users.fetch(");
+  content = content.replace(/client\.await\s+users\.fetch\(/g, "client.users.fetch(");
+  content = content.replace(/await\s+client\.await\s+users\.fetch\(/g, "await client.users.fetch(");
+  content = content.replace(/await\s+client\.await\s+users\.get\(/g, "await client.users.fetch(");
+
+  // 3. Ajouter async aux fonctions si nécessaire
   const usesAwait = content.includes("await ");
   const hasAsyncFunction = /async\s+function/.test(content) || /async\s+\(/.test(content);
   if (usesAwait && !hasAsyncFunction) {
     content = content.replace(/function\s+(\w+)\s*\(/, "async function $1(");
-    modified = true;
   }
 
-  if (modified) {
+  if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
     console.log(`🔧 Corrigé : ${filePath}`);
   }
