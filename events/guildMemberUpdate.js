@@ -80,7 +80,7 @@ module.exports = {
                 });
 
                 if (newRoleIDs.length > oldRoleIDs.length) {
-                    async async function filterOutOld(id) {
+                    async function filterOutOld(id) {
                        for (var i = 0; i < oldRoleIDs.length; i++) {
                            if (id === oldRoleIDs[i]) {
                                return false;

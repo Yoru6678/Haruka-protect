@@ -64,7 +64,7 @@ module.exports = {
     }
 };
 
-async async function parseDuration(duration) {
+async function parseDuration(duration) {
     const timeUnits = {
         s: 1000,
         m: 60 * 1000,

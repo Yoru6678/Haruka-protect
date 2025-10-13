@@ -25,7 +25,7 @@ module.exports = {
             try {
 
                 first_layer()
-                async async function first_layer() {
+                async function first_layer() {
                     let menuoptions = new MessageSelectMenu()
                         .setCustomId('MenuSelection')
                         .setMaxValues(1)
