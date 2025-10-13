@@ -18,23 +18,20 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixDoubleAwait(filePath) {
+function fixGuildAwaitMembers(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Supprime await await
-  content = content.replace(/\bawait\s+await\b/g, "await");
-
-  // Supprime await .await ou await awaitX
-  content = content.replace(/\bawait\s+(\.\s*)?await(\w*)/g, "await $2");
+  // Corrige channel.guild.await members → channel.guild.members
+  content = content.replace(/channel\.guild\.await\s+members/g, "channel.guild.members");
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ doublon await corrigé : ${filePath}`);
+    console.log(`✅ guild.await members corrigé : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixDoubleAwait);
+allFiles.forEach(fixGuildAwaitMembers);

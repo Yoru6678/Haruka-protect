@@ -38,7 +38,7 @@ module.exports = {
             }
             else if (punish.get(`sanction_${channel.guild.id}`) === "derank") {
 
-                const member = await channel.guild.await members.get(audit.executor.id)
+                const member = await channel.guild.members.get(audit.executor.id)
                 member.roles.set([], "AntiChannel Create").catch(() => false)
             }
 
