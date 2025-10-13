@@ -66,7 +66,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: `📚` });
 
-        const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
+        const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)))
         if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
     }
 };
