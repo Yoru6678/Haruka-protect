@@ -1,36 +1,20 @@
 const fs = require("fs");
 const path = require("path");
 
-const baseDir = process.cwd();
-const extensions = [".js"];
+const filePath = path.join("moderation", "addrole.js");
 
-function walk(dir, files = []) {
-  for (const file of fs.readdirSync(dir)) {
-    const fullPath = path.join(dir, file);
-    const stat = fs.statSync(fullPath);
-    if (stat.isDirectory()) {
-      if (file === "node_modules") continue;
-      walk(fullPath, files);
-    } else if (extensions.includes(path.extname(fullPath))) {
-      files.push(fullPath);
-    }
-  }
-  return files;
-}
+const bug = "} else if (pgs.get(permgs${message.guild.id}) === true && message.member.roles.cache.has(pgs.get(permgs${message.guild.id})) {";
+const fix = "} else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`))) {";
 
-function fixExtraParenthesis(filePath) {
-  if (filePath === __filename) return;
+if (fs.existsSync(filePath)) {
   let content = fs.readFileSync(filePath, "utf8");
-  let original = content;
-
-  // Corrige les triples parenthèses → doubles
-  content = content.replace(/\.get\(([^)]+)\)\)/g, (_, inner) => `.get(${inner})`);
-
-  if (content !== original) {
+  if (content.includes(bug)) {
+    content = content.replace(bug, fix);
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ parenthèse corrigée dans : ${filePath}`);
+    console.log(`✅ Ligne corrigée dans : ${filePath}`);
+  } else {
+    console.log(`ℹ️ Aucun bug trouvé dans : ${filePath}`);
   }
+} else {
+  console.log(`❌ Fichier introuvable : ${filePath}`);
 }
-
-const allFiles = walk(baseDir);
-allFiles.forEach(fixExtraParenthesis);
