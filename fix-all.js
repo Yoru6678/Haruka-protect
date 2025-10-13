@@ -18,25 +18,20 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixAwaitInsideGet(filePath) {
+function fixDotAfterSemicolon(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Corrige client.channels.cache.get(await rlog.get(...))
-  content = content.replace(
-    /client\.channels\.cache\.get\(\s*await\s+(rlog\.get\([^)]+\))\s*\)/g,
-    (match, inner) => {
-      return `const raidlogId = await ${inner};\nconst channel = client.channels.cache.get(raidlogId);`;
-    }
-  );
+  // Corrige ;.send(...) → .send(...) sur la ligne suivante
+  content = content.replace(/;\s*\.(\w+)/g, (_, method) => `\n${method}`);
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ await dans .get corrigé : ${filePath}`);
+    console.log(`✅ point après point-virgule corrigé : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixAwaitInsideGet);
+allFiles.forEach(fixDotAfterSemicolon);
