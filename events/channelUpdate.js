@@ -53,8 +53,8 @@ module.exports = {
                     .setDescription(`<@${audit.executor.id}> a tenté de \`modifier\` un salon, il a été sanctionné.`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${oldChannel.guild.id}.raidlog`);
-const channel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }

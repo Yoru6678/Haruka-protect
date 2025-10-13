@@ -30,8 +30,8 @@ module.exports = {
                 .setColor(color)
                 .setDescription(`${member} a été **kick** pour avoir \`rejoins pendant que le serveur était verrouillé\``)
             const raidlogId = await rlog.get(`${member.guild.id}.raidlog`);
-const channel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
             if (channel) channel.send({ embeds: [embed] }).catch(() => false)
         }
 
@@ -43,8 +43,8 @@ const channel = client.channels.cache.get(raidlogId);
                 .setColor(color)
                 .setDescription(`${member} a rejoint en étant __blacklist__, il a été **banni**`)
             const raidlogId = await rlog.get(`${member.guild.id}.raidlog`);
-const channel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
             if (channel) channel.send({ embeds: [embed] }).catch(() => false)
         }
 
@@ -82,7 +82,7 @@ const channel = client.channels.cache.get(raidlogId);
                     const embed = new Discord.MessageEmbed()
                         .setDescription(`<@${action.executor.id}> a ajouté un \`bot\` au serveur\nBot ajouté: <@${member.id}>`)
                         .setTimestamp()
-                    const channel = client.channels.cache.get(await db.get(`${member.guild.id}.raidlog`))
+                    const raidlogChannel = client.channels.cache.get(await db.get(`${member.guild.id}.raidlog`))
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
                 }

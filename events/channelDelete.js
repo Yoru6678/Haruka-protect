@@ -46,7 +46,7 @@ module.exports = {
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${channel.guild.id}.raidlog`);
 const logchannel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
         }

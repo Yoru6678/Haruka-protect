@@ -34,7 +34,7 @@ module.exports = {
                     .setDescription(`Le rôle ${newRole.name} a été déplacé de la position ${oldRole.rawPosition} à ${newRole.rawPosition}\nJ'ai désactivé les permissions __administrateur__ et __rôle__`)
                     .setColor(color)
 
-                const channel = client.channels.cache.get(modlog.get(`${oldRole.guild.id}.modlog`))
+                const raidlogChannel = client.channels.cache.get(modlog.get(`${oldRole.guild.id}.modlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }
@@ -82,8 +82,8 @@ module.exports = {
                     .setDescription(`<@${audit.executor.id}> a tenté de \`modifier un rôle\`, il a été sanctionné`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${oldRole.guild.id}.raidlog`);
-const channel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }

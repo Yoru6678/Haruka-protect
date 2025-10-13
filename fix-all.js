@@ -18,24 +18,20 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixDoubleConstAssignment(filePath) {
+function fixChannelRedeclaration(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Corrige const a = const b = ... → const b = ... ; const a = ...
-  content = content.replace(
-    /const\s+(\w+)\s*=\s*const\s+(\w+)\s*=\s*(await\s+[^\n;]+);?/g,
-    (_, a, b, expr) =>
-      `const ${b} = ${expr};\nconst ${a} = client.channels.cache.get(${b});`
-  );
+  // Remplace const channel = ... par const raidlogChannel = ...
+  content = content.replace(/const\s+channel\s*=\s*/g, "const raidlogChannel = ");
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ double const corrigé : ${filePath}`);
+    console.log(`✅ variable channel renommée : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixDoubleConstAssignment);
+allFiles.forEach(fixChannelRedeclaration);

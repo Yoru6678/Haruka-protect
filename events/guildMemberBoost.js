@@ -12,7 +12,7 @@ module.exports = {
         const chan = `${await boostlog.get(`${newMember.guild.id}.boostlog`)}`
         if (!chan) return
 
-        const channel = oldMember.guild.channels.cache.get(chan)
+        const raidlogChannel = oldMember.guild.channels.cache.get(chan)
         if (channel) return channel.send({ content: `${oldMember.user.tag} vient de boost le serveur !` }).catch(() => false)
 
     }

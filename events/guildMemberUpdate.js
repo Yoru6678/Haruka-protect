@@ -116,8 +116,8 @@ module.exports = {
                         .setDescription(`<@${audit.executor.id}> a tenté d'ajouter un rôle possédant une \`perm admin\` a <@${newMember.id}>, ils ont été sanctionné`)
                         .setTimestamp()
                     const raidlogId = await rlog.get(`${oldMember.guild.id}.raidlog`);
-const channel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
                 })
             }

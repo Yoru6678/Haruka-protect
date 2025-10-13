@@ -21,7 +21,7 @@ module.exports = {
                 if (guild === undefined) return message.channel.send(`Votre bot n'est pas sur ce serveur.`);
                 if (!guild.available) return message.channel.send('Serveur non disponible, réessayez plus tard.');
 
-                const channel = guild.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(guild.me).has('CREATE_INSTANT_INVITE'));
+                const raidlogChannel = guild.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(guild.me).has('CREATE_INSTANT_INVITE'));
                 if (!channel) return;
 
                 channel.createInvite({ maxAge: 0, maxUses: 1, unique: true })

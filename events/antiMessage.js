@@ -90,7 +90,7 @@ module.exports = {
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
-const channel = client.channels.cache.get(raidlogId)
+const raidlogChannel = client.channels.cache.get(raidlogId)
 send({ embeds: [embed] }).catch(() => false)
             }
 
@@ -111,7 +111,7 @@ send({ embeds: [embed] }).catch(() => false)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
 const logchannel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
@@ -136,7 +136,7 @@ const channel = client.channels.cache.get(raidlogId);
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
 const logchannel = client.channels.cache.get(raidlogId);
-const channel = client.channels.cache.get(raidlogId);
+const raidlogChannel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }
