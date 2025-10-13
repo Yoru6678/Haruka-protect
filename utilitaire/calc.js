@@ -19,7 +19,7 @@ module.exports = {
 
         const expression = args.join(' ');
 
-        const safeEval = (expr) => {
+        const safeEval = async (expr) => {
             if (/^[0-9+\-*/().\s]+$/.test(expr)) {
                 return Function(`'use strict'; return (${expr})`)();
             } else {
