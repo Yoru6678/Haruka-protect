@@ -1,8 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 
+const target = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
+const broken = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
+const bugged = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
+const wrong = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
+const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));";
+
 const baseDir = process.cwd();
-const extensions = [".js", ".ts", ".jsx", ".cjs", ".mjs"];
+const extensions = [".js"];
 
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {
@@ -18,19 +24,15 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixBadEquality(filePath) {
+function brutalReplace(filePath) {
   if (filePath === __filename) return;
   let content = fs.readFileSync(filePath, "utf8");
-  let original = content;
-
-  // Corrige = == en ===
-  content = content.replace(/=\s*==/g, "===");
-
-  if (content !== original) {
+  if (content.includes(wrong)) {
+    content = content.replace(wrong, fix);
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ opérateur corrigé : ${filePath}`);
+    console.log(`✅ ligne corrigée dans : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixBadEquality);
+allFiles.forEach(brutalReplace);
