@@ -18,20 +18,24 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixDotAfterSemicolon(filePath) {
+function fixDoubleConstAssignment(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Corrige ;.send(...) → .send(...) sur la ligne suivante
-  content = content.replace(/;\s*\.(\w+)/g, (_, method) => `\n${method}`);
+  // Corrige const a = const b = ... → const b = ... ; const a = ...
+  content = content.replace(
+    /const\s+(\w+)\s*=\s*const\s+(\w+)\s*=\s*(await\s+[^\n;]+);?/g,
+    (_, a, b, expr) =>
+      `const ${b} = ${expr};\nconst ${a} = client.channels.cache.get(${b});`
+  );
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ point après point-virgule corrigé : ${filePath}`);
+    console.log(`✅ double const corrigé : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixDotAfterSemicolon);
+allFiles.forEach(fixDoubleConstAssignment);

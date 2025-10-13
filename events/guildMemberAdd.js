@@ -29,7 +29,8 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setColor(color)
                 .setDescription(`${member} a été **kick** pour avoir \`rejoins pendant que le serveur était verrouillé\``)
-            const channel = const raidlogId = await rlog.get(`${member.guild.id}.raidlog`);
+            const raidlogId = await rlog.get(`${member.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
 const channel = client.channels.cache.get(raidlogId);
             if (channel) channel.send({ embeds: [embed] }).catch(() => false)
         }
@@ -41,7 +42,8 @@ const channel = client.channels.cache.get(raidlogId);
             const embed = new Discord.MessageEmbed()
                 .setColor(color)
                 .setDescription(`${member} a rejoint en étant __blacklist__, il a été **banni**`)
-            const channel = const raidlogId = await rlog.get(`${member.guild.id}.raidlog`);
+            const raidlogId = await rlog.get(`${member.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
 const channel = client.channels.cache.get(raidlogId);
             if (channel) channel.send({ embeds: [embed] }).catch(() => false)
         }

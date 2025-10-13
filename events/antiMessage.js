@@ -109,7 +109,8 @@ send({ embeds: [embed] }).catch(() => false)
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
-                const logchannel = const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+                const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+const logchannel = client.channels.cache.get(raidlogId);
 const channel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
@@ -133,7 +134,8 @@ const channel = client.channels.cache.get(raidlogId);
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a mentionné \`tout le serveur\` dans \`${message.channel.name}\`, j'ai renew le salon`)
                     .setTimestamp()
-                const logchannel = const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+                const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+const logchannel = client.channels.cache.get(raidlogId);
 const channel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
