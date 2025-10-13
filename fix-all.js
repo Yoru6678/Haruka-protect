@@ -28,7 +28,7 @@ function fixFile(filePath) {
   content = content.replace(
     /client\.channels\.cache\.get\(\s*await\s+([^)]+)\)/g,
     (_, expr) => {
-      return `const raidlogId = await ${expr};\nconst channel = client.channels.cache.get(raidlogId)`;
+      return `const raidlogId = await ${expr};\nconst channel = client.channels.cache.get(raidlogId);`;
     }
   );
 
@@ -67,6 +67,14 @@ function fixFile(filePath) {
   // 8. await ml.get(`...`; → await ml.get(`...`);
   content = content.replace(/(await\s+ml\.get\(`[^`]+`);/g, (match) => {
     return match.replace(";", ")");
+  });
+
+  // 9. Supprimer les parenthèses en trop → ...get(...)); → ...get(...);
+  content = content.replace(/(\.get\([^)]+\)\));/g, (match) => {
+    return match.replace(/\)\);/, ");");
+  });
+  content = content.replace(/=\s*([^)]+\)\));/g, (_, expr) => {
+    return `= ${expr.replace(/\)\);/, ");")}`;
   });
 
   if (content !== original) {

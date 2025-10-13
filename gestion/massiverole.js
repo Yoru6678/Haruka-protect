@@ -43,7 +43,7 @@ module.exports = {
           return message.reply(`Veuillez fournir un rôle valide`);
         }
 
-        message.guild.members.cache.forEach(member => member.roles.add(role));
+        message.guild.members.cache.forEach(member = > member.roles.add(role))
 
         message.channel.send(`**${role.name}** est en train d'être ajouté à tous les membres du serveur`);
       }
@@ -65,7 +65,7 @@ module.exports = {
           return message.reply(`Veuillez fournir un rôle valide`);
         }
 
-        message.guild.members.cache.forEach(member => member.roles.remove(role));
+        message.guild.members.cache.forEach(member = > member.roles.remove(role))
 
         message.channel.send(`** ${role.name} ** est en train d'être retiré à tous les membres du serveur`);
       }

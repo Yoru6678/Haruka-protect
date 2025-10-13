@@ -21,7 +21,7 @@ module.exports = {
 
             if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-                let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+                let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() = == args[0].toLocaleLowerCase())
                 if (!member) return
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
@@ -44,7 +44,7 @@ const channel = client.channels.cache.get(raidlogId))
 
             } else if (message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) === true) {
 
-                let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+                let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() = == args[0].toLocaleLowerCase())
                 if (!member) return
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])

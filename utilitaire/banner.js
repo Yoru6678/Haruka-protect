@@ -17,7 +17,7 @@ module.exports = {
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
         
-        const url = await member.user.fetch().then((user) => user.bannerURL({ format: "png", dynamic: true, size: 4096 }));
+        const url = await member.user.fetch().then((user) = > user.bannerURL({ format: "png", dynamic: true, size: 4096 }))
 
         const nobanner = new Discord.MessageEmbed()
             .setColor(color)

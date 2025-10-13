@@ -38,7 +38,7 @@ module.exports = {
                 var admins = message.guild.members.cache.filter(member => member.permissions.has("ADMINISTRATOR") && !member.user.bot);
                 var adminNames = admins.map(m => `${m.user.tag}: \`(${m.user.id})\``).join("\n");
                 for (let i = 0; i < adminNames.length; i += 1995) {
-                    const content = adminNames.substring(i, Math.min(adminNames.length, i + 1995));
+                    const content = adminNames.substring(i, Math.min(adminNames.length, i + 1995))
                     var embed = new Discord.MessageEmbed()
                         .setTitle(`Liste des Administrateurs.`)
                         .setDescription(`\n ${content}`)

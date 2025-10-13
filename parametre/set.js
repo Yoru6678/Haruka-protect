@@ -14,18 +14,18 @@ module.exports = {
                     case 'name':
                         client.user.setUsername(content)
                             .then(() => message.channel.send(`${message.author}, vous avez changé le **nom** du bot.`))
-                            .catch(() => message.reply("Veuillez patienter avant de rechanger mon pseudo"));
+                            .catch(() = > message.reply("Veuillez patienter avant de rechanger mon pseudo"))
                         break;
                     case 'pic':
                         if (message.attachments.size > 0) {
                             const attachment = message.attachments.first();
                             client.user.setAvatar(attachment.url)
                                 .then(() => message.channel.send(`${message.author}, vous avez changé la **photo de profil** du bot.`))
-                                .catch(() => message.reply("Veuillez patienter avant de rechanger mon avatar"));
+                                .catch(() = > message.reply("Veuillez patienter avant de rechanger mon avatar"))
                         } else {
                             client.user.setAvatar(content)
                                 .then(() => message.reply(`Vous avez changé la **photo de profil** du bot.`))
-                                .catch(() => message.reply("Veuillez patienter avant de rechanger mon avatar"));
+                                .catch(() = > message.reply("Veuillez patienter avant de rechanger mon avatar"))
                         }
                         break;
                     case 'banner':
@@ -33,11 +33,11 @@ module.exports = {
                             const attachment = message.attachments.first();
                             client.user.setBanner(attachment.url)
                                 .then(() => message.channel.send(`${message.author}, vous avez changé la **bannière** du bot.`))
-                                .catch(() => message.reply("Veuillez patienter avant de rechanger ma bannière"));
+                                .catch(() = > message.reply("Veuillez patienter avant de rechanger ma bannière"))
                         } else {
                             client.user.setBanner(content)
                                 .then(() => message.reply(`Vous avez changé la **bannière** de votre bot.`))
-                                .catch(() => message.reply("Veuillez patienter avant de rechanger ma bannière"));
+                                .catch(() = > message.reply("Veuillez patienter avant de rechanger ma bannière"))
                         }
                         break;
                     default:

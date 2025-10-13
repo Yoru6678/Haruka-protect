@@ -52,7 +52,7 @@ module.exports = {
                     .setDescription(`**Action**: Mute\n**Utilisateur**: ${target.user.tag} (${target.id})\n**Modérateur**: ${message.author.tag}\n**Durée**: ${ms(duration, { long: true })}\n**Raison**: ${reason}`)
                     .setTimestamp()
                     .setFooter(footer);
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
             } catch (err) {
                 console.error(err);
@@ -87,7 +87,7 @@ async function ms(duration, options) {
     const seconds = Math.floor((duration / 1000) % 60);
     const minutes = Math.floor((duration / (1000 * 60)) % 60);
     const jours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-    const heures = Math.floor(duration / (1000 * 60 * 60 * 24));
+    const heures = Math.floor(duration / (1000 * 60 * 60 * 24))
 
     const parts = [];
     if (jours) parts.push(`${jours} jour${jours > 1 ? 's' : ''}`);
