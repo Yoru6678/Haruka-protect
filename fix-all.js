@@ -4,9 +4,6 @@ const path = require("path");
 const baseDir = process.cwd();
 const extensions = [".js"];
 
-const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)";
-const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))";
-
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, file);
@@ -21,15 +18,19 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixLogChannel(filePath) {
+function fixExtraParenthesis(filePath) {
   if (filePath === __filename) return;
   let content = fs.readFileSync(filePath, "utf8");
-  if (content.includes(bug)) {
-    content = content.replace(bug, fix);
+  let original = content;
+
+  // Corrige les triples parenthèses → doubles
+  content = content.replace(/\.get\(([^)]+)\)\)/g, (_, inner) => `.get(${inner})`);
+
+  if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ parenthèse manquante corrigée dans : ${filePath}`);
+    console.log(`✅ parenthèse corrigée dans : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixLogChannel);
+allFiles.forEach(fixExtraParenthesis);

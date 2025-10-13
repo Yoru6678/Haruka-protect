@@ -52,7 +52,7 @@ module.exports = {
                     .setDescription(`**Action**: Mute\n**Utilisateur**: ${target.user.tag} (${target.id})\n**Modérateur**: ${message.author.tag}\n**Durée**: ${ms(duration, { long: true })}\n**Raison**: ${reason}`)
                     .setTimestamp()
                     .setFooter(footer);
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)))
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
             } catch (err) {
                 console.error(err);

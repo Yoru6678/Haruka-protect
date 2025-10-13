@@ -42,7 +42,7 @@ const logchannel = client.channels.cache.get(raidlogId);
 const channel = client.channels.cache.get(raidlogId)
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
-            } else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`))) {
+            } else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) {
 
                 let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase())
                 if (!member) return
@@ -60,7 +60,7 @@ const channel = client.channels.cache.get(raidlogId)
                     .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRôle retiré : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)))
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }

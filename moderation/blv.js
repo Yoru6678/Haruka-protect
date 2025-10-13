@@ -56,7 +56,7 @@ module.exports = {
                     .setDescription(!own ? "Aucun" : own.map((user, i) => `<@${user}>`).slice(0, 30).join("\n")
                     )
                     .setFooter({ text: `${footer}` })
-                    const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)))
+                    const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                     if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
         }

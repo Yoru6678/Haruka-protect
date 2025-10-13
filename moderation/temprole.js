@@ -17,7 +17,7 @@ module.exports = {
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
 
-        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) {
+        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) {
             if (args[0] === 'list') {
                 let allTempRoles = await temproles.get(`temproles_${message.guild.id}`) || [];
                 if (allTempRoles.length === 0) {
@@ -148,7 +148,7 @@ module.exports = {
                     .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`temprole\` sur ${member}\nRôle ajouté : ${role}\nDurée : ${duration}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` });
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)))
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
             }
         } else {
