@@ -21,7 +21,7 @@ module.exports = {
             if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)   === true)
 
                 message.delete()
-            message.channel.await messages.get({ limit: 100 })
+            message.channel.messages.fetch({ limit: 100 })
                 .then((messages) => {
                     var filterUser = message.mentions.members.first().id;
                     var filtered = messages.filter(m => m.author.id === filterUser).array().slice(0, 100);
