@@ -64,7 +64,7 @@ module.exports = {
     }
 };
 
-async function parseDuration(duration) {
+async async function parseDuration(duration) {
     const timeUnits = {
         s: 1000,
         m: 60 * 1000,
@@ -83,7 +83,7 @@ async function parseDuration(duration) {
     return value * timeUnits[unit];
 }
 
-function ms(duration, options) {
+async function ms(duration, options) {
     const seconds = Math.floor((duration / 1000) % 60);
     const minutes = Math.floor((duration / (1000 * 60)) % 60);
     const jours = Math.floor((duration / (1000 * 60 * 60)) % 24);

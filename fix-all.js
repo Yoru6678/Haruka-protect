@@ -18,28 +18,26 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixAsync(filePath) {
+function fixAwaitWithoutAsync(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  const usesAwait = content.includes("await ");
-  const hasAsyncFunction =
-    /async\s+function/.test(content) ||
-    /execute\s*:\s*async\s*function/.test(content) ||
-    /async\s*\(/.test(content);
+  // Vérifie si le fichier contient await
+  if (!content.includes("await ")) return;
 
-  if (usesAwait && !hasAsyncFunction) {
-    // Fonctions classiques
-    content = content.replace(/function\s+(\w+)\s*\(/, "async function $1(");
+  // Corrige les fonctions classiques
+  content = content.replace(/function\s+(\w+)\s*\(/g, "async function $1(");
 
-    // Méthodes Discord type execute: function(...)
-    content = content.replace(/execute\s*:\s*function\s*\(/, "execute: async function(");
+  // Corrige les méthodes Discord type execute: function(...)
+  content = content.replace(/execute\s*:\s*function\s*\(/g, "execute: async function(");
 
-    // Fonctions fléchées anonymes
-    content = content.replace(/const\s+(\w+)\s*=\s*\(([^)]*)\)\s*=>\s*{/, "const $1 = async ($2) => {");
-  }
+  // Corrige les fonctions fléchées anonymes
+  content = content.replace(/const\s+(\w+)\s*=\s*\(([^)]*)\)\s*=>\s*{/, "const $1 = async ($2) => {");
+
+  // Corrige les exports directs
+  content = content.replace(/module\.exports\s*=\s*function\s*\(/g, "module.exports = async function(");
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
@@ -48,4 +46,4 @@ function fixAsync(filePath) {
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixAsync);
+allFiles.forEach(fixAwaitWithoutAsync);

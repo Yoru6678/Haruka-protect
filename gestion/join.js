@@ -29,7 +29,7 @@ module.exports = {
                 try {
 
                     first_layer()
-                    async function first_layer() {
+                    async async function first_layer() {
                         let menuoptions = new MessageSelectMenu()
                             .setCustomId('MenuSelection')
                             .setMaxValues(1)
@@ -130,7 +130,7 @@ module.exports = {
 
                         const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
 
-                        function menuselection(i) {
+                        async function menuselection(i) {
                             used1 = true;
                         }
 
