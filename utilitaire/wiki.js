@@ -1,6 +1,8 @@
+const db = require("../db.js");
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
-const db = require('quick.db');
+
+
 const cl = db.table("Color");
 const config = require("../config");
 const footer = config.bot.footer;

@@ -1,6 +1,8 @@
+const db = require("../db.js");
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const config = require("../config");
-const db = require('quick.db');
+
+
 const cl = db.table("Color");
 const p3 = db.table("Perm3");
 const owner = db.table("Owner");

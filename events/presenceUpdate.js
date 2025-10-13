@@ -1,5 +1,4 @@
-const db = require("quick.db")
-
+const db = require("../db.js");
 module.exports = {
     name: 'presenceUpdate',
     once: false,

@@ -1,5 +1,6 @@
+const db = require("../db.js");
 const Discord = require('discord.js')
-const db = require("quick.db")
+
 const owner = db.table("Owner")
 const rlog = db.table("raidlog")
 const punish = db.table("Punition")

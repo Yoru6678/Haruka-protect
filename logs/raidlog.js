@@ -1,6 +1,7 @@
+const db = require("../db.js");
 const { MessageEmbed } = require('discord.js')
 const Discord = require('discord.js')
-const db = require('quick.db')
+
 const config = require("../config")
 const owner = db.table("Owner")
 const cl = db.table("Color")

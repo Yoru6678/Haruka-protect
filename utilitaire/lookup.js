@@ -1,6 +1,8 @@
+const db = require("../db.js");
 const Discord = require("discord.js");
 const moment = require('moment');
-const db = require('quick.db');
+
+
 const cl = db.table("Color");
 const config = require("../config");
 const p1 = db.table("Perm1");

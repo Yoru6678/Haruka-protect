@@ -1,7 +1,8 @@
+const db = require("../db.js");
 const Discord = require("discord.js")
 const config = require("../config")
 const footer = config.bot.footer
-const db = require("quick.db")
+
 const owner = db.table("Owner")
 const p = db.table("Prefix")
 const punish = db.table("Punition")

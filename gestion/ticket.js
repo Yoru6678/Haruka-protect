@@ -1,8 +1,9 @@
+const db = require("../db.js");
 const ms = require('ms'),
     { MessageEmbed, MessageActionRow, MessageSelectMenu, MessageButton } = require('discord.js');
 
 const Discord = require("discord.js")
-const db = require('quick.db')
+
 const owner = db.table("Owner")
 const config = require("../config")
 

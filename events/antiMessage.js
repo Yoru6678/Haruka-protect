@@ -1,4 +1,4 @@
-const db = require("quick.db")
+const db = require("../db.js");
 const config = require('../config')
 const Discord = require('discord.js')
 const rlog = db.table("raidlog")

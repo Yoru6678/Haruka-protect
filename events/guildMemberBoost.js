@@ -1,4 +1,4 @@
-const db = require("quick.db")
+const db = require("../db.js");
 const boostlog = db.table("boostlog")
 
 module.exports = {

@@ -1,6 +1,7 @@
+const db = require("../db.js");
 const Discord = require("discord.js")
 const { Colors } = require("discord.js/src/util/Constants")
-const db = require("quick.db")
+
 const rlog = db.table("raidlog")
 const wl = db.table("Whitelist")
 const msglog = db.table("msglog")

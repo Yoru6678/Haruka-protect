@@ -1,7 +1,8 @@
+const db = require("../db.js");
 const Discord = require('discord.js');
 let started_time_duration = ""
 let time_duration = ""
-const db = require('quick.db')
+
 const config = require("../config")
 const owner = db.table("Owner")
 const p = db.table("Prefix")

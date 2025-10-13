@@ -1,11 +1,12 @@
+const db = require("./db.js");
 require("dotenv").config();
 const { Client, Intents, guild, Collection } = require('discord.js');
 const Discord = require("discord.js")
 const config = require('./config')
 const ping = require('./ping.js')
 const { readdirSync } = require("fs")
-const { QuickDB } = require('quick.db');
-const db = new QuickDB();
+
+
 const p = db.table("Prefix")
 const logembed = db.table("embedlog")
 ms = require("ms")

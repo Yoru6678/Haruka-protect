@@ -1,5 +1,7 @@
+const db = require("../db.js");
 const Discord = require("discord.js");
-const db = require('quick.db');
+
+
 const owner = db.table("Owner");
 const p = db.table("Prefix");
 const config = require("../config");

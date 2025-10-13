@@ -1,8 +1,9 @@
+const db = require("../db.js");
 const { Permissions, MessageEmbed, MessageActionRow, MessageSelectMenu, Message, DiscordAPIError } = require('discord.js');
 const Discord = require('discord.js')
 const messageCreate = require('./messageCreate');
 const config = require('../config')
-const db = require('quick.db')
+
 const cl = db.table("Color")
 const ct = db.table("CategorieTicket")
 const moment = require('moment')

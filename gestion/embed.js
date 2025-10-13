@@ -1,4 +1,4 @@
-const db = require('quick.db')
+const db = require("../db.js");
 const owner = db.table("Owner")
 const cl = db.table("Color")
 const config = require("../config")
