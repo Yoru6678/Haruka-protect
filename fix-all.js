@@ -4,8 +4,8 @@ const path = require("path");
 const baseDir = process.cwd();
 const extensions = [".js"];
 
-const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
-const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));";
+const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)";
+const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))";
 
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {

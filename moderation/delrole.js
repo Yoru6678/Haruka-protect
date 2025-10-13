@@ -60,7 +60,7 @@ const channel = client.channels.cache.get(raidlogId)
                     .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRôle retiré : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }

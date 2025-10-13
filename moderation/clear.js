@@ -55,7 +55,7 @@ module.exports = {
                     .setDescription(`<@${message.author.id}> a \`supprimé\` ${args[0]} message(s) dans <#${message.channel.id}>`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             } else {
