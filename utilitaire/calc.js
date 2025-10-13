@@ -11,7 +11,7 @@ module.exports = {
     name: 'calc',
     usage: 'calc <calcul>',
     description: `Permet d'effectuer un calcul.`,
-    execute(client, message, args) {
+    async execute(client, message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         if (!args.length) {

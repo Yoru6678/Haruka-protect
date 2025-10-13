@@ -18,22 +18,29 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixTopLevelAwait(filePath) {
+function fixExecuteAsync(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Si le fichier contient await mais aucune fonction
-  if (content.includes("await ") && !/function\s|\(\)\s*=>/.test(content)) {
-    content = `(async () => {\n${content}\n})();`;
-  }
+  // Corrige execute: function(...) → execute: async function(...)
+  content = content.replace(
+    /execute\s*:\s*(?!async\s*)function\s*\(/g,
+    "execute: async function("
+  );
+
+  // Corrige execute(...) { → async execute(...) {
+  content = content.replace(
+    /(?<!async\s)execute\s*\(([^)]*)\)\s*{/g,
+    "async execute($1) {"
+  );
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ encapsulé dans async IIFE : ${filePath}`);
+    console.log(`✅ execute rendu async : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixTopLevelAwait);
+allFiles.forEach(fixExecuteAsync);
