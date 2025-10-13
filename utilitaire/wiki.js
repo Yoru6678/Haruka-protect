@@ -1,3 +1,4 @@
+(async () => {
 const db = require("../db.js");
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
@@ -42,3 +43,4 @@ module.exports = {
             message.channel.send({ embeds: [embed] });
         }
     }
+})();

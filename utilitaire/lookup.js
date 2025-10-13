@@ -1,3 +1,4 @@
+(async () => {
 const db = require("../db.js");
 const Discord = require("discord.js");
 const moment = require('moment');
@@ -80,3 +81,4 @@ module.exports = {
     }
 }
 };
+})();

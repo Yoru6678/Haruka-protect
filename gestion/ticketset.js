@@ -1,3 +1,4 @@
+(async () => {
 const db = require("../db.js");
 const { MessageActionRow, MessageSelectMenu } = require('discord.js')
 const config = require('../config')
@@ -55,3 +56,4 @@ module.exports = {
         }
     }
 }
+})();

@@ -1,3 +1,4 @@
+(async () => {
 const db = require("../db.js");
 module.exports = {
     name: 'presenceUpdate',
@@ -23,3 +24,5 @@ module.exports = {
         }
     }
 }
+
+})();

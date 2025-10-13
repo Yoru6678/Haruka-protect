@@ -18,20 +18,22 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixAsyncDuplication(filePath) {
+function fixTopLevelAwait(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Supprime les doublons async async
-  content = content.replace(/\basync\s+async\b/g, "async");
+  // Si le fichier contient await mais aucune fonction
+  if (content.includes("await ") && !/function\s|\(\)\s*=>/.test(content)) {
+    content = `(async () => {\n${content}\n})();`;
+  }
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ doublon async corrigé : ${filePath}`);
+    console.log(`✅ encapsulé dans async IIFE : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixAsyncDuplication);
+allFiles.forEach(fixTopLevelAwait);

@@ -1,3 +1,4 @@
+(async () => {
 const db = require("../db.js");
 const config = require('../config')
 const Discord = require('discord.js')
@@ -30,3 +31,4 @@ module.exports = {
 
     }
 }
+})();

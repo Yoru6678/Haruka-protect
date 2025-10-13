@@ -1,3 +1,4 @@
+(async () => {
 const db = require("../db.js");
 const Discord = module.require("discord.js");
 
@@ -30,3 +31,5 @@ module.exports = {
         message.delete();
     }
     }
+
+})();
