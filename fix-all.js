@@ -4,8 +4,8 @@ const path = require("path");
 const baseDir = process.cwd();
 const extensions = [".js"];
 
-const bug = `} else if (message.member.roles.cache.has(pgs.get(\`permgs_\${message.guild.id}\`) === true) {`;
-const fix = `} else if (pgs.get(\`permgs_\${message.guild.id}\`) === true && message.member.roles.cache.has(pgs.get(\`permgs_\${message.guild.id}\`))) {`;
+const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`);";
+const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));";
 
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {
