@@ -17,7 +17,7 @@ module.exports = {
 
         if (ab.get(`config.${guild.guild.id}.antiban`) === true) {
 
-            const action = await guild.guild.fetchAuditLogs({ limit: 1, type: "KICK_MEMBERS" }).then(async (audit) = > audit.entries.first())
+            const action = await guild.guild.fetchAuditLogs({ limit: 1, type: "KICK_MEMBERS" }).then(async (audit) => audit.entries.first())
             if (!action | !action.executor) return
             if (action.executor.id === client.user.id) return
     

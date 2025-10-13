@@ -53,7 +53,7 @@ const raidlogChannel4 = client.channels.cache.get(raidlogId);
 
             if (atb.get(`config.${member.guild.id}.antibot`) === true) {
 
-                const action = await member.guild.fetchAuditLogs({ limit: 1, type: "BOT_ADD" }).then(async (audit) = > audit.entries.first())
+                const action = await member.guild.fetchAuditLogs({ limit: 1, type: "BOT_ADD" }).then(async (audit) => audit.entries.first())
                 if (!audit | !audit.executor) return
                 if (audit.executor.id === client.user.id) return
         

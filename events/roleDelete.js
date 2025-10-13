@@ -14,7 +14,7 @@ module.exports = {
 
     async execute(client, role, oldRole, newRole) {
 
-        const audit = await role.guild.fetchAuditLogs({type: "ROLE_DELETE"}).then(async (audit) = > audit.entries.first())
+        const audit = await role.guild.fetchAuditLogs({type: "ROLE_DELETE"}).then(async (audit) => audit.entries.first())
         if (!audit | !audit.executor) return
         if (audit.executor === client.user.id) return
 

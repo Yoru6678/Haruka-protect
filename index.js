@@ -33,50 +33,50 @@ client.giveawaysManager = new GiveawaysManager(client, {
 
 //|▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬| HANDLER |▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬|
 
-const commandFiles = readdirSync('./moderation').filter(file = > file.endsWith('.js'))
+const commandFiles = readdirSync('./moderation').filter(file => file.endsWith('.js'))
 for (const file of commandFiles) {
     const command = require(`./moderation/${file}`);
     client.commands.set(command.name, command);
 }
 
 
-const parametreFiles = readdirSync('./parametre').filter(file = > file.endsWith('.js'))
+const parametreFiles = readdirSync('./parametre').filter(file => file.endsWith('.js'))
 for (const file of parametreFiles) {
     const command = require(`./parametre/${file}`);
     client.commands.set(command.name, command);
 }
 
-const gestionFiles = readdirSync('./gestion').filter(file = > file.endsWith('.js'))
+const gestionFiles = readdirSync('./gestion').filter(file => file.endsWith('.js'))
 for (const file of gestionFiles) {
     const command = require(`./gestion/${file}`);
     client.commands.set(command.name, command);
 }
 
-const utilitaireFiles = readdirSync('./utilitaire').filter(file = > file.endsWith('.js'))
+const utilitaireFiles = readdirSync('./utilitaire').filter(file => file.endsWith('.js'))
 for (const file of utilitaireFiles) {
     const command = require(`./utilitaire/${file}`);
     client.commands.set(command.name, command);
 }
 
-const logsFiles = readdirSync('./logs').filter(file = > file.endsWith('.js'))
+const logsFiles = readdirSync('./logs').filter(file => file.endsWith('.js'))
 for (const file of logsFiles) {
     const command = require(`./logs/${file}`);
     client.commands.set(command.name, command);
 }
 
-const antiraidFiles = readdirSync('./antiraid').filter(file = > file.endsWith('.js'))
+const antiraidFiles = readdirSync('./antiraid').filter(file => file.endsWith('.js'))
 for (const file of antiraidFiles) {
     const command = require(`./antiraid/${file}`);
     client.commands.set(command.name, command);
 }
 
-const eventFiles = readdirSync('./events').filter(file = > file.endsWith('.js'))
+const eventFiles = readdirSync('./events').filter(file => file.endsWith('.js'))
 for (const file of eventFiles) {
     const event = require(`./events/${file}`);
     if (event.once) {
-        client.once(event.name, (...args) = > event.execute(client, ...args))
+        client.once(event.name, (...args) => event.execute(client, ...args))
     } else {
-        client.on(event.name, (...args) = > event.execute(client, ...args))
+        client.on(event.name, (...args) => event.execute(client, ...args))
     }
 }
 
@@ -99,7 +99,7 @@ var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g;
 client.on("warn", e => {
     console.log(e.replace(regToken, "[REDACTED]"))
 });
-client.on("error", e = > {
+client.on("error", e => {
     console.log(e.replace(regToken, "[REDACTED]"))
 });
 

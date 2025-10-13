@@ -33,7 +33,7 @@ module.exports = {
                     MANAGE_GUILD: "Gérer le serveur"
                 };
 
-                const dangerousPerms = Object.keys(perms).filter(perm = > role.permissions.has(perm))
+                const dangerousPerms = Object.keys(perms).filter(perm => role.permissions.has(perm))
                 const allPermissions = dangerousPerms.length > 0 ? dangerousPerms.map(perm => perms[perm]).join(", ") : "Aucune";
 
                 const roleEmbed = new MessageEmbed()
@@ -116,7 +116,7 @@ module.exports = {
                     }
                 });
 
-                collector.on('end', () = > {
+                collector.on('end', () => {
                     row.components.forEach(component => component.setDisabled(true))
                     sentMessage.edit({ components: [row] });
                 });

@@ -72,7 +72,7 @@ module.exports = {
                 VERY_HIGH: "Maximum",
             };
 
-            const rolesGuild = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role = > role.toString())
+            const rolesGuild = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString())
             const membersGuild = message.guild.members.cache;
             const channelsGuild = message.guild.channels.cache;
             const emojisGuild = message.guild.emojis.cache;
