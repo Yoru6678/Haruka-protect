@@ -18,73 +18,19 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixFile(filePath) {
+function fixBadEquality(filePath) {
   if (filePath === __filename) return;
-
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // 1. Corriger les flèches mal écrites : = > → =>
-  content = content.replace(/=\s*>/g, "=>");
-
-  // 2. await dans .get(...) → séparer en deux lignes
-  content = content.replace(
-    /client\.channels\.cache\.get\(\s*await\s+([^)]+)\)/g,
-    (_, expr) => {
-      return `const raidlogId = await ${expr};\nconst channel = client.channels.cache.get(raidlogId);`;
-    }
-  );
-
-  // 3. await await → await
-  content = content.replace(/\bawait\s+await\b/g, "await");
-
-  // 4. ;.send(...) → .send(...) sur la ligne suivante
-  content = content.replace(/;\s*\.(\w+)/g, (_, method) => `\n${method}`);
-
-  // 5. const a = const b = ... → séparer
-  content = content.replace(
-    /const\s+(\w+)\s*=\s*const\s+(\w+)\s*=\s*(await\s+[^\n;]+);?/g,
-    (_, a, b, expr) => `const ${b} = ${expr};\nconst ${a} = client.channels.cache.get(${b});`
-  );
-
-  // 6. execute(...) → async execute(...)
-  content = content.replace(
-    /(?<!async\s)execute\s*\(([^)]*)\)\s*{/g,
-    "async execute($1) {"
-  );
-
-  // 7. Redéclaration de channel → renommer
-  let seenChannel = 0;
-  content = content.replace(/const\s+channel\s*=/g, () => {
-    seenChannel++;
-    return seenChannel === 1 ? "const channel =" : `const channel${seenChannel} =`;
-  });
-
-  // 8. Redéclaration de raidlogChannel → renommer
-  let seenRaid = 0;
-  content = content.replace(/const\s+raidlogChannel\s*=/g, () => {
-    seenRaid++;
-    return seenRaid === 1 ? "const raidlogChannel =" : `const raidlogChannel${seenRaid} =`;
-  });
-
-  // 9. await ml.get(`...`; → await ml.get(`...`);
-  content = content.replace(/(await\s+ml\.get\(`[^`]+`);/g, (match) => {
-    return match.replace(";", ")");
-  });
-
-  // 10. Supprimer les parenthèses en trop → ...get(...)); → ...get(...);
-  content = content.replace(/(\.get\([^)]+\)\));/g, (match) => {
-    return match.replace(/\)\);/, ");");
-  });
-  content = content.replace(/=\s*([^)]+\)\));/g, (_, expr) => {
-    return `= ${expr.replace(/\)\);/, ");")}`;
-  });
+  // Corrige = == en ===
+  content = content.replace(/=\s*==/g, "===");
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ corrigé : ${filePath}`);
+    console.log(`✅ opérateur corrigé : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixFile);
+allFiles.forEach(fixBadEquality);
