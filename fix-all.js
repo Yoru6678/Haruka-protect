@@ -3,7 +3,7 @@ const path = require("path");
 
 const filePath = path.join("moderation", "addrole.js");
 
-const bug = "} else if (pgs.get(permgs${message.guild.id}) === true && message.member.roles.cache.has(pgs.get(permgs${message.guild.id})) {";
+const bug = "} else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) {";
 const fix = "} else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`))) {";
 
 if (fs.existsSync(filePath)) {
