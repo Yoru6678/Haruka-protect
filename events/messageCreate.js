@@ -21,7 +21,7 @@ module.exports = {
         const commandName = args.shift().toLowerCase()
         const command = client.commands.get(commandName)
 
-        if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`)))
+        if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))
             message.channel.send(`Mon prefix sur le serveur est : \`${pf}\``)
 
         if (!message.content.startsWith(pf) || message.author.bot) return

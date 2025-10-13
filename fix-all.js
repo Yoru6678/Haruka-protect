@@ -4,9 +4,6 @@ const path = require("path");
 const baseDir = process.cwd();
 const extensions = [".js"];
 
-const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)";
-const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))";
-
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, file);
@@ -21,15 +18,22 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixBug(filePath) {
+function fixTripleParenthesis(filePath) {
   if (filePath === __filename) return;
   let content = fs.readFileSync(filePath, "utf8");
-  if (content.includes(bug)) {
-    content = content.replace(bug, fix);
+  let original = content;
+
+  // Corrige ...get(...`))); → ...get(...`));
+  content = content.replace(/\)\)\);/g, "))");
+
+  // Corrige ...get(...`))) → ...get(...`))
+  content = content.replace(/\)\)\)/g, "))");
+
+  if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ corrigé dans : ${filePath}`);
+    console.log(`✅ parenthèse en trop supprimée : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixBug);
+allFiles.forEach(fixTripleParenthesis);

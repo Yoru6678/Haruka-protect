@@ -33,7 +33,7 @@ module.exports = {
 
             let giveawayDuration = args[1];
 
-            if (!giveawayDuration || isNaN(ms(giveawayDuration))) {
+            if (!giveawayDuration || isNaN(ms(giveawayDuration)) {
                 return message.reply(":x: Vous devez spécifier une durée valide !");
             }
 

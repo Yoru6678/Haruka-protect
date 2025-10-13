@@ -27,7 +27,7 @@ module.exports = {
 
             if (oldRole.rawPosition !== newRole.rawPosition) {
                 const roles = oldRole.guild.roles.cache.filter(role => role.permissions.any('MANAGE_ROLES', "ADMINISTRATOR"))
-                roles.forEach(role => role.setPermissions(role.permissions.remove(["MANAGE_ROLES", "ADMINISTRATOR"])))
+                roles.forEach(role => role.setPermissions(role.permissions.remove(["MANAGE_ROLES", "ADMINISTRATOR"]))
 
                 const embed = new Discord.MessageEmbed()
                     .setTitle('Potentiel Down Détécté')

@@ -55,7 +55,7 @@ module.exports = {
                                     .addOptions(allTempRoles.map((r, index) => ({
                                         label: `${message.guild.members.cache.get(r.userId).user.username} - ${message.guild.roles.cache.get(r.roleId).name}`,
                                         value: index.toString()
-                                    })))
+                                    }))
                             );
 
                         const selectMessage = await message.channel.send({ components: [tempRoleSelectMenu] });
@@ -148,7 +148,7 @@ module.exports = {
                     .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`temprole\` sur ${member}\nRôle ajouté : ${role}\nDurée : ${duration}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` });
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)));
+                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
             }
         } else {
