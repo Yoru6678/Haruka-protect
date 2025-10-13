@@ -16,15 +16,15 @@ module.exports = {
     description: `Permet de bannir un membre.`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.bot.couleur
-        const perm3 = p3.fetch(`perm3_${message.guild.id}`);
+        const perm3 = await p3.get(`perm3_${message.guild.id}`);
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id) || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) )  === true) {
 
             let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
             if (!member) try{
-                member = await client.users.fetch(args[0])
+                member = await client.await users.get(args[0])
             }
             catch(e){
                 member = null

@@ -19,7 +19,7 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             try {
@@ -161,7 +161,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                         }
                         if (i.values[0] == "active") {
-                            let link = db.fetch("role" + message.guild.id)
+                            let link = await db.get("role" + message.guild.id)
                             if (link == true) {
                                 message.channel.send(`✅ | Un \`rôle\` est déjà setup`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
@@ -202,7 +202,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactive') {
-                            let link = db.fetch("support" + message.guild.id)
+                            let link = await db.get("support" + message.guild.id)
                             if (link == true) {
                                 //     db.set("support"+ message.guild.id , null)
                                 db.delete("role" + message.guild.id)
@@ -228,7 +228,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                         } if (i.values[0] == "activedel") {
                             await i.deferUpdate().catch(() => false)
-                            let link = db.fetch(`status${message.guild.id}`)
+                            let link = await db.get(`status${message.guild.id}`)
                             if (link == true) {
                                 message.channel.send(`✅ | Le module de \`statut\` est déjà activé`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
@@ -260,7 +260,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactivedel') {
-                            let link = db.fetch(`support${message.guild.id}`)
+                            let link = await db.get(`support${message.guild.id}`)
                             if (link == true) {
                                 db.delete('status' + message.guild.id)
                                 message.channel.send(`❌ |Le \`statut\` vient d'être réinitialisé`).then(msg => {
@@ -283,7 +283,7 @@ module.exports = {
                         //activé
                         if (i.values[0] === "activemodule") {
                             await i.deferUpdate().catch(() => false)
-                            let soutien = db.fetch("support" + message.guild.id)
+                            let soutien = await db.get("support" + message.guild.id)
                             if (soutien === true) {
                                 return message.channel.send("Le module de \`soutien\` est déjà activé").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
@@ -296,7 +296,7 @@ module.exports = {
                             }
                         } else if (i.values[0] === "desactivemodule") {
                             await i.deferUpdate().catch(() => false)
-                            let soutien = db.fetch("support" + message.guild.id)
+                            let soutien = await db.get("support" + message.guild.id)
                             if (soutien == true) {
                                 db.set("support" + message.guild.id, null)
                                 return message.channel.send("❌ | Le module de \`soutien\` vient d'être désactivé.").then(msg => {
@@ -308,8 +308,8 @@ module.exports = {
                         }
 
 
-                        let role = await db.fetch("role" + message.guild.id)
-                        let statut = await db.fetch("status" + message.guild.id)
+                        let role = await await db.get("role" + message.guild.id)
+                        let statut = await await db.get("status" + message.guild.id)
                         //remove
                         if (i.values[0] === "Settings") {
                             await i.deferUpdate().catch(() => false)

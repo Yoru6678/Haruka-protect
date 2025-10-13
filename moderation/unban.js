@@ -11,7 +11,7 @@ module.exports = {
     usage: 'unban [membre/all]',
     description: `Permet de débannir un membre ou tous les membres.`,
     async execute(client, message, args) {
-        const perm3 = p3.fetch(`perm3_${message.guild.id}`);
+        const perm3 = await p3.get(`perm3_${message.guild.id}`);
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)  ) {
             if (!args[0]) {

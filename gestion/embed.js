@@ -14,7 +14,7 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             let selectMenuOptions = [
@@ -118,7 +118,7 @@ module.exports = {
                                 var yxy = await cld.message.channel.send({ content: "Quel est l'identifiant du message avec l'embed à modifier ?" })
                                 message.channel.awaitMessages({ filter, max: 1, time: 60000, errors: ["time"] })
                                     .then(async (collected2) => {
-                                        var msg = await channel.messages.fetch(collected2.first().content)
+                                        var msg = await channel.await messages.get(collected2.first().content)
                                         if (!msg) return cld.message.channel.send({ content: "Message introuvable." })
 
                                         msg.edit({ embeds: [embed] })
@@ -385,7 +385,7 @@ module.exports = {
                                 var yxy = await cld.message.channel.send({ content: "Quel est le message de l'**embed** ?" })
                                 message.channel.awaitMessages({ filter, max: 1, time: 60000, errors: ["time"] })
                                     .then(async (collected2) => {
-                                        var messag = await channel.messages.fetch(collected2.first().content)
+                                        var messag = await channel.await messages.get(collected2.first().content)
                                         if (!messag) return cld.message.channel.send({ content: "Message introuvable." })
                                         collected.first().delete().catch(() => false)
                                         collected.first().delete().catch(() => false)

@@ -29,7 +29,7 @@ module.exports = {
     description: `Permet d'afficher le dernier message supprimé sur le serveur`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
 
         let isLinkall = false;

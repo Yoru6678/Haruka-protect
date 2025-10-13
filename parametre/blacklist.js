@@ -12,7 +12,7 @@ module.exports = {
     description: `Permet de mettre dans la blacklist des membres.`,
     async execute(client, message, args) {
         if (config.bot.buyer.includes(message.author.id)) {
-            let color = cl.fetch(`color_${message.guild.id}`);
+            let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
 
             if (args[0] === 'clear') {

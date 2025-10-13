@@ -17,7 +17,7 @@ module.exports = {
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
             if (!args[0]) return message;
 
-            let color = cl.fetch(`color_${message.guild.id}`);
+            let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
 
             if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
@@ -37,7 +37,7 @@ module.exports = {
                     .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`addrole\` sur ${member}\nRôle ajouté : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` });
-                const logchannel = client.channels.cache.get(ml.fetch(`${message.guild.id}.modlog`));
+                const logchannel = client.channels.cache.get(await ml.get(`${message.guild.id}.modlog`));
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
 
             } else if (message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) === true) {

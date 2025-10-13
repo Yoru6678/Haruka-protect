@@ -18,7 +18,7 @@ module.exports = {
         if (!audit | !audit.executor) return
         if (audit.executor.id === client.user.id) return
 
-        if (acu.fetch(`config.${oldChannel.guild.id}.antichannelupdate`) == true) {
+        if (await acu.get(`config.${oldChannel.guild.id}.antichannelupdate`) == true) {
 
             if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${oldChannel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
@@ -52,7 +52,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`modifier\` un salon, il a été sanctionné.`)
                     .setTimestamp()
-                const channel = client.channels.cache.get(rlog.fetch(`${oldChannel.guild.id}.raidlog`))
+                const channel = client.channels.cache.get(await rlog.get(`${oldChannel.guild.id}.raidlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }

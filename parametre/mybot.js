@@ -12,7 +12,7 @@ module.exports = {
 
         if (config.bot.buyer.includes(message.author.id)) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             const embed = new MessageEmbed()

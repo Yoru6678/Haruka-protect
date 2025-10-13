@@ -16,7 +16,7 @@ module.exports = {
     name: 'interactionCreate',
     async execute(client, interaction, message) {
 
-        let color = cl.fetch(`color_${interaction.guild.id}`)
+        let color = await cl.get(`color_${interaction.guild.id}`)
         if (color == null) color = config.bot.couleur
 
         if (!interaction.isButton()) return;

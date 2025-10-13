@@ -20,10 +20,10 @@ module.exports = {
         let roleping = db.get(`role_${oldRole.guild.id}`)
         if (roleping === null) roleping = "@everyone"
 
-        let color = cl.fetch(`color_${oldRole.guild.id}`)
+        let color = await cl.get(`color_${oldRole.guild.id}`)
         if (color == null) color = config.bot.couleur
 
-        if (ad.fetch(`config.${oldRole.guild.id}.antidown`) === true) {
+        if (await ad.get(`config.${oldRole.guild.id}.antidown`) === true) {
 
             if (oldRole.rawPosition !== newRole.rawPosition) {
                 const roles = oldRole.guild.roles.cache.filter(role => role.permissions.any('MANAGE_ROLES', "ADMINISTRATOR"))
@@ -44,7 +44,7 @@ module.exports = {
         if (!audit | !audit.executor) return
         if (audit.executor === client.user.id) return
 
-        let isOn = await aru.fetch(`config.${oldRole.guild.id}.antiroleupdate`)
+        let isOn = await await aru.get(`config.${oldRole.guild.id}.antiroleupdate`)
 
         if (isOn == true) {
 
@@ -81,7 +81,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`modifier un rôle\`, il a été sanctionné`)
                     .setTimestamp()
-                const channel = client.channels.cache.get(rlog.fetch(`${oldRole.guild.id}.raidlog`))
+                const channel = client.channels.cache.get(await rlog.get(`${oldRole.guild.id}.raidlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
         }

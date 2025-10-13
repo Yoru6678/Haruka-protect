@@ -16,7 +16,7 @@ module.exports = {
 
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
 
          if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p1) || message.member.roles.cache.has(p2) || message.member.roles.cache.has(p3) || config.bot.buyer.includes(message.author.id)  ) {

@@ -15,10 +15,10 @@ module.exports = {
     description: `Permet d'afficher l'help.`,
     async execute(client, message, args) {
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.bot.prefixe
         
-        let color = cl.fetch(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.bot.couleur
 
     if (args[0] === "variable") {
@@ -60,7 +60,7 @@ module.exports = {
 
         if (args[0] === "all") {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             const public = new Discord.MessageEmbed()

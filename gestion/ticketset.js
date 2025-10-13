@@ -15,10 +15,10 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            let pf = p.fetch(`prefix_${message.guild.id}`)
+            let pf = await p.get(`prefix_${message.guild.id}`)
             if (pf == null) pf = config.prefix
 
             message.delete()

@@ -14,13 +14,13 @@ module.exports = {
 
         if (config.bot.buyer.includes(message.author.id)) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             if (args[0]) {
                 let member = message.mentions.users.first() || client.users.cache.get(args[0]);
                 if (!member) try{
-                    member = await client.users.fetch(args[0])
+                    member = await client.await users.get(args[0])
                 }
                 catch(e){
                     return message.channel.send(`Aucun utilisateur trouvé pour \`${args[0] || "rien"}\``)

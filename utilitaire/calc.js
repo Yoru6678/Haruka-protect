@@ -11,7 +11,7 @@ module.exports = {
     usage: 'calc <calcul>',
     description: `Permet d'effectuer un calcul.`,
     execute(client, message, args) {
-        let color = cl.fetch(`color_${message.guild.id}`) || config.bot.couleur;
+        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         if (!args.length) {
             return message.channel.send("Veuillez fournir un calcul.");

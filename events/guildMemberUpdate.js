@@ -15,7 +15,7 @@ module.exports = {
 
     async execute(client, oldMember, newMember) {
 
-        let color = cl.fetch(`color_${oldMember.guild.id}`)
+        let color = await cl.get(`color_${oldMember.guild.id}`)
         if (color == null) color = config.bot.couleur
 
         let channellogs = modlog.get(`${newMember.guild.id}.modlog`)
@@ -80,7 +80,7 @@ module.exports = {
                 });
 
                 if (newRoleIDs.length > oldRoleIDs.length) {
-                    function filterOutOld(id) {
+                    async function filterOutOld(id) {
                        for (var i = 0; i < oldRoleIDs.length; i++) {
                            if (id === oldRoleIDs[i]) {
                                return false;
@@ -115,7 +115,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                         .setDescription(`<@${audit.executor.id}> a tenté d'ajouter un rôle possédant une \`perm admin\` a <@${newMember.id}>, ils ont été sanctionné`)
                         .setTimestamp()
-                    const channel = client.channels.cache.get(rlog.fetch(`${oldMember.guild.id}.raidlog`))
+                    const channel = client.channels.cache.get(await rlog.get(`${oldMember.guild.id}.raidlog`))
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
                 })
             }

@@ -14,12 +14,12 @@ module.exports = {
     usage: 'temprole <membre> <role> <durée> | temprole list',
     description: `Permet d'ajouter un rôle temporaire à un membre ou de voir la liste des rôles temporaires.`,
     async execute(client, message, args) {
-        let color = cl.fetch(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`))) {
             if (args[0] === 'list') {
-                let allTempRoles = temproles.fetch(`temproles_${message.guild.id}`) || [];
+                let allTempRoles = await temproles.get(`temproles_${message.guild.id}`) || [];
                 if (allTempRoles.length === 0) {
                     return message.channel.send("Aucun rôle temporaire en cours.");
                 }
@@ -138,7 +138,7 @@ module.exports = {
 
                 setTimeout(async () => {
                     await member.roles.remove(role, `Rôle temporaire expiré`);
-                    let updatedTempRoles = temproles.fetch(`temproles_${message.guild.id}`) || [];
+                    let updatedTempRoles = await temproles.get(`temproles_${message.guild.id}`) || [];
                     updatedTempRoles = updatedTempRoles.filter(r => r.userId !== member.id || r.roleId !== role.id);
                     temproles.set(`temproles_${message.guild.id}`, updatedTempRoles);
                 }, durationMs);

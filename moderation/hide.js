@@ -15,9 +15,9 @@ module.exports = {
     description: `Permet de cacher un salon`,
     async execute(client, message, args, color) {
 
-        const perm3 = p3.fetch(`perm3_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}`)
 
-            let ecolor = cl.fetch(`color_${message.guild.id}`)
+            let ecolor = await cl.get(`color_${message.guild.id}`)
             if (ecolor == null) color = config.bot.couleur
 
 

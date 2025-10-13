@@ -15,7 +15,7 @@ module.exports = {
     description: `Permet de derank un membre sur le serveur.`,
     async execute(client, message, args) {
     if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) )  === true) {
-            let color = cl.fetch(`color_${message.guild.id}`);
+            let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
         
                 let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);

@@ -17,7 +17,7 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             const funny = message.guild.channels.cache.filter(x => x.type === "GUILD_CATEGORY")

@@ -13,7 +13,7 @@ module.exports = {
     usage: 'clear',
     description: `Permet de supprimer des messages`,
     async execute(client, message, args) {
-        const perm3 = p3.fetch(`perm3_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}`)
 
         if (message.mentions.members.first()) {
 
@@ -21,7 +21,7 @@ module.exports = {
             if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)   === true)
 
                 message.delete()
-            message.channel.messages.fetch({ limit: 100 })
+            message.channel.await messages.get({ limit: 100 })
                 .then((messages) => {
                     var filterUser = message.mentions.members.first().id;
                     var filtered = messages.filter(m => m.author.id === filterUser).array().slice(0, 100);
@@ -47,7 +47,7 @@ module.exports = {
                     });
                 }
 
-                let color = cl.fetch(`color_${message.guild.id}`)
+                let color = await cl.get(`color_${message.guild.id}`)
                 if (color == null) color = config.bot.couleur
 
                 const embed = new Discord.MessageEmbed()

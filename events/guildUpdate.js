@@ -17,7 +17,7 @@ module.exports = {
         if (oldGuild === newGuild) return;
         let guild = newGuild
 
-        let color = cl.fetch(`color_${guild.id}`)
+        let color = await cl.get(`color_${guild.id}`)
         if (color == null) color = config.bot.couleur
 
         if (agu.get(`guildupdate_${guild.id}`) === true) {
@@ -50,7 +50,7 @@ module.exports = {
                 embed.setDescription(`${action.executor} a apporté des \`modifications au serveur\`, **il a été sanctionné**`)
                 embed.setColor(color)
 
-                const channel = client.channels.cache.get(rlog.fetch(`${guild.id}.raidlog`))
+                const channel = client.channels.cache.get(await rlog.get(`${guild.id}.raidlog`))
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
                 if (oldGuild.name !== newGuild.name) await newGuild.setName(oldGuild.name).catch(() => false)

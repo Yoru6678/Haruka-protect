@@ -9,7 +9,7 @@ module.exports = {
 
         if (oldMember.premiumSince === newMember.premiumSince) return
 
-        const chan = `${boostlog.fetch(`${newMember.guild.id}.boostlog`)}`
+        const chan = `${await boostlog.get(`${newMember.guild.id}.boostlog`)}`
         if (!chan) return
 
         const channel = oldMember.guild.channels.cache.get(chan)

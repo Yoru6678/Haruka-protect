@@ -38,14 +38,14 @@ module.exports = {
             }
             else if (punish.get(`sanction_${channel.guild.id}`) === "derank") {
 
-                const member = await channel.guild.members.fetch(audit.executor.id)
+                const member = await channel.guild.await members.get(audit.executor.id)
                 member.roles.set([], "AntiChannel Create").catch(() => false)
             }
 
             const embed = new Discord.MessageEmbed()
                 .setDescription(`<@${audit.executor.id}> a tenté de \`créer\` un salon, il a été sanctionné.`)
                 .setTimestamp()
-            const logchannel = client.channels.cache.get(rlog.fetch(`${channel.guild.id}.raidlog`))
+            const logchannel = client.channels.cache.get(await rlog.get(`${channel.guild.id}.raidlog`))
             if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
         }

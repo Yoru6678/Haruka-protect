@@ -14,7 +14,7 @@ module.exports = {
     description: `Permet de configuré la sanction de l'antiraid.`,
     async execute(client, message, args) {
 
-        let color = cl.fetch(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {

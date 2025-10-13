@@ -18,7 +18,7 @@ module.exports = {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             const newChannel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0] || message.channelId);

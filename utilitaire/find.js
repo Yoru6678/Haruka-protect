@@ -10,7 +10,7 @@ module.exports = {
     usage: 'find [membre/ID]',
     description: `Permet de chercher un membre en vocal dans le serveur.`,
     async execute(client, message, args) {
-        let color = cl.fetch(`color_${message.guild.id}`) || config.bot.couleur;
+        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
 

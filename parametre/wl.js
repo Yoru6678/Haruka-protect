@@ -16,7 +16,7 @@ module.exports = {
     description: `Permet de rajouter quelqu'un ou un rôle dans la whitelist du bot.`,
     async execute(client, message, args) {
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)  ) {
-            let color = cl.fetch(`color_${message.guild.id}`);
+            let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
 
             if (args[0]) {

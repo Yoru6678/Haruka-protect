@@ -18,7 +18,7 @@ module.exports = {
         if (!audit | !audit.executor) return
         if (audit.executor.id === client.user.id) return
 
-        if (atd.fetch(`config.${channel.guild.id}.antichanneldelete`) == true) {
+        if (await atd.get(`config.${channel.guild.id}.antichanneldelete`) == true) {
 
             if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
@@ -44,7 +44,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${audit.executor.id}> a tenté de \`supprimer\` un salon, il a été sanctionné.`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${channel.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${channel.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
         }

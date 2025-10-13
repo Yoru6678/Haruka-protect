@@ -72,7 +72,7 @@ module.exports = {
         if (message.author.bot) return
         if (message.channel.type == "DM") return
 
-        let pf = p.fetch(`prefix_${message.guild.id}`)
+        let pf = await p.get(`prefix_${message.guild.id}`)
         if (pf == null) pf = config.bot.prefixe
 
         if (owner.get(`owners.${message.member.id}`) || wl.get(`${message.guild.id}.${message.member.id}.wl`) || config.bot.buyer === message.author.id === true) return
@@ -89,7 +89,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
-                client.channels.cache.get(rlog.fetch(`${message.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
+                client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
             }
 
         }
@@ -107,7 +107,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${message.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
@@ -130,7 +130,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a mentionné \`tout le serveur\` dans \`${message.channel.name}\`, j'ai renew le salon`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(rlog.fetch(`${message.guild.id}.raidlog`))
+                const logchannel = client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }

@@ -10,7 +10,7 @@ module.exports = {
     description: `Permet de voir la latence du bot en millisecondes.`,
 
     async execute(client, message, args) {
-        let color = cl.fetch(`color_${message.guild.id}`) || config.bot.couleur;
+        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         const embed = new Discord.MessageEmbed()
             .addField('BOT', `${client.ws.ping} ms`, true)

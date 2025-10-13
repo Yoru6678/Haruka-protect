@@ -18,14 +18,14 @@ module.exports = {
     description: `Permet de rendre muet un membre dans un salon vocal sur le serveur.`,
     async execute(client, message, args, member) {
 
-        const perm1 = p1.fetch(`perm1_${message.guild.id}`)
-        const perm2 = p2.fetch(`perm2_${message.guild.id}`)
-        const perm3 = p3.fetch(`perm3_${message.guild.id}`)
+        const perm1 = await p1.get(`perm1_${message.guild.id}`)
+        const perm2 = await p2.get(`perm2_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}`)
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm1) || message.member.roles.cache.has(perm2) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)   === true) {
 
             await message.guild.members.fetch();
-            await message.client.guilds.fetch(message.guild.id);
+            await message.client.await guilds.get(message.guild.id);
 
             const muteUser = message.mentions.members.first() || message.guild.members.cache.get(args[0])
             
@@ -61,7 +61,7 @@ module.exports = {
                 `**${muteUser.user.tag}** a été mute avec succès sur le serveur. Raison: **${muteReason || "Aucune"}**. `
             )
 
-            let color = cl.fetch(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
             const embed = new Discord.MessageEmbed()
