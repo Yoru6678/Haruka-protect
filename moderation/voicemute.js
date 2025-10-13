@@ -25,7 +25,7 @@ module.exports = {
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm1) || message.member.roles.cache.has(perm2) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)   === true) {
 
             await message.guild.members.fetch();
-            await message.client.await guilds.get(message.guild.id);
+            await message.client.guilds.fetch(message.guild.id);
 
             const muteUser = message.mentions.members.first() || message.guild.members.cache.get(args[0])
             
