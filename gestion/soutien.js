@@ -308,8 +308,8 @@ module.exports = {
                         }
 
 
-                        let role = await await db.get("role" + message.guild.id)
-                        let statut = await await db.get("status" + message.guild.id)
+                        let role = await db.get("role" + message.guild.id)
+                        let statut = await db.get("status" + message.guild.id)
                         //remove
                         if (i.values[0] === "Settings") {
                             await i.deferUpdate().catch(() => false)

@@ -18,29 +18,23 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixExecuteAsync(filePath) {
+function fixDoubleAwait(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Corrige execute: function(...) → execute: async function(...)
-  content = content.replace(
-    /execute\s*:\s*(?!async\s*)function\s*\(/g,
-    "execute: async function("
-  );
+  // Supprime await await
+  content = content.replace(/\bawait\s+await\b/g, "await");
 
-  // Corrige execute(...) { → async execute(...) {
-  content = content.replace(
-    /(?<!async\s)execute\s*\(([^)]*)\)\s*{/g,
-    "async execute($1) {"
-  );
+  // Supprime await .await ou await awaitX
+  content = content.replace(/\bawait\s+(\.\s*)?await(\w*)/g, "await $2");
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ execute rendu async : ${filePath}`);
+    console.log(`✅ doublon await corrigé : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixExecuteAsync);
+allFiles.forEach(fixDoubleAwait);

@@ -44,7 +44,7 @@ module.exports = {
         if (!audit | !audit.executor) return
         if (audit.executor === client.user.id) return
 
-        let isOn = await await aru.get(`config.${oldRole.guild.id}.antiroleupdate`)
+        let isOn = await aru.get(`config.${oldRole.guild.id}.antiroleupdate`)
 
         if (isOn == true) {
 
