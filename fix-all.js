@@ -4,8 +4,8 @@ const path = require("path");
 const baseDir = process.cwd();
 const extensions = [".js"];
 
-const bug = "} else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`)) {";
-const fix = "} else if (pgs.get(`permgs_${message.guild.id}`) === true && message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`))) {";
+const bug = "else if (message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`) === true) {";
+const fix = "else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`))) {";
 
 function walk(dir, files = []) {
   for (const file of fs.readdirSync(dir)) {
@@ -21,7 +21,7 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixCondition(filePath) {
+function fixBanCondition(filePath) {
   if (filePath === __filename) return;
   let content = fs.readFileSync(filePath, "utf8");
   if (content.includes(bug)) {
@@ -32,4 +32,4 @@ function fixCondition(filePath) {
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixCondition);
+allFiles.forEach(fixBanCondition);
