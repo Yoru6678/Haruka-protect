@@ -115,7 +115,8 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                         .setDescription(`<@${audit.executor.id}> a tenté d'ajouter un rôle possédant une \`perm admin\` a <@${newMember.id}>, ils ont été sanctionné`)
                         .setTimestamp()
-                    const channel = client.channels.cache.get(await rlog.get(`${oldMember.guild.id}.raidlog`))
+                    const channel = const raidlogId = await rlog.get(`${oldMember.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
                     if (channel) channel.send({ embeds: [embed] }).catch(() => false)
                 })
             }

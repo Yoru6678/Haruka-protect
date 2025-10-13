@@ -56,7 +56,8 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${newMessage.author.id}> a envoyé un \`lien\` dans \`${newMessage.channel.name}\`, j'ai supprimé son message`)
                     .setTimestamp()
-                client.channels.cache.get(await rlog.get(`${newMessage.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
+                const raidlogId = await rlog.get(`${newMessage.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);.send({ embeds: [embed] }).catch(() => false)
             }
         }
 

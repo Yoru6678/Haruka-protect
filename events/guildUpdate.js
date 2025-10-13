@@ -50,7 +50,8 @@ module.exports = {
                 embed.setDescription(`${action.executor} a apporté des \`modifications au serveur\`, **il a été sanctionné**`)
                 embed.setColor(color)
 
-                const channel = client.channels.cache.get(await rlog.get(`${guild.id}.raidlog`))
+                const channel = const raidlogId = await rlog.get(`${guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
                 if (channel) channel.send({ embeds: [embed] }).catch(() => false)
 
                 if (oldGuild.name !== newGuild.name) await newGuild.setName(oldGuild.name).catch(() => false)

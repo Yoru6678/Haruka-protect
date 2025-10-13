@@ -45,7 +45,8 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setDescription(`<@${audit.executor.id}> a tenté de \`créer\` un salon, il a été sanctionné.`)
                 .setTimestamp()
-            const logchannel = client.channels.cache.get(await rlog.get(`${channel.guild.id}.raidlog`))
+            const logchannel = const raidlogId = await rlog.get(`${channel.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
             if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
         }

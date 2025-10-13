@@ -89,7 +89,8 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
-                client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`)).send({ embeds: [embed] }).catch(() => false)
+                const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);.send({ embeds: [embed] }).catch(() => false)
             }
 
         }
@@ -107,7 +108,8 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`))
+                const logchannel = const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
@@ -130,7 +132,8 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                     .setDescription(`<@${message.author.id}> a mentionné \`tout le serveur\` dans \`${message.channel.name}\`, j'ai renew le salon`)
                     .setTimestamp()
-                const logchannel = client.channels.cache.get(await rlog.get(`${message.guild.id}.raidlog`))
+                const logchannel = const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
+const channel = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }

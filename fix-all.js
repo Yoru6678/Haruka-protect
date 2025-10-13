@@ -18,20 +18,25 @@ function walk(dir, files = []) {
   return files;
 }
 
-function fixGuildAwaitMembers(filePath) {
+function fixAwaitInsideGet(filePath) {
   if (filePath === __filename) return;
 
   let content = fs.readFileSync(filePath, "utf8");
   let original = content;
 
-  // Corrige channel.guild.await members → channel.guild.members
-  content = content.replace(/channel\.guild\.await\s+members/g, "channel.guild.members");
+  // Corrige client.channels.cache.get(await rlog.get(...))
+  content = content.replace(
+    /client\.channels\.cache\.get\(\s*await\s+(rlog\.get\([^)]+\))\s*\)/g,
+    (match, inner) => {
+      return `const raidlogId = await ${inner};\nconst channel = client.channels.cache.get(raidlogId);`;
+    }
+  );
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, "utf8");
-    console.log(`✅ guild.await members corrigé : ${filePath}`);
+    console.log(`✅ await dans .get corrigé : ${filePath}`);
   }
 }
 
 const allFiles = walk(baseDir);
-allFiles.forEach(fixGuildAwaitMembers);
+allFiles.forEach(fixAwaitInsideGet);
