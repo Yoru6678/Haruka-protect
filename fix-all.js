@@ -3,8 +3,8 @@ const path = require("path");
 
 const filePath = path.join("moderation", "ban.js");
 
-const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)";
-const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))";
+const bug = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)))";
+const fix = "const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));";
 
 if (fs.existsSync(filePath)) {
   let content = fs.readFileSync(filePath, "utf8");
