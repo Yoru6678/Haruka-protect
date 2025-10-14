@@ -36,7 +36,7 @@ module.exports = {
                 .setDescription(`<@${message.author.id}> a utilisé la commande \`hide\` le salon <#${message.channel.id}>`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
-            const modlog = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)
+            const modlog = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));
             if (modlog) modlog.send({ embeds: [embed] }).catch(() => false)
     }
 }
