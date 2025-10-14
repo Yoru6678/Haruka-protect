@@ -45,7 +45,7 @@ module.exports = {
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
         }
 
-        else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`)) {
+        else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`))) {
 
             let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 

@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const filePath = path.join("moderation", "hide.js");
+const filePath = path.join("moderation", "kick.js");
 
-const bug = "const modlog = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)";
-const fix = "const modlog = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));";
+const bug = "else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`)) {";
+const fix = "else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`))) {";
 
 if (fs.existsSync(filePath)) {
   let content = fs.readFileSync(filePath, "utf8");
