@@ -4,3 +4,13 @@ build:
   command: npm install --force
 run:
   command: node index.js
+env:
+  - name: NODE_ENV
+    value: production
+healthcheck:
+  http:
+    port: 8000
+    path: /
+  grace_period: 30
+  interval: 10
+  restart_limit: 3

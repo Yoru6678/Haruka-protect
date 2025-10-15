@@ -1,3 +1,4 @@
+require('./ping');
 const db = require("./db.js");
 require("dotenv").config();
 const { Client, Intents, Collection } = require('discord.js');

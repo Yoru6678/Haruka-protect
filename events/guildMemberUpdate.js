@@ -1,181 +1,62 @@
 const db = require("../db.js");
-const Discord = require('discord.js')
-const config = require('../config')
+const Discord = require('discord.js');
 
-const modlog = db.table("modlog")
-const cl = db.table("Color")
-const aa = db.table("Antiadmin")
-const punish = db.table("Punition")
-const rlog = db.table("raidlog")
-const owner = db.table("Owner")
+const owner = db.table("Owner");
+const rlog = db.table("raidlog");
+const punish = db.table("Punition");
+const wl = db.table("Whitelist");
+const ad = db.table("Antidown");
+const config = require('../config');
 
 module.exports = {
     name: 'guildMemberUpdate',
     once: false,
 
     async execute(client, oldMember, newMember) {
+        if (ad.get(`config.${newMember.guild.id}.antidown`) === true) {
+            const oldRoles = oldMember.roles.cache;
+            const newRoles = newMember.roles.cache;
+            
+            const removedRoles = oldRoles.filter(role => !newRoles.has(role.id));
+            
+            if (removedRoles.size > 0) {
+                const audit = await newMember.guild.fetchAuditLogs({
+                    type: "MEMBER_ROLE_UPDATE",
+                    limit: 1
+                }).then(audit => audit.entries.first());
+                
+                if (!audit || !audit.executor) return;
+                if (audit.executor.id === client.user.id) return;
+                if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${newMember.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id) return;
 
-        let color = await cl.get(`color_${oldMember.guild.id}`)
-        if (color == null) color = config.bot.couleur
-
-        let channellogs = modlog.get(`${newMember.guild.id}.modlog`)
-
-        let roleping = db.get(`role_${newMember.guild.id}`)
-        if (roleping === null) roleping = "@everyone"
-        let deletionLog = await oldMember.guild.fetchAuditLogs({ type: "MEMBER_ROLE_UPDATE" }).then((audit) => audit.entries.first())
-        if (!deletionLog | !deletionLog.executor) return
-        if (deletionLog.executor.id === client.user.id) return
-
-        const { executor } = deletionLog;
-        if (executor.id === client.user.id) return;
-        if (executor.id === "ID") return;
-
-        if (oldMember.roles.cache.size < newMember.roles.cache.size) {
-            let newroles = null;
-            deletionLog.changes.forEach(r => {
-                newroles = r.new
-            });
-
-            let adminping = db.get(`adminping_${oldMember.guild.id}`)
-            if (adminping == null) adminping == true
-
-            if (adminping == true) {
-
-                if (newMember.permissions.has(`ADMINISTRATOR`) && !oldMember.permissions.has(`ADMINISTRATOR`)) {
-                    const lologs = channellogs
-                    let pingrole = `${roleping}`
-                    const logsAdmin = newMember.guild.channels.cache.get(lologs)
-
-                    if (logsAdmin) {
-
-                        const embed = new Discord.MessageEmbed()
-                            .setAuthor({ name: `Permission Admin détectée [Danger]`, iconURL: newMember.user.displayAvatarURL({ dynamic: true }) })
-                            .setTitle(`Une perm admin a été ajoutée`)
-                            .setDescription(`Exécuteur : ${executor}\nMembre : ${oldMember}\n Rôle : <@&${newroles.map(r => r.id).join(">, <@&")}>`)
-                            .setTimestamp()
-                            .setFooter({ text: `⚠️` })
-                            .setColor(color)
-                        const msg = await logsAdmin.send({ content: `${pingrole}`, embeds: [embed] })
-
-                    }
-                }
-            }
-
-            if (aa.get(`config.${oldMember.guild.id}.antiadmin`) === true) {
-
-                if (owner.get(`owners.${executor.id}`) || config.bot.buyer === executor.id === true || client.user.id === executor.id === true) return
-
-                const audit = await oldMember.guild.fetchAuditLogs({type: 25}).then((audit) => audit.entries.first())
-                if (!audit || !audit.executor) return
-                if (audit.executor === client.user.id) return
-                if (audit?.executor?.id == client.user.id) return
-
-                let oldRoleIDs = [];
-                oldMember.roles.cache.forEach(role => {
-                    oldRoleIDs.push(role.id);
-                });
-                let newRoleIDs = [];
-                newMember.roles.cache.forEach(role => {
-                    newRoleIDs.push(role.id);
+                removedRoles.forEach(role => {
+                    newMember.roles.add(role).catch(() => false);
                 });
 
-                if (newRoleIDs.length > oldRoleIDs.length) {
-                    async function filterOutOld(id) {
-                       for (var i = 0; i < oldRoleIDs.length; i++) {
-                           if (id === oldRoleIDs[i]) {
-                               return false;
-                           }
-                       }
-                       return true;
-                    }
-                    let onlyRole = newRoleIDs.filter(filterOutOld);
-                    var IDNum = onlyRole[0];
-                    }
-
-                oldMember.guild.members.resolve(newMember).roles.cache.forEach(role => {
-                    if (role.name !== '@everyone') {
-                        oldMember.guild.members.resolve(newMember).roles.remove(IDNum).catch(() => false)
-                    }
-
-                    else if (punish.get(`sanction_${oldMember.guild.id}`) === "ban") {
-                        oldMember.guild.members.ban(audit.executor.id, { reason: `Anti Admin` })
-
-                    } else if (punish.get(`sanction_${oldMember.guild.id}`) === "derank") {
-
-                        oldMember.guild.members.resolve(audit.executor.id).roles.cache.forEach(role => {
-                            if (role.name !== '@everyone') {
-                                oldMember.guild.members.resolve(audit.executor.id).roles.remove(role).catch(() => false)
+                if (punish.get(`sanction_${newMember.guild.id}`) === "ban") {
+                    newMember.guild.members.ban(audit.executor.id, { reason: `Anti Down` }).catch(() => false);
+                } else if (punish.get(`sanction_${newMember.guild.id}`) === "kick") {
+                    newMember.guild.members.kick(audit.executor.id, { reason: `Anti Down` }).catch(() => false);
+                } else if (punish.get(`sanction_${newMember.guild.id}`) === "derank") {
+                    const member = await newMember.guild.members.fetch(audit.executor.id).catch(() => null);
+                    if (member) {
+                        member.roles.cache.forEach(r => {
+                            if (r.name !== '@everyone') {
+                                member.roles.remove(r).catch(() => false);
                             }
-                        })
-
-                    } else if (punish.get(`sanction_${oldMember.guild.id}`) === "kick") {
-
-                        oldMember.guild.members.kick(audit.executor.id, { reason: `Anti Admin` })
+                        });
                     }
-                    const embed = new Discord.MessageEmbed()
-                        .setDescription(`<@${audit.executor.id}> a tenté d'ajouter un rôle possédant une \`perm admin\` a <@${newMember.id}>, ils ont été sanctionné`)
-                        .setTimestamp()
-                    const raidlogId = await rlog.get(`${oldMember.guild.id}.raidlog`);
-const raidlogChannel = client.channels.cache.get(raidlogId);
-const raidlogChannel2 = client.channels.cache.get(raidlogId);
-                    if (channel) channel.send({ embeds: [embed] }).catch(() => false)
-                })
-            }
-        }
-
-        if (db.get(`banping_${oldMember.guild.id}`) == true) {
-            if (newMember.permissions.has(`ADMINISTRATOR`) && !oldMember.permissions.has(`ADMINISTRATOR`)) return
-            let newroles = null;
-            deletionLog.changes.forEach(r => {
-                newroles = r.new
-            });
-
-
-            if (newMember.permissions.has(`BAN_MEMBERS`) && !oldMember.permissions.has(`BAN_MEMBERS`)) {
-                const lologs = channellogs
-                const pingrole = roleping
-                const logsAdmin = newMember.guild.channels.cache.get(lologs)
-
-                if (logsAdmin) {
-
-                    const embed = new Discord.MessageEmbed()
-                        .setAuthor({ name: `Permission Ban détectée [Danger]`, iconURL: newMember.user.displayAvatarURL({ dynamic: true }) })
-                        .setTitle(`Une perm Ban a été ajoutée`)
-                        .setDescription(`Exécuteur : ${executor}\nMembre : ${oldMember}\nRôle : <@&${newroles.map(r => r.id).join(">, <@&")}>`)
-                        .setTimestamp()
-                        .setFooter({ text: `⚠️` })
-                        .setColor(color)
-                    const msg = await logsAdmin.send({ embeds: [embed] })
-
                 }
-            }
-        }
 
-        if (db.get(`roleping_${oldMember.guild.id}`) == true) {
-            if (newMember.permissions.has(`ADMINISTRATOR`) && !oldMember.permissions.has(`ADMINISTRATOR`)) return
-            let newroles = null;
-            deletionLog.changes.forEach(r => {
-                newroles = r.new
-            });
-
-            if (newMember.permissions.has(`MANAGE_ROLES`) && !oldMember.permissions.has(`MANAGE_ROLES`)) {
-                const lologs = channellogs
-                const pingrole = roleping
-                const logsAdmin = newMember.guild.channels.cache.get(lologs)
-
-                if (logsAdmin) {
-
-                    const embed = new Discord.MessageEmbed()
-                        .setAuthor({ name: `Permission role détectée [Danger]`, iconURL: newMember.user.displayAvatarURL({ dynamic: true }) })
-                        .setTitle(`Une perm rôle a été ajoutée`)
-                        .setDescription(`Exécuteur : ${executor}\nMembre : ${oldMember}\nRôle : <@&${newroles.map(r => r.id).join(">, <@&")}>`)
-                        .setTimestamp()
-                        .setFooter({ text: `⚠️` })
-                        .setColor(color)
-                    const msg = await logsAdmin.send({ embeds: [embed] })
-
-                }
+                const embed = new Discord.MessageEmbed()
+                    .setDescription(`<@${audit.executor.id}> a retiré des rôles à ${newMember.user.tag}`)
+                    .setTimestamp()
+                    .setColor(config.bot.couleur);
+                
+                const raidlogId = await rlog.get(`${newMember.guild.id}.raidlog`);
+                const logchannel = client.channels.cache.get(raidlogId);
+                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
             }
         }
     }
-}
+};

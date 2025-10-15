@@ -1,6 +1,6 @@
 module.exports = {
     bot: {
-        prefixe: '*', // Préfixe - Le texte avant les commandes
+        prefixe: '+', // Préfixe - Le texte avant les commandes
         buyer: '784847248433479710', // Buyer
         couleur: '#36adfa', // Couleur HEX
         footer: 'Haruka Protect', // Dans la commande help ou autre il y'a un texte en bas
