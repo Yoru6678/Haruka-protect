@@ -1,62 +1,28 @@
-(async () => {
 const db = require("../db.js");
 const Discord = require("discord.js");
-
+const config = require("../config");
 
 const owner = db.table("Owner");
 const wl = db.table("Whitelist");
 const cl = db.table("Color");
-const config = require("../config");
-const footer = config.bot.footer;
 
 module.exports = {
     name: 'unwl',
-    usage: 'unwl [membre/role]',
-    category: "owner",
-    description: `Permet d'enlever quelqu'un ou un rôle de la whitelist du bot.`,
+    usage: 'unwl <@user>',
+    description: 'Retire un membre de la whitelist',
     async execute(client, message, args) {
-        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)  ) {
-            let color = await cl.get(`color_${message.guild.id}`);
-            if (color == null) color = config.bot.couleur;
+        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
-            if (args[0]) {
-                let mor;
+        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)) {
+            const member = message.mentions.members.first();
+            if (!member) return message.reply("Mentionnez un membre");
 
-            
-                if (message.mentions.members.size > 0) {
-                    mor = message.mentions.members.first();
-                } else if (message.mentions.roles.size > 0) {
-                 
-                    mor = message.mentions.roles.first();
-                } else {
-                  
-                    mor = message.guild.members.cache.get(args[0]) || message.guild.roles.cache.get(args[0]);
-                }
+            wl.delete(`${message.guild.id}.${member.id}.wl`);
 
-                if (!mor) return message.channel.send(`Aucun membre ou rôle trouvé pour \`${args[0] || "rien"}\``);
-
-                if (mor instanceof Discord.Role) {
-                  
-                    if (!wl.get(`${message.guild.id}.${mor.id}.wl`) {
-                        return message.channel.send(`Le rôle ${mor.name} n'est pas dans la Whitelist.`);
-                    } else {
-                        wl.delete(`${message.guild.id}.${mor.id}.wl`);
-                        return message.channel.send(`Le rôle ${mor.name} a été retiré de la Whitelist.`);
-                    }
-                } else if (mor instanceof Discord.GuildMember) {
-              
-                    if (!wl.get(`${message.guild.id}.${mor.id}.wl`) {
-                        return message.channel.send(`${mor.user.username} n'est pas dans la Whitelist.`);
-                    } else {
-                        wl.delete(`${message.guild.id}.${mor.id}.wl`);
-                        return message.channel.send(`${mor.user.username} a été retiré de la Whitelist.`);
-                    }
-                }
-            } else {
-                return message.channel.send(`Veuillez spécifier un membre ou un rôle à retirer de la Whitelist.`);
-            }
+            const embed = new Discord.MessageEmbed()
+                .setDescription(`❌ ${member.user.tag} retiré de la whitelist`)
+                .setColor(color);
+            message.channel.send({ embeds: [embed] });
         }
     }
 };
-
-})();

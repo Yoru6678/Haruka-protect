@@ -1,54 +1,40 @@
 const db = require("../db.js");
-const Discord = require('discord.js')
+const Discord = require('discord.js');
 
-const owner = db.table("Owner")
-const rlog = db.table("raidlog")
-const punish = db.table("Punition")
-const wl = db.table("Whitelist")
-const atr = db.table("antirolecreate")
-const config = require('../config')
+const owner = db.table("Owner");
+const rlog = db.table("raidlog");
+const punish = db.table("Punition");
+const wl = db.table("Whitelist");
+const atr = db.table("antirolecreate");
+const config = require('../config');
 
 module.exports = {
     name: 'roleCreate',
     once: false,
 
     async execute(client, role) {
+        if (atr.get(`config.${role.guild.id}.antirolecreate`) === true) {
+            const audit = await role.guild.fetchAuditLogs({type: "ROLE_CREATE"}).then((audit) => audit.entries.first());
+            if (!audit || !audit.executor) return;
+            if (audit.executor.id === client.user.id) return;
+            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${role.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id) return;
 
-        const audit = await role.guild.fetchAuditLogs({type: "ROLE_CREATE"}).then((audit) => audit.entries.first())
-        if (!audit | !audit.executor) return
-        if (audit.executor === client.user.id) return
+            role.delete().catch(() => false);
 
-        if (await atr.get(`config.${role.guild.id}.antirolecreate`) == true) {
-
-            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${role.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id === true || client.user.id === audit.executor.id === true) return
-
-            if (audit.action == 'ROLE_CREATE') {
-
-                role.delete()
-
-                if (punish.get(`sanction_${role.guild.id}`) === "ban") {
-                    role.guild.members.ban(audit.executor.id, { reason: `Antirôle Create` })
-
-                } else if (punish.get(`sanction_${role.guild.id}`) === "derank") {
-
-                    role.guild.members.resolve(audit.executor).roles.cache.forEach(role => {
-                        if (role.name !== '@everyone') {
-                            role.guild.members.resolve(audit.executor).roles.remove(role).catch(() => false)
-                        }
-                    })
-
-                } else if (punish.get(`sanction_${role.guild.id}`) === "kick") {
-
-                    role.guild.members.kick(audit.executor.id, { reason: `Antirôle Create` })
-                }
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`<@${audit.executor.id}> a tenté de \`créer\` un rôle, il a été sanctionné`)
-                    .setTimestamp()
-                if (channel) const raidlogId = await rlog.get(`${role.guild.id}.raidlog`);
-const raidlogChannel = client.channels.cache.get(raidlogId);
-                if (channel) channel.send({ embeds: [embed] }).catch(() => false)
-
+            if (punish.get(`sanction_${role.guild.id}`) === "ban") {
+                role.guild.members.ban(audit.executor.id, { reason: "AntiRole Create" }).catch(() => false);
+            } else if (punish.get(`sanction_${role.guild.id}`) === "kick") {
+                role.guild.members.kick(audit.executor.id, { reason: "AntiRole Create" }).catch(() => false);
             }
+
+            const embed = new Discord.MessageEmbed()
+                .setDescription("<@" + audit.executor.id + "> a créé le rôle " + role.name + ", je l'ai supprimé")
+                .setTimestamp()
+                .setColor(config.bot.couleur);
+            
+            const raidlogId = await rlog.get(`${role.guild.id}.raidlog`);
+            const logchannel = client.channels.cache.get(raidlogId);
+            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
         }
     }
-}
+};

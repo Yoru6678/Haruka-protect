@@ -1,79 +1,39 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js");
+const config = require("../config");
 
-const owner = db.table("Owner")
-const cl = db.table("Color")
-const ml = db.table("modlog")
-const config = require("../config")
-const fs = require('fs')
-const moment = require('moment')
-const p3 = db.table("Perm3")
+const owner = db.table("Owner");
+const p1 = db.table("Perm1");
+const p2 = db.table("Perm2");
+const p3 = db.table("Perm3");
+const cl = db.table("Color");
 
 module.exports = {
     name: 'kick',
-    usage: 'kick <membre>',
-    description: `Permet de kick un membre.`,
+    usage: 'kick <@user> [raison]',
+    description: 'Expulse un membre du serveur',
     async execute(client, message, args) {
+        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
-        const perm3 = await p3.get(`perm3_${message.guild.id}`)
-        let color = await cl.get(`color_${message.guild.id}`)
-        if (color == null) color = config.bot.couleur
+        if (owner.get(`owners.${message.author.id}`) || 
+            message.member.roles.cache.has(p1.get(`perm1_${message.guild.id}`)) ||
+            message.member.roles.cache.has(p2.get(`perm2_${message.guild.id}`)) ||
+            message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`)) ||
+            config.bot.buyer.includes(message.author.id)) {
 
-            if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)   === true) {
+            const member = message.mentions.members.first();
+            if (!member) return message.reply("Mentionnez un membre à expulser");
 
-            let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+            const reason = args.slice(1).join(" ") || "Aucune raison fournie";
 
-            if (!member) {
-                return message.reply("Merci de mentionner l'utilisateur que vous souhaitez kick du serveur !")
-            }
-
-            if (member.id === message.author.id) {
-                return message.reply("Tu ne peux pas te kick")
-            }
-
-            let reason = args.slice(1).join(" ") || `Aucune raison`
-
-            message.reply({ content: `${member} a été expulsé du serveur` }).catch(err => err)
-            member.kick(`${reason}`).catch(() => false)
-
-            const embed = new Discord.MessageEmbed()
-                .setColor(color)
-                .setDescription(`<@${message.author.id}> a \`expulsé\` ${member} du serveur\nRaison : ${reason}`)
-                .setTimestamp()
-                .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
-                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
-        }
-
-        else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`))) {
-
-            let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-
-            if (!member) {
-                return message.reply("Merci de mentionner l'utilisateur que vous souhaitez kick du serveur !")
-            }
-
-            if (member.id === message.author.id) {
-                return message.reply("Tu ne peux pas te kick !")
-            }
-
-            if (member.roles.highest.position >= message.member.roles.highest.position || message.author.id !== message.guild.owner.id) {
-                return message.reply(`Vous ne pouvez pas kick un membre au dessus de vous`)
-            }
-
-            let reason = args.slice(1).join(" ") || `Aucune raison`
-
-            message.reply({ content: `${member} a été expulsé du serveur` })
-            member.kick(`${reason}`)
-
-            const embed = new Discord.MessageEmbed()
-                .setColor(color)
-                .setDescription(`<@${message.author.id}> a \`expulsé\` ${member} du serveur\nRaison : ${reason}`)
-                .setTimestamp()
-                .setFooter({ text: `📚` })
-                const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`)
-                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
-
+            member.kick(reason).then(() => {
+                const embed = new Discord.MessageEmbed()
+                    .setDescription(`✅ ${member.user.tag} a été expulsé\nRaison: ${reason}`)
+                    .setColor(color);
+                message.channel.send({ embeds: [embed] });
+            }).catch(() => {
+                message.reply("Je ne peux pas expulser ce membre");
+            });
         }
     }
-}
+};
