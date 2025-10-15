@@ -1,34 +1,32 @@
-(async () => {
 const db = require("../db.js");
-const config = require('../config')
-const Discord = require('discord.js')
-const rlog = db.table("raidlog")
-const wl = db.table("Whitelist")
-const p = db.table("Prefix")
+const config = require('../config');
+
+const owner = db.table("Owner");
+const p = db.table("Prefix");
 
 module.exports = {
-    name: "messageCreate",
+    name: 'messageCreate',
+    once: false,
 
     async execute(client, message) {
+        if (message.author.bot) return;
+        if (!message.guild) return;
 
-        if (message.author.bot) return
-        if (message.channel.type == "DM") return
+        let prefix = await p.get(`prefix_${message.guild.id}`) || config.bot.prefixe;
 
-        let pf = await p.get(`prefix_${message.guild.id}`)
-        if (pf == null) pf = config.bot.prefixe
+        if (!message.content.startsWith(prefix)) return;
 
-        const args = message.content.slice(pf.length).trim().split(' ')
-        const commandName = args.shift().toLowerCase()
-        const command = client.commands.get(commandName)
+        const args = message.content.slice(prefix.length).trim().split(/ +/);
+        const commandName = args.shift().toLowerCase();
 
-        if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))
-            message.channel.send(`Mon prefix sur le serveur est : \`${pf}\``)
+        const command = client.commands.get(commandName);
+        if (!command) return;
 
-        if (!message.content.startsWith(pf) || message.author.bot) return
-        if (!command) return
-
-            command.execute(client, message, args)
-
+        try {
+            await command.execute(client, message, args);
+        } catch (error) {
+            console.error(`Erreur lors de l'exécution de ${commandName}:`, error);
+            message.reply('Une erreur est survenue lors de l\'exécution de cette commande.').catch(() => false);
+        }
     }
-}
-})();
+};

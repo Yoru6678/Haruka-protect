@@ -5,24 +5,27 @@ const owner = db.table("Owner");
 const rlog = db.table("raidlog");
 const punish = db.table("Punition");
 const wl = db.table("Whitelist");
-const atd = db.table("antichanneldelete");
+const aw = db.table("antiwebhook");
 const config = require('../config');
 
 module.exports = {
-    name: 'channelDelete',
+    name: 'webhooksUpdate',
     once: false,
 
     async execute(client, channel) {
-        if (atd.get(`config.${channel.guild.id}.antichanneldelete`) === true) {
-            const audit = await channel.guild.fetchAuditLogs({type: "CHANNEL_DELETE"}).then((audit) => audit.entries.first());
+        if (aw.get(`config.${channel.guild.id}.antiwebhook`) === true) {
+            const audit = await channel.guild.fetchAuditLogs({type: "WEBHOOK_CREATE"}).then((audit) => audit.entries.first());
             if (!audit || !audit.executor) return;
             if (audit.executor.id === client.user.id) return;
-            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id || client.user.id === audit.executor.id) return;
+            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id) return;
+
+            const webhooks = await channel.fetchWebhooks();
+            webhooks.forEach(webhook => webhook.delete().catch(() => false));
 
             if (punish.get(`sanction_${channel.guild.id}`) === "ban") {
-                channel.guild.members.ban(audit.executor.id, { reason: `AntiChannel Delete` }).catch(() => false);
+                channel.guild.members.ban(audit.executor.id, { reason: `AntiWebhook` }).catch(() => false);
             } else if (punish.get(`sanction_${channel.guild.id}`) === "kick") {
-                channel.guild.members.kick(audit.executor.id, { reason: `AntiChannel Delete` }).catch(() => false);
+                channel.guild.members.kick(audit.executor.id, { reason: `AntiWebhook` }).catch(() => false);
             } else if (punish.get(`sanction_${channel.guild.id}`) === "derank") {
                 const member = await channel.guild.members.fetch(audit.executor.id).catch(() => null);
                 if (member) {
@@ -35,7 +38,7 @@ module.exports = {
             }
 
             const embed = new Discord.MessageEmbed()
-                .setDescription(`<@${audit.executor.id}> a supprimé le salon \`${channel.name}\``)
+                .setDescription(`<@${audit.executor.id}> a créé un webhook, je l'ai supprimé`)
                 .setTimestamp()
                 .setColor(config.bot.couleur);
             

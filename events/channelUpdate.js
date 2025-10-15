@@ -1,62 +1,47 @@
 const db = require("../db.js");
-const Discord = require('discord.js')
+const Discord = require('discord.js');
 
-const owner = db.table("Owner")
-const rlog = db.table("raidlog")
-const punish = db.table("Punition")
-const wl = db.table("Whitelist")
-const acu = db.table("antichannelupdate")
-const config = require('../config')
+const owner = db.table("Owner");
+const rlog = db.table("raidlog");
+const punish = db.table("Punition");
+const wl = db.table("Whitelist");
+const acu = db.table("antichannelupdate");
+const config = require('../config');
 
 module.exports = {
     name: 'channelUpdate',
     once: false,
 
     async execute(client, oldChannel, newChannel) {
+        if (acu.get(`config.${newChannel.guild.id}.antichannelupdate`) === true) {
+            const audit = await newChannel.guild.fetchAuditLogs({type: "CHANNEL_UPDATE"}).then((audit) => audit.entries.first());
+            if (!audit || !audit.executor) return;
+            if (audit.executor.id === client.user.id) return;
+            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${newChannel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id || client.user.id === audit.executor.id) return;
 
-        const audit = await oldChannel.guild.fetchAuditLogs({type: "CHANNEL_UPDATE"}).then((audit) => audit.entries.first())
-        if (!audit | !audit.executor) return
-        if (audit.executor.id === client.user.id) return
-
-        if (await acu.get(`config.${oldChannel.guild.id}.antichannelupdate`) == true) {
-
-            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${oldChannel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id === true || client.user.id === audit.executor.id === true) return
-
-            if (audit.action == "CHANNEL_UPDATE" || audit.action == "CHANNEL_OVERWRITE_UPDATE") {
-                // edit
-
-                try{  
-                    if (oldChannel.name !== newChannel.name) await newChannel.setName(oldChannel.name)
-                    if (oldChannel.parentId !== newChannel.parentId) await newChannel.setParent(oldChannel.parentId)
-                    if (oldChannel.rawPosition !== newChannel.rawPosition) await newChannel.setPosition(oldChannel.rawPosition)
-                    if (oldChannel.bitrate !== newChannel.bitrate) await newChannel.setBitrate(oldChannel.bitrate)
-                    if (oldChannel.userLimit !== newChannel.userLimit) await newChannel.setUserLimit(oldChannel.userLimit)
-                    if (oldChannel.rateLimitPerUser !== newChannel.rateLimitPerUser) await newChannel.setRateLimitPerUser(oldChannel.rateLimitPerUser)
-                }catch(e){}
-
-                if (punish.get(`sanction_${oldChannel.guild.id}`) === "ban") {
-                    oldChannel.guild.members.ban(audit.executor.id, { reason: `AntiChannel Update` })
-
-                } else if (punish.get(`sanction_${oldChannel.guild.id}`) === "derank") {
-
-                    oldChannel.guild.members.resolve(audit.executor.id).roles.cache.forEach(role => {
+            if (punish.get(`sanction_${newChannel.guild.id}`) === "ban") {
+                newChannel.guild.members.ban(audit.executor.id, { reason: `AntiChannel Update` }).catch(() => false);
+            } else if (punish.get(`sanction_${newChannel.guild.id}`) === "kick") {
+                newChannel.guild.members.kick(audit.executor.id, { reason: `AntiChannel Update` }).catch(() => false);
+            } else if (punish.get(`sanction_${newChannel.guild.id}`) === "derank") {
+                const member = await newChannel.guild.members.fetch(audit.executor.id).catch(() => null);
+                if (member) {
+                    member.roles.cache.forEach(role => {
                         if (role.name !== '@everyone') {
-                            oldChannel.guild.members.resolve(audit.executor).roles.remove(role).catch(() => false)
+                            member.roles.remove(role).catch(() => false);
                         }
-                    })
-
-                } else if (punish.get(`sanction_${oldChannel.guild.id}`) === "kick") {
-
-                    oldChannel.guild.members.kick(audit.executor.id, { reason: `AntiChannel Update` })
+                    });
                 }
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`<@${audit.executor.id}> a tenté de \`modifier\` un salon, il a été sanctionné.`)
-                    .setTimestamp()
-                const raidlogId = await rlog.get(`${oldChannel.guild.id}.raidlog`);
-const raidlogChannel = client.channels.cache.get(raidlogId);
-const raidlogChannel2 = client.channels.cache.get(raidlogId);
-                if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
+
+            const embed = new Discord.MessageEmbed()
+                .setDescription(`<@${audit.executor.id}> a modifié le salon \`${newChannel.name}\``)
+                .setTimestamp()
+                .setColor(config.bot.couleur);
+            
+            const raidlogId = await rlog.get(`${newChannel.guild.id}.raidlog`);
+            const logchannel = client.channels.cache.get(raidlogId);
+            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
         }
     }
-}
+};

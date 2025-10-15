@@ -1,55 +1,49 @@
 const db = require("../db.js");
-const Discord = require('discord.js')
-const config = require('../config')
+const Discord = require('discord.js');
 
-const cl = db.table("Color")
-const owner = db.table("Owner")
-const rlog = db.table("raidlog")
-const punish = db.table("Punition")
-const ab = db.table("Antiban")
+const owner = db.table("Owner");
+const rlog = db.table("raidlog");
+const punish = db.table("Punition");
+const wl = db.table("Whitelist");
+const aba = db.table("Antiban");
+const config = require('../config');
 
 module.exports = {
     name: 'guildBanAdd',
     once: false,
 
-    async execute(client, guild, user) {
+    async execute(client, ban) {
+        if (aba.get(`config.${ban.guild.id}.antiban`) === true) {
+            const audit = await ban.guild.fetchAuditLogs({type: "MEMBER_BAN_ADD"}).then((audit) => audit.entries.first());
+            if (!audit || !audit.executor) return;
+            if (audit.executor.id === client.user.id) return;
+            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${ban.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id) return;
 
-        if (!user) return
-        if (ab.get(`config.${user.guild.id}.antiban`) === true) {
+            ban.guild.members.unban(ban.user.id, "AntiBan").catch(() => false);
 
-            const action = await user.guild.fetchAuditLogs({ limit: 1, type: "MEMBER_BAN_ADD" }).then(async (audit) => audit.entries.first())
-            if (!audit | !audit.executor) return
-            if (audit.executor.id === client.user.id) return
-    
-            let perm = config.bot.buyer == action.executor.id || config.bot.funny == action.executor.id || owner.get(`owners.${action.executor.id}`) || client.user.id == action.executor.id
-            if (!perm) {
-
-                if (punish.get(`sanction_${user.guild.id}`) === "ban") {
-                    guild.members.ban(action.executor.id, { reason: `Antiban` })
-
-                } else if (punish.get(`sanction_${user.guild.id}`) === "derank") {
-
-                    user.guild.members.resolve(action.executor.id).roles.cache.forEach(role => {
+            if (punish.get(`sanction_${ban.guild.id}`) === "ban") {
+                ban.guild.members.ban(audit.executor.id, { reason: `AntiBan` }).catch(() => false);
+            } else if (punish.get(`sanction_${ban.guild.id}`) === "kick") {
+                ban.guild.members.kick(audit.executor.id, { reason: `AntiBan` }).catch(() => false);
+            } else if (punish.get(`sanction_${ban.guild.id}`) === "derank") {
+                const member = await ban.guild.members.fetch(audit.executor.id).catch(() => null);
+                if (member) {
+                    member.roles.cache.forEach(role => {
                         if (role.name !== '@everyone') {
-                            user.guild.members.resolve(action.executor.id).roles.remove(role).catch(() => false)
+                            member.roles.remove(role).catch(() => false);
                         }
-                    })
-
-                } else if (punish.get(`sanction_${user.guild.id}`) === "kick") {
-
-                    user.guild.members.kick(action.executor.id, { reason: `Antiban` })
+                    });
                 }
-
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`<@${action.executor.id}> a \`banni\` un membre, il a été sanctionné`)
-                    .setTimestamp()
-                const raidlogId = await rlog.get(`${user.guild.id}.raidlog`);
-const raidlogChannel = client.channels.cache.get(raidlogId)
-send({ embeds: [embed] }).catch(() => false)
-
-                guild.members.unban(user).catch(() => false)
-
             }
+
+            const embed = new Discord.MessageEmbed()
+                .setDescription(`<@${audit.executor.id}> a banni ${ban.user.tag}, je l'ai débanni`)
+                .setTimestamp()
+                .setColor(config.bot.couleur);
+            
+            const raidlogId = await rlog.get(`${ban.guild.id}.raidlog`);
+            const logchannel = client.channels.cache.get(raidlogId);
+            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
         }
     }
-}
+};

@@ -111,7 +111,6 @@ send({ embeds: [embed] }).catch(() => false)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
 const logchannel = client.channels.cache.get(raidlogId);
-const raidlogChannel2 = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
@@ -136,7 +135,6 @@ const raidlogChannel2 = client.channels.cache.get(raidlogId);
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
 const logchannel = client.channels.cache.get(raidlogId);
-const raidlogChannel3 = client.channels.cache.get(raidlogId);
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 
             }

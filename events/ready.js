@@ -1,16 +1,15 @@
-const db = require("../db.js");
-const Discord = require('discord.js')
-const config = require('../config')
-
-const cl = db.table("Color")
+const config = require('../config');
 
 module.exports = {
     name: 'ready',
     once: true,
 
-    async execute(client) {
-        console.log(`NOM > ${client.user.username}`)
-        console.log(`ID > ${client.user.id}\n`
-            + `Invitation > https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
-        }
+    execute(client) {
+        console.log(`\n✅ ${client.user.tag} est maintenant en ligne !\n`);
+        console.log(`📊 Serveurs: ${client.guilds.cache.size}`);
+        console.log(`👥 Utilisateurs: ${client.users.cache.size}`);
+        console.log(`📝 Commandes: ${client.commands.size}\n`);
+        
+        client.user.setActivity(`${config.bot.prefixe}help | ${client.guilds.cache.size} serveurs`, { type: 'WATCHING' });
     }
+};

@@ -1,91 +1,47 @@
 const db = require("../db.js");
-const Discord = require('discord.js')
+const Discord = require('discord.js');
 
-const owner = db.table("Owner")
-const rlog = db.table("raidlog")
-const punish = db.table("Punition")
-const wl = db.table("Whitelist")
-const aru = db.table("antiroleupdate")
-const ad = db.table("Antidown")
-const cl = db.table("Color")
-const modlog = db.table("modlog")
-const config = require('../config')
+const owner = db.table("Owner");
+const rlog = db.table("raidlog");
+const punish = db.table("Punition");
+const wl = db.table("Whitelist");
+const aru = db.table("antiroleupdate");
+const config = require('../config');
 
 module.exports = {
     name: 'roleUpdate',
     once: false,
 
     async execute(client, oldRole, newRole) {
+        if (aru.get(`config.${newRole.guild.id}.antiroleupdate`) === true) {
+            const audit = await newRole.guild.fetchAuditLogs({type: "ROLE_UPDATE"}).then((audit) => audit.entries.first());
+            if (!audit || !audit.executor) return;
+            if (audit.executor.id === client.user.id) return;
+            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${newRole.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id || client.user.id === audit.executor.id) return;
 
-        let roleping = db.get(`role_${oldRole.guild.id}`)
-        if (roleping === null) roleping = "@everyone"
-
-        let color = await cl.get(`color_${oldRole.guild.id}`)
-        if (color == null) color = config.bot.couleur
-
-        if (await ad.get(`config.${oldRole.guild.id}.antidown`) === true) {
-
-            if (oldRole.rawPosition !== newRole.rawPosition) {
-                const roles = oldRole.guild.roles.cache.filter(role => role.permissions.any('MANAGE_ROLES', "ADMINISTRATOR"))
-                roles.forEach(role => role.setPermissions(role.permissions.remove(["MANAGE_ROLES", "ADMINISTRATOR"]))
-
-                const embed = new Discord.MessageEmbed()
-                    .setTitle('Potentiel Down Détécté')
-                    .setDescription(`Le rôle ${newRole.name} a été déplacé de la position ${oldRole.rawPosition} à ${newRole.rawPosition}\nJ'ai désactivé les permissions __administrateur__ et __rôle__`)
-                    .setColor(color)
-
-                const raidlogChannel = client.channels.cache.get(modlog.get(`${oldRole.guild.id}.modlog`)
-                if (channel) channel.send({ embeds: [embed] }).catch(() => false)
-            }
-        }
-
-
-        const audit = await oldRole.guild.fetchAuditLogs({type: "ROLE_UPDATE"}).then((audit) => audit.entries.first())
-        if (!audit | !audit.executor) return
-        if (audit.executor === client.user.id) return
-
-        let isOn = await aru.get(`config.${oldRole.guild.id}.antiroleupdate`)
-
-        if (isOn == true) {
-
-            if (audit?.executor?.id == oldRole?.guild?.ownerId) return
-
-            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${oldRole.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id === true || client.user.id === audit.executor.id === true) return
-            
-            if (audit.action == 'ROLE_UPDATE') {
-
-                try {
-                    if (oldRole.name !== newRole.name) newRole.setName(oldRole.name)
-                    if (oldRole.hexColor !== newRole.hexColor) newRole.setColor(oldRole.hexColor)
-                    if (oldRole.permissions !== newRole.peermissions) newRole.setPermissions(oldRole.permissions)
-                    if (oldRole.hoist !== newRole.hoist) newRole.setHoist(oldRole.hoist)
-                    if (oldRole.mentionable !== newRole.mentionable) newRole.setMentionable(oldRole.mentionable)
-                    if (oldRole.rawPosition !== newRole.narawPositionme) newRole.setPosition(oldRole.rawPosition)
-                } catch(e){}
-
-                if (punish.get(`sanction_${oldRole.guild.id}`) === "ban") {
-                    oldRole.guild.members.ban(audit.executor.id, { reason: `Antirôle Update` })
-
-                } else if (punish.get(`sanction_${oldRole.guild.id}`) === "derank") {
-
-                    oldRole.guild.members.resolve(audit.executor).roles.cache.forEach(role => {
-                        if (role.name !== '@everyone') {
-                            oldRole.guild.members.resolve(audit.executor).roles.remove(role).catch(() => false)
+            if (punish.get(`sanction_${newRole.guild.id}`) === "ban") {
+                newRole.guild.members.ban(audit.executor.id, { reason: `AntiRole Update` }).catch(() => false);
+            } else if (punish.get(`sanction_${newRole.guild.id}`) === "kick") {
+                newRole.guild.members.kick(audit.executor.id, { reason: `AntiRole Update` }).catch(() => false);
+            } else if (punish.get(`sanction_${newRole.guild.id}`) === "derank") {
+                const member = await newRole.guild.members.fetch(audit.executor.id).catch(() => null);
+                if (member) {
+                    member.roles.cache.forEach(r => {
+                        if (r.name !== '@everyone') {
+                            member.roles.remove(r).catch(() => false);
                         }
-                    })
-
-                } else if (punish.get(`sanction_${oldRole.guild.id}`) === "kick") {
-
-                    oldRole.guild.members.kick(audit.executor.id, { reason: `Antirôle Update` })
+                    });
                 }
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`<@${audit.executor.id}> a tenté de \`modifier un rôle\`, il a été sanctionné`)
-                    .setTimestamp()
-                const raidlogId = await rlog.get(`${oldRole.guild.id}.raidlog`);
-const raidlogChannel2 = client.channels.cache.get(raidlogId);
-const raidlogChannel3 = client.channels.cache.get(raidlogId);
-                if (channel) channel.send({ embeds: [embed] }).catch(() => false)
             }
+
+            const embed = new Discord.MessageEmbed()
+                .setDescription(`<@${audit.executor.id}> a modifié le rôle \`${newRole.name}\``)
+                .setTimestamp()
+                .setColor(config.bot.couleur);
+            
+            const raidlogId = await rlog.get(`${newRole.guild.id}.raidlog`);
+            const logchannel = client.channels.cache.get(raidlogId);
+            if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false);
         }
     }
-}
+};
