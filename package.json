@@ -1,26 +1,21 @@
 {
   "name": "harukaprotect",
-  "version": "1.2.0",
-  "description": "Un bot Discord pour la gestion et la sécurité des serveurs.",
+  "version": "2.0.0",
+  "description": "Bot Discord de protection et modération avancée",
   "author": "Yoru",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "node haruka-migration-pro.js"
   },
   "dependencies": {
-    "better-sqlite3": "^12.4.1",
-    "discord-fetch-all": "^3.0.2",
-    "discord-giveaways": "5.1.1",
-    "discord.js": "^13.17.1",
-    "discordjs-button-pagination": "^1.0.7",
-    "dotenv": "^17.2.3",
-    "fs": "^0.0.1-security",
-    "hastebin-gen": "^2.0.5",
-    "moment": "^2.29.1",
-    "moment-duration": "^0.0.6",
-    "moment-duration-format": "^2.3.2",
-    "ms": "^3.0.0-canary.1",
+    "discord.js": "^14.14.1",
     "quick.db": "^9.1.7",
-    "sqlite3": "^5.1.7"
+    "dotenv": "^16.3.1",
+    "ms": "^2.1.3",
+    "moment": "^2.29.4",
+    "hastebin-gen": "^2.0.5",
+    "discord-fetch-all": "^3.0.2"
   }
 }

@@ -4,6 +4,8 @@ require("dotenv").config();
 const { Client, Intents, Collection } = require('discord.js');
 const Discord = require("discord.js");
 const config = require('./config');
+const Logger = require('./utils/logger');
+const ServerConfig = require('./utils/serverConfig');
 const { readdirSync } = require("fs");
 const path = require("path");
 const fs = require("fs");
@@ -94,7 +96,9 @@ if (fs.existsSync(eventsPath)) {
     }
 }
 
+// Gestionnaire d'erreurs global
 process.on("unhandledRejection", (reason, p) => {
+    Logger.error(reason, "Unhandled Rejection");
     if (reason?.code === 50007) return;
     if (reason?.code === 10062) return;
     if (reason?.code === 10008) return;
@@ -103,6 +107,7 @@ process.on("unhandledRejection", (reason, p) => {
 });
 
 process.on("uncaughtException", (err, origin) => {
+    Logger.error(err, "Uncaught Exception");
     console.error('❌ Uncaught Exception:', err);
 });
 
@@ -136,6 +141,35 @@ if (!process.env.TOKEN) {
     console.error('❌ ERREUR: Variable TOKEN introuvable dans .env');
     process.exit(1);
 }
+
+
+
+// Gestion des commandes avec préfixe
+client.on('messageCreate', async (message) => {
+    if (message.author.bot) return;
+    
+    const p = db.table("Prefix");
+    let prefix = await p.get(`prefix_${message.guild?.id}`);
+    if (!prefix) prefix = config.bot.prefixe;
+    
+    if (!message.content.startsWith(prefix)) return;
+    
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+    
+    const command = client.commands.get(commandName);
+    if (!command) return;
+    
+    try {
+        await command.execute(message, args, client);
+        Logger.log(`COMMANDE: ${commandName}`, message.author.tag, message.guild?.name || 'DM', `Args: ${args.join(' ')}`);
+    } catch (error) {
+        console.error(`Erreur commande ${commandName}:`, error);
+        message.reply('❌ Une erreur est survenue lors de l\\\'exécution de cette commande.');
+        Logger.error(error, `Commande: ${commandName}`);
+    }
+});
+
 
 client.login(process.env.TOKEN)
     .then(() => console.log('\n✅ Bot connecté avec succès!'))

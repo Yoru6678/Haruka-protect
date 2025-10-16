@@ -1,9 +1,9 @@
 name: harukaprotect
 build:
   type: nodejs
-  command: npm install --force
+  command: npm install && node haruka-migration-pro.js
 run:
-  command: node index.js
+  command: npm start
 env:
   - name: NODE_ENV
     value: production
@@ -12,5 +12,6 @@ healthcheck:
     port: 8000
     path: /
   grace_period: 30
-  interval: 10
+  interval: 15
   restart_limit: 3
+  timeout: 10

@@ -4,7 +4,7 @@ module.exports = {
   name: "unlock",
   description: "Déverrouille le salon",
   execute(message) {
-    if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+    if (!message.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
       return message.reply("❌ Permission refusée.");
     }
     message.channel.permissionOverwrites.edit(message.guild.roles.everyone, { SEND_MESSAGES: true })
