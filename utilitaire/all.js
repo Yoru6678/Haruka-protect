@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -27,7 +27,7 @@ module.exports = {
             if (args[0] === 'bots') {
                 let bots = message.guild.members.cache.filter(m => m.user.bot).size;
                 let botNames = message.guild.members.cache.filter(m => m.user.bot).map(m => `${m.user.tag}: \`(${m.user.id})\``).join("\n");
-                var embed = new (require("discord.js").EmbedBuilder)()
+                var embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setTitle(`Liste des Bots`)
                     .setDescription(`${botNames}`)
                     .setFooter({ text: `Total: ${bots}` })
@@ -39,7 +39,7 @@ module.exports = {
                 var adminNames = admins.map(m => `${m.user.tag}: \`(${m.user.id})\``).join("\n");
                 for (let i = 0; i < adminNames.length; i += 1995) {
                     const content = adminNames.substring(i, Math.min(adminNames.length, i + 1995))
-                    var embed = new (require("discord.js").EmbedBuilder)()
+                    var embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                         .setTitle(`Liste des Administrateurs.`)
                         .setDescription(`\n ${content}`)
                         .setFooter({ text: `Total : ${admins.size}` })

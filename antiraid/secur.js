@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 const config = require("../config")
 const footer = config.bot.footer
 
@@ -181,7 +181,7 @@ module.exports = {
                         .setStyle('Danger')
                 )
 
-            const panel = new (require("discord.js").EmbedBuilder)()
+            const panel = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -204,7 +204,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const panelactive = new (require("discord.js").EmbedBuilder)()
+            const panelactive = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -227,7 +227,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const paneldesactive = new (require("discord.js").EmbedBuilder)()
+            const paneldesactive = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -328,7 +328,7 @@ module.exports = {
             message.channel.send({ embeds: [panel], components: [secu, panelselect] }).then(async msg => {
 
                 //anti channel create
-                const antichannelembed = new (require("discord.js").EmbedBuilder)()
+                const antichannelembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel create__**`)
                     .setColor(color)
 
@@ -355,7 +355,7 @@ module.exports = {
                         ])
                 )
                 //anti channel delete
-                const antichanneldembed = new (require("discord.js").EmbedBuilder)()
+                const antichanneldembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel delete__**`)
                     .setColor(color)
 
@@ -382,7 +382,7 @@ module.exports = {
                         ])
                 )
                 //anti channel update
-                const antichanneupdembed = new (require("discord.js").EmbedBuilder)()
+                const antichanneupdembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel update__**`)
                     .setColor(color)
 
@@ -409,7 +409,7 @@ module.exports = {
                         ])
                 )
                 //anti Role create
-                const antirolecreateembed = new (require("discord.js").EmbedBuilder)()
+                const antirolecreateembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle create__**`)
                     .setColor(color)
 
@@ -436,7 +436,7 @@ module.exports = {
                         ])
                 )
                 //anti rôle delete
-                const antiroledeleteembed = new (require("discord.js").EmbedBuilder)()
+                const antiroledeleteembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle delete__**`)
                     .setColor(color)
 
@@ -463,7 +463,7 @@ module.exports = {
                         ])
                 )
                 //anti rôle update
-                const antiroleupembed = new (require("discord.js").EmbedBuilder)()
+                const antiroleupembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle update__**`)
                     .setColor(color)
 
@@ -490,7 +490,7 @@ module.exports = {
                         ])
                 )
                 //anti Link
-                const antilinkembed = new (require("discord.js").EmbedBuilder)()
+                const antilinkembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'antilink__**`)
                     .setColor(color)
 
@@ -518,7 +518,7 @@ module.exports = {
                 )
 
                 //anti wb
-                const antiwbembed = new (require("discord.js").EmbedBuilder)()
+                const antiwbembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti WebHook__**`)
                     .setColor(color)
 
@@ -545,7 +545,7 @@ module.exports = {
                         ])
                 )
                 //Punition
-                const punishembed = new (require("discord.js").EmbedBuilder)()
+                const punishembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de la __Punition__**`)
                     .setColor(color)
 
@@ -578,7 +578,7 @@ module.exports = {
                 )
 
                 //Anti update
-                const antiupdateembed = new (require("discord.js").EmbedBuilder)()
+                const antiupdateembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l' __anti update__**`)
                     .setColor(color)
 
@@ -606,7 +606,7 @@ module.exports = {
                 )
 
                 //Anti Bot
-                const antibotembed = new (require("discord.js").EmbedBuilder)()
+                const antibotembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l'__anti bot__**`)
                     .setColor(color)
 
@@ -634,7 +634,7 @@ module.exports = {
                 )
 
                 //Server lock/unlock
-                const lockembed = new (require("discord.js").EmbedBuilder)()
+                const lockembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Autoriser ou refuser __l'accès au serveur__**`)
                     .setColor(color)
 
@@ -663,7 +663,7 @@ module.exports = {
                 )
 
                 //Anti Ban
-                const antibanembed = new (require("discord.js").EmbedBuilder)()
+                const antibanembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l'__antiban__**`)
                     .setColor(color)
 

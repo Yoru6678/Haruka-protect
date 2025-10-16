@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -32,7 +32,7 @@ module.exports = {
 
                 message.channel.send(`1 rôle retiré à 1 membre`)
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRole retiré : ${role}`)
                     .setTimestamp()
@@ -55,7 +55,7 @@ const channel = client.channels.cache.get(raidlogId)
 
                 message.channel.send(`1 rôle retiré à 1 membre`)
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRôle retiré : ${role}`)
                     .setTimestamp()

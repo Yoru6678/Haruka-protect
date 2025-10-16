@@ -34,7 +34,7 @@ module.exports = {
                 }
             }
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setDescription(`<@${audit.executor.id}> a supprimé le rôle \`${role.name}\``)
                 .setTimestamp()
                 .setColor(config.bot.couleur);

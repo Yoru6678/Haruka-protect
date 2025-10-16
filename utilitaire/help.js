@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 const p = db.table("Prefix");
@@ -29,7 +29,7 @@ module.exports = {
                 TIER_3: 3,
             };
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle("Arguments de messages")
                 .setDescription("Exemple de message simple: `{MemberMention} nous a rejoint, nous sommes maintenant {MemberCount} sur {Server}`")
                 .addFields(
@@ -49,7 +49,7 @@ module.exports = {
         }
 
         if (args[0] === "all") {
-            const public = new (require("discord.js").EmbedBuilder)()
+            const public = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle('Commandes Publiques')
                 .setDescription(`**\`${pf}help\`**
 **\`${pf}ping\`**
@@ -61,7 +61,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const perm1 = new (require("discord.js").EmbedBuilder)()
+            const perm1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle('Permission 1')
                 .setDescription(`**\`${pf}mute\`**
 **\`${pf}unmute\`**
@@ -70,7 +70,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const perm2 = new (require("discord.js").EmbedBuilder)()
+            const perm2 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle('Permission 2')
                 .setDescription(`**\`${pf}clear\`**
 **\`${pf}hide\`**
@@ -78,7 +78,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const perm3 = new (require("discord.js").EmbedBuilder)()
+            const perm3 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle('Permission 3')
                 .setDescription(`**\`${pf}kick\`**
 **\`${pf}ban\`**
@@ -90,7 +90,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const ownerEmbed = new (require("discord.js").EmbedBuilder)()
+            const ownerEmbed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle('Permission Owner')
                 .setDescription(`**\`${pf}wl\`**
 **\`${pf}unwl\`**
@@ -155,7 +155,7 @@ module.exports = {
                 ])
         );
 
-        const Help = new (require("discord.js").EmbedBuilder)()
+        const Help = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setTitle("Utilitaire")
             .setDescription(`**\`${pf}help\`** - Menu d'aide
 **\`${pf}ping\`** - Latence du bot
@@ -167,7 +167,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const moderation = new (require("discord.js").EmbedBuilder)()
+        const moderation = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setTitle('Modération')
             .setDescription(`**\`${pf}kick\`** - Expulser un membre
 **\`${pf}ban\`** - Bannir un membre
@@ -180,7 +180,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const Owner = new (require("discord.js").EmbedBuilder)()
+        const Owner = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setTitle('Owner')
             .setDescription(`**\`${pf}wl\`** - Ajouter à la whitelist
 **\`${pf}unwl\`** - Retirer de la whitelist
@@ -190,7 +190,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const antiraid = new (require("discord.js").EmbedBuilder)()
+        const antiraid = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setTitle('Antiraid')
             .setDescription(`**\`${pf}secur\`** - Panel de sécurité
 **\`${pf}sanction\`** - Configurer les sanctions
@@ -202,7 +202,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const Gestion = new (require("discord.js").EmbedBuilder)()
+        const Gestion = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setTitle("Gestion")
             .setDescription(`**\`${pf}giveaway\`** - Lancer un giveaway
 **\`${pf}gend\`** - Terminer un giveaway
@@ -213,7 +213,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const logs = new (require("discord.js").EmbedBuilder)()
+        const logs = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setTitle('Logs')
             .setDescription(`**\`${pf}messagelog\`** - Logs des messages
 **\`${pf}modlog\`** - Logs de modération

@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -47,7 +47,7 @@ module.exports = {
             try {
                 await target.timeout(duration, reason);
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setColor(couleur)
                     .setDescription(`**Action**: Mute\n**Utilisateur**: ${target.user.tag} (${target.id})\n**Modérateur**: ${message.author.tag}\n**Durée**: ${ms(duration, { long: true })}\n**Raison**: ${reason}`)
                     .setTimestamp()

@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js").default || require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 const ServerConfig = require("../utils/serverConfig");
 const { isAuthorized } = require("../security");
 

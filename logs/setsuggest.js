@@ -30,7 +30,7 @@ module.exports = {
 
                 const channellogs = db.get(`${message.guild.id}.suggestions`)
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setTitle(`${message.author.tag} a défini ce salon commme salon des suggestions`)
                     .setDescription(`❓ Ce salon est désormais utilisé pour __toutes__ **les suggestions** du serveur\nExécuteur : <@${message.author.id}>`)
                     .setTimestamp()

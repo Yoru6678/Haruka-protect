@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const wl = db.table("Whitelist")
@@ -50,7 +50,7 @@ module.exports = {
                 let p1 = 30;
                 let page = 1;
 
-                let embed = new (require("discord.js").EmbedBuilder)()
+                let embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 embed.setTitle("Whitelist Vocal")
                     .setColor(color)
                     .setDescription(!own ? "Aucun" : own.map((user, i) => `<@${user}>`).slice(0, 30).join("\n")

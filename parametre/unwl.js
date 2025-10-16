@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 const owner = db.table("Owner");
@@ -19,7 +19,7 @@ module.exports = {
 
             wl.delete(`${message.guild.id}.${member.id}.wl`);
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setDescription(`❌ ${member.user.tag} retiré de la whitelist`)
                 .setColor(color);
             message.channel.send({ embeds: [embed] });

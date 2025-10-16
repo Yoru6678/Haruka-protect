@@ -47,7 +47,7 @@ module.exports = {
 
                     channel.guild.members.kick(audit.executor.id, { reason: `Anti Webhook` })
                 }
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${audit.executor.id}> a tenté de créer un \`webhook\`, il a été sanctionné`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${channel.guild.id}.raidlog`);

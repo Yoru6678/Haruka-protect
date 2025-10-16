@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -47,7 +47,7 @@ module.exports = {
                 if (permga == `<@&null>`) permga = "Non configuré"
 
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setTitle('Permission du serveur')
                     .addField(`Permission 1`, `${perm1}`)
                     .addField(`Permission 2`, `${perm2}`)

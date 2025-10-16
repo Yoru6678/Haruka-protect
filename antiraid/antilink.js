@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -22,7 +22,7 @@ module.exports = {
             if (args[0] == 'all') {
                 al.set(`config.${message.guild.id}.antilinkall`, true)
                 al.set(`config.${message.guild.id}.antilinkinvite`, false)
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**L'Antilink** détecte maintenant **tous les liens**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
@@ -30,7 +30,7 @@ module.exports = {
             } else if (args[0] == 'invite') {
                 al.set(`config.${message.guild.id}.antilinkinvite`, true)
                 al.set(`config.${message.guild.id}.antilinkall`, false)
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**L'Antilink** détecte maintenant **les invitations de serveurs**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
@@ -38,7 +38,7 @@ module.exports = {
             } else if (args[0] == 'off') {
                 al.set(`config.${message.guild.id}.antilinkinvite`, false)
                 al.set(`config.${message.guild.id}.antilinkall`, false)
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**L'Antilink** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })

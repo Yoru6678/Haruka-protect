@@ -86,7 +86,7 @@ module.exports = {
                     setTimeout(() => msg.delete(), 6000)
                 })
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
@@ -106,7 +106,7 @@ if (chan) chan.send({ embeds: [embed] }).catch(() => false)
                 })
 
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
@@ -130,7 +130,7 @@ const logchannel = client.channels.cache.get(raidlogId);
                     })
                 })
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${message.author.id}> a mentionné \`tout le serveur\` dans \`${message.channel.name}\`, j'ai renew le salon`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);

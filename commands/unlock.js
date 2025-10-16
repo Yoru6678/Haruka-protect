@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("../utils/embedBuilder");
-const { Permissions } = require("discord.js").default || require("discord.js");
+const { Permissions } = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 module.exports = {
   name: "unlock",
   description: "Déverrouille le salon",

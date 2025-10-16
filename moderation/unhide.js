@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const modlog = db.table("modlog")
@@ -35,7 +35,7 @@ module.exports = {
             let channellogs = db.get(`${message.guild.id}.modlog`)
             if (channellogs == null) return
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setColor(ecolor)
                 .setDescription(`<@${message.author.id}> a utilisé la commande \`unhide\` le salon <#${message.channel.id}>`)
                 .setTimestamp()

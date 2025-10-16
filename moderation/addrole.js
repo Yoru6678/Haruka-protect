@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 
@@ -32,7 +32,7 @@ module.exports = {
 
                 message.channel.send(`1 rôle ajouté à 1 membre`);
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`addrole\` sur ${member}\nRôle ajouté : ${role}`)
                     .setTimestamp()
@@ -54,7 +54,7 @@ const channel = client.channels.cache.get(raidlogId);
 
                 message.channel.send(`1 rôle ajouté à 1 membre`);
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`addrole\` sur ${member}\nRôle ajouté : ${role}`)
                     .setTimestamp()

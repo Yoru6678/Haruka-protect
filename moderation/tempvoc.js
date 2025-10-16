@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -76,7 +76,7 @@ module.exports = {
                     if (salontemp == "<#null>") salontemp = "Non configuré"
 
 
-                    const MenuEmbed = new (require("discord.js").EmbedBuilder)()
+                    const MenuEmbed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                         .setTitle('Vocaux Temporaires')
                         .setDescription(`__**Choisissez les options pour configuré les vocaux temporaires**__`)
                         .addFields(

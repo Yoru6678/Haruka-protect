@@ -64,7 +64,7 @@ module.exports = {
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setColor(color)
                 .setDescription(`<@${message.author.id}> a \`voicemute\` ${muteUser}\nRaison: ${muteReason}`)
                 .setTimestamp()

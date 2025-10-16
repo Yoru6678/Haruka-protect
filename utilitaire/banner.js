@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -19,13 +19,13 @@ module.exports = {
         
         const url = await member.user.fetch().then((user) => user.bannerURL({ format: "png", dynamic: true, size: 4096 }))
 
-        const nobanner = new (require("discord.js").EmbedBuilder)()
+        const nobanner = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setColor(color)
             .setTitle(`Bannière`)
             .setDescription(`${member.user.tag} n'a pas de bannière.`)
         if (!url) return message.channel.send({ embeds: [nobanner] });
 
-        const embed = new (require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
             .setColor(color)
             .setTitle(`Bannière de ${member.user.tag}`)
             .setImage(`${url}`)

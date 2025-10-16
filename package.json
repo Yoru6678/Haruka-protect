@@ -3,10 +3,11 @@
   "version": "2.0.0",
   "description": "Bot Discord de protection et modération avancée",
   "author": "Yoru",
-  "main": "index.js",
+  "main": "start.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node start.js",
+    "dev": "nodemon start.js",
+    "build": "echo 'Build completed'"
   },
   "dependencies": {
     "discord.js": "^14.14.1",

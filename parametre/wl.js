@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -52,7 +52,7 @@ module.exports = {
                 let membersList = message.guild.members.cache.filter(u => wl.get(`${message.guild.id}.${u.id}.wl`) === u.id).map(a => "<@" + a.user.id + ">");
                 let rolesList = message.guild.roles.cache.filter(r => wl.get(`${message.guild.id}.${r.id}.wl`) === r.id).map(r => `<@&${r.id}>`);
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setTitle("Whitelist")
                     .setDescription(`Membres : ${membersList.join("\n")}\n\nRôles : ${rolesList.join(", ")}`)
                     .setColor(color)

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 
 
 const cl = db.table("Color");
@@ -31,7 +31,7 @@ module.exports = {
         try {
             const result = safeEval(expression);
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setDescription(`Le résultat de \`${expression}\` est: **${result}**`)
                 .setColor(color)
 

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -21,13 +21,13 @@ module.exports = {
 
             if (args[0] == 'on') {
                 atb.set(`config.${message.guild.id}.antibot`, true)
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**L'antibot** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 atb.set(`config.${message.guild.id}.antibot`, false)
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setDescription(`**L'antibot** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js");
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 
@@ -23,22 +23,22 @@ module.exports = {
             let fufu = sanction.get(`sanction_${message.guild.id}`);
             if (fufu == null) fufu = "derank";
 
-            const embed = new (require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Sanction actuelle : \`${fufu}\``)
                 .setColor(color);
 
-            const derank = new (require("discord.js").EmbedBuilder)()
+            const derank = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Nouvelle Sanction : \`derank\``)
                 .setColor(color);
 
-            const kick = new (require("discord.js").EmbedBuilder)()
+            const kick = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Nouvelle Sanction : \`kick\``)
                 .setColor(color);
 
-            const ban = new (require("discord.js").EmbedBuilder)()
+            const ban = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Nouvelle Sanction : \`ban\``)
                 .setColor(color);

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js")
+const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const ownercount = db.table("Ownercount")
@@ -45,7 +45,7 @@ module.exports = {
 
                 let list = message.guild.members.cache.filter(u => owner.get(`owners.${u.id}`) === u.id).map(a => "<@" + a.user.id + ">")
 
-                const embed = new (require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
                     .setTitle("Liste des Owners")
                     .setDescription(list.join("\n"))
                     .setColor(color)
