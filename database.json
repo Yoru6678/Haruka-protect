@@ -1,1 +1,13 @@
-[]
+{
+  "Prefix": {},
+  "Color": {},
+  "Owner": {},
+  "Whitelist": {},
+  "AntiLink": {},
+  "Antibot": {},
+  "Sanction": {},
+  "ServerConfig": {},
+  "main": {
+    "test": {}
+  }
+}
