@@ -15,7 +15,7 @@ const {
 module.exports = {
     name: 'tempvoc',
     usage: 'tempvoc',
-    description: `Permet de configuréer des salons vocal temporaire.`,
+    description: `Permet de configurer des salons vocal temporaire.`,
     async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
@@ -46,7 +46,7 @@ module.exports = {
                                 emoji: "972648521255768095",
                             },
                             {
-                                label: "Désactivéé les vocaux temporaires",
+                                label: "Désactivé les vocaux temporaires",
                                 value: "desactivéemodule",
                                 emoji: "988389407730040863",
                             },
@@ -67,20 +67,20 @@ module.exports = {
                     let tempvocsettings = db.get(`tempvocsettings_${message.guild.id}`)
                     if (tempvocsettings == null) tempvocsettings = "Non Configuré"
                     if (tempvocsettings == true) tempvocsettings = "Activé"
-                    if (tempvocsettings == false) tempvocsettings = "Desactivéé"
+                    if (tempvocsettings == false) tempvocsettings = "Desactivé"
 
                     let categorytemp = `<#${db.get(`categorytempvoc_${message.guild.id}`)}>`
                     if (categorytemp == "<#null>") categorytemp = "Non Configuré"
 
                     let salontemp = `<#${db.get(`salontempvoc_${message.guild.id}`)}>`
-                    if (salontemp == "<#null>") salontemp = "Non configuréé"
+                    if (salontemp == "<#null>") salontemp = "Non configuré"
 
 
                     const MenuEmbed = new (require("discord.js").EmbedBuilder)()
                         .setTitle('Vocaux Temporaires')
-                        .setDescription(`__**Choisissez les options pour configuréé les vocaux temporaires**__`)
+                        .setDescription(`__**Choisissez les options pour configuré les vocaux temporaires**__`)
                         .addFields(
-                            { name: 'Activé/Désactivéé', value: `Tempvoc: __**${tempvocsettings}**__`, inline: true },
+                            { name: 'Activé/Désactivé', value: `Tempvoc: __**${tempvocsettings}**__`, inline: true },
                             { name: 'Catégorie tempvoc', value: `Catégorie: __**${categorytemp}**__`, inline: true },
                             { name: 'Salon tempvoc', value: `Salon: __**${salontemp}**__`, inline: true },
                         )
@@ -238,7 +238,7 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                             let link = await db.get(`salontempvoc_${message.guild.id}`)
                             if (link == true) {
-                                message.channel.send(`✅ |`Le salon tempvoc ` est déjà configuréé`).then(msg => {
+                                message.channel.send(`✅ |`Le salon tempvoc ` est déjà configuré`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -288,17 +288,17 @@ module.exports = {
                         }
 
 
-                        //activéé MSG
+                        //activé MSG
                         if (i.values[0] === "activéemodule") {
                             await i.deferUpdate().catch(() => false)
                             let soutien = await db.get("tempvocsettings_" + message.guild.id)
                             if (soutien === true) {
-                                return message.channel.send("Les vocaux temporaires sont déjà activéés").then(msg => {
+                                return message.channel.send("Les vocaux temporaires sont déjà activés").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
                             } else {
                                 db.set("tempvocsettings_" + message.guild.id, true)
-                                return message.channel.send("✅ |Les vocaux temporaires viennent d'être activéés.").then(msg => {
+                                return message.channel.send("✅ |Les vocaux temporaires viennent d'être activés.").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
                             }
@@ -307,10 +307,10 @@ module.exports = {
                             let soutien = await db.get("tempvocsettings_" + message.guild.id)
                             if (soutien == true) {
                                 db.set("tempvocsettings_" + message.guild.id, null)
-                                return message.channel.send("❌ | Les vocaux temporaires viennent d'être désactivéés.").then(msg => {
+                                return message.channel.send("❌ | Les vocaux temporaires viennent d'être désactivés.").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
-                            } else return message.channel.send('✅ | Les vocaux temporaires sont déjà désactivéés.').then(msg => {
+                            } else return message.channel.send('✅ | Les vocaux temporaires sont déjà désactivés.').then(msg => {
                                 setTimeout(() => msg.delete(), 5000)
                             })
                         }

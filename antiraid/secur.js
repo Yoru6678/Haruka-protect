@@ -27,7 +27,7 @@ const aa = db.table("Antiadmin")
 module.exports = {
     name: 'secur',
     usage: 'secur',
-    description: `Permet de configuréer les sécuritées sur le serveur.`,
+    description: `Permet de configuréer les sécurités sur le serveur.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -170,13 +170,13 @@ module.exports = {
             const secu = new Discord.ActionRowBuilder()
                 .addComponents(
                     new Discord.ButtonBuilder()
-                        .setCustomId('activée')
+                        .setCustomId('active')
                         .setLabel('Activé')
                         .setStyle('Success')
                 )
                 .addComponents(
                     new Discord.ButtonBuilder()
-                        .setCustomId('desactivée')
+                        .setCustomId('desactive')
                         .setLabel('Désactivéé')
                         .setStyle('Danger')
                 )
@@ -204,7 +204,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const panelactivée = new (require("discord.js").EmbedBuilder)()
+            const panelactive = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -227,7 +227,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const paneldesactivée = new (require("discord.js").EmbedBuilder)()
+            const paneldesactive = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -343,7 +343,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'accoff',
                                 emoji: '❌',
                             },
@@ -370,7 +370,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'acdoff',
                                 emoji: '❌',
                             },
@@ -397,7 +397,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'acuoff',
                                 emoji: '❌',
                             },
@@ -424,7 +424,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'arcoff',
                                 emoji: '❌',
                             },
@@ -451,7 +451,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'ardoff',
                                 emoji: '❌',
                             },
@@ -478,7 +478,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'aruoff',
                                 emoji: '❌',
                             },
@@ -505,7 +505,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'aloff',
                                 emoji: '❌',
                             },
@@ -533,7 +533,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'awoff',
                                 emoji: '❌',
                             },
@@ -593,7 +593,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'auoff',
                                 emoji: '❌',
                             },
@@ -621,7 +621,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'atboff',
                                 emoji: '❌',
                             },
@@ -678,7 +678,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactivéer',
+                                label: 'Désactiver',
                                 value: 'abaoff',
                                 emoji: '❌',
                             },
@@ -700,7 +700,7 @@ module.exports = {
                 collector.on("collect", async (c) => {
                     const value = c.customId
 
-                    if (value === "activée") {
+                    if (value === "active") {
 
                         c.reply({ content: `**Toutes les sécurités ont été activéées avec succès**`, ephemeral: true })
 
@@ -719,10 +719,10 @@ module.exports = {
                         ad.set(`config.${message.guild.id}.antidown`, true)
                         aa.set(`config.${message.guild.id}.antiadmin`, true)
 
-                        msg.edit({ embeds: [panelactivée] })
+                        msg.edit({ embeds: [panelactive] })
                     }
 
-                    else if (value === "desactivée") {
+                    else if (value === "desactive") {
 
                         c.reply({ content: `**Toutes les sécurités ont été désactivéées avec succès**`, ephemeral: true })
 
@@ -742,7 +742,7 @@ module.exports = {
                         ad.set(`config.${message.guild.id}.antidown`, false)
                         aa.set(`config.${message.guild.id}.antiadmin`, false)
 
-                        msg.edit({ embeds: [paneldesactivée] })
+                        msg.edit({ embeds: [paneldesactive] })
                     }
                 })
             })

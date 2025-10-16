@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
         const embed = new EmbedBuilder()
             .setTitle('📚 Commandes Haruka Protect')
-            .setDescription('Utilise \`+commande\` pour exécuter une commande')
+            .setDescription('Utilise `+commande` pour exécuter une commande')
             .addFields(
                 { name: '🛡️ Modération', value: 'ban, kick, mute, clear, warn' },
                 { name: '🔒 Protection', value: 'antiraid, antilink, secur' },

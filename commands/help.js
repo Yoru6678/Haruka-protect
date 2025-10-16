@@ -6,28 +6,28 @@ module.exports = {
     async execute(message, args) {
         const embed = new EmbedBuilder()
             .setTitle("🛡️ Haruka Protect - Commandes")
-            .setDescription("Système complet de protection et modération")
+            .setDescription("Système complet de protection et modération Discord")
             .setColor("#36adfa")
             .setThumbnail(message.client.user.displayAvatarURL())
             .addFields(
                 {
-                    name: "🔧 Modération",
-                    value: "\`+mute\` \`+unmute\` \`+warn\` \`+lock\` \`+unlock\` \`+ban\` \`+kick\`",
+                    name: "🔧 Commandes Principales",
+                    value: "\`\`\`+help • +ping • +config • +botinfo • +serverinfo • +userinfo • +avatar\`\`\`",
+                    inline: false
+                },
+                {
+                    name: "🛡️ Modération",
+                    value: "\`\`\`+ban • +kick • +mute • +unmute • +warn • +clear • +lock • +unlock\`\`\`",
                     inline: true
                 },
                 {
-                    name: "🛡️ Protection",
-                    value: "\`+antiraid\` \`+antilink\` \`+secur\` \`+sanction\` \`+server lock\`",
-                    inline: true
-                },
-                {
-                    name: "ℹ️ Informations",
-                    value: "\`+serverinfo\` \`+userinfo\` \`+botinfo\` \`+avatar\`",
+                    name: "🔒 Protection", 
+                    value: "\`\`\`+secur • +antiraid • +antilink • +sanction • +server lock\`\`\`",
                     inline: true
                 },
                 {
                     name: "🎫 Utilitaires",
-                    value: "\`+ticket\` \`+ping\` \`+help\` \`+dmdban\`",
+                    value: "\`\`\`+ticket • +giveaway • +embed • +say • +mp\`\`\`",
                     inline: true
                 }
             )
@@ -37,6 +37,6 @@ module.exports = {
             })
             .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        await message.channel.send({ embeds: [embed] });
     }
 };

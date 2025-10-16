@@ -9,7 +9,7 @@ module.exports = {
     async execute(message, args) {
         if (!isAuthorized(message) || !message.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
             return message.reply({ 
-                embeds: [EmbedBuilder.error("Permission refusée. Vous devez être autoriséé et avoir la permission de modérer les membres.")]
+                embeds: [EmbedBuilder.error("Permission refusée. Vous devez être autorisé et avoir la permission de modérer les membres.")]
             });
         }
 
@@ -18,8 +18,7 @@ module.exports = {
         
         if (!member || isNaN(duration) || duration < 1) {
             return message.reply({ 
-                embeds: [EmbedBuilder.error("Usage : +mute @membre durée(en minutes)
-Exemple: +mute @user 30")]
+                embeds: [EmbedBuilder.error("Usage : +mute @membre durée(en minutes)\\nExemple: +mute @user 30")]
             });
         }
 
@@ -30,13 +29,13 @@ Exemple: +mute @user 30")]
         }
 
         try {
-            await member.timeout(duration * 60 * 1000, `Mute par ${message.author.tag}`);
+            await member.timeout(duration * 60 * 1000, \`Mute par \${message.author.tag}\`);
             
             message.channel.send({ 
-                embeds: [EmbedBuilder.success(`${member} a été muté pour ${duration} minutes.`)]
+                embeds: [EmbedBuilder.success(\`\${member} a été muté pour \${duration} minutes.\`)]
             });
             
-            Logger.moderation("MUTE", message.author, member, `Durée: ${duration} minutes`);
+            Logger.moderation("MUTE", message.author, member, \`Durée: \${duration} minutes\`);
 
         } catch (error) {
             console.error(error);

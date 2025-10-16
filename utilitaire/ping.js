@@ -1,28 +1,13 @@
-(async () => {
-const db = require("../db.js");
-const Discord = require('discord.js');
-const config = require("../config");
-
-
-const cl = db.table("Color");
+const { EmbedBuilder } = require("../utils/embedBuilder");
 
 module.exports = {
-    name: 'ping',
-    description: `Permet de voir la latence du bot en millisecondes.`,
-
+    name: "ping",
+    description: "Affiche la latence du bot",
     async execute(message, args) {
-        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
-
-        const embed = new (require("discord.js").EmbedBuilder)()
-            .addField('BOT', `${client.ws.ping} ms`, true)
-            .setColor(color);
-
-        const msg = await message.channel.send({ embeds: [embed] });
-
-        const api = msg.createdTimestamp - message.createdTimestamp;
-        embed.addField("API", `${api} ms`, true);
+        const latency = Date.now() - message.createdTimestamp;
+        const apiLatency = Math.round(message.client.ws.ping);
         
-        msg.edit({ embeds: [embed] });
+        const embed = EmbedBuilder.info(`🏓 **Pong !**\\n📡 Latence: ${latency}ms\\n⚡ API: ${apiLatency}ms`);
+        await message.channel.send({ embeds: [embed] });
     }
 };
-})();
