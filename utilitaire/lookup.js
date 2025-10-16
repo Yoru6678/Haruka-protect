@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const moment = require('moment');
 
 
@@ -67,7 +67,7 @@ module.exports = {
 
         const bot = mention.user.bot ? "L'utilisateur est un bot" : "L'utilisateur est un humain";
 
-        const userlol = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const userlol = new (require("discord.js").EmbedBuilder)()
             .setAuthor(`Informations`, usericon)
             .setThumbnail(usericon)
             .addField(`General`, `Nom: \`${mention.user.username}\` \nSurnom: \`${nick}\``)

@@ -71,7 +71,7 @@ module.exports = {
 
                 interaction.reply({ content: `Veuillez confirmer la fermeture de votre ticket`, ephemeral: true })
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle('Fermer le ticket ?')
                     .setDescription(`<@${interaction.member.id}> Êtes-vous sûr de vouloir fermer ce ticket ?`)
                     .setFooter({ text: `⚠️ Le salon sera immédiatement supprimé !` })
@@ -95,11 +95,14 @@ module.exports = {
                     pinnedOnly: false,
                 });
 
-                var results = allMessages.map(msg => `${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}`).join('\n')
+                var results = allMessages.map(msg => `${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}`).join('
+')
 
                 const hastebin = require("hastebin-gen");
 
-                hastebin(`Voici les logs du salon ${interaction.channel.name} - ${interaction.channel.id} sur le serveur ${interaction.guild.name}\n\u200b\n` + results, {
+                hastebin(`Voici les logs du salon ${interaction.channel.name} - ${interaction.channel.id} sur le serveur ${interaction.guild.name}
+\u200b
+` + results, {
                     extension: "diff",
                     url: 'https://haste.chaun14.fr/'
                 }).then(haste => {
@@ -122,8 +125,9 @@ module.exports = {
                 .catch(() => false)
                 setTimeout(() => interaction.channel.delete(), 3000)
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${interaction.member.id}> vient de fermer un ticket \nTicket Fermé : __${interaction.channel.name}__`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`<@${interaction.member.id}> vient de fermer un ticket 
+Ticket Fermé : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
                         if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
@@ -150,12 +154,15 @@ module.exports = {
                 });
 
 
-                var results = allMessages.map(msg => `${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}`).join('\n')
+                var results = allMessages.map(msg => `${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}`).join('
+')
 
                 const hastebin = require("hastebin-gen");
 
 
-                hastebin(`Voici les logs du salon ${interaction.channel.name} - ${interaction.channel.id} sur le serveur ${interaction.guild.name}\n\u200b\n` + results, {
+                hastebin(`Voici les logs du salon ${interaction.channel.name} - ${interaction.channel.id} sur le serveur ${interaction.guild.name}
+\u200b
+` + results, {
                     extension: "diff",
                     url: 'https://haste.chaun14.fr/'
                 }).then(haste => {
@@ -168,7 +175,7 @@ module.exports = {
                     msgd.edit({ content: `Je vous ai envoyé le **transcript** du salon en message privé`})
 
                     interaction.member.send({
-                        content: `Voici le **transcript** du salon que vous pouvez télécharger ou le haste : ${haste} `,
+                        content: `Voici le **transcript** du salon que vous pouvez téléchargéer ou le haste : ${haste} `,
                         files: [{
                             attachment: `./${interaction.channel.id}_${interaction.member.id}`,
                             name: `log${interaction.channel.id}.txt`
@@ -184,15 +191,16 @@ module.exports = {
 
                 });
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${interaction.member.id}> vient de récupérer le transcript de son ticket\nTicket : __${interaction.channel.name}__`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`<@${interaction.member.id}> vient de récupérer le transcript de son ticket
+Ticket : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
                         if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
             }
 
             if (interaction.values[0] == "delete") {
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle('Fermer le ticket ?')
                     .setDescription(`<@${interaction.member.id}> Êtes-vous sûr de vouloir fermer ce ticket ?`)
                     .setFooter({ text: `⚠️ Le salon sera immédiatement supprimé !` })
@@ -229,13 +237,13 @@ module.exports = {
                         
                         const ticket = new EmbedBuilder()
                             .setTitle('📧・Ticket')
-                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en charge votre ticket.`)
+                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en chargée votre ticket.`)
                             .setFooter({ text: 'Support' })
                             .setColor(color)
                         c.send({ embeds: [ticket], components: [row] })
                         interaction.reply({ content: `🔓 Votre ticket a été ouvert avec succès. <#${c.id}>`, ephemeral: true })
 
-                        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                        const embed = new (require("discord.js").EmbedBuilder)()
                             .setDescription(`<@${interaction.member.id}> vient d'ouvrir un ticket`)
                             .setColor(color)
                         const ticketchannel = client.channels.cache.get(ticketlog)
@@ -265,13 +273,13 @@ module.exports = {
                     }).then((c) => {
                         const ticket = new EmbedBuilder()
                             .setTitle('📧・Ticket')
-                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en charge votre ticket.`)
+                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en chargée votre ticket.`)
                             .setFooter({ text: 'Support' })
                             .setColor(color)
                         c.send({ embeds: [ticket], components: [row] })
                         interaction.reply({ content: `🔓 Votre ticket a été ouvert avec succès. <#${c.id}>`, ephemeral: true }).catch(() => false)
 
-                        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                        const embed = new (require("discord.js").EmbedBuilder)()
                             .setDescription(`<@${interaction.member.id}> vient d'ouvrir un ticket`)
                             .setColor(color)
                         const ticketchannel = client.channels.cache.get(ticketlog)

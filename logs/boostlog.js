@@ -31,7 +31,7 @@ module.exports = {
 
                 const logs = boostlog.get(`${message.guild.id}.boostlog`)
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setTitle(`${message.author.tag} a défini ce salon commme salon des logs boost`)
                     .setDescription(`🔮 Ce salon est désormais utilisé pour __toutes__ les **logs boost** du serveur\nExécuteur : <@${message.author.id}>`)

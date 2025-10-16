@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 
 const cl = db.table("Color")
@@ -32,7 +32,7 @@ module.exports = {
             const content = description
                 .replaceAll('957096643587633152', "Ne pas retirer")
 
-            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
                 .setFooter({ text: config.bot.footer })
                 .setDescription(content)

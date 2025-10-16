@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -36,10 +36,11 @@ module.exports = {
             try {
                 await target.timeout(null, reason);
                 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(couleur)
                     .setTitle('Unmute')
-                    .setDescription(`${target} a été unmute par ${message.author}.\nRaison : ${reason}`)
+                    .setDescription(`${target} a été unmute par ${message.author}.
+Raison : ${reason}`)
                     .setTimestamp()
                     .setFooter(footer);
 

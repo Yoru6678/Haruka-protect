@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
 const ServerConfig = require("../utils/serverConfig");
 const { isAuthorized } = require("../security");
 
@@ -7,7 +7,7 @@ module.exports = {
     description: "Configurer le bot pour ce serveur",
     async execute(message, args) {
         if (!isAuthorized(message)) {
-            return message.reply("❌ Vous n'avez pas la permission de configurer le bot.");
+            return message.reply("❌ Vous n'avez pas la permission de configuréer le bot.");
         }
         
         const config = new ServerConfig(message.guild.id);
@@ -23,12 +23,14 @@ module.exports = {
                 .addFields(
                     { 
                         name: "🔧 Paramètres Généraux", 
-                        value: `Prefix: \`${serverConfig.prefix || '+'}\`\nSalon de logs: ${serverConfig.logChannel ? `<#${serverConfig.logChannel}>` : "Non configuré"}`, 
+                        value: `Prefix: `${serverConfig.prefix || '+'}`
+Salon de logs: ${serverConfig.logChannel ? `<#${serverConfig.logChannel}>` : "Non configuréé"}`, 
                         inline: true 
                     },
                     { 
                         name: "🛡️ Auto-Modération", 
-                        value: `Anti-Liens: ${serverConfig.autoMod?.antiLink ? '✅' : '❌'}\nAnti-Spam: ${serverConfig.autoMod?.antiSpam ? '✅' : '❌'}`, 
+                        value: `Anti-Liens: ${serverConfig.autoMod?.antiLink ? '✅' : '❌'}
+Anti-Spam: ${serverConfig.autoMod?.antiSpam ? '✅' : '❌'}`, 
                         inline: true 
                     }
                 )
@@ -57,7 +59,7 @@ module.exports = {
                     return message.reply("❌ Le prefix doit faire entre 1 et 3 caractères.");
                 }
                 await config.set('prefix', value);
-                message.reply(`✅ Prefix mis à jour: \`${value}\``);
+                message.reply(`✅ Prefix mis à jour: `${value}``);
                 break;
                 
             case 'logs':
@@ -70,7 +72,7 @@ module.exports = {
                 break;
                 
             default:
-                message.reply("❌ Paramètre inconnu. Paramètres disponibles: \`prefix\`, \`logs\`");
+                message.reply("❌ Paramètre inconnu. Paramètres disponibles: `prefix`, `logs`");
         }
     }
 };

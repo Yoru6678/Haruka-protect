@@ -10,9 +10,9 @@ module.exports = {
     }
     try {
       await message.channel.permissionOverwrites.edit(message.guild.roles.everyone, { SendMessages: false });
-      message.channel.send({ embeds: [EmbedBuilder.success("Salon verrouillé.")] });
+      message.channel.send({ embeds: [EmbedBuilder.success("Salon verrouilléé.")] });
     } catch (error) {
-      message.reply("Erreur lors du verrouillage.");
+      message.reply("Erreur lors du verrouilléage.");
     }
   }
 };

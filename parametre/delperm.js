@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -33,7 +33,7 @@ module.exports = {
 
                 p1.set(`perm1_${message.guild.id}`, "Non Configuré")
 
-                const embed1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed1 = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`Le rôle ${role} n'a plus accès aux commandes de la **perm 1**`)
                     .setColor(color)
 
@@ -48,7 +48,7 @@ module.exports = {
 
                 p2.set(`perm2_${message.guild.id}`, "Non Configuré")
 
-                const embed1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed1 = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`Le rôle ${role} n'a plus accès aux commandes de la **perm 2**`)
                     .setColor(color)
 
@@ -63,7 +63,7 @@ module.exports = {
 
                 p3.set(`perm3_${message.guild.id}`, "Non Configuré")
 
-                const embed1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed1 = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`Le rôle ${role} n'a plus accès aux commandes de la **perm 3**`)
                     .setColor(color)
 
@@ -78,7 +78,7 @@ module.exports = {
 
                 pgs.set(`permgs_${message.guild.id}`, "Non Configuré")
 
-                const embed1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed1 = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`Le rôle ${role} n'a plus accès aux commandes de la perm **Gestion Staff**`)
                     .setColor(color)
 
@@ -93,7 +93,7 @@ module.exports = {
 
                 pgp.set(`permgp_${message.guild.id}`, "Non Configuré")
 
-                const embed1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed1 = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`Le rôle ${role} n'a plus accès aux commandes de la perm **Gestion Permissions**`)
                     .setColor(color)
 
@@ -107,7 +107,7 @@ module.exports = {
 
                 pga.set(`permga_${message.guild.id}`, "Non Configuré")
 
-                const embed1 = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed1 = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`Le rôle ${role} n'a plus accès aux commandes de la perm **Giveaway**`)
                     .setColor(color)
 

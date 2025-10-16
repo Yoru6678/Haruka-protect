@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -20,14 +20,14 @@ module.exports = {
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) === true) {
 
             if (args[0] === "lock") {
-                if (lock.get(`serverlock_${message.guild.id}`) === "lock") return message.channel.send(`**Le serveur est déjà verroouillé**`)
+                if (lock.get(`serverlock_${message.guild.id}`) === "lock") return message.channel.send(`**Le serveur est déjà verrouillééé**`)
                 lock.set(`serverlock_${message.guild.id}`, "lock")
-                message.channel.send(`Le serveur est maintenant **verrouillé**`)
+                message.channel.send(`Le serveur est maintenant **verrouilléé**`)
 
             } else if (args[0] === "unlock") {
-                if (lock.get(`serverlock_${message.guild.id}`) === "unlock") return message.channel.send(`**Le serveur n'est pas verrouillé**`)
+                if (lock.get(`serverlock_${message.guild.id}`) === "unlock") return message.channel.send(`**Le serveur n'est pas verrouilléé**`)
                 lock.set(`serverlock_${message.guild.id}`, false)
-                message.channel.send(`Le serveur est maintenant **déverrouillé**`)
+                message.channel.send(`Le serveur est maintenant **déverrouilléé**`)
 
             }
         }

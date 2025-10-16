@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const config = require("../config");
 
 
@@ -26,15 +26,16 @@ module.exports = {
                 if (!member) return;
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1]);
-                if (!role) return message.channel.send(`Aucun rôle trouvé pour \`${args[1] || "rien"}\``);
+                if (!role) return message.channel.send(`Aucun rôle trouvé pour `${args[1] || "rien"}``);
 
                 await member.roles.add(role.id, `Rôle ajouté par ${message.author.tag}`);
 
                 message.channel.send(`1 rôle ajouté à 1 membre`);
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
-                    .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`addrole\` sur ${member}\nRôle ajouté : ${role}`)
+                    .setDescription(`➕ <@${message.author.id}> a utilisé la commande `addrole` sur ${member}
+Rôle ajouté : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` });
                 const raidlogId = await ml.get(`${message.guild.id}.modlog`)
@@ -48,15 +49,16 @@ const channel = client.channels.cache.get(raidlogId);
                 if (!member) return;
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1]);
-                if (!role) return message.channel.send(`Aucun rôle trouvé pour \`${args[1] || "rien"}\``);
+                if (!role) return message.channel.send(`Aucun rôle trouvé pour `${args[1] || "rien"}``);
 
                 await member.roles.add(role.id, `Rôle ajouté par ${message.author.tag}`);
 
                 message.channel.send(`1 rôle ajouté à 1 membre`);
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
-                    .setDescription(`➕ <@${message.author.id}> a utilisé la commande \`addrole\` sur ${member}\nRôle ajouté : ${role}`)
+                    .setDescription(`➕ <@${message.author.id}> a utilisé la commande `addrole` sur ${member}
+Rôle ajouté : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` });
                 const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))

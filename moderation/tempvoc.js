@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -15,7 +15,7 @@ const {
 module.exports = {
     name: 'tempvoc',
     usage: 'tempvoc',
-    description: `Permet de configurer des salons vocal temporaire.`,
+    description: `Permet de configuréer des salons vocal temporaire.`,
     async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
@@ -42,12 +42,12 @@ module.exports = {
                             },
                             {
                                 label: "Activé les vocaux temporaires",
-                                value: "activemodule",
+                                value: "activéemodule",
                                 emoji: "972648521255768095",
                             },
                             {
-                                label: "Désactivé les vocaux temporaires",
-                                value: "desactivemodule",
+                                label: "Désactivéé les vocaux temporaires",
+                                value: "desactivéemodule",
                                 emoji: "988389407730040863",
                             },
                             {
@@ -67,20 +67,20 @@ module.exports = {
                     let tempvocsettings = db.get(`tempvocsettings_${message.guild.id}`)
                     if (tempvocsettings == null) tempvocsettings = "Non Configuré"
                     if (tempvocsettings == true) tempvocsettings = "Activé"
-                    if (tempvocsettings == false) tempvocsettings = "Desactivé"
+                    if (tempvocsettings == false) tempvocsettings = "Desactivéé"
 
                     let categorytemp = `<#${db.get(`categorytempvoc_${message.guild.id}`)}>`
                     if (categorytemp == "<#null>") categorytemp = "Non Configuré"
 
                     let salontemp = `<#${db.get(`salontempvoc_${message.guild.id}`)}>`
-                    if (salontemp == "<#null>") salontemp = "Non configuré"
+                    if (salontemp == "<#null>") salontemp = "Non configuréé"
 
 
-                    const MenuEmbed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                    const MenuEmbed = new (require("discord.js").EmbedBuilder)()
                         .setTitle('Vocaux Temporaires')
-                        .setDescription(`__**Choisissez les options pour configuré les vocaux temporaires**__`)
+                        .setDescription(`__**Choisissez les options pour configuréé les vocaux temporaires**__`)
                         .addFields(
-                            { name: 'Activé/Désactivé', value: `Tempvoc: __**${tempvocsettings}**__`, inline: true },
+                            { name: 'Activé/Désactivéé', value: `Tempvoc: __**${tempvocsettings}**__`, inline: true },
                             { name: 'Catégorie tempvoc', value: `Catégorie: __**${categorytemp}**__`, inline: true },
                             { name: 'Salon tempvoc', value: `Salon: __**${salontemp}**__`, inline: true },
                         )
@@ -118,12 +118,12 @@ module.exports = {
                         .addOptions([
                             {
                                 label: "Définir une Catégorie",
-                                value: `active`,
+                                value: `activée`,
                                 emoji: '✅',
                             },
                             {
                                 label: 'Réinitialiser',
-                                value: `desactive`,
+                                value: `desactivée`,
                                 emoji: '❌',
                             },
                             {
@@ -142,12 +142,12 @@ module.exports = {
                         .addOptions([
                             {
                                 label: "Définir un Salon",
-                                value: `activedel`,
+                                value: `activéedel`,
                                 emoji: '✅',
                             },
                             {
                                 label: 'Réinitialiser',
-                                value: `desactivedel`,
+                                value: `desactivéedel`,
                                 emoji: '❌',
                             },
                             {
@@ -174,10 +174,10 @@ module.exports = {
                             menumsg.edit({ embeds: [antichannel], components: [new ActionRowBuilder().addComponents([options])] })
                             await i.deferUpdate().catch(() => false)
                         }
-                        if (i.values[0] == "active") {
+                        if (i.values[0] == "activée") {
                             let link = await db.get(`categorytempvoc_${message.guild.id}`)
                             if (link == true) {
-                                message.channel.send(`✅ |\`Une catégorie \` est déjà setup`).then(msg => {
+                                message.channel.send(`✅ |`Une catégorie ` est déjà setup`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -199,7 +199,7 @@ module.exports = {
                                         db.set(`categorytempvoc_${message.guild.id}`, status)
                                         collected.first().delete().catch(() => false)
 
-                                        message.channel.send(`✅ |\`La catégorie \` a bien été enregistrée`).then(msg => {
+                                        message.channel.send(`✅ |`La catégorie ` a bien été enregistrée`).then(msg => {
                                             setTimeout(() => msg.delete(), 5000)
                                         }).catch(() => false);
                                     })
@@ -209,19 +209,19 @@ module.exports = {
                             menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                             await i.deferUpdate().catch(() => false)
 
-                        } else if (i.values[0] == 'desactive') {
+                        } else if (i.values[0] == 'desactivée') {
                             let link = await db.get("messagebvn_" + message.guild.id)
                             if (link == true) {
                                 //     db.set("support"+ message.guild.id , null)
                                 db.delete("messagebvn_" + message.guild.id)
-                                message.channel.send(`❌ |\`Le message de bienvenue \` vient d'être reset`).then(msg => {
+                                message.channel.send(`❌ |`Le message de bienvenue ` vient d'être reset`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
                                 await i.deferUpdate().catch(() => false)
 
                             } else if (link == null) {
-                                message.channel.send(`❌ |\`Le message de bienvenue \` est déjà reset`).then(msg => {
+                                message.channel.send(`❌ |`Le message de bienvenue ` est déjà reset`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -234,11 +234,11 @@ module.exports = {
                         else if (i.values[0] === "salontempvoc") {
                             menumsg.edit({ embeds: [antichanneldelete], components: [new ActionRowBuilder().addComponents([AntiChannelDelete])] })
                             await i.deferUpdate().catch(() => false)
-                        } if (i.values[0] == "activedel") {
+                        } if (i.values[0] == "activéedel") {
                             await i.deferUpdate().catch(() => false)
                             let link = await db.get(`salontempvoc_${message.guild.id}`)
                             if (link == true) {
-                                message.channel.send(`✅ |\`Le salon tempvoc \` est déjà configuré`).then(msg => {
+                                message.channel.send(`✅ |`Le salon tempvoc ` est déjà configuréé`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -256,7 +256,7 @@ module.exports = {
                                     const status = collected.first().content
                                     db.set(`salontempvoc_${message.guild.id}`, status)
                                     //  db.set("support"+ message.guild.id , true)
-                                    message.channel.send(`✅ |\`Le salon des vocaux temporaires a été enregistrée \`Salon: <#${status}>`).then(msg => {
+                                    message.channel.send(`✅ |`Le salon des vocaux temporaires a été enregistrée `Salon: <#${status}>`).then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                     collected.first().delete().catch(() => false)
@@ -267,11 +267,11 @@ module.exports = {
                             menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                             await i.deferUpdate().catch(() => false)
 
-                        } else if (i.values[0] == 'desactivedel') {
+                        } else if (i.values[0] == 'desactivéedel') {
                             let link = await db.get(`support${message.guild.id}`)
                             if (link == true) {
                                 db.delete('status' + message.guild.id)
-                                message.channel.send(`❌ |\`Les vocaux temporaires \` vien d'être reset`).then(msg => {
+                                message.channel.send(`❌ |`Les vocaux temporaires ` vien d'être reset`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -279,7 +279,7 @@ module.exports = {
 
 
                             } else {
-                                message.channel.send(`❌ |\`Les vocaux temporaires \` sont déjà reset`).then(msg => {
+                                message.channel.send(`❌ |`Les vocaux temporaires ` sont déjà reset`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -288,29 +288,29 @@ module.exports = {
                         }
 
 
-                        //activé MSG
-                        if (i.values[0] === "activemodule") {
+                        //activéé MSG
+                        if (i.values[0] === "activéemodule") {
                             await i.deferUpdate().catch(() => false)
                             let soutien = await db.get("tempvocsettings_" + message.guild.id)
                             if (soutien === true) {
-                                return message.channel.send("Les vocaux temporaires sont déjà activés").then(msg => {
+                                return message.channel.send("Les vocaux temporaires sont déjà activéés").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
                             } else {
                                 db.set("tempvocsettings_" + message.guild.id, true)
-                                return message.channel.send("✅ |Les vocaux temporaires viennent d'être activés.").then(msg => {
+                                return message.channel.send("✅ |Les vocaux temporaires viennent d'être activéés.").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
                             }
-                        } else if (i.values[0] === "desactivemodule") {
+                        } else if (i.values[0] === "desactivéemodule") {
                             await i.deferUpdate().catch(() => false)
                             let soutien = await db.get("tempvocsettings_" + message.guild.id)
                             if (soutien == true) {
                                 db.set("tempvocsettings_" + message.guild.id, null)
-                                return message.channel.send("❌ | Les vocaux temporaires viennent d'être désactivés.").then(msg => {
+                                return message.channel.send("❌ | Les vocaux temporaires viennent d'être désactivéés.").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
-                            } else return message.channel.send('✅ | Les vocaux temporaires sont déjà désactivés.').then(msg => {
+                            } else return message.channel.send('✅ | Les vocaux temporaires sont déjà désactivéés.').then(msg => {
                                 setTimeout(() => msg.delete(), 5000)
                             })
                         }

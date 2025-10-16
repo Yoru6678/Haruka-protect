@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 
 
 const config = require("../config");

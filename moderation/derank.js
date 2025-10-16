@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -29,7 +29,7 @@ module.exports = {
                 } catch {
                 }
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setTitle("Derank d'un membre")
                     .setDescription(`<@${member.id}> a été derank et les rôles suivants ont été retirés : ${roles}`)
@@ -41,10 +41,11 @@ module.exports = {
                 let roleping = db.get(`role_${message.guild.id}`);
                 if (roleping === null) roleping = "@everyone";
 
-                const modlog = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const modlog = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setTitle(`${message.author.tag} a effectué un derank`)
-                    .setDescription(`⚠️ <@${member.id}> a été derank\nExécuteur : <@${message.author.id}>`)
+                    .setDescription(`⚠️ <@${member.id}> a été derank
+Exécuteur : <@${message.author.id}>`)
                     .setTimestamp()
                     .setFooter({ text: `⚠️ ${footer}` });
 

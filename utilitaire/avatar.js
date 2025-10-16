@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 
 
 const cl = db.table("Color");
@@ -22,7 +22,7 @@ module.exports = {
         let avatar = member.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 });
         let username = member.username;
 
-        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setTitle(`${username}`)
             .setImage(avatar)
             .setColor(color);

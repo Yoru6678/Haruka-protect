@@ -5,10 +5,13 @@ module.exports = {
     once: true,
 
     execute(client) {
-        console.log(`\n✅ ${client.user.tag} est maintenant en ligne !\n`);
+        console.log(`
+✅ ${client.user.tag} est maintenant en ligne !
+`);
         console.log(`📊 Serveurs: ${client.guilds.cache.size}`);
         console.log(`👥 Utilisateurs: ${client.users.cache.size}`);
-        console.log(`📝 Commandes: ${client.commands.size}\n`);
+        console.log(`📝 Commandes: ${client.commands.size}
+`);
         
         client.user.setActivity(`${config.bot.prefixe}help | ${client.guilds.cache.size} serveurs`, { type: 'WATCHING' });
     }

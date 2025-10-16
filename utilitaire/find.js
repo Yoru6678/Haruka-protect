@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 
 
 const cl = db.table("Color");
@@ -21,7 +21,7 @@ module.exports = {
 
         const voiceChannel = member.voice.channel;
 
-        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setColor(color)
             .addField(
                 ` `,

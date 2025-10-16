@@ -1,4 +1,4 @@
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const db = require("../db.js");
 const config = require("../config");
 
@@ -24,12 +24,12 @@ module.exports = {
             message.channel.permissionOverwrites.edit(message.guild.id, {
                 SendMessages: false
             }).then(() => {
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription("🔒 Salon verrouillé")
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription("🔒 Salon verrouilléé")
                     .setColor(color);
                 message.channel.send({ embeds: [embed] });
             }).catch(() => {
-                message.reply("Impossible de verrouiller ce salon");
+                message.reply("Impossible de verrouilléer ce salon");
             });
         }
     }

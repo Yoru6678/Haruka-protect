@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")

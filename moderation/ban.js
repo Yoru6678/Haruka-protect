@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -42,12 +42,15 @@ module.exports = {
             let reason = args.slice(1).join(" ") || `Aucune raison`
 
             message.reply({ content: `${member} a été banni du serveur` }).catch(err => err)
-            member.send({ content: `Tu as été banni par ${message.author} pour la raison suivante: \n\n ${reason}` })
+            member.send({ content: `Tu as été banni par ${message.author} pour la raison suivante: 
+
+ ${reason}` })
             member.ban({ reason: `${reason}` })
 
-            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
-                .setDescription(`<@${message.author.id}> a \`banni\` ${member} du serveur\nRaison : ${reason}`)
+                .setDescription(`<@${message.author.id}> a `banni` ${member} du serveur
+Raison : ${reason}`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
             const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));
@@ -77,12 +80,15 @@ module.exports = {
             let reason = args.slice(1).join(" ") || `Aucune raison`
 
             message.reply({ content: `${member} a été banni du serveur` }).catch(err => err)
-            member.send({ content: `Tu as été banni par ${message.author} pour la raison suivante: \n\n ${reason}` })
+            member.send({ content: `Tu as été banni par ${message.author} pour la raison suivante: 
+
+ ${reason}` })
             member.ban({ reason: `${reason}` })
 
-            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
-                .setDescription(`<@${message.author.id}> a \`banni\` ${member} du serveur\nRaison : ${reason}`)
+                .setDescription(`<@${message.author.id}> a `banni` ${member} du serveur
+Raison : ${reason}`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
                 const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));

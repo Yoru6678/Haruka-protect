@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const config = require("../config")
 const owner = db.table("Owner")
@@ -23,10 +23,12 @@ module.exports = {
 
                 const newChannel = message.mentions.channels.first() || message.guild.channels.cache.get(args[1] || message.channelId);
                 if (!newChannel) return message.channel.send({ content: "Aucun salon trouvé !" })
-                if (db.get(`${message.guild.id}.antivoc.${newChannel.id}`) === newChannel) return message.channel.send(`🔊・__Le salon <#${db.get(`${message.guild.id}.antivoc.${newChannel}`)}> est désormais interdit__\n*(Bypass par les owners et la Whitelist)*`)
+                if (db.get(`${message.guild.id}.antivoc.${newChannel.id}`) === newChannel) return message.channel.send(`🔊・__Le salon <#${db.get(`${message.guild.id}.antivoc.${newChannel}`)}> est désormais interdit__
+*(Bypass par les owners et la Whitelist)*`)
                 else {
                     db.set(`${message.guild.id}.antivoc.${newChannel.id}`, newChannel.id)
-                    message.channel.send(`🔊・__Le salon ${newChannel} est désormais interdit__\n*(Bypass: owner et whitelist)*`)
+                    message.channel.send(`🔊・__Le salon ${newChannel} est désormais interdit__
+*(Bypass: owner et whitelist)*`)
 
                 }
             }
@@ -42,7 +44,7 @@ module.exports = {
             if (args[0] == 'clear') {
 
                 db.delete(`${message.guild.id}.antivoc`)
-                message.channel.send({ content: `Tous les salons interdit sont de nouveau autorisé.` })
+                message.channel.send({ content: `Tous les salons interdit sont de nouveau autoriséé.` })
 
             }
         }

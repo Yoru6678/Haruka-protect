@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const config = require("../config");
 const ms = require("ms");
 
@@ -32,7 +32,7 @@ module.exports = {
             if (!duration) return message.reply("Durée invalide");
 
             member.roles.add(role).then(() => {
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`✅ ${role.name} donné à ${member.user.tag} pour ${time}`)
                     .setColor(color);
                 message.channel.send({ embeds: [embed] });

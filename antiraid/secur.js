@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 const footer = config.bot.footer
 
@@ -27,7 +27,7 @@ const aa = db.table("Antiadmin")
 module.exports = {
     name: 'secur',
     usage: 'secur',
-    description: `Permet de configurer les sécuritées sur le serveur.`,
+    description: `Permet de configuréer les sécuritées sur le serveur.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -170,18 +170,18 @@ module.exports = {
             const secu = new Discord.ActionRowBuilder()
                 .addComponents(
                     new Discord.ButtonBuilder()
-                        .setCustomId('active')
+                        .setCustomId('activée')
                         .setLabel('Activé')
                         .setStyle('Success')
                 )
                 .addComponents(
                     new Discord.ButtonBuilder()
-                        .setCustomId('desactive')
-                        .setLabel('Désactivé')
+                        .setCustomId('desactivée')
+                        .setLabel('Désactivéé')
                         .setStyle('Danger')
                 )
 
-            const panel = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const panel = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -204,7 +204,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const panelactive = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const panelactivée = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -227,7 +227,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const paneldesactive = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const paneldesactivée = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -328,7 +328,7 @@ module.exports = {
             message.channel.send({ embeds: [panel], components: [secu, panelselect] }).then(async msg => {
 
                 //anti channel create
-                const antichannelembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antichannelembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel create__**`)
                     .setColor(color)
 
@@ -343,7 +343,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'accoff',
                                 emoji: '❌',
                             },
@@ -355,7 +355,7 @@ module.exports = {
                         ])
                 )
                 //anti channel delete
-                const antichanneldembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antichanneldembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel delete__**`)
                     .setColor(color)
 
@@ -370,7 +370,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'acdoff',
                                 emoji: '❌',
                             },
@@ -382,7 +382,7 @@ module.exports = {
                         ])
                 )
                 //anti channel update
-                const antichanneupdembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antichanneupdembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel update__**`)
                     .setColor(color)
 
@@ -397,7 +397,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'acuoff',
                                 emoji: '❌',
                             },
@@ -409,7 +409,7 @@ module.exports = {
                         ])
                 )
                 //anti Role create
-                const antirolecreateembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antirolecreateembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle create__**`)
                     .setColor(color)
 
@@ -424,7 +424,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'arcoff',
                                 emoji: '❌',
                             },
@@ -436,7 +436,7 @@ module.exports = {
                         ])
                 )
                 //anti rôle delete
-                const antiroledeleteembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antiroledeleteembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle delete__**`)
                     .setColor(color)
 
@@ -451,7 +451,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'ardoff',
                                 emoji: '❌',
                             },
@@ -463,7 +463,7 @@ module.exports = {
                         ])
                 )
                 //anti rôle update
-                const antiroleupembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antiroleupembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle update__**`)
                     .setColor(color)
 
@@ -478,7 +478,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'aruoff',
                                 emoji: '❌',
                             },
@@ -490,7 +490,7 @@ module.exports = {
                         ])
                 )
                 //anti Link
-                const antilinkembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antilinkembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'antilink__**`)
                     .setColor(color)
 
@@ -505,7 +505,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'aloff',
                                 emoji: '❌',
                             },
@@ -518,7 +518,7 @@ module.exports = {
                 )
 
                 //anti wb
-                const antiwbembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antiwbembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti WebHook__**`)
                     .setColor(color)
 
@@ -533,7 +533,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'awoff',
                                 emoji: '❌',
                             },
@@ -545,7 +545,7 @@ module.exports = {
                         ])
                 )
                 //Punition
-                const punishembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const punishembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de la __Punition__**`)
                     .setColor(color)
 
@@ -578,7 +578,7 @@ module.exports = {
                 )
 
                 //Anti update
-                const antiupdateembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antiupdateembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l' __anti update__**`)
                     .setColor(color)
 
@@ -593,7 +593,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'auoff',
                                 emoji: '❌',
                             },
@@ -606,7 +606,7 @@ module.exports = {
                 )
 
                 //Anti Bot
-                const antibotembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antibotembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l'__anti bot__**`)
                     .setColor(color)
 
@@ -621,7 +621,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'atboff',
                                 emoji: '❌',
                             },
@@ -634,7 +634,7 @@ module.exports = {
                 )
 
                 //Server lock/unlock
-                const lockembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const lockembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Autoriser ou refuser __l'accès au serveur__**`)
                     .setColor(color)
 
@@ -663,7 +663,7 @@ module.exports = {
                 )
 
                 //Anti Ban
-                const antibanembed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const antibanembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l'__antiban__**`)
                     .setColor(color)
 
@@ -678,7 +678,7 @@ module.exports = {
                                 emoji: '✅',
                             },
                             {
-                                label: 'Désactiver',
+                                label: 'Désactivéer',
                                 value: 'abaoff',
                                 emoji: '❌',
                             },
@@ -700,9 +700,9 @@ module.exports = {
                 collector.on("collect", async (c) => {
                     const value = c.customId
 
-                    if (value === "active") {
+                    if (value === "activée") {
 
-                        c.reply({ content: `**Toutes les sécurités ont été activées avec succès**`, ephemeral: true })
+                        c.reply({ content: `**Toutes les sécurités ont été activéées avec succès**`, ephemeral: true })
 
                         atc.set(`config.${message.guild.id}.antichannelcreate`, true)
                         agu.set(`guildupdate_${message.guild.id}`, true)
@@ -719,12 +719,12 @@ module.exports = {
                         ad.set(`config.${message.guild.id}.antidown`, true)
                         aa.set(`config.${message.guild.id}.antiadmin`, true)
 
-                        msg.edit({ embeds: [panelactive] })
+                        msg.edit({ embeds: [panelactivée] })
                     }
 
-                    else if (value === "desactive") {
+                    else if (value === "desactivée") {
 
-                        c.reply({ content: `**Toutes les sécurités ont été désactivées avec succès**`, ephemeral: true })
+                        c.reply({ content: `**Toutes les sécurités ont été désactivéées avec succès**`, ephemeral: true })
 
                         atc.set(`config.${message.guild.id}.antichannelcreate`, false)
                         agu.set(`guildupdate_${message.guild.id}`, false)
@@ -742,7 +742,7 @@ module.exports = {
                         ad.set(`config.${message.guild.id}.antidown`, false)
                         aa.set(`config.${message.guild.id}.antiadmin`, false)
 
-                        msg.edit({ embeds: [paneldesactive] })
+                        msg.edit({ embeds: [paneldesactivée] })
                     }
                 })
             })

@@ -1,143 +1,42 @@
 const db = require("../db.js");
-const config = require('../config')
-const Discord = require('discord.js')
-const rlog = db.table("raidlog")
-const wl = db.table("Whitelist")
-const p = db.table("Prefix")
-const al = db.table("AntiLink")
-const ae = db.table("Antieveryone")
-const owner = db.table("Owner")
-const linksall = [
-    'discord.gg',
-    'dsc.bio',
-    'www',
-    'https',
-    'http',
-    '.ga',
-    '.fr',
-    '.com',
-    '.tk',
-    '.ml',
-    '://',
-    '.gg',
-    'discord.me',
-    'discord.io',
-    'invite.me',
-    'discordapp.com/invite'
-]
-
-const linksinvite = [
-    'discord.gg',
-    '.gg',
-    'discord.me',
-    'discord.io',
-    'invite.me',
-    'discordapp.com/invite'
-]
-
-const mention = ["@everyone", "@here"]
+const config = require('../config');
+const Discord = require('discord.js');
+const rlog = db.table("raidlog");
+const wl = db.table("Whitelist");
+const al = db.table("AntiLink");
 
 module.exports = {
-    name: "messageCreate",
-
-    async execute(client, message, channel) {
-
-        if (!message.guild) return;
-
-        let isLink = false
-        let isLinkall = false
-        let isMention = false
-        let antilinkinvite = await al.get(`config.${message.guild.id}.antilinkinvite`)
-        let antilinkall = await al.get(`config.${message.guild.id}.antilinkall`)
-        let antieveryone = await ae.get(`config.${message.guild.id}.antieveryone`)
-
-        linksall.forEach(l => {
-            if (message.content.includes(l)) {
-                isLinkall = true
+    name: 'antiMessage',
+    async execute(message) {
+        try {
+            // Vérification whitelist
+            const isWhitelisted = wl.get(`${message.guild.id}.${message.author.id}.wl`);
+            if (isWhitelisted || message.author.bot) return;
+            
+            // Vérification anti-lien
+            const antiLinkAll = al.get(`config.${message.guild.id}.antilinkall`);
+            const antiLinkInvite = al.get(`config.${message.guild.id}.antilinkinvite`);
+            
+            if ((antiLinkAll || antiLinkInvite) && message.content) {
+                const linkRegex = /https?:\/\/[^\s]+/gi;
+                const inviteRegex = /(discord\.gg|discordapp\.com\/invite)\/([a-zA-Z0-9-]+)/gi;
+                
+                if (antiLinkAll && linkRegex.test(message.content)) {
+                    await message.delete();
+                    const msg = await message.channel.send(`🔗 **Anti-Link** - ${message.author}, les liens sont interdits.`);
+                    setTimeout(() => msg.delete(), 5000);
+                    return;
+                }
+                
+                if (antiLinkInvite && inviteRegex.test(message.content)) {
+                    await message.delete();
+                    const msg = await message.channel.send(`🔗 **Anti-Invite** - ${message.author}, les invitations Discord sont interdites.`);
+                    setTimeout(() => msg.delete(), 5000);
+                    return;
+                }
             }
-        })
-
-        linksinvite.forEach(l => {
-            if (message.content.includes(l)) {
-                isLink = true
-            }
-        })
-
-        mention.forEach(l => {
-            if (message.content.includes(l)) {
-                isMention = true
-            }
-        })
-
-        if (message.author.bot) return
-        if (message.channel.type == "DM") return
-
-        let pf = await p.get(`prefix_${message.guild.id}`)
-        if (pf == null) pf = config.bot.prefixe
-
-        if (owner.get(`owners.${message.member.id}`) || wl.get(`${message.guild.id}.${message.member.id}.wl`) || config.bot.buyer === message.author.id === true) return
-
-        if (antilinkinvite == true) {
-
-            if (isLink == true) {
-                message.delete()
-                message.member.timeout(15000)
-                message.channel.send({ content: `<@${message.author.id}> tu n'as pas le droit d'envoyer de liens dans ce serveur.` }).then(msg => {
-                    setTimeout(() => msg.delete(), 6000)
-                })
-
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
-                    .setTimestamp()
-                const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
-const raidlogChannel = const chan = client.channels.cache.get(raidlogId);
-if (chan) chan.send({ embeds: [embed] }).catch(() => false)
-            }
-
-        }
-
-        if (antilinkall == true) {
-
-            if (isLinkall == true) {
-                message.delete().catch(() => false)
-                message.member.timeout(15000).catch(() => false)
-                message.channel.send({ content: `<@${message.author.id}> tu n'as pas le droit d'envoyer de liens dans ce serveur.` }).then(msg => {
-                    setTimeout(() => msg.delete(), 6000)
-                })
-
-
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${message.author.id}> a envoyé un \`lien\` dans \`${message.channel.name}\`, j'ai supprimé son message.`)
-                    .setTimestamp()
-                const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
-const logchannel = client.channels.cache.get(raidlogId);
-                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
-            }
-
-        }
-
-        if (antieveryone == true) {
-
-            if (isMention == true) {
-
-                message.channel.clone().then((ch) => {
-                    ch.setParent(message.channel.parent);
-                    ch.setPosition(message.channel.position);
-                    message.channel.delete();
-                    message.member.timeout(60000)
-                    ch.send(`**Le salon a été renew car <@${message.author.id}> a ping tout le serveur**`).then(msg => {
-                        setTimeout(() => msg.delete(), 50000)
-                    })
-                })
-
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${message.author.id}> a mentionné \`tout le serveur\` dans \`${message.channel.name}\`, j'ai renew le salon`)
-                    .setTimestamp()
-                const raidlogId = await rlog.get(`${message.guild.id}.raidlog`);
-const logchannel = client.channels.cache.get(raidlogId);
-                if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
-
-            }
+        } catch (error) {
+            console.error('Erreur antiMessage:', error);
         }
     }
-}
+};

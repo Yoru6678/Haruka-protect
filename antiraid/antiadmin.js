@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -11,7 +11,7 @@ const aa = db.table("Antiadmin")
 module.exports = {
     name: 'antiadmin',
     usage: 'antiadmin',
-    description: `Permet de configurer l'antiraid.`,
+    description: `Permet de configuréer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -21,14 +21,14 @@ module.exports = {
 
             if (args[0] == 'on') {
                 aa.set(`config.${message.guild.id}.antiadmin`, true)
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'anti admin** est maintenant **activé**`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`**L'anti admin** est maintenant **activéé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 aa.set(`config.${message.guild.id}.antiadmin`, false)
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'anti admin** est maintenant **désactivé**`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`**L'anti admin** est maintenant **désactivéé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

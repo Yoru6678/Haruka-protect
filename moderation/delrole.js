@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -26,15 +26,16 @@ module.exports = {
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
 
-                if (!role) return message.channel.send(`Aucun rôle trouvé pour \`${args[1] || "rien"}\``)
+                if (!role) return message.channel.send(`Aucun rôle trouvé pour `${args[1] || "rien"}``)
 
                 await member.roles.remove(role.id, `Rôle retiré par ${message.author.tag}`);
 
                 message.channel.send(`1 rôle retiré à 1 membre`)
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
-                    .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRole retiré : ${role}`)
+                    .setDescription(`➖ <@${message.author.id}> a utilisé la commande `delrole` sur ${member}
+Role retiré : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
                 const raidlogId = await ml.get(`${message.guild.id}.modlog`)
@@ -49,15 +50,16 @@ const channel = client.channels.cache.get(raidlogId)
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
 
-                if (!role) return message.channel.send(`Aucun rôle trouvé pour \`${args[1] || "rien"}\``)
+                if (!role) return message.channel.send(`Aucun rôle trouvé pour `${args[1] || "rien"}``)
 
                 await member.roles.remove(role.id, `Rôle retiré par ${message.author.tag}`);
 
                 message.channel.send(`1 rôle retiré à 1 membre`)
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
-                    .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRôle retiré : ${role}`)
+                    .setDescription(`➖ <@${message.author.id}> a utilisé la commande `delrole` sur ${member}
+Rôle retiré : ${role}`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
                 const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))

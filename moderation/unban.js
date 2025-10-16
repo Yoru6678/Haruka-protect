@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const config = require('../config');
 
 
@@ -34,10 +34,11 @@ module.exports = {
                 const channellogs = config.bot.channellogs; 
                 const logchannel = client.channels.cache.get(channellogs);
                 if (logchannel) {
-                    const alert = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                    const alert = new (require("discord.js").EmbedBuilder)()
                         .setColor("#6495ED")
                         .setTitle(`${message.author.tag} a débanni tous les membres`)
-                        .setDescription(`Tous les membres bannis ont été débannis\nExécuteur : <@${message.author.id}>`)
+                        .setDescription(`Tous les membres bannis ont été débannis
+Exécuteur : <@${message.author.id}>`)
                         .setTimestamp();
                     logchannel.send({ embeds: [alert] }).catch(() => false);
                 }
@@ -60,10 +61,11 @@ module.exports = {
                 const channellogs = config.bot.channellogs; 
                 const logchannel = client.channels.cache.get(channellogs);
                 if (logchannel) {
-                    const alert = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                    const alert = new (require("discord.js").EmbedBuilder)()
                         .setColor("#6495ED")
                         .setTitle(`${message.author.tag} a débanni un membre`)
-                        .setDescription(`<@${user}> a été débanni\nExécuteur : <@${message.author.id}>`)
+                        .setDescription(`<@${user}> a été débanni
+Exécuteur : <@${message.author.id}>`)
                         .setTimestamp();
                     logchannel.send({ embeds: [alert] }).catch(() => false);
                 }

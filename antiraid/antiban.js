@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -11,7 +11,7 @@ const ab = db.table("Antiban")
 module.exports = {
     name: 'antiban',
     usage: 'antiban',
-    description: `Permet de configurer l'antiraid.`,
+    description: `Permet de configuréer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -21,14 +21,14 @@ module.exports = {
 
             if (args[0] == 'on') {
                 ab.set(`config.${message.guild.id}.antiban`, true)
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiban** est maintenant **activé**`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`**L'antiban** est maintenant **activéé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 ab.set(`config.${message.guild.id}.antiban`, false)
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiban** est maintenant **désactivé**`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`**L'antiban** est maintenant **désactivéé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

@@ -1,4 +1,4 @@
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const db = require("../db.js");
 const config = require("../config");
 
@@ -11,7 +11,7 @@ const cl = db.table("Color");
 module.exports = {
     name: 'unlock',
     usage: 'unlock',
-    description: 'Déverrouille le salon actuel',
+    description: 'Déverrouillée le salon actuel',
     async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
@@ -24,12 +24,12 @@ module.exports = {
             message.channel.permissionOverwrites.edit(message.guild.id, {
                 SendMessages: null
             }).then(() => {
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription("🔓 Salon déverrouillé")
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription("🔓 Salon déverrouilléé")
                     .setColor(color);
                 message.channel.send({ embeds: [embed] });
             }).catch(() => {
-                message.reply("Impossible de déverrouiller ce salon");
+                message.reply("Impossible de déverrouilléer ce salon");
             });
         }
     }

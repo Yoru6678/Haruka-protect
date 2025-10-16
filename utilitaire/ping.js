@@ -13,7 +13,7 @@ module.exports = {
     async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
-        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .addField('BOT', `${client.ws.ping} ms`, true)
             .setColor(color);
 

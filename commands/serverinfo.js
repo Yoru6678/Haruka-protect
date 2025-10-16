@@ -16,7 +16,8 @@ module.exports = {
                 { name: "🆔 ID", value: guild.id, inline: true },
                 { name: "📅 Créé le", value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:R>`, inline: true },
                 { name: "👥 Membres", value: `${guild.memberCount} membres`, inline: true },
-                { name: "📊 Statistiques", value: `${guild.channels.cache.size} salons\\n${guild.roles.cache.size} rôles`, inline: true },
+                { name: "📊 Statistiques", value: `${guild.channels.cache.size} salons\
+${guild.roles.cache.size} rôles`, inline: true },
                 { name: "🔐 Niveau de vérification", value: `${guild.verificationLevel}`, inline: true }
             )
             .setFooter({ text: `Haruka Protect • ${guild.name}`, iconURL: guild.iconURL() })

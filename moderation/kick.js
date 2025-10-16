@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = require("discord.js");
 const config = require("../config");
 
 const owner = db.table("Owner");
@@ -27,8 +27,9 @@ module.exports = {
             const reason = args.slice(1).join(" ") || "Aucune raison fournie";
 
             member.kick(reason).then(() => {
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`✅ ${member.user.tag} a été expulsé\nRaison: ${reason}`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`✅ ${member.user.tag} a été expulsé
+Raison: ${reason}`)
                     .setColor(color);
                 message.channel.send({ embeds: [embed] });
             }).catch(() => {

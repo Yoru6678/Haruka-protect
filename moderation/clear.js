@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const config = require("../config")
@@ -50,9 +50,9 @@ module.exports = {
                 let color = await cl.get(`color_${message.guild.id}`)
                 if (color == null) color = config.bot.couleur
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
-                    .setDescription(`<@${message.author.id}> a \`supprimé\` ${args[0]} message(s) dans <#${message.channel.id}>`)
+                    .setDescription(`<@${message.author.id}> a `supprimé` ${args[0]} message(s) dans <#${message.channel.id}>`)
                     .setTimestamp()
                     .setFooter({ text: `📚` })
                 const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))

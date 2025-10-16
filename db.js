@@ -15,7 +15,7 @@ class SimpleDB {
                 this.data = JSON.parse(content);
             }
         } catch (error) {
-            console.log('❌ Erreur chargement DB:', error.message);
+            console.log('❌ Erreur chargéement DB:', error.message);
             this.data = {};
         }
     }

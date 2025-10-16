@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -13,7 +13,7 @@ const aru = db.table("antiroleupdate")
 module.exports = {
     name: 'antirôle',
     usage: 'antirôle',
-    description: `Permet de configurer l'antirôle.`,
+    description: `Permet de configuréer l'antirôle.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -26,8 +26,8 @@ module.exports = {
                 atr.set(`config.${message.guild.id}.antirolecreate`, true)
                 ard.set(`config.${message.guild.id}.antiroledelete`, true)
                 ard.set(`config.${message.guild.id}.antiroledelete`, true)
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antirôle** est maintenant **activé**`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`**L'antirôle** est maintenant **activéé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             }
@@ -37,8 +37,8 @@ module.exports = {
                 atr.set(`config.${message.guild.id}.antirolecreate`, false)
                 ard.set(`config.${message.guild.id}.antiroledelete`, false)
                 ard.set(`config.${message.guild.id}.antiroledelete`, false)
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antirôle** est maintenant **désactivé**`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`**L'antirôle** est maintenant **désactivéé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             }
@@ -48,8 +48,8 @@ module.exports = {
                 if (args[1] == 'on') {
 
                     atr.set(`config.${message.guild.id}.antirolecreate`, true)
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antirôle create** est maintenant **activé**`)
+                    const embed = new (require("discord.js").EmbedBuilder)()
+                        .setDescription(`**L'antirôle create** est maintenant **activéé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -57,8 +57,8 @@ module.exports = {
                 else if (args[1] == 'off') {
 
                     atr.set(`config.${message.guild.id}.antirolecreate`, false)
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antirôle create** est maintenant **désactivé**`)
+                    const embed = new (require("discord.js").EmbedBuilder)()
+                        .setDescription(`**L'antirôle create** est maintenant **désactivéé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -68,8 +68,8 @@ module.exports = {
                 if (args[1] == 'on') {
 
                     ard.set(`config.${message.guild.id}.antiroledelete`, true)
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antirôle Delete** est maintenant **activé**`)
+                    const embed = new (require("discord.js").EmbedBuilder)()
+                        .setDescription(`**L'antirôle Delete** est maintenant **activéé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -77,8 +77,8 @@ module.exports = {
                 else if (args[1] == 'off') {
 
                     ard.set(`config.${message.guild.id}.antiroledelete`, false)
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antirôle Delete** est maintenant **désactivé**`)
+                    const embed = new (require("discord.js").EmbedBuilder)()
+                        .setDescription(`**L'antirôle Delete** est maintenant **désactivéé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -87,8 +87,8 @@ module.exports = {
                 if (args[1] == 'on') {
 
                     aru.set(`config.${message.guild.id}.antiroleupdate`, true)
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antirôle Update** est maintenant **activé**`)
+                    const embed = new (require("discord.js").EmbedBuilder)()
+                        .setDescription(`**L'antirôle Update** est maintenant **activéé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -96,8 +96,8 @@ module.exports = {
                 else if (args[1] == 'off') {
 
                     aru.set(`config.${message.guild.id}.antiroleupdate`, false)
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antirôle Update** est maintenant **désactivé**`)
+                    const embed = new (require("discord.js").EmbedBuilder)()
+                        .setDescription(`**L'antirôle Update** est maintenant **désactivéé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }

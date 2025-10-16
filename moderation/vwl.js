@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const wl = db.table("Whitelist")
@@ -26,13 +26,13 @@ module.exports = {
                 if (args[0]) {
                     member = client.users.cache.get(args[0]);
                 } else {
-                    return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
+                    return message.channel.send(`Aucun membre trouvé pour `${args[0] || "rien"}``)
 
                 }
                 if (message.mentions.members.first()) {
                     member = client.users.cache.get(message.mentions.members.first().id);
                 }
-                if (!member) return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
+                if (!member) return message.channel.send(`Aucun membre trouvé pour `${args[0] || "rien"}``)
                 if (wl.get(`${message.guild.id}.${member.id}.vl`) === true) { return message.channel.send(`${member.username} est déjà whitelist vocal.`) }
                 wl.add(`${message.guild.id}.vlcount`, 1)
                 wl.push(`${message.guild.id}.vl`, member.id)
@@ -50,10 +50,11 @@ module.exports = {
                 let p1 = 30;
                 let page = 1;
 
-                let embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                let embed = new (require("discord.js").EmbedBuilder)()
                 embed.setTitle("Whitelist Vocal")
                     .setColor(color)
-                    .setDescription(!own ? "Aucun" : own.map((user, i) => `<@${user}>`).slice(0, 30).join("\n")
+                    .setDescription(!own ? "Aucun" : own.map((user, i) => `<@${user}>`).slice(0, 30).join("
+")
                     )
                     .setFooter({ text: `${footer}` })
                 message.channel.send({ embeds: [embed] })

@@ -78,8 +78,10 @@ if (fs.existsSync(path.join(__dirname, 'package-lock.json'))) {
   console.log("❌ ERREUR: Le fichier n'a pas été créé");
 }
 
-console.log("\n📋 MAINTENANT EXÉCUTE CES COMMANDES:");
+console.log("
+📋 MAINTENANT EXÉCUTE CES COMMANDES:");
 console.log("git add package-lock.json");
 console.log("git commit -m 'build: add package-lock.json'");
 console.log("git push");
-console.log("\n🎉 Le build Koyeb va FONCTIONNER!");
+console.log("
+🎉 Le build Koyeb va FONCTIONNER!");

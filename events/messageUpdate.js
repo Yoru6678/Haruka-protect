@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 const { Colors } = require("discord.js/src/util/Constants")
 
 const rlog = db.table("raidlog")
@@ -53,8 +53,8 @@ module.exports = {
                     setTimeout(() => msg.delete(), 6000)
                 })
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${newMessage.author.id}> a envoyé un \`lien\` dans \`${newMessage.channel.name}\`, j'ai supprimé son message`)
+                const embed = new (require("discord.js").EmbedBuilder)()
+                    .setDescription(`<@${newMessage.author.id}> a envoyé un `lien` dans `${newMessage.channel.name}`, j'ai supprimé son message`)
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${newMessage.guild.id}.raidlog`);
 const raidlogChannel = const chan = client.channels.cache.get(raidlogId);
@@ -72,9 +72,10 @@ if (chan) chan.send({ embeds: [embed] }).catch(() => false)
 
         if (!oldMessage.author | !newMessage.author) return
 
-        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setTitle(`📝 Message édité`)
-            .setDescription(`**${oldMessage.author.username}**#${oldMessage.author.discriminator} (\`${oldMessage.author.id}\`) a édité son message dans [\`${oldMessage.channel.name}\`](https://discord.com/channels/${oldMessage.guild.id}/${oldMessage.channel.id}) \n  **Avant**: \`\`\`${oldMessage.content}\`\`\` **Après:** \`\`\`${newMessage.content}\`\`\``)
+            .setDescription(`**${oldMessage.author.username}**#${oldMessage.author.discriminator} (`${oldMessage.author.id}`) a édité son message dans [`${oldMessage.channel.name}`](https://discord.com/channels/${oldMessage.guild.id}/${oldMessage.channel.id}) 
+  **Avant**: ```${oldMessage.content}``` **Après:** ```${newMessage.content}````)
             .setFooter({ text: `🕙 ${getNow().time}` })
             .setColor(color)
 

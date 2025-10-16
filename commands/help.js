@@ -12,22 +12,22 @@ module.exports = {
             .addFields(
                 {
                     name: "🔧 Modération",
-                    value: "\\`+mute\\` \\`+unmute\\` \\`+warn\\` \\`+lock\\` \\`+unlock\\` \\`+ban\\` \\`+kick\\`",
+                    value: "\`+mute\` \`+unmute\` \`+warn\` \`+lock\` \`+unlock\` \`+ban\` \`+kick\`",
                     inline: true
                 },
                 {
                     name: "🛡️ Protection",
-                    value: "\\`+antiraid\\` \\`+antilink\\` \\`+secur\\` \\`+sanction\\` \\`+server lock\\`",
+                    value: "\`+antiraid\` \`+antilink\` \`+secur\` \`+sanction\` \`+server lock\`",
                     inline: true
                 },
                 {
                     name: "ℹ️ Informations",
-                    value: "\\`+serverinfo\\` \\`+userinfo\\` \\`+botinfo\\` \\`+avatar\\`",
+                    value: "\`+serverinfo\` \`+userinfo\` \`+botinfo\` \`+avatar\`",
                     inline: true
                 },
                 {
                     name: "🎫 Utilitaires",
-                    value: "\\`+ticket\\` \\`+ping\\` \\`+help\\` \\`+dmdban\\`",
+                    value: "\`+ticket\` \`+ping\` \`+help\` \`+dmdban\`",
                     inline: true
                 }
             )

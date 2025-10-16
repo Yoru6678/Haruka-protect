@@ -45,7 +45,8 @@ module.exports = {
             } catch (err) {
                 console.error(err);
                 message
-                    .reply("Je n'ai pas pu désactiver le son de cet utilisateur, veuillez vérifier mes permissions et réessayer.\n" + err)
+                    .reply("Je n'ai pas pu désactivéer le son de cet utilisateur, veuillez vérifier mes permissions et réessayer.
+" + err)
             }
 
             try {
@@ -64,9 +65,10 @@ module.exports = {
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
-                .setDescription(`<@${message.author.id}> a \`voicemute\` ${muteUser}\nRaison: ${muteReason}`)
+                .setDescription(`<@${message.author.id}> a `voicemute` ${muteUser}
+Raison: ${muteReason}`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
             const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))

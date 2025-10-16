@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const cl = db.table("Color")
 const fs = require('fs')
@@ -21,22 +21,22 @@ module.exports = {
         let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.bot.couleur
 
-        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setColor(color)
             .setDescription(`
-**\`antiadmin | Owner\`**
-**\`antiban | Owner\`**
-**\`antiupdate | Owner\`**
-**\`antibot | Owner\`**
-**\`antilink | Owner | Wl\`**
-**\`antieveryone | Owner | Wl\`**
-**\`antichannel create | Owner | Wl\`**
-**\`antichannel delete | Owner\`**
-**\`antichannel update | Owner\`**
-**\`antirôle create | Owner\`**
-**\`antirôle delete | Owner\`**
-**\`antirôle update | Owner\`**
-**\`antiwebhook | Owner\`**
+**`antiadmin | Owner`**
+**`antiban | Owner`**
+**`antiupdate | Owner`**
+**`antibot | Owner`**
+**`antilink | Owner | Wl`**
+**`antieveryone | Owner | Wl`**
+**`antichannel create | Owner | Wl`**
+**`antichannel delete | Owner`**
+**`antichannel update | Owner`**
+**`antirôle create | Owner`**
+**`antirôle delete | Owner`**
+**`antirôle update | Owner`**
+**`antiwebhook | Owner`**
 `)
 
         message.channel.send({ embeds: [embed] });

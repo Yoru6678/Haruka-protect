@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("../utils/embedBuilder");
-const { PermissionsBitField } = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const { PermissionsBitField } = require("discord.js");
 const { isAuthorized } = require("../security");
 const Logger = require("../utils/logger");
 
@@ -9,7 +9,7 @@ module.exports = {
     async execute(message, args) {
         if (!isAuthorized(message) || !message.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
             return message.reply({ 
-                embeds: [EmbedBuilder.error("Permission refusée. Vous devez être autorisé et avoir la permission de modérer les membres.")]
+                embeds: [EmbedBuilder.error("Permission refusée. Vous devez être autoriséé et avoir la permission de modérer les membres.")]
             });
         }
 
@@ -18,7 +18,8 @@ module.exports = {
         
         if (!member || isNaN(duration) || duration < 1) {
             return message.reply({ 
-                embeds: [EmbedBuilder.error("Usage : +mute @membre durée(en minutes)\nExemple: +mute @user 30")]
+                embeds: [EmbedBuilder.error("Usage : +mute @membre durée(en minutes)
+Exemple: +mute @user 30")]
             });
         }
 

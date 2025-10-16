@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -31,9 +31,9 @@ module.exports = {
                 message.delete();
             }
 
-            const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(ecolor)
-                .setDescription(`<@${message.author.id}> a utilisé la commande \`hide\` le salon <#${message.channel.id}>`)
+                .setDescription(`<@${message.author.id}> a utilisé la commande `hide` le salon <#${message.channel.id}>`)
                 .setTimestamp()
                 .setFooter({ text: `📚` })
             const modlog = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));

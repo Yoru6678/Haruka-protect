@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -109,7 +109,7 @@ module.exports = {
                         let salonbvn = `<#${db.get(`salonbvn_${message.guild.id}`)}>`
                         if (salonbvn == "<#null>") salonbvn = "Non configuré"
 
-                        const MenuEmbed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                        const MenuEmbed = new (require("discord.js").EmbedBuilder)()
                             .setTitle('Paramètres de Bienvenue')
                             .setDescription(`__**Choisissez les options lorsqu'un membre rejoindra le serveur**__`)
 
@@ -438,7 +438,7 @@ module.exports = {
 
                     const logs = db.get(`salonbvn_${message.guild.id}`)
 
-                    const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                    const embed = new (require("discord.js").EmbedBuilder)()
                         .setColor(color)
                         .setTitle(`${message.author.tag} a défini ce salon commme salon de bienvenue`)
                         .setDescription(`ℹ️ Ce salon est désormais utilisé pour __toutes__ les **arrivées** du serveur\nExécuteur : <@${message.author.id}>`)

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = module.require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js");
+const Discord = module.require("discord.js");
 
 const cl = db.table("Color")
 const config = require("../config")
@@ -19,7 +19,7 @@ module.exports = {
         const vocal = message.guild.members.cache.filter(m => m.voice.channel).size
         const boost = message.guild.premiumSubscriptionCount || '0'
 
-        const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setTitle(`${message.guild.name} > Statistiques`)
             .setColor(color)
             .setThumbnail(message.guild.iconURL({ dynamic: true }))

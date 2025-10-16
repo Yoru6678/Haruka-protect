@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js").default || require("discord.js").default || require("discord.js").default || require("discord.js")
+const Discord = require("discord.js")
 
 const config = require("../config")
 const owner = db.table("Owner")
@@ -28,13 +28,13 @@ module.exports = {
                 if (args[0]) {
                     member = client.users.cache.get(args[0]);
                 } else {
-                    return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
+                    return message.channel.send(`Aucun membre trouvé pour `${args[0] || "rien"}``)
 
                 }
                 if (message.mentions.members.first()) {
                     member = client.users.cache.get(message.mentions.members.first().id);
                 }
-                if (!member) return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
+                if (!member) return message.channel.send(`Aucun membre trouvé pour `${args[0] || "rien"}``)
                 if (blv.get(`${message.guild.id}.${member.id}.blv`) === null) { return message.channel.send(`${member.username} n'est pas dans la blacklist vocal.`) }
                 blv.subtract(`${message.guild.id}.blvcount`, 1)
                 blv.delete(`${message.guild.id}.${member.id}.blv`, member.id)

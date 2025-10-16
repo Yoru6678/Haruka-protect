@@ -16,7 +16,7 @@ module.exports = {
             if (audit && audit.executor && audit.executor.id !== client.user.id) {
                 member.kick("AntiBot").catch(() => false);
                 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${audit.executor.id}> a ajouté un bot (${member.user.tag}), je l'ai expulsé`)
                     .setTimestamp()
                     .setColor(config.bot.couleur);
@@ -28,7 +28,7 @@ module.exports = {
         }
 
         if (lock.get(`serverlock_${member.guild.id}`) === "lock") {
-            member.kick("Serveur verrouillé").catch(() => false);
+            member.kick("Serveur verrouilléé").catch(() => false);
         }
     }
 };

@@ -5,7 +5,6 @@ const config = require('./config');
 const { readdirSync } = require("fs");
 const path = require("path");
 const fs = require("fs");
-
 const Logger = require('./utils/logger');
 
 const client = new Client({
@@ -27,21 +26,18 @@ const client = new Client({
         GatewayIntentBits.DirectMessageTyping,
         GatewayIntentBits.MessageContent
     ],
-    restTimeOffset: 0,
     partials: [Partials.User, Partials.Channel, Partials.GuildMember, Partials.Message, Partials.Reaction]
 });
 
 client.commands = new Collection();
 
-// Fonction pour charger les commandes
+// Chargement des commandes
 function loadCommands(directory) {
     const dirPath = path.join(__dirname, directory);
-    if (!fs.existsSync(dirPath)) {
-        console.log(`⚠️  Dossier ${directory} introuvable`);
-        return;
-    }
+    if (!fs.existsSync(dirPath)) return;
     
     const files = readdirSync(dirPath).filter(file => file.endsWith('.js'));
+    
     for (const file of files) {
         try {
             const commandPath = path.join(dirPath, file);
@@ -50,55 +46,39 @@ function loadCommands(directory) {
             
             if (command.name && typeof command.execute === 'function') {
                 client.commands.set(command.name, command);
-                console.log(`✅ Commande chargée: ${command.name} (${directory}/${file})`);
-            } else {
-                console.log(`⚠️  Commande invalide: ${directory}/${file}`);
+                console.log(`   ✅ ${command.name}`);
             }
         } catch (error) {
-            console.error(`❌ Erreur chargement: ${directory}/${file} - ${error.message}`);
+            console.error(`   ❌ ${file}: ${error.message}`);
         }
     }
 }
 
-console.log('\\n🛡️  Chargement des commandes...');
-
-// Charger toutes les commandes de tous les dossiers
+console.log('
+📦 Chargement des commandes...');
 const commandFolders = ['commands', 'moderation', 'parametre', 'gestion', 'utilitaire', 'logs', 'antiraid'];
-commandFolders.forEach(folder => {
-    loadCommands(folder);
-});
+commandFolders.forEach(folder => loadCommands(folder));
+console.log(`
+✅ ${client.commands.size} commandes chargééées
+`);
 
-console.log(`\\n📊 Total des commandes chargées: ${client.commands.size}`);
-
-// Gestion des commandes avec préfixe
+// Gestion des messages
 client.on('messageCreate', async (message) => {
-    if (message.author.bot) return;
-    if (!message.guild) return;
+    if (message.author.bot || !message.guild) return;
     
     const prefix = config.bot.prefixe;
-    
     if (!message.content.startsWith(prefix)) return;
     
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
     
-    const command = client.commands.get(commandName);
-    if (!command) {
-        // Vérifier les alias
-        const aliasCommand = Array.from(client.commands.values()).find(cmd => 
-            cmd.aliases && cmd.aliases.includes(commandName)
-        );
-        if (!aliasCommand) return;
-        
-        console.log(`🔍 Alias trouvé: ${commandName} -> ${aliasCommand.name}`);
-        await executeCommand(aliasCommand, message, args);
-        return;
-    }
+    const command = client.commands.get(commandName) || 
+                   Array.from(client.commands.values()).find(cmd => 
+                       cmd.aliases && cmd.aliases.includes(commandName)
+                   );
     
-    await executeCommand(command, message, args);
-});
-
-async function executeCommand(command, message, args) {
+    if (!command) return;
+    
     try {
         await command.execute(message, args, client);
         Logger.log(`COMMANDE: ${command.name}`, message.author.tag, message.guild.name, `Args: ${args.join(' ')}`);
@@ -107,22 +87,22 @@ async function executeCommand(command, message, args) {
         Logger.error(error, `Commande: ${command.name}`);
         
         try {
-            await message.reply('❌ Une erreur est survenue lors de l\\\'exécution de cette commande.');
-        } catch (replyError) {
-            console.error('Impossible de répondre à la commande:', replyError);
+            await message.reply('❌ Une erreur est survenue.');
+        } catch (e) {
+            console.error('Impossible de répondre:', e);
         }
     }
-}
+});
 
-// Gestion des interactions (boutons, menus)
+// Gestion des interactions
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isButton() && !interaction.isStringSelectMenu()) return;
     
     try {
-        // Rechercher le gestionnaire d'interactions dans les events
         const eventsPath = path.join(__dirname, 'events');
         if (fs.existsSync(eventsPath)) {
             const eventFiles = readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+            
             for (const file of eventFiles) {
                 try {
                     const event = require(path.join(eventsPath, file));
@@ -130,7 +110,7 @@ client.on('interactionCreate', async (interaction) => {
                         await event.execute(client, interaction);
                     }
                 } catch (error) {
-                    console.error(`❌ Erreur event: ${file} - ${error.message}`);
+                    console.error(`❌ Event ${file}:`, error.message);
                 }
             }
         }
@@ -140,47 +120,51 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // Gestion des erreurs
-process.on("unhandledRejection", (reason, p) => {
+process.on("unhandledRejection", (reason) => {
+    console.error('❌ Unhandled Rejection:', reason);
     Logger.error(reason, "Unhandled Rejection");
 });
 
-process.on("uncaughtException", (err, origin) => {
+process.on("uncaughtException", (err) => {
+    console.error('❌ Uncaught Exception:', err);
     Logger.error(err, "Uncaught Exception");
 });
 
-// Événement ready
+// Ready
 client.once('ready', () => {
-    console.log(`\\n🎉 Connecté en tant que ${client.user.tag}!`);
-    console.log(`📊 Servant ${client.guilds.cache.size} serveurs`);
-    console.log(`👥 Surveillant ${client.users.cache.size} utilisateurs`);
-    console.log(`🛡️  ${client.commands.size} commandes chargées`);
-    console.log(`🛡️  Haruka Protect est opérationnel!\\n`);
+    console.log(`
+✅ Connecté: ${client.user.tag}`);
+    console.log(`📊 ${client.guilds.cache.size} serveurs`);
+    console.log(`👥 ${client.users.cache.size} utilisateurs`);
+    console.log(`⚡ ${client.commands.size} commandes
+`);
     
-    client.user.setActivity('+help | Protection', { type: 3 }); // WATCHING
+    client.user.setActivity('+help | Protection', { type: 3 });
 });
 
-// Serveur HTTP pour Koyeb health check
+// Health check pour Koyeb
 const http = require('http');
 const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('🛡️ Haruka Protect - Bot en ligne');
+    res.end('✅ Haruka Protect - En ligne');
 });
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
-    console.log(`✅ Serveur HTTP démarré sur le port ${PORT}`);
+    console.log(`🌐 Serveur HTTP: ${PORT}
+`);
 });
 
-// Connexion du bot
+// Connexion
 if (!process.env.TOKEN) {
-    console.error('❌ ERREUR: Token Discord non trouvé');
-    console.log('💡 Assure-toi d\'avoir configuré la variable TOKEN sur Koyeb');
+    console.error('❌ Token Discord manquant!');
+    console.log('Configure TOKEN sur Koyeb');
     process.exit(1);
 }
 
 client.login(process.env.TOKEN)
-    .then(() => console.log('\\n🔗 Connexion à Discord...'))
+    .then(() => console.log('🔐 Connexion...'))
     .catch(err => {
-        console.error('❌ Erreur de connexion:', err.message);
+        console.error('❌ Erreur:', err.message);
         process.exit(1);
     });

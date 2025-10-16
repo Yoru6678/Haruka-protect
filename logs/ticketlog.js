@@ -30,7 +30,7 @@ module.exports = {
 
                 const logs = ticketlog.get(`${message.guild.id}.ticketlog`)
 
-                const embed = new (require("discord.js").default || require("discord.js").EmbedBuilder)()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setTitle(`${message.author.tag} a défini ce salon commme salon des logs tickets`)
                     .setDescription(`✉️ | Ce salon est désormais utilisé pour __toutes__ les **logs tickets** du serveur\nExécuteur : <@${message.author.id}>`)

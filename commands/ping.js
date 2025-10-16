@@ -6,7 +6,9 @@ module.exports = {
         const latency = Date.now() - message.createdTimestamp;
         const apiLatency = Math.round(message.client.ws.ping);
         
-        const embed = EmbedBuilder.info(`🏓 Pong !\n📡 Latence: ${latency}ms\n🔧 API: ${apiLatency}ms`);
+        const embed = EmbedBuilder.info(`🏓 Pong !
+📡 Latence: ${latency}ms
+🔧 API: ${apiLatency}ms`);
         message.channel.send({ embeds: [embed] });
     }
 };

@@ -1,11 +1,9 @@
 name: harukaprotect
 build:
   type: nodejs
-  command: |
-    export NODE_ENV=development
-    npm install --production=false
+  buildCommand: npm install
 run:
-  command: npm start
+  command: node index.js
 env:
   - name: NODE_ENV
     value: production
