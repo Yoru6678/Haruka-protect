@@ -1,65 +1,45 @@
-const db = require("./db.js");
+const db = require('./db');
 
 class ServerConfig {
     constructor(guildId) {
         this.guildId = guildId;
-        this.configTable = db.table(`ServerConfig_${guildId}`);
+        this.table = db.table('ServerConfig');
     }
     
-    async get(key, defaultValue = null) {
-        return await this.configTable.get(key) || defaultValue;
+    async get(key) {
+        return this.table.get(`${this.guildId}.${key}`);
     }
     
     async set(key, value) {
-        return await this.configTable.set(key, value);
-    }
-    
-    async delete(key) {
-        return await this.configTable.delete(key);
-    }
-    
-    async setupDefaultConfig() {
-        const defaultConfig = {
-            prefix: '+',
-            modRole: null,
-            adminRole: null,
-            logChannel: null,
-            welcomeChannel: null,
-            autoMod: {
-                antiLink: false,
-                antiSpam: false,
-                antiMassMention: false,
-                maxWarnings: 3
-            },
-            moderation: {
-                muteRole: null,
-                tempMuteMax: 1440
-            },
-            tickets: {
-                category: null,
-                supportRole: null
-            }
-        };
-        
-        for (const [key, value] of Object.entries(defaultConfig)) {
-            if (!await this.get(key)) {
-                await this.set(key, value);
-            }
-        }
-        
-        return defaultConfig;
+        return this.table.set(`${this.guildId}.${key}`, value);
     }
     
     async getAll() {
-        const allData = await this.configTable.all();
-        const config = {};
+        const allData = this.table.all();
+        const guildData = {};
         
-        for (const { id, value } of allData) {
-            const key = id.replace(`${this.guildId}.`, '');
-            config[key] = value;
-        }
+        allData.forEach(item => {
+            if (item.id.startsWith(this.guildId)) {
+                const key = item.id.replace(`${this.guildId}.`, '');
+                guildData[key] = item.value;
+            }
+        });
         
-        return config;
+        return guildData;
+    }
+    
+    async setupDefaultConfig() {
+        const current = await this.getAll();
+        
+        if (!current.prefix) await this.set('prefix', '+');
+        if (!current.logChannel) await this.set('logChannel', null);
+        if (!current.autoMod) await this.set('autoMod', {
+            antiLink: false,
+            antiSpam: false,
+            antiInvite: false
+        });
+        
+        return this.getAll();
     }
 }
 

@@ -1,34 +1,24 @@
-const { EmbedBuilder } = require("discord.js");
-const config = require("../config");
+const { EmbedBuilder } = require('discord.js');
 
 class CustomEmbedBuilder {
-    static success(desc) {
+    static success(message) {
         return new EmbedBuilder()
-            .setDescription("✅ " + desc)
-            .setColor("#00ff00")
-            .setTimestamp();
+            .setDescription(`✅ ${message}`)
+            .setColor('#00ff00');
     }
     
-    static error(desc) {
+    static error(message) {
         return new EmbedBuilder()
-            .setDescription("❌ " + desc)
-            .setColor("#ff0000")
-            .setTimestamp();
+            .setDescription(`❌ ${message}`)
+            .setColor('#ff0000');
     }
     
-    static warn(desc) {
+    static info(message) {
         return new EmbedBuilder()
-            .setDescription("⚠️ " + desc)
-            .setColor("#ffa500")
-            .setTimestamp();
-    }
-    
-    static info(desc) {
-        return new EmbedBuilder()
-            .setDescription("ℹ️ " + desc)
-            .setColor(config.bot.couleur)
-            .setTimestamp();
+            .setDescription(`ℹ️ ${message}`)
+            .setColor('#36adfa');
     }
 }
 
 module.exports = CustomEmbedBuilder;
+module.exports.EmbedBuilder = EmbedBuilder;

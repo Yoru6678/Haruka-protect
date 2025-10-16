@@ -6,7 +6,8 @@
   "main": "start.js",
   "scripts": {
     "start": "node start.js",
-    "dev": "nodemon start.js"
+    "dev": "nodemon start.js",
+    "build": "node create-lock.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",

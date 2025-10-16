@@ -11,6 +11,6 @@ module.exports = {
     return wl.get(`${message.guild.id}.${message.author.id}.wl`);
   },
   isAuthorized(message) {
-    return this.checkOwner(message) || this.checkWhitelist(message);
+    return this.checkOwner(message) || this.checkWhitelist(message) || message.member.permissions.has('Administrator');
   }
 };

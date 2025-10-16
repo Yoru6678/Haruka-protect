@@ -5,31 +5,44 @@ const moment = require('moment');
 class Logger {
     static log(action, user, guild, details = '') {
         const timestamp = moment().format('YYYY-MM-DD HH:mm:ss');
-        const logEntry = `[${timestamp}] ${action} | User: ${user} | Serveur: ${guild} | Détails: ${details}\n`;
+        const logMessage = `[${timestamp}] ${action} | User: ${user} | Guild: ${guild} | ${details}\n`;
         
-        console.log(`📝 ${logEntry.trim()}`);
+        console.log(logMessage.trim());
         
-        const logFile = path.join(__dirname, '../logs', `${moment().format('YYYY-MM-DD')}.log`);
-        fs.appendFileSync(logFile, logEntry);
+        // Écrire dans le fichier de log
+        const logDir = path.join(__dirname, '..', 'logs');
+        if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+        
+        const logFile = path.join(logDir, `${moment().format('YYYY-MM-DD')}.log`);
+        fs.appendFileSync(logFile, logMessage);
     }
     
     static error(error, context = '') {
         const timestamp = moment().format('YYYY-MM-DD HH:mm:ss');
-        const logEntry = `[${timestamp}] ❌ ERREUR | Contexte: ${context} | Error: ${error.message}\n`;
+        const errorMessage = `[${timestamp}] ERROR | Context: ${context} | Message: ${error.message} | Stack: ${error.stack}\n`;
         
-        console.error(`❌ ${logEntry.trim()}`);
+        console.error(errorMessage.trim());
         
-        const logFile = path.join(__dirname, '../logs', `errors-${moment().format('YYYY-MM-DD')}.log`);
-        fs.appendFileSync(logFile, logEntry);
+        // Écrire dans le fichier d'erreurs
+        const logDir = path.join(__dirname, '..', 'logs');
+        if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+        
+        const errorFile = path.join(logDir, `errors-${moment().format('YYYY-MM-DD')}.log`);
+        fs.appendFileSync(errorFile, errorMessage);
     }
     
-    static moderation(action, moderator, target, reason = 'Aucune raison') {
-        this.log(
-            `🛡️ MODERATION: ${action}`,
-            moderator.tag,
-            moderator.guild?.name || 'Unknown',
-            `Cible: ${target.tag} | Raison: ${reason}`
-        );
+    static moderation(action, moderator, target, reason = '') {
+        const timestamp = moment().format('YYYY-MM-DD HH:mm:ss');
+        const modMessage = `[${timestamp}] MODERATION | Action: ${action} | Mod: ${moderator.tag} (${moderator.id}) | Target: ${target.tag} (${target.id}) | Reason: ${reason}\n`;
+        
+        console.log(modMessage.trim());
+        
+        // Écrire dans le fichier de modération
+        const logDir = path.join(__dirname, '..', 'logs');
+        if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+        
+        const modFile = path.join(logDir, `moderation-${moment().format('YYYY-MM-DD')}.log`);
+        fs.appendFileSync(modFile, modMessage);
     }
 }
 

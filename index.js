@@ -1,6 +1,5 @@
 const db = require("./db.js");
 require("dotenv").config();
-const db = require('./db.js');
 const { Client, GatewayIntentBits, Collection, Partials, ComponentType } = require('discord.js');
 const config = require('./config');
 const { readdirSync } = require("fs");
