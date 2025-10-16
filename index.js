@@ -54,13 +54,10 @@ function loadCommands(directory) {
     }
 }
 
-console.log('
-📦 Chargement des commandes...');
+console.log('\n📦 Chargement des commandes...');
 const commandFolders = ['commands', 'moderation', 'parametre', 'gestion', 'utilitaire', 'logs', 'antiraid'];
 commandFolders.forEach(folder => loadCommands(folder));
-console.log(`
-✅ ${client.commands.size} commandes chargééées
-`);
+console.log(`\n✅ ${client.commands.size} commandes chargées\n`);
 
 // Gestion des messages
 client.on('messageCreate', async (message) => {
@@ -132,12 +129,10 @@ process.on("uncaughtException", (err) => {
 
 // Ready
 client.once('ready', () => {
-    console.log(`
-✅ Connecté: ${client.user.tag}`);
+    console.log(`\n✅ Connecté: ${client.user.tag}`);
     console.log(`📊 ${client.guilds.cache.size} serveurs`);
     console.log(`👥 ${client.users.cache.size} utilisateurs`);
-    console.log(`⚡ ${client.commands.size} commandes
-`);
+    console.log(`⚡ ${client.commands.size} commandes\n`);
     
     client.user.setActivity('+help | Protection', { type: 3 });
 });
@@ -151,8 +146,7 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
-    console.log(`🌐 Serveur HTTP: ${PORT}
-`);
+    console.log(`🌐 Serveur HTTP: ${PORT}\n`);
 });
 
 // Connexion
