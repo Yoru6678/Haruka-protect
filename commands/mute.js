@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("../utils/embedBuilder");
-const { PermissionsBitField } = require("discord.js");
+const { PermissionsBitField } = require("discord.js").default || require("discord.js");
 const { isAuthorized } = require("../security");
 const Logger = require("../utils/logger");
 

@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 const config = require("../config")
 const footer = config.bot.footer
 
@@ -28,7 +28,7 @@ module.exports = {
     name: 'secur',
     usage: 'secur',
     description: `Permet de configurer les sécuritées sur le serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.bot.couleur
@@ -167,21 +167,21 @@ module.exports = {
 
 
 
-            const secu = new Discord.MessageActionRow()
+            const secu = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('active')
                         .setLabel('Activé')
-                        .setStyle('SUCCESS')
+                        .setStyle('Success')
                 )
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('desactive')
                         .setLabel('Désactivé')
-                        .setStyle('DANGER')
+                        .setStyle('Danger')
                 )
 
-            const panel = new Discord.MessageEmbed()
+            const panel = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -204,7 +204,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const panelactive = new Discord.MessageEmbed()
+            const panelactive = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -227,7 +227,7 @@ module.exports = {
 
                 .setColor(color)
 
-            const paneldesactive = new Discord.MessageEmbed()
+            const paneldesactive = new (require("discord.js").EmbedBuilder)()
                 .setAuthor({ name: `Panel Antiraid` })
                 .setDescription(`
 
@@ -250,8 +250,8 @@ module.exports = {
 
                 .setColor(color)
 
-            const panelselect = new Discord.MessageActionRow().addComponents(
-                new Discord.MessageSelectMenu()
+            const panelselect = new Discord.ActionRowBuilder().addComponents(
+                new Discord.StringSelectMenuBuilder()
                     .setCustomId('Funny')
                     .setPlaceholder(`Configurer un module`)
                     .addOptions([
@@ -328,12 +328,12 @@ module.exports = {
             message.channel.send({ embeds: [panel], components: [secu, panelselect] }).then(async msg => {
 
                 //anti channel create
-                const antichannelembed = new Discord.MessageEmbed()
+                const antichannelembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel create__**`)
                     .setColor(color)
 
-                const antichannelrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antichannelrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -355,12 +355,12 @@ module.exports = {
                         ])
                 )
                 //anti channel delete
-                const antichanneldembed = new Discord.MessageEmbed()
+                const antichanneldembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel delete__**`)
                     .setColor(color)
 
-                const antichannedlrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antichannedlrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -382,12 +382,12 @@ module.exports = {
                         ])
                 )
                 //anti channel update
-                const antichanneupdembed = new Discord.MessageEmbed()
+                const antichanneupdembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti channel update__**`)
                     .setColor(color)
 
-                const antichanneduprow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antichanneduprow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -409,12 +409,12 @@ module.exports = {
                         ])
                 )
                 //anti Role create
-                const antirolecreateembed = new Discord.MessageEmbed()
+                const antirolecreateembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle create__**`)
                     .setColor(color)
 
-                const antirolecreaterow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antirolecreaterow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -436,12 +436,12 @@ module.exports = {
                         ])
                 )
                 //anti rôle delete
-                const antiroledeleteembed = new Discord.MessageEmbed()
+                const antiroledeleteembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle delete__**`)
                     .setColor(color)
 
-                const antiroledeleterow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antiroledeleterow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -463,12 +463,12 @@ module.exports = {
                         ])
                 )
                 //anti rôle update
-                const antiroleupembed = new Discord.MessageEmbed()
+                const antiroleupembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti rôle update__**`)
                     .setColor(color)
 
-                const antiroleuprow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antiroleuprow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -490,12 +490,12 @@ module.exports = {
                         ])
                 )
                 //anti Link
-                const antilinkembed = new Discord.MessageEmbed()
+                const antilinkembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'antilink__**`)
                     .setColor(color)
 
-                const antilinkrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antilinkrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -518,12 +518,12 @@ module.exports = {
                 )
 
                 //anti wb
-                const antiwbembed = new Discord.MessageEmbed()
+                const antiwbembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de __l'anti WebHook__**`)
                     .setColor(color)
 
-                const antiwbrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antiwbrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer`)
                         .addOptions([
@@ -545,12 +545,12 @@ module.exports = {
                         ])
                 )
                 //Punition
-                const punishembed = new Discord.MessageEmbed()
+                const punishembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de la __Punition__**`)
                     .setColor(color)
 
-                const punishrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const punishrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer la punition`)
                         .addOptions([
@@ -578,12 +578,12 @@ module.exports = {
                 )
 
                 //Anti update
-                const antiupdateembed = new Discord.MessageEmbed()
+                const antiupdateembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l' __anti update__**`)
                     .setColor(color)
 
-                const antiupdaterow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antiupdaterow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer l'anti update`)
                         .addOptions([
@@ -606,12 +606,12 @@ module.exports = {
                 )
 
                 //Anti Bot
-                const antibotembed = new Discord.MessageEmbed()
+                const antibotembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l'__anti bot__**`)
                     .setColor(color)
 
-                const antibotrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antibotrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer l'anti bot`)
                         .addOptions([
@@ -634,12 +634,12 @@ module.exports = {
                 )
 
                 //Server lock/unlock
-                const lockembed = new Discord.MessageEmbed()
+                const lockembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Autoriser ou refuser __l'accès au serveur__**`)
                     .setColor(color)
 
-                const lockrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const lockrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Accès au serveur`)
                         .addOptions([
@@ -663,12 +663,12 @@ module.exports = {
                 )
 
                 //Anti Ban
-                const antibanembed = new Discord.MessageEmbed()
+                const antibanembed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`**Configuration de l'__antiban__**`)
                     .setColor(color)
 
-                const antibanrow = new Discord.MessageActionRow().addComponents(
-                    new Discord.MessageSelectMenu()
+                const antibanrow = new Discord.ActionRowBuilder().addComponents(
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
                         .setPlaceholder(`Configurer l'anti bot`)
                         .addOptions([
@@ -692,250 +692,7 @@ module.exports = {
 
 
                 const collectorX = message.channel.createMessageComponentCollector({
-                    componentType: "SELECT_MENU",
-                    filter: (i => i.user.id === message.author.id)
-                });
-
-
-                collectorX.on("collect", async (f) => {
-                    f.deferUpdate().catch(() => false)
-                    const value = f.values[0];
-                    //retour
-                    if (value === "retour") {
-
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "acc") {
-
-                        msg.edit({ embeds: [antichannelembed], components: [antichannelrow] })
-                    }
-
-                    if (value === "accon") {
-
-                        atc.set(`config.${message.guild.id}.antichannelcreate`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect, secu] })
-                    }
-
-                    if (value === "accoff") {
-
-                        atc.set(`config.${message.guild.id}.antichannelcreate`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect, secu] })
-                    }
-
-                    if (value === "acd") {
-
-                        msg.edit({ embeds: [antichanneldembed], components: [antichannedlrow] })
-                    }
-
-                    if (value === "acdon") {
-
-                        atd.set(`config.${message.guild.id}.antichanneldelete`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "acdoff") {
-
-                        atd.set(`config.${message.guild.id}.antichanneldelete`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "acu") {
-
-                        msg.edit({ embeds: [antichanneupdembed], components: [antichanneduprow] })
-                    }
-
-                    if (value === "acuon") {
-
-                        acu.set(`config.${message.guild.id}.antichannelupdate`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "acuoff") {
-
-                        acu.set(`config.${message.guild.id}.antichannelupdate`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "arc") {
-
-                        msg.edit({ embeds: [antirolecreateembed], components: [antirolecreaterow] })
-                    }
-
-                    if (value === "arcon") {
-
-                        atr.set(`config.${message.guild.id}.antirolecreate`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "arcoff") {
-
-                        atr.set(`config.${message.guild.id}.antirolecreate`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "ard") {
-
-                        msg.edit({ embeds: [antiroledeleteembed], components: [antiroledeleterow] })
-                    }
-
-                    if (value === "ardon") {
-
-                        ard.set(`config.${message.guild.id}.antiroledelete`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "ardoff") {
-
-                        ard.set(`config.${message.guild.id}.antiroledelete`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "aru") {
-
-                        msg.edit({ embeds: [antiroledeleteembed], components: [antiroledeleterow] })
-                    }
-
-                    if (value === "aruon") {
-
-                        aru.set(`config.${message.guild.id}.antiroleupdate`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "aruoff") {
-
-                        aru.set(`config.${message.guild.id}.antiroleupdate`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "al") {
-
-                        msg.edit({ embeds: [antilinkembed], components: [antilinkrow] })
-                    }
-
-                    if (value === "alon") {
-
-                        al.set(`config.${message.guild.id}.antilink`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "aloff") {
-
-                        al.set(`config.${message.guild.id}.antilink`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "aw") {
-
-                        msg.edit({ embeds: [antiwbembed], components: [antiwbrow] })
-                    }
-
-                    if (value === "awon") {
-
-                        aw.set(`config.${message.guild.id}.antiwebhook`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "awoff") {
-
-                        aw.set(`config.${message.guild.id}.antiwebhook`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "punish") {
-
-                        msg.edit({ embeds: [punishembed], components: [punishrow] })
-                    }
-
-                    if (value === "derank") {
-
-                        punish.set(`sanction_${message.guild.id}`, "derank")
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "kick") {
-
-                        punish.set(`sanction_${message.guild.id}`, "kick")
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "ban") {
-
-                        punish.set(`sanction_${message.guild.id}`, "ban")
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "au") {
-
-                        msg.edit({ embeds: [antiupdateembed], components: [antiupdaterow] })
-                    }
-
-                    if (value === "auon") {
-
-                        agu.set(`guildupdate_${message.guild.id}`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "auoff") {
-
-                        agu.set(`guildupdate_${message.guild.id}`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "ab") {
-
-                        msg.edit({ embeds: [antibotembed], components: [antibotrow] })
-                    }
-
-                    if (value === "atbon") {
-
-                        atb.set(`config.${message.guild.id}.antibot`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "atboff") {
-
-                        atb.set(`config.${message.guild.id}.antibot`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect] })
-                    }
-
-                    if (value === "ass") {
-
-                        msg.edit({ embeds: [lockembed], components: [lockrow] })
-                    }
-
-                    if (value === "asson") {
-
-                        lock.set(`serverlock_${message.guild.id}`, "lock")
-                        await msg.edit({ embeds: [panel], components: [panelselect, secu] })
-                    }
-
-                    if (value === "assoff") {
-
-                        lock.set(`serverlock_${message.guild.id}`, "unlock")
-                        await msg.edit({ embeds: [panel], components: [panelselect, secu] })
-                    }
-
-                    if (value === "aba") {
-
-                        msg.edit({ embeds: [antibanembed], components: [antibanrow] })
-                    }
-
-                    if (value === "abaon") {
-
-                        aba.set(`config.${message.guild.id}.antiban`, true)
-                        msg.edit({ embeds: [panel], components: [panelselect, secu] })
-                    }
-
-                    if (value === "abaoff") {
-
-                        aba.set(`config.${message.guild.id}.antiban`, false)
-                        msg.edit({ embeds: [panel], components: [panelselect, secu] })
-                    }
-                })
-
-                const collector = message.channel.createMessageComponentCollector({
-                    componentType: "BUTTON",
+                    componentType: ComponentType.Button,
                     filter: (i => i.user.id === message.author.id)
                 })
 

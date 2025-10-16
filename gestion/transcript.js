@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { MessageActionRow, MessageSelectMenu } = require('discord.js')
+const { ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js')
 const config = require('../config')
 
 const moment = require('moment')
@@ -12,7 +12,7 @@ module.exports = {
     usage: 'transcript',
     category: "owner",
     description: `Commande transcript.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 

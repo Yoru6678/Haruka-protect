@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -11,7 +11,7 @@ module.exports = {
     name: 'delrole',
     usage: 'delrole',
     description: `Permet de retirer un rôle à un membre.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
             if (!args[0]) return message
@@ -32,7 +32,7 @@ module.exports = {
 
                 message.channel.send(`1 rôle retiré à 1 membre`)
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRole retiré : ${role}`)
                     .setTimestamp()
@@ -55,7 +55,7 @@ const channel = client.channels.cache.get(raidlogId)
 
                 message.channel.send(`1 rôle retiré à 1 membre`)
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setDescription(`➖ <@${message.author.id}> a utilisé la commande \`delrole\` sur ${member}\nRôle retiré : ${role}`)
                     .setTimestamp()

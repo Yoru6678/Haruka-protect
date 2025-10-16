@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { MessageActionRow, MessageSelectMenu } = require('discord.js')
+const { ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js')
 const config = require('../config')
 
 const owner = db.table("Owner")
@@ -9,7 +9,7 @@ module.exports = {
     name: 'permticket',
     usage: 'permticket',
     description: `Permet de configurer le rôle qui aura accès aux tickets`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const config = require("../config")
  
@@ -9,7 +9,7 @@ module.exports = {
     name: 'reboot',
     usage: 'reboot',
     description: `Permet de redémarrer le bot.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
 

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -19,7 +19,7 @@ module.exports = {
     usage: 'perm',
     category: "owner",
     description: `Permet de voir la liste des permissions du serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -47,7 +47,7 @@ module.exports = {
                 if (permga == `<@&null>`) permga = "Non configuré"
 
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle('Permission du serveur')
                     .addField(`Permission 1`, `${perm1}`)
                     .addField(`Permission 2`, `${perm2}`)

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const Discord = require('discord.js')
 
 const config = require("../config")
@@ -21,7 +21,7 @@ module.exports = {
     name: 'presetlogs',
     usage: 'presetlogs',
     description: `Permet de créer automatiquement la catégorie des logs.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -30,10 +30,10 @@ module.exports = {
 
             message.channel.send(`ℹ️ Création de la **catégorie des logs** en cours...`).then(msge => {
                 message.guild.channels.create('LOGS', {
-                    type: 'GUILD_CATEGORY',
+                    type: 'Category',
                     permissionsOverwrites: [{
                         id: message.guild.id,
-                        deny: ['VIEW_CHANNEL']
+                        deny: ['ViewChannel']
                     }]
                 }).then(c => {
                     c.guild.channels.create(`📁・logs-message`, {
@@ -42,7 +42,7 @@ module.exports = {
                         permissionOverwrites: [
                             {
                                 id: message.guild.id,
-                                deny: ['VIEW_CHANNEL']
+                                deny: ['ViewChannel']
                             },
                         ],
                     }).then(logs => {
@@ -55,7 +55,7 @@ module.exports = {
                         permissionOverwrites: [
                             {
                                 id: message.guild.id,
-                                deny: ['VIEW_CHANNEL']
+                                deny: ['ViewChannel']
                             },
                         ],
                     }).then(logs => {
@@ -68,7 +68,7 @@ module.exports = {
                         permissionOverwrites: [
                             {
                                 id: message.guild.id,
-                                deny: ['VIEW_CHANNEL']
+                                deny: ['ViewChannel']
                             },
                         ],
                     }).then(logs => {
@@ -81,7 +81,7 @@ module.exports = {
                         permissionOverwrites: [
                             {
                                 id: message.guild.id,
-                                deny: ['VIEW_CHANNEL']
+                                deny: ['ViewChannel']
                             },
                         ],
                     }).then(logs => {
@@ -94,7 +94,7 @@ module.exports = {
                         permissionOverwrites: [
                             {
                                 id: message.guild.id,
-                                deny: ['VIEW_CHANNEL']
+                                deny: ['ViewChannel']
                             },
                         ],
                     }).then(logs => {
@@ -108,7 +108,7 @@ module.exports = {
                         permissionOverwrites: [
                             {
                                 id: message.guild.id,
-                                deny: ['VIEW_CHANNEL']
+                                deny: ['ViewChannel']
                             },
                         ],
                     }).then(logs => {

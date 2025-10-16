@@ -3,7 +3,7 @@ const owner = db.table("Owner")
 const cl = db.table("Color")
 const config = require("../config")
 const ms = require('ms'),
-    { MessageEmbed, MessageActionRow, MessageSelectMenu, MessageButton } = require('discord.js');
+    { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder } = require('discord.js');
 
 module.exports = {
     name: 'embed',
@@ -56,40 +56,35 @@ module.exports = {
                     value: "embedcopyother", emoji: "📩"
                 }
             ]
-            var selectMenu = new MessageSelectMenu()
+            var selectMenu = new StringSelectMenuBuilder()
                 .setCustomId("embedbuilder")
                 .setPlaceholder("Choisissez une option")
                 .addOptions([selectMenuOptions])
 
-            var b1 = new MessageButton()
+            var b1 = new ButtonBuilder()
                 .setCustomId("embedsend")
-                .setStyle("SUCCESS")
+                .setStyle("Success")
                 .setLabel("Envoyer l'embed")
 
-            var b2 = new MessageButton()
+            var b2 = new ButtonBuilder()
                 .setCustomId("embededit")
-                .setStyle("SUCCESS")
+                .setStyle("Success")
                 .setLabel("Modifier le message de l'embed")
 
-            var embedBuilderActionRow = new MessageActionRow()
+            var embedBuilderActionRow = new ActionRowBuilder()
                 .addComponents([selectMenu])
 
-            var embedBuilderActionRowSendEdit = new MessageActionRow()
+            var embedBuilderActionRowSendEdit = new ActionRowBuilder()
                 .addComponents([b1, b2])
 
-            let embed = (new MessageEmbed({ color: `${color}`, description: '\u200B' }))
+            let embed = (new EmbedBuilder({ color: `${color}`, description: '\u200B' }))
 
             message.channel.send({ content: `**Panel de création d'embeds de ${client.user.username}.**` }).then(async d => {
                 let msgembed = await d.channel.send({ embeds: [embed], components: [embedBuilderActionRow, embedBuilderActionRowSendEdit] }).catch(async err => { return; })
                 const filter = m => message.author.id === m.author.id;
                 const filterSelect = i => message.author.id === i.user.id;
                 const collector = d.channel.createMessageComponentCollector({
-                    filterSelect,
-                    componentType: "SELECT_MENU",
-                })
-                const collectorX = d.channel.createMessageComponentCollector({
-                    filterSelect,
-                    componentType: "BUTTON",
+                    componentType: ComponentType.Button,
                 })
                 collectorX.on(`collect`, async (cld) => {
                     if (cld.user.id !== message.author.id) return;
@@ -391,7 +386,7 @@ module.exports = {
                                         collected.first().delete().catch(() => false)
                                         yx.delete().catch(() => false)
                                         yxy.delete().catch(() => false);
-                                        embed = new MessageEmbed({ description: "\u200B" })
+                                        embed = new EmbedBuilder({ description: "\u200B" })
                                         if (!messag.embeds) return cld.message.channel.send({ content: "Aucun embed trouvé dans le message spécifié." });
                                         if (messag.embeds.length < 1) return cld.message.channel.send({ content: "Aucun embed trouvé dans le message spécifié." });
                                         if (messag.embeds[0].title) embed.setTitle(messag.embeds[0].title)

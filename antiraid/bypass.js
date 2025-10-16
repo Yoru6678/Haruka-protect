@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const cl = db.table("Color")
 const fs = require('fs')
@@ -14,14 +14,14 @@ module.exports = {
     name: 'bypass',
     usage: 'bypass',
     description: `Permet de voir quelles rank peuvent bypass des permissions.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
     if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p1) || message.member.roles.cache.has(p2) || message.member.roles.cache.has(p3) || config.bot.buyer.includes(message.author.id)  ) {
 
         let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.bot.couleur
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setColor(color)
             .setDescription(`
 **\`antiadmin | Owner\`**

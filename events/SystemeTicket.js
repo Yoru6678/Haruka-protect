@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { Permissions, MessageEmbed, MessageActionRow, MessageSelectMenu, Message, DiscordAPIError } = require('discord.js');
+const { Permissions, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, Message, DiscordAPIError } = require('discord.js');
 const Discord = require('discord.js')
 const messageCreate = require('./messageCreate');
 const config = require('../config')
@@ -20,10 +20,10 @@ module.exports = {
         if (color == null) color = config.bot.couleur
 
         if (!interaction.isSelectMenu()) return;
-        const row = new MessageActionRow()
+        const row = new ActionRowBuilder()
             .addComponents(
 
-                new MessageSelectMenu()
+                new StringSelectMenuBuilder()
 
                     .setCustomId('ticket')
                     .setPlaceholder('Selectionnez pour fermer le ticket !')
@@ -40,10 +40,10 @@ module.exports = {
         let rolestaff = dbrolestaff.get(`rolestaff_${interaction.guild.id}`)
         if (rolestaff == null) rolestaff = client.user.id
 
-        const deleteticket = new MessageActionRow()
+        const deleteticket = new ActionRowBuilder()
             .addComponents(
 
-                new MessageSelectMenu()
+                new StringSelectMenuBuilder()
 
                     .setCustomId('ticketdelete')
                     .setPlaceholder('Confirmation')
@@ -71,7 +71,7 @@ module.exports = {
 
                 interaction.reply({ content: `Veuillez confirmer la fermeture de votre ticket`, ephemeral: true })
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle('Fermer le ticket ?')
                     .setDescription(`<@${interaction.member.id}> Êtes-vous sûr de vouloir fermer ce ticket ?`)
                     .setFooter({ text: `⚠️ Le salon sera immédiatement supprimé !` })
@@ -122,7 +122,7 @@ module.exports = {
                 .catch(() => false)
                 setTimeout(() => interaction.channel.delete(), 3000)
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${interaction.member.id}> vient de fermer un ticket \nTicket Fermé : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
@@ -184,7 +184,7 @@ module.exports = {
 
                 });
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${interaction.member.id}> vient de récupérer le transcript de son ticket\nTicket : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
@@ -192,7 +192,7 @@ module.exports = {
             }
 
             if (interaction.values[0] == "delete") {
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle('Fermer le ticket ?')
                     .setDescription(`<@${interaction.member.id}> Êtes-vous sûr de vouloir fermer ce ticket ?`)
                     .setFooter({ text: `⚠️ Le salon sera immédiatement supprimé !` })
@@ -209,25 +209,25 @@ module.exports = {
                 let categorie = await ct.get(`${interaction.guild.id}.categorie`)
                 if (categorie === null) {
                     interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
-                        type: 'GUILD_TEXT',
+                        type: 'GuildText',
                         topic: `${interaction.user.id}`,
                         permissionOverwrites: [
                             {
                                 id: interaction.guild.id,
-                                deny: [`VIEW_CHANNEL`]
+                                deny: [`ViewChannel`]
                             },
                             {
                                 id: rolestaff,
-                                allow: [`VIEW_CHANNEL`]
+                                allow: [`ViewChannel`]
                             },
                             {
                                 id: interaction.user.id,
-                                allow: [`VIEW_CHANNEL`]
+                                allow: [`ViewChannel`]
                             },
                         ]
                     }).then((c) => {
                         
-                        const ticket = new MessageEmbed()
+                        const ticket = new EmbedBuilder()
                             .setTitle('📧・Ticket')
                             .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en charge votre ticket.`)
                             .setFooter({ text: 'Support' })
@@ -235,7 +235,7 @@ module.exports = {
                         c.send({ embeds: [ticket], components: [row] })
                         interaction.reply({ content: `🔓 Votre ticket a été ouvert avec succès. <#${c.id}>`, ephemeral: true })
 
-                        const embed = new Discord.MessageEmbed()
+                        const embed = new (require("discord.js").EmbedBuilder)()
                             .setDescription(`<@${interaction.member.id}> vient d'ouvrir un ticket`)
                             .setColor(color)
                         const ticketchannel = client.channels.cache.get(ticketlog)
@@ -244,26 +244,26 @@ module.exports = {
                     })
                 } else {
                     interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
-                        type: 'GUILD_TEXT',
+                        type: 'GuildText',
                         topic: `${interaction.user.id}`,
                         parent: `${categorie}`,
                         permissionOverwrites: [
                             {
                                 id: interaction.guild.id,
-                                deny: [`VIEW_CHANNEL`]
+                                deny: [`ViewChannel`]
                             },
                             {
                                 id: interaction.user.id,
-                                allow: [`VIEW_CHANNEL`]
+                                allow: [`ViewChannel`]
                             },
                             {
                                 id: rolestaff,
-                                allow: [`VIEW_CHANNEL`]
+                                allow: [`ViewChannel`]
                             },
 
                         ]
                     }).then((c) => {
-                        const ticket = new MessageEmbed()
+                        const ticket = new EmbedBuilder()
                             .setTitle('📧・Ticket')
                             .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en charge votre ticket.`)
                             .setFooter({ text: 'Support' })
@@ -271,7 +271,7 @@ module.exports = {
                         c.send({ embeds: [ticket], components: [row] })
                         interaction.reply({ content: `🔓 Votre ticket a été ouvert avec succès. <#${c.id}>`, ephemeral: true }).catch(() => false)
 
-                        const embed = new Discord.MessageEmbed()
+                        const embed = new (require("discord.js").EmbedBuilder)()
                             .setDescription(`<@${interaction.member.id}> vient d'ouvrir un ticket`)
                             .setColor(color)
                         const ticketchannel = client.channels.cache.get(ticketlog)

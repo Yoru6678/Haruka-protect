@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const config = require("../config")
 const owner = db.table("Owner")
@@ -12,7 +12,7 @@ module.exports = {
     name: 'antijoin',
     usage: 'antijoin',
     description: `Permet de d'interdire l'accès à des vocaux.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || (config.bot.buyer.includes(message.author.id)  ) === true) {
 

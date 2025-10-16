@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const Discord = require('discord.js')
 
 const config = require("../config")
@@ -64,7 +64,7 @@ module.exports = {
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
                 .setDescription(`<@${message.author.id}> a \`voicemute\` ${muteUser}\nRaison: ${muteReason}`)
                 .setTimestamp()

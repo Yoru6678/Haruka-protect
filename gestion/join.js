@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -7,9 +7,9 @@ const config = require("../config")
 const p = db.table("Prefix")
 const footer = config.bot.footer
 const {
-    MessageEmbed,
-    MessageSelectMenu,
-    MessageActionRow, MessageButton
+    EmbedBuilder,
+    StringSelectMenuBuilder,
+    ActionRowBuilder, ButtonBuilder
 } = require(`discord.js`);
  
 
@@ -17,7 +17,7 @@ module.exports = {
     name: 'join',
     usage: 'join',
     description: `Permet de configurer le rôle bienvenue.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) === true) {
 
@@ -30,7 +30,7 @@ module.exports = {
 
                     first_layer()
                     async function first_layer() {
-                        let menuoptions = new MessageSelectMenu()
+                        let menuoptions = new StringSelectMenuBuilder()
                             .setCustomId('MenuSelection')
                             .setMaxValues(1)
                             .setMinValues(1)
@@ -109,7 +109,7 @@ module.exports = {
                         let salonbvn = `<#${db.get(`salonbvn_${message.guild.id}`)}>`
                         if (salonbvn == "<#null>") salonbvn = "Non configuré"
 
-                        const MenuEmbed = new Discord.MessageEmbed()
+                        const MenuEmbed = new (require("discord.js").EmbedBuilder)()
                             .setTitle('Paramètres de Bienvenue')
                             .setDescription(`__**Choisissez les options lorsqu'un membre rejoindra le serveur**__`)
 
@@ -128,7 +128,7 @@ module.exports = {
 
                         let used1 = false;
 
-                        const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                        const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
 
                         async function menuselection(i) {
                             used1 = true;
@@ -137,20 +137,20 @@ module.exports = {
                         //Event
                         let msg = menumsg
 
-                        const antichannel = new MessageEmbed()
+                        const antichannel = new EmbedBuilder()
                             .setTitle(`Configurer le message de bienvenue`)
                             .setDescription("**Sélectionner l'option qui vous correspond**")
                             .setColor(color)
                             .setThumbnail('https://cdn.discordapp.com/attachments/904084986536276059/1003923893045698610/mp.gif')
 
-                        const antichanneldelete = new MessageEmbed()
+                        const antichanneldelete = new EmbedBuilder()
                             .setTitle(`Configuré le MP de bienvenue`)
                             .setDescription("**Indiquer quel message sera envoyé aux nouveaux membres qui rejoindront le serveur**")
                             .setColor(color)
                             .setThumbnail('https://cdn.discordapp.com/attachments/904084986536276059/1003923893045698610/mp.gif')
 
 
-                        let options = new MessageSelectMenu()
+                        let options = new StringSelectMenuBuilder()
                             .setCustomId('MenuOn')
                             .setMaxValues(1)
                             .setMinValues(1)
@@ -176,7 +176,7 @@ module.exports = {
 
 
 
-                        let AntiChannelDelete = new MessageSelectMenu()
+                        let AntiChannelDelete = new StringSelectMenuBuilder()
                             .setCustomId('MenuOn')
                             .setMaxValues(1)
                             .setMinValues(1)
@@ -205,7 +205,7 @@ module.exports = {
                         let filter1 = (i) => i.user.id === message.author.id;
                         const col = await msg.createMessageComponentCollector({
                             filter: filter1,
-                            componentType: "SELECT_MENU"
+                            componentType: ComponentType.StringSelect
                         })
 
                         col.on("collect", async (i) => {
@@ -213,7 +213,7 @@ module.exports = {
                                 menumsg.delete()
                             }
                             else if (i.values[0] === "msgperso") {
-                                menumsg.edit({ embeds: [antichannel], components: [new MessageActionRow().addComponents([options])] })
+                                menumsg.edit({ embeds: [antichannel], components: [new ActionRowBuilder().addComponents([options])] })
                                 await i.deferUpdate().catch(() => false)
                             }
                             if (i.values[0] == "active") {
@@ -248,7 +248,7 @@ module.exports = {
                                 }
 
                             } else if (i.values[0] == "Retour") {
-                                menumsg.edit({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                                menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                                 await i.deferUpdate().catch(() => false)
 
                             } else if (i.values[0] == 'desactive') {
@@ -274,7 +274,7 @@ module.exports = {
 
                             //Statut
                             else if (i.values[0] === "mpperso") {
-                                menumsg.edit({ embeds: [antichanneldelete], components: [new MessageActionRow().addComponents([AntiChannelDelete])] })
+                                menumsg.edit({ embeds: [antichanneldelete], components: [new ActionRowBuilder().addComponents([AntiChannelDelete])] })
                                 await i.deferUpdate().catch(() => false)
                             } if (i.values[0] == "activedel") {
                                 await i.deferUpdate().catch(() => false)
@@ -306,7 +306,7 @@ module.exports = {
                                     })
                                 }
                             } else if (i.values[0] == "Retourdel") {
-                                menumsg.edit({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                                menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                                 await i.deferUpdate().catch(() => false)
 
                             } else if (i.values[0] == 'desactivedel') {
@@ -391,7 +391,7 @@ module.exports = {
                 catch (e) {
                     console.log(e)
                     return message.channel.send({
-                        embeds: [new MessageEmbed()
+                        embeds: [new EmbedBuilder()
                             .setColor(color)
                             .setTitle("Une erreur est survenue")
                             .setDescription('Erreur inattendue, veuillez réessayer.')
@@ -418,7 +418,7 @@ module.exports = {
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
 
                 if (!role) return message.channel.send({ content: `Merci de spécifier le rôle à ajouter` })
-                if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("ADMINISTRATOR") || role.permissions.has("MANAGE_CHANNELS") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("MANAGE_ROLES")) return message.channel.send({ content: `Le **joinrole** n'a pas pu etre configuré car le rôle séléctionné contient des permissions **Dangereuses**` })
+                if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("Administrator") || role.permissions.has("ManageChannels") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("ManageRoles")) return message.channel.send({ content: `Le **joinrole** n'a pas pu etre configuré car le rôle séléctionné contient des permissions **Dangereuses**` })
 
                 message.channel.send({ content: `Le rôle ${role} sera désormais automatiquement attribué aux nouveaux membres` })
                 db.set(`joinrole_${message.guild.id}`, role.id)
@@ -438,7 +438,7 @@ module.exports = {
 
                     const logs = db.get(`salonbvn_${message.guild.id}`)
 
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new (require("discord.js").EmbedBuilder)()
                         .setColor(color)
                         .setTitle(`${message.author.tag} a défini ce salon commme salon de bienvenue`)
                         .setDescription(`ℹ️ Ce salon est désormais utilisé pour __toutes__ les **arrivées** du serveur\nExécuteur : <@${message.author.id}>`)

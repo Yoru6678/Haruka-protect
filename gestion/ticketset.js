@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const { MessageActionRow, MessageSelectMenu } = require('discord.js')
+const { ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js')
 const config = require('../config')
 
 const owner = db.table("Owner")
@@ -12,7 +12,7 @@ module.exports = {
     usage: 'ticketset',
     category: "owner",
     description: `Commande ticket set.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -23,9 +23,9 @@ module.exports = {
             if (pf == null) pf = config.prefix
 
             message.delete()
-            const row = new MessageActionRow()
+            const row = new ActionRowBuilder()
                 .addComponents(
-                    new MessageSelectMenu()
+                    new StringSelectMenuBuilder()
                         .setCustomId('select')
                         .setPlaceholder(`Cliquez pour ouvrir un ticket`)
                         .addOptions([

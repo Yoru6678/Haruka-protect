@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -9,7 +9,7 @@ module.exports = {
     name: 'mp',
     usage: 'mp [membre/all]',
     description: `Permet d'envoyer un MP à un membre ou à tous les membres du serveur via le bot.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)  ) {
             const target = args.shift().toLowerCase();
             const msg = args.join(" ");

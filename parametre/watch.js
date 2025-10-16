@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 function sleep(ms) {
@@ -11,7 +11,7 @@ module.exports = {
     name: 'watch',
     usage: 'watch <statut>',
     description: `Permet de changer le statut du bot en "regarde".`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
 

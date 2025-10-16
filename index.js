@@ -1,55 +1,39 @@
-require('./ping');
 const db = require("./db.js");
 require("dotenv").config();
-const { Client, Intents, Collection } = require('discord.js');
-const Discord = require("discord.js");
+const { Client, GatewayIntentBits, Collection, Partials, ComponentType } = require('discord.js');
 const config = require('./config');
-const Logger = require('./utils/logger');
-const ServerConfig = require('./utils/serverConfig');
 const { readdirSync } = require("fs");
 const path = require("path");
 const fs = require("fs");
 
-const p = db.table("Prefix");
-const logembed = db.table("embedlog");
-const ms = require("ms");
-const color = config.bot.couleur;
+const Logger = require('./utils/logger');
 
 const client = new Client({
     intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MEMBERS,
-        Intents.FLAGS.GUILD_BANS,
-        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-        Intents.FLAGS.GUILD_INTEGRATIONS,
-        Intents.FLAGS.GUILD_WEBHOOKS,
-        Intents.FLAGS.GUILD_INVITES,
-        Intents.FLAGS.GUILD_VOICE_STATES,
-        Intents.FLAGS.GUILD_PRESENCES,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_MESSAGE_TYPING,
-        Intents.FLAGS.DIRECT_MESSAGES,
-        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-        Intents.FLAGS.DIRECT_MESSAGE_TYPING
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildEmojisAndStickers,
+        GatewayIntentBits.GuildIntegrations,
+        GatewayIntentBits.GuildWebhooks,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildMessageTyping,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.DirectMessageTyping,
+        GatewayIntentBits.MessageContent
     ],
     restTimeOffset: 0,
-    partials: ["USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"]
+    partials: [Partials.User, Partials.Channel, Partials.GuildMember, Partials.Message, Partials.Reaction]
 });
 
 client.commands = new Collection();
 
-const { GiveawaysManager } = require('discord-giveaways');
-client.giveawaysManager = new GiveawaysManager(client, {
-    storage: "./database.json",
-    updateCountdownEvery: 3000,
-    default: {
-        botsCanWin: false,
-        embedColor: "#FF0000",
-        reaction: "🎉"
-    }
-});
-
+// Fonction pour charger les commandes
 function loadCommands(directory) {
     const dirPath = path.join(__dirname, directory);
     if (!fs.existsSync(dirPath)) {
@@ -60,97 +44,38 @@ function loadCommands(directory) {
     const files = readdirSync(dirPath).filter(file => file.endsWith('.js'));
     for (const file of files) {
         try {
-            const command = require(path.join(dirPath, file));
-            if (command.name) {
+            const commandPath = path.join(dirPath, file);
+            delete require.cache[require.resolve(commandPath)];
+            const command = require(commandPath);
+            
+            if (command.name && typeof command.execute === 'function') {
                 client.commands.set(command.name, command);
-            }
-        } catch (error) {
-            console.error(`❌ Erreur: ${directory}/${file} - ${error.message}`);
-        }
-    }
-}
-
-console.log('\n📦 Chargement des commandes...');
-loadCommands('moderation');
-loadCommands('parametre');
-loadCommands('gestion');
-loadCommands('utilitaire');
-loadCommands('logs');
-loadCommands('antiraid');
-
-console.log('\n📦 Chargement des événements...');
-const eventsPath = path.join(__dirname, 'events');
-if (fs.existsSync(eventsPath)) {
-    const eventFiles = readdirSync(eventsPath).filter(file => file.endsWith('.js'));
-    for (const file of eventFiles) {
-        try {
-            const event = require(path.join(eventsPath, file));
-            if (event.once) {
-                client.once(event.name, (...args) => event.execute(client, ...args));
+                console.log(`✅ Commande chargée: ${command.name} (${directory}/${file})`);
             } else {
-                client.on(event.name, (...args) => event.execute(client, ...args));
+                console.log(`⚠️  Commande invalide: ${directory}/${file}`);
             }
         } catch (error) {
-            console.error(`❌ Erreur: events/${file} - ${error.message}`);
+            console.error(`❌ Erreur chargement: ${directory}/${file} - ${error.message}`);
         }
     }
 }
 
-// Gestionnaire d'erreurs global
-process.on("unhandledRejection", (reason, p) => {
-    Logger.error(reason, "Unhandled Rejection");
-    if (reason?.code === 50007) return;
-    if (reason?.code === 10062) return;
-    if (reason?.code === 10008) return;
-    if (reason?.code === 50013) return;
-    console.error('❌ Unhandled Rejection:', reason);
+console.log('\\n🛡️  Chargement des commandes...');
+
+// Charger toutes les commandes de tous les dossiers
+const commandFolders = ['commands', 'moderation', 'parametre', 'gestion', 'utilitaire', 'logs', 'antiraid'];
+commandFolders.forEach(folder => {
+    loadCommands(folder);
 });
 
-process.on("uncaughtException", (err, origin) => {
-    Logger.error(err, "Uncaught Exception");
-    console.error('❌ Uncaught Exception:', err);
-});
-
-process.on("multipleResolves", (type, promise, reason) => {
-    console.warn('⚠️  Multiple Resolves:', type, reason);
-});
-
-const regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g;
-
-client.on("warn", e => {
-    console.log('⚠️ ', e.replace(regToken, "[REDACTED]"));
-});
-
-client.on("error", e => {
-    console.error('❌', e.toString().replace(regToken, "[REDACTED]"));
-});
-
-client.snipes = new Map();
-client.on('messageDelete', function (message) {
-    if (!message.guild || message.author.bot) return;
-    
-    client.snipes.set(message.channel.id, {
-        content: message.content,
-        author: message.author,
-        image: message.attachments.first() ? message.attachments.first().proxyURL : null,
-        timestamp: Date.now()
-    });
-});
-
-if (!process.env.TOKEN) {
-    console.error('❌ ERREUR: Variable TOKEN introuvable dans .env');
-    process.exit(1);
-}
-
-
+console.log(`\\n📊 Total des commandes chargées: ${client.commands.size}`);
 
 // Gestion des commandes avec préfixe
 client.on('messageCreate', async (message) => {
     if (message.author.bot) return;
+    if (!message.guild) return;
     
-    const p = db.table("Prefix");
-    let prefix = await p.get(`prefix_${message.guild?.id}`);
-    if (!prefix) prefix = config.bot.prefixe;
+    const prefix = config.bot.prefixe;
     
     if (!message.content.startsWith(prefix)) return;
     
@@ -158,21 +83,103 @@ client.on('messageCreate', async (message) => {
     const commandName = args.shift().toLowerCase();
     
     const command = client.commands.get(commandName);
-    if (!command) return;
+    if (!command) {
+        // Vérifier les alias
+        const aliasCommand = Array.from(client.commands.values()).find(cmd => 
+            cmd.aliases && cmd.aliases.includes(commandName)
+        );
+        if (!aliasCommand) return;
+        
+        console.log(`🔍 Alias trouvé: ${commandName} -> ${aliasCommand.name}`);
+        await executeCommand(aliasCommand, message, args);
+        return;
+    }
     
+    await executeCommand(command, message, args);
+});
+
+async function executeCommand(command, message, args) {
     try {
         await command.execute(message, args, client);
-        Logger.log(`COMMANDE: ${commandName}`, message.author.tag, message.guild?.name || 'DM', `Args: ${args.join(' ')}`);
+        Logger.log(`COMMANDE: ${command.name}`, message.author.tag, message.guild.name, `Args: ${args.join(' ')}`);
     } catch (error) {
-        console.error(`Erreur commande ${commandName}:`, error);
-        message.reply('❌ Une erreur est survenue lors de l\\\'exécution de cette commande.');
-        Logger.error(error, `Commande: ${commandName}`);
+        console.error(`❌ Erreur commande ${command.name}:`, error);
+        Logger.error(error, `Commande: ${command.name}`);
+        
+        try {
+            await message.reply('❌ Une erreur est survenue lors de l\\\'exécution de cette commande.');
+        } catch (replyError) {
+            console.error('Impossible de répondre à la commande:', replyError);
+        }
+    }
+}
+
+// Gestion des interactions (boutons, menus)
+client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isButton() && !interaction.isStringSelectMenu()) return;
+    
+    try {
+        // Rechercher le gestionnaire d'interactions dans les events
+        const eventsPath = path.join(__dirname, 'events');
+        if (fs.existsSync(eventsPath)) {
+            const eventFiles = readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+            for (const file of eventFiles) {
+                try {
+                    const event = require(path.join(eventsPath, file));
+                    if (event.name === 'interactionCreate' && typeof event.execute === 'function') {
+                        await event.execute(client, interaction);
+                    }
+                } catch (error) {
+                    console.error(`❌ Erreur event: ${file} - ${error.message}`);
+                }
+            }
+        }
+    } catch (error) {
+        console.error('❌ Erreur interaction:', error);
     }
 });
 
+// Gestion des erreurs
+process.on("unhandledRejection", (reason, p) => {
+    Logger.error(reason, "Unhandled Rejection");
+});
+
+process.on("uncaughtException", (err, origin) => {
+    Logger.error(err, "Uncaught Exception");
+});
+
+// Événement ready
+client.once('ready', () => {
+    console.log(`\\n🎉 Connecté en tant que ${client.user.tag}!`);
+    console.log(`📊 Servant ${client.guilds.cache.size} serveurs`);
+    console.log(`👥 Surveillant ${client.users.cache.size} utilisateurs`);
+    console.log(`🛡️  ${client.commands.size} commandes chargées`);
+    console.log(`🛡️  Haruka Protect est opérationnel!\\n`);
+    
+    client.user.setActivity('+help | Protection', { type: 3 }); // WATCHING
+});
+
+// Serveur HTTP pour Koyeb health check
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('🛡️ Haruka Protect - Bot en ligne');
+});
+
+const PORT = process.env.PORT || 8000;
+server.listen(PORT, () => {
+    console.log(`✅ Serveur HTTP démarré sur le port ${PORT}`);
+});
+
+// Connexion du bot
+if (!process.env.TOKEN) {
+    console.error('❌ ERREUR: Token Discord non trouvé');
+    console.log('💡 Assure-toi d\'avoir configuré la variable TOKEN sur Koyeb');
+    process.exit(1);
+}
 
 client.login(process.env.TOKEN)
-    .then(() => console.log('\n✅ Bot connecté avec succès!'))
+    .then(() => console.log('\\n🔗 Connexion à Discord...'))
     .catch(err => {
         console.error('❌ Erreur de connexion:', err.message);
         process.exit(1);

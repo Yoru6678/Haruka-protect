@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -7,16 +7,16 @@ const config = require("../config")
 const p = db.table("Prefix")
 const footer = config.bot.footer
 const {
-    MessageEmbed,
-    MessageSelectMenu,
-    MessageActionRow, MessageButton
+    EmbedBuilder,
+    StringSelectMenuBuilder,
+    ActionRowBuilder, ButtonBuilder
 } = require(`discord.js`);
 
 module.exports = {
     name: 'tempvoc',
     usage: 'tempvoc',
     description: `Permet de configurer des salons vocal temporaire.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -24,7 +24,7 @@ module.exports = {
 
                 first_layer()
                 async function first_layer() {
-                    let menuoptions = new MessageSelectMenu()
+                    let menuoptions = new StringSelectMenuBuilder()
                         .setCustomId('MenuSelection')
                         .setMaxValues(1)
                         .setMinValues(1)
@@ -76,7 +76,7 @@ module.exports = {
                     if (salontemp == "<#null>") salontemp = "Non configuré"
 
 
-                    const MenuEmbed = new Discord.MessageEmbed()
+                    const MenuEmbed = new (require("discord.js").EmbedBuilder)()
                         .setTitle('Vocaux Temporaires')
                         .setDescription(`__**Choisissez les options pour configuré les vocaux temporaires**__`)
                         .addFields(
@@ -89,7 +89,7 @@ module.exports = {
 
                     let used1 = false;
 
-                    const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                    const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
 
                     async function menuselection(i) {
                         used1 = true;
@@ -98,19 +98,19 @@ module.exports = {
                     //Event
                     let msg = menumsg
 
-                    const antichannel = new MessageEmbed()
+                    const antichannel = new EmbedBuilder()
                         .setTitle(`Configuré les salons temporaires`)
                         .setDescription("**Sélectionner l'option qui vous correspond**")
                         .setColor(color)
                         .setImage('https://cdn.discordapp.com/attachments/904084986536276059/1003966590867472525/2022-08-02_11-59-40.gif')
 
-                    const antichanneldelete = new MessageEmbed()
+                    const antichanneldelete = new EmbedBuilder()
                         .setTitle(`Sélectionner l'option qui vous correspond`)
                         .setDescription("**Sélectionner l'option qui vous correspond**")
                         .setColor(color)
                         .setImage('https://cdn.discordapp.com/attachments/904084986536276059/1003966590867472525/2022-08-02_11-59-40.gif')
 
-                    let options = new MessageSelectMenu()
+                    let options = new StringSelectMenuBuilder()
                         .setCustomId('MenuOn')
                         .setMaxValues(1)
                         .setMinValues(1)
@@ -134,7 +134,7 @@ module.exports = {
                         ])
 
 
-                    let AntiChannelDelete = new MessageSelectMenu()
+                    let AntiChannelDelete = new StringSelectMenuBuilder()
                         .setCustomId('MenuOn')
                         .setMaxValues(1)
                         .setMinValues(1)
@@ -163,7 +163,7 @@ module.exports = {
                     let filter1 = (i) => i.user.id === message.author.id;
                     const col = await msg.createMessageComponentCollector({
                         filter: filter1,
-                        componentType: "SELECT_MENU"
+                        componentType: ComponentType.StringSelect
                     })
 
                     col.on("collect", async (i) => {
@@ -171,7 +171,7 @@ module.exports = {
                             menumsg.delete()
                         }
                         else if (i.values[0] === "categorietempvoc") {
-                            menumsg.edit({ embeds: [antichannel], components: [new MessageActionRow().addComponents([options])] })
+                            menumsg.edit({ embeds: [antichannel], components: [new ActionRowBuilder().addComponents([options])] })
                             await i.deferUpdate().catch(() => false)
                         }
                         if (i.values[0] == "active") {
@@ -206,7 +206,7 @@ module.exports = {
                             }
 
                         } else if (i.values[0] == "Retour") {
-                            menumsg.edit({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                            menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactive') {
@@ -232,7 +232,7 @@ module.exports = {
 
                         //Statut
                         else if (i.values[0] === "salontempvoc") {
-                            menumsg.edit({ embeds: [antichanneldelete], components: [new MessageActionRow().addComponents([AntiChannelDelete])] })
+                            menumsg.edit({ embeds: [antichanneldelete], components: [new ActionRowBuilder().addComponents([AntiChannelDelete])] })
                             await i.deferUpdate().catch(() => false)
                         } if (i.values[0] == "activedel") {
                             await i.deferUpdate().catch(() => false)
@@ -264,7 +264,7 @@ module.exports = {
                                 })
                             }
                         } else if (i.values[0] == "Retourdel") {
-                            menumsg.edit({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                            menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactivedel') {
@@ -321,7 +321,7 @@ module.exports = {
             catch (e) {
                 console.log(e)
                 return message.channel.send({
-                    embeds: [new MessageEmbed()
+                    embeds: [new EmbedBuilder()
                         .setColor(color)
                         .setTitle("Une erreur est survenu")
                         .setDescription('Erreur intattenudu')

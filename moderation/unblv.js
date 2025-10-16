@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const config = require("../config")
 const owner = db.table("Owner")
@@ -14,7 +14,7 @@ module.exports = {
     name: 'unblv',
     usage: 'unblv',
     description: `Permet de gérer la blacklist vocal.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
 
         const perm3 = await p3.get(`perm3_${message.guild.id}`)

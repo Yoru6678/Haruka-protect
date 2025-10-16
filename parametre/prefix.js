@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const cl = db.table("Color")
 const p = db.table("Prefix")
@@ -10,7 +10,7 @@ module.exports = {
     name: 'prefix',
     usage: 'prefix',
     description: `Permet de changer le prefix du bot sur un serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
 

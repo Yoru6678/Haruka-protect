@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -11,7 +11,7 @@ module.exports = {
     name: 'unbl',
     usage: 'unbl',
     description: `Permet d'enlever quelqu'un de la liste noire du bot`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
 

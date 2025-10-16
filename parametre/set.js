@@ -1,11 +1,11 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 module.exports = {
     name: 'set',
     usage: 'set <name/pic/banner> [nom/lien]',
     description: `Permet de changer le nom, l'avatar ou la bannière du bot.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         if (config.bot.buyer.includes(message.author.id)) {
             if (args.length >= 2) {
                 const option = args[0].toLowerCase();

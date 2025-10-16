@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const modlog = db.table("modlog")
@@ -25,7 +25,7 @@ module.exports = {
                 let channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel
 
                         channel.permissionOverwrites.edit(message.guild.id, {
-                            VIEW_CHANNEL: null,
+                            ViewChannel: null,
                         });
                 message.channel.send(`Les membres peuvent à nouveau voir le salon <#${channel.id}>`);
                 message.delete();
@@ -35,7 +35,7 @@ module.exports = {
             let channellogs = db.get(`${message.guild.id}.modlog`)
             if (channellogs == null) return
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(ecolor)
                 .setDescription(`<@${message.author.id}> a utilisé la commande \`unhide\` le salon <#${message.channel.id}>`)
                 .setTimestamp()

@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const config = require("../config");
@@ -9,7 +9,7 @@ module.exports = {
     name: 'invite',
     usage: 'invite <id>',
     description: `Permet de créer une invitation pour un serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)  ) {
 
@@ -21,7 +21,7 @@ module.exports = {
                 if (guild === undefined) return message.channel.send(`Votre bot n'est pas sur ce serveur.`);
                 if (!guild.available) return message.channel.send('Serveur non disponible, réessayez plus tard.');
 
-                const raidlogChannel = guild.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(guild.me).has('CREATE_INSTANT_INVITE'));
+                const raidlogChannel = guild.channels.cache.find(channel => channel.type === 'GuildText' && channel.permissionsFor(guild.me).has('CREATE_INSTANT_INVITE'));
                 if (!channel) return;
 
                 channel.createInvite({ maxAge: 0, maxUses: 1, unique: true })

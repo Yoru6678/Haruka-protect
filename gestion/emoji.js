@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const { Util } = require("discord.js")
+const { Util } = require("discord.js").default || require("discord.js")
 const config = require('../config')
 
 const owner = db.table("Owner")
@@ -10,7 +10,7 @@ module.exports = {
     name: 'emoji',
     usage: 'emoji',
     description: `Permet de créer un émoji`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         const perm3 = await p3.get(`perm3_${message.guild.id}`)
   

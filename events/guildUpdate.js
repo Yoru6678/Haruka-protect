@@ -34,7 +34,7 @@ module.exports = {
                 }
             }
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setDescription(`<@${audit.executor.id}> a modifié les paramètres du serveur`)
                 .setTimestamp()
                 .setColor(config.bot.couleur);

@@ -1,8 +1,8 @@
 const db = require("../db.js");
 const ms = require('ms'),
-    { MessageEmbed, MessageActionRow, MessageSelectMenu, MessageButton } = require('discord.js');
+    { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder } = require('discord.js');
 
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const config = require("../config")
@@ -11,7 +11,7 @@ module.exports = {
     name: 'ticket',
     usage: 'ticket',
     description: `Permet de créer un système de ticket personnalisé`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -54,40 +54,35 @@ module.exports = {
                     value: "embedcopyother", emoji: "📩"
                 }
             ]
-            var selectMenu = new MessageSelectMenu()
+            var selectMenu = new StringSelectMenuBuilder()
                 .setCustomId("embedbuilder")
                 .setPlaceholder("Choisissez une option")
                 .addOptions([selectMenuOptions])
 
-            var b1 = new MessageButton()
+            var b1 = new ButtonBuilder()
                 .setCustomId("embedsend")
-                .setStyle("SUCCESS")
+                .setStyle("Success")
                 .setLabel("Envoyer l'embed")
 
-            var embedBuilderActionRow = new MessageActionRow()
+            var embedBuilderActionRow = new ActionRowBuilder()
                 .addComponents([selectMenu])
 
-            var embedBuilderActionRowSendEdit = new MessageActionRow()
+            var embedBuilderActionRowSendEdit = new ActionRowBuilder()
                 .addComponents([b1])
 
-            let embed = (new MessageEmbed({ description: '\u200B' }))
+            let embed = (new EmbedBuilder({ description: '\u200B' }))
 
             message.channel.send({ content: `**Panel de création de tickets personnalisés de ${client.user}.**` }).then(async d => {
                 let msgembed = await d.channel.send({ embeds: [embed], components: [embedBuilderActionRow, embedBuilderActionRowSendEdit] }).catch(async err => { return; })
                 const filter = m => message.author.id === m.author.id;
                 const filterSelect = i => message.author.id === i.user.id;
                 const collector = d.channel.createMessageComponentCollector({
-                    filterSelect,
-                    componentType: "SELECT_MENU",
-                })
-                const collectorX = d.channel.createMessageComponentCollector({
-                    filterSelect,
-                    componentType: "BUTTON",
+                    componentType: ComponentType.Button,
                 })
 
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageSelectMenu()
+                        new StringSelectMenuBuilder()
                             .setCustomId('select')
                             .setPlaceholder(`Cliquez sur l'un des menus.`)
                             .addOptions([
@@ -403,7 +398,7 @@ module.exports = {
                                         collected.first().delete().catch(() => false)
                                         yx.delete().catch(() => false)
                                         yxy.delete().catch(() => false);
-                                        embed = new MessageEmbed({ description: "\u200B" })
+                                        embed = new EmbedBuilder({ description: "\u200B" })
                                         if (!messag.embeds) return cld.message.channel.send({ content: "Aucun embed trouvé dans le message spécifié." });
                                         if (messag.embeds.length < 1) return cld.message.channel.send({ content: "Aucun embed trouvé dans le message spécifié." });
                                         if (messag.embeds[0].title) embed.setTitle(messag.embeds[0].title)

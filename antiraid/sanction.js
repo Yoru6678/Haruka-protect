@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 
@@ -13,7 +13,7 @@ module.exports = {
     name: 'sanction',
     usage: 'sanction',
     description: `Permet de configuré la sanction de l'antiraid.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
@@ -23,51 +23,51 @@ module.exports = {
             let fufu = sanction.get(`sanction_${message.guild.id}`);
             if (fufu == null) fufu = "derank";
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Sanction actuelle : \`${fufu}\``)
                 .setColor(color);
 
-            const derank = new Discord.MessageEmbed()
+            const derank = new (require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Nouvelle Sanction : \`derank\``)
                 .setColor(color);
 
-            const kick = new Discord.MessageEmbed()
+            const kick = new (require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Nouvelle Sanction : \`kick\``)
                 .setColor(color);
 
-            const ban = new Discord.MessageEmbed()
+            const ban = new (require("discord.js").EmbedBuilder)()
                 .setTitle(`Sanction Raid`)
                 .setDescription(`Nouvelle Sanction : \`ban\``)
                 .setColor(color);
 
 
-            const sanctionRow = new Discord.MessageActionRow()
+            const sanctionRow = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('derank')
                         .setLabel('Derank')
-                        .setStyle('PRIMARY')
+                        .setStyle('Primary')
                 )
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('kick')
                         .setLabel('Kick')
-                        .setStyle('DANGER')
+                        .setStyle('Danger')
                 )
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('ban')
                         .setLabel('Ban')
-                        .setStyle('DANGER')
+                        .setStyle('Danger')
                 );
 
             message.channel.send({ embeds: [embed], components: [sanctionRow] }).then(async msg => {
 
                 const collector = message.channel.createMessageComponentCollector({
-                    componentType: "BUTTON",
+                    componentType: ComponentType.Button,
                     filter: (i => i.user.id === message.author.id)
                 });
                 collector.on("collect", async (c) => {

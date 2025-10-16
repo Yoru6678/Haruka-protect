@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const moment = require('moment');
 
 
@@ -15,7 +15,7 @@ module.exports = {
     name: 'lookup',
     usage: 'lookup',
 
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
@@ -23,10 +23,10 @@ module.exports = {
          if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p1) || message.member.roles.cache.has(p2) || message.member.roles.cache.has(p3) || config.bot.buyer.includes(message.author.id)  ) {
 
         const permissions = {
-            "ADMINISTRATOR": "Administrator",
+            "Administrator": "Administrator",
             "MANAGE_GUILD": "Manage Server",
-            "MANAGE_ROLES": "Manage Roles",
-            "MANAGE_CHANNELS": "Manage Channels",
+            "ManageRoles": "Manage Roles",
+            "ManageChannels": "Manage Channels",
             "KICK_MEMBERS": "Kick Members",
             "BAN_MEMBERS": "Ban Members",
             "MANAGE_NICKNAMES": "Manage Nicknames",
@@ -67,7 +67,7 @@ module.exports = {
 
         const bot = mention.user.bot ? "L'utilisateur est un bot" : "L'utilisateur est un humain";
 
-        const userlol = new Discord.MessageEmbed()
+        const userlol = new (require("discord.js").EmbedBuilder)()
             .setAuthor(`Informations`, usericon)
             .setThumbnail(usericon)
             .addField(`General`, `Nom: \`${mention.user.username}\` \nSurnom: \`${nick}\``)

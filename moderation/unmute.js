@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -16,7 +16,7 @@ module.exports = {
     name: 'unmute',
     usage: 'unmute <membre>',
     description: `Permet de ne plus rendre muet un utilisateur sur le serveur`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         let pf = await p.get(`prefix_${message.guild.id}`);
         if (pf == null) pf = config.bot.prefixe;
 
@@ -36,7 +36,7 @@ module.exports = {
             try {
                 await target.timeout(null, reason);
                 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(couleur)
                     .setTitle('Unmute')
                     .setDescription(`${target} a été unmute par ${message.author}.\nRaison : ${reason}`)

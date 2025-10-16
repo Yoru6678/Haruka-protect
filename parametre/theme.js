@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -10,7 +10,7 @@ module.exports = {
     name: 'theme',
     usage: 'theme <couleur>',
     description: `Permet de changer la couleur de l'embed dans config.json.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 

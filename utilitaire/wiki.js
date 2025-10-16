@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const fetch = require("node-fetch");
 
 
@@ -12,7 +12,7 @@ module.exports = {
     name: 'wiki',
     usage: 'wiki <mot-clé>',
     description: `Recherche des mot-clé sur Wikipedia.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
       
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
@@ -33,7 +33,7 @@ module.exports = {
                 return message.channel.send("Aucune page Wikipedia trouvée pour cette phrase.");
             }
           
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
             .setTitle("Recherche sur " + data.title)
             .setURL(data.content_urls.desktop.page)
             .setDescription(data.extract)

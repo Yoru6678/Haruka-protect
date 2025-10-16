@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
@@ -18,7 +18,7 @@ module.exports = {
     usage: 'setp <perm1/2/3/gs/gp/ga> @role',
     category: "owner",
     description: `Permet de gérer les permissions des rôles du serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) === true) {
 
@@ -36,7 +36,7 @@ module.exports = {
                 } else {
                     p1.set(`perm1_${message.guild.id}`, role.id)
 
-                    const embed1 = new Discord.MessageEmbed()
+                    const embed1 = new (require("discord.js").EmbedBuilder)()
                         .setDescription(`Le rôle ${role} a désormais accès à toutes les commandes de la **perm 1**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed1] })
@@ -54,7 +54,7 @@ module.exports = {
                 } else {
                     p2.set(`perm2_${message.guild.id}`, role.id)
 
-                    const embed2 = new Discord.MessageEmbed()
+                    const embed2 = new (require("discord.js").EmbedBuilder)()
                         .setDescription(`Le rôle ${role} à désormais accès à toutes les commandes de la **perm 2**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed2] })
@@ -72,7 +72,7 @@ module.exports = {
                 } else {
                     p3.set(`perm3_${message.guild.id}`, role.id)
 
-                    const embed3 = new Discord.MessageEmbed()
+                    const embed3 = new (require("discord.js").EmbedBuilder)()
                         .setDescription(`Le rôle ${role} à désormais accès à toutes les commandes de la **perm 3**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed3] })
@@ -90,7 +90,7 @@ module.exports = {
                 } else {
                     pgs.set(`permgs_${message.guild.id}`, role.id)
 
-                    const embedgs = new Discord.MessageEmbed()
+                    const embedgs = new (require("discord.js").EmbedBuilder)()
                         .setDescription(`Le rôle ${role} à désormais accès à toutes les commandes de la perm **Gestion Staff**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embedgs] })
@@ -108,7 +108,7 @@ module.exports = {
                 } else {
                     pgp.set(`permgp_${message.guild.id}`, role.id)
 
-                    const embedgp = new Discord.MessageEmbed()
+                    const embedgp = new (require("discord.js").EmbedBuilder)()
                         .setDescription(`Le rôle ${role} à désormais accès à toutes les commandes de la perm **Gestion Permissions**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embedgp] })
@@ -126,7 +126,7 @@ module.exports = {
                 } else {
                     pga.set(`permga_${message.guild.id}`, role.id)
 
-                    const embedga = new Discord.MessageEmbed()
+                    const embedga = new (require("discord.js").EmbedBuilder)()
                         .setDescription(`Le rôle ${role} à désormais accès à toutes les commandes de la perm **Giveaway**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embedga] })

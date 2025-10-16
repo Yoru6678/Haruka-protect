@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const config = require("../config")
 const owner = db.table("Owner")
@@ -13,7 +13,7 @@ module.exports = {
     name: 'blv',
     usage: 'antivoc',
     description: `Permet de gérer la blacklist vocal`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
 
   if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) )  === true) {
@@ -50,7 +50,7 @@ module.exports = {
                 let p1 = 30;
                 let page = 1;
 
-                let embed = new Discord.MessageEmbed()
+                let embed = new (require("discord.js").EmbedBuilder)()
                 embed.setTitle("Blacklist Vocal")
                     .setColor(color)
                     .setDescription(!own ? "Aucun" : own.map((user, i) => `<@${user}>`).slice(0, 30).join("\n")

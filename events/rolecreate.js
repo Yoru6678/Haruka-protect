@@ -27,7 +27,7 @@ module.exports = {
                 role.guild.members.kick(audit.executor.id, { reason: "AntiRole Create" }).catch(() => false);
             }
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setDescription("<@" + audit.executor.id + "> a créé le rôle " + role.name + ", je l'ai supprimé")
                 .setTimestamp()
                 .setColor(config.bot.couleur);

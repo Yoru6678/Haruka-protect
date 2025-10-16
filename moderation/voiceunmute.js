@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const Discord = require('discord.js')
 
 const config = require("../config")
@@ -15,7 +15,7 @@ module.exports = {
     name: 'voiceunmute',
     usage: 'voiceunmute <@>',
     description: `Permet de ne plus mute un membre dans un salon vocal sur le serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         const perm1 = await p1.get(`perm1_${message.guild.id}`)
         const perm2 = await p2.get(`perm2_${message.guild.id}`)
@@ -60,7 +60,7 @@ module.exports = {
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
                 .setDescription(`<@${message.author.id}> a \`voiceunmute\` ${muteUser}\nRaison: ${muteReason}`)
                 .setTimestamp()

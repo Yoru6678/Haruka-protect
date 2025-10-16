@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const cl = db.table("Color");
@@ -28,7 +28,7 @@ module.exports = {
     name: 'snipe',
     usage: 'snipe',
     description: `Permet d'afficher le dernier message supprimé sur le serveur`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
@@ -45,7 +45,7 @@ module.exports = {
         });
 
         if (isLinkall == true) {
-            const embedl = new Discord.MessageEmbed()
+            const embedl = new (require("discord.js").EmbedBuilder)()
                 .setDescription(`**${msg.author.tag}** \`\`\`discord.gg/******\`\`\``);
             return message.channel.send({ embeds: [embedl] });
         }
@@ -62,7 +62,7 @@ module.exports = {
             temps = messageTime.format('DD/MM/YYYY à HH:mm');
         }
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setDescription(`**${msg.author.tag}** \n${msg.content}`)
             .setColor(color)
             .setFooter({ text: `${footer}・${temps}` })

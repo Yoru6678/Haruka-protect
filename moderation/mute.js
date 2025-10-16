@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -16,7 +16,7 @@ module.exports = {
     name: 'mute',
     usage: 'mute <membre> [temps]',
     description: `Permet de rendre muet un utilisateur sur le serveur`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         let pf = await p.get(`prefix_${message.guild.id}`);
         if (pf == null) pf = config.bot.prefixe;
 
@@ -47,7 +47,7 @@ module.exports = {
             try {
                 await target.timeout(duration, reason);
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(couleur)
                     .setDescription(`**Action**: Mute\n**Utilisateur**: ${target.user.tag} (${target.id})\n**Modérateur**: ${message.author.tag}\n**Durée**: ${ms(duration, { long: true })}\n**Raison**: ${reason}`)
                     .setTimestamp()

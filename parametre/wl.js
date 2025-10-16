@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -15,7 +15,7 @@ module.exports = {
     usage: 'wl [membre/role]',
     category: "owner",
     description: `Permet de rajouter quelqu'un ou un rôle dans la whitelist du bot.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)  ) {
             let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
@@ -52,7 +52,7 @@ module.exports = {
                 let membersList = message.guild.members.cache.filter(u => wl.get(`${message.guild.id}.${u.id}.wl`) === u.id).map(a => "<@" + a.user.id + ">");
                 let rolesList = message.guild.roles.cache.filter(r => wl.get(`${message.guild.id}.${r.id}.wl`) === r.id).map(r => `<@&${r.id}>`);
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle("Whitelist")
                     .setDescription(`Membres : ${membersList.join("\n")}\n\nRôles : ${rolesList.join(", ")}`)
                     .setColor(color)

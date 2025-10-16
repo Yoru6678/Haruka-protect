@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const cl = db.table("Color");
@@ -11,7 +11,7 @@ module.exports = {
     name: 'bl',
     usage: 'bl <membre/clear>',
     description: `Permet de mettre dans la blacklist des membres.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         if (config.bot.buyer.includes(message.author.id)) {
             let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
@@ -40,7 +40,7 @@ module.exports = {
                 let p1 = 30;
                 let page = 1;
 
-                let embed = new Discord.MessageEmbed()
+                let embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle("Blacklist")
                     .setColor(color)
                     .setDescription(!own ? "Aucun" : own.map((user, i) => `<@${user}>`).slice(0, 30).join("\n"))

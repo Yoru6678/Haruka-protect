@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const config = require("../config")
 const owner = db.table("Owner")
@@ -28,7 +28,7 @@ module.exports = {
         }),
             deletionLog = fetchedLogs.entries.first();
             const { executor, target } = deletionLog;
-        const embed1 = new Discord.MessageEmbed()
+        const embed1 = new (require("discord.js").EmbedBuilder)()
             .setTitle(`❌ Suppression`)
             .setDescription(`Message supprimé de <@${message.author.id}> dans [\`${message.channel.name}\`](https://discord.com/channels/${message.guild.id}/${message.channel.id})\n\`${mess}\``)
             .setFooter({ text: `🕙 ${getNow().time}` })
@@ -36,7 +36,7 @@ module.exports = {
         if (!deletionLog) return channel.send({ embeds: [embed1] })
 
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setTitle(`❌ Suppression`)
             .setDescription(`Message supprimé de <@${message.author.id}> dans [\`${message.channel.name}\`](https://discord.com/channels/${message.guild.id}/${message.channel.id})\n\`${mess}\``)
             .setFooter({ text: `🕙 ${getNow().time}` })

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const Discord = require('discord.js')
 
 const config = require("../config")
@@ -14,14 +14,14 @@ module.exports = {
     name: 'setcategorie',
     usage: 'setcategorie <id>',
     description: `Permet de changer la catégorie des tickets.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            const funny = message.guild.channels.cache.filter(x => x.type === "GUILD_CATEGORY")
+            const funny = message.guild.channels.cache.filter(x => x.type === "Category")
 
             const newCategorie = message.guild.channels.cache.get(args[0] || funny.id);
             if (!newCategorie) return message.channel.send({ content: "Aucun catégorie trouvée !" })

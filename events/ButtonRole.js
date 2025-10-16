@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { Permissions, MessageEmbed, MessageActionRow, MessageSelectMenu, Message, DiscordAPIError } = require('discord.js');
+const { Permissions, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, Message, DiscordAPIError } = require('discord.js');
 const Discord = require('discord.js')
 const messageCreate = require('./messageCreate');
 const config = require('../config')

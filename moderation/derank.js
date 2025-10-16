@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const owner = db.table("Owner");
@@ -13,7 +13,7 @@ module.exports = {
     name: 'derank',
     usage: 'derank <membre>',
     description: `Permet de derank un membre sur le serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
     if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) )  === true) {
             let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
@@ -29,7 +29,7 @@ module.exports = {
                 } catch {
                 }
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setTitle("Derank d'un membre")
                     .setDescription(`<@${member.id}> a été derank et les rôles suivants ont été retirés : ${roles}`)
@@ -41,7 +41,7 @@ module.exports = {
                 let roleping = db.get(`role_${message.guild.id}`);
                 if (roleping === null) roleping = "@everyone";
 
-                const modlog = new Discord.MessageEmbed()
+                const modlog = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
                     .setTitle(`${message.author.tag} a effectué un derank`)
                     .setDescription(`⚠️ <@${member.id}> a été derank\nExécuteur : <@${message.author.id}>`)

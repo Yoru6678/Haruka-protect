@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const config = require("../config");
 
 const p = db.table("Prefix");
@@ -13,7 +13,7 @@ module.exports = {
     usage: 'help',
     category: "utils",
     description: "Permet d'afficher l'help.",
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         let pf = await p.get(`prefix_${message.guild.id}`);
         if (pf == null) pf = config.bot.prefixe;
@@ -29,7 +29,7 @@ module.exports = {
                 TIER_3: 3,
             };
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setTitle("Arguments de messages")
                 .setDescription("Exemple de message simple: `{MemberMention} nous a rejoint, nous sommes maintenant {MemberCount} sur {Server}`")
                 .addFields(
@@ -49,7 +49,7 @@ module.exports = {
         }
 
         if (args[0] === "all") {
-            const public = new Discord.MessageEmbed()
+            const public = new (require("discord.js").EmbedBuilder)()
                 .setTitle('Commandes Publiques')
                 .setDescription(`**\`${pf}help\`**
 **\`${pf}ping\`**
@@ -61,7 +61,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const perm1 = new Discord.MessageEmbed()
+            const perm1 = new (require("discord.js").EmbedBuilder)()
                 .setTitle('Permission 1')
                 .setDescription(`**\`${pf}mute\`**
 **\`${pf}unmute\`**
@@ -70,7 +70,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const perm2 = new Discord.MessageEmbed()
+            const perm2 = new (require("discord.js").EmbedBuilder)()
                 .setTitle('Permission 2')
                 .setDescription(`**\`${pf}clear\`**
 **\`${pf}hide\`**
@@ -78,7 +78,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const perm3 = new Discord.MessageEmbed()
+            const perm3 = new (require("discord.js").EmbedBuilder)()
                 .setTitle('Permission 3')
                 .setDescription(`**\`${pf}kick\`**
 **\`${pf}ban\`**
@@ -90,7 +90,7 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const ownerEmbed = new Discord.MessageEmbed()
+            const ownerEmbed = new (require("discord.js").EmbedBuilder)()
                 .setTitle('Permission Owner')
                 .setDescription(`**\`${pf}wl\`**
 **\`${pf}unwl\`**
@@ -100,15 +100,15 @@ module.exports = {
                 .setFooter({ text: `${footer} | Préfixe : ${pf}` })
                 .setColor(color);
 
-            const button1 = new Discord.MessageButton()
+            const button1 = new Discord.ButtonBuilder()
                 .setCustomId('gauche')
                 .setLabel('◀')
-                .setStyle('DANGER');
+                .setStyle('Danger');
 
-            const button2 = new Discord.MessageButton()
+            const button2 = new Discord.ButtonBuilder()
                 .setCustomId('droite')
                 .setLabel('▶')
-                .setStyle('DANGER');
+                .setStyle('Danger');
 
             const pages = [public, perm1, perm2, perm3, ownerEmbed];
             const buttonList = [button1, button2];
@@ -117,8 +117,8 @@ module.exports = {
             return;
         }
 
-        const row = new Discord.MessageActionRow().addComponents(
-            new Discord.MessageSelectMenu()
+        const row = new Discord.ActionRowBuilder().addComponents(
+            new Discord.StringSelectMenuBuilder()
                 .setCustomId('help')
                 .setPlaceholder("Choisissez une catégorie")
                 .addOptions([
@@ -155,7 +155,7 @@ module.exports = {
                 ])
         );
 
-        const Help = new Discord.MessageEmbed()
+        const Help = new (require("discord.js").EmbedBuilder)()
             .setTitle("Utilitaire")
             .setDescription(`**\`${pf}help\`** - Menu d'aide
 **\`${pf}ping\`** - Latence du bot
@@ -167,7 +167,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const moderation = new Discord.MessageEmbed()
+        const moderation = new (require("discord.js").EmbedBuilder)()
             .setTitle('Modération')
             .setDescription(`**\`${pf}kick\`** - Expulser un membre
 **\`${pf}ban\`** - Bannir un membre
@@ -180,7 +180,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const Owner = new Discord.MessageEmbed()
+        const Owner = new (require("discord.js").EmbedBuilder)()
             .setTitle('Owner')
             .setDescription(`**\`${pf}wl\`** - Ajouter à la whitelist
 **\`${pf}unwl\`** - Retirer de la whitelist
@@ -190,7 +190,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const antiraid = new Discord.MessageEmbed()
+        const antiraid = new (require("discord.js").EmbedBuilder)()
             .setTitle('Antiraid')
             .setDescription(`**\`${pf}secur\`** - Panel de sécurité
 **\`${pf}sanction\`** - Configurer les sanctions
@@ -202,7 +202,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const Gestion = new Discord.MessageEmbed()
+        const Gestion = new (require("discord.js").EmbedBuilder)()
             .setTitle("Gestion")
             .setDescription(`**\`${pf}giveaway\`** - Lancer un giveaway
 **\`${pf}gend\`** - Terminer un giveaway
@@ -213,7 +213,7 @@ module.exports = {
             .setFooter({ text: `${footer} | Préfixe : ${pf}` })
             .setColor(color);
 
-        const logs = new Discord.MessageEmbed()
+        const logs = new (require("discord.js").EmbedBuilder)()
             .setTitle('Logs')
             .setDescription(`**\`${pf}messagelog\`** - Logs des messages
 **\`${pf}modlog\`** - Logs de modération
@@ -225,7 +225,7 @@ module.exports = {
 
         message.channel.send({ embeds: [Help], components: [row] }).then(async msg => {
             const collector = message.channel.createMessageComponentCollector({
-                componentType: "SELECT_MENU",
+                componentType: ComponentType.StringSelect,
                 filter: (i => i.user.id === message.author.id),
                 time: 120000
             });

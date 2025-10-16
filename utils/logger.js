@@ -31,15 +31,6 @@ class Logger {
             `Cible: ${target.tag} | Raison: ${reason}`
         );
     }
-    
-    static security(action, user, guild, details = '') {
-        this.log(
-            `🛡️ SECURITE: ${action}`,
-            user.tag,
-            guild.name,
-            details
-        );
-    }
 }
 
 module.exports = Logger;

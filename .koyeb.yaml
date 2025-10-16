@@ -1,7 +1,7 @@
 name: harukaprotect
 build:
   type: nodejs
-  command: npm install && node haruka-migration-pro.js
+  command: npm install --force
 run:
   command: npm start
 env:

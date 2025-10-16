@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build": "node haruka-migration-pro.js"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
@@ -17,5 +16,8 @@
     "moment": "^2.29.4",
     "hastebin-gen": "^2.0.5",
     "discord-fetch-all": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

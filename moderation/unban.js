@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const config = require('../config');
 
 
@@ -10,7 +10,7 @@ module.exports = {
     name: 'unban',
     usage: 'unban [membre/all]',
     description: `Permet de débannir un membre ou tous les membres.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         const perm3 = await p3.get(`perm3_${message.guild.id}`);
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)  ) {
@@ -34,7 +34,7 @@ module.exports = {
                 const channellogs = config.bot.channellogs; 
                 const logchannel = client.channels.cache.get(channellogs);
                 if (logchannel) {
-                    const alert = new Discord.MessageEmbed()
+                    const alert = new (require("discord.js").EmbedBuilder)()
                         .setColor("#6495ED")
                         .setTitle(`${message.author.tag} a débanni tous les membres`)
                         .setDescription(`Tous les membres bannis ont été débannis\nExécuteur : <@${message.author.id}>`)
@@ -60,7 +60,7 @@ module.exports = {
                 const channellogs = config.bot.channellogs; 
                 const logchannel = client.channels.cache.get(channellogs);
                 if (logchannel) {
-                    const alert = new Discord.MessageEmbed()
+                    const alert = new (require("discord.js").EmbedBuilder)()
                         .setColor("#6495ED")
                         .setTitle(`${message.author.tag} a débanni un membre`)
                         .setDescription(`<@${user}> a été débanni\nExécuteur : <@${message.author.id}>`)

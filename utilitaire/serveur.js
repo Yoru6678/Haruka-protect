@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 
 const cl = db.table("Color");
@@ -17,7 +17,7 @@ module.exports = {
     name: 'serveur',
     usage: 'serveur <pic/banner/info>',
     description: `Permet d'afficher des informations relatives au serveur`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
          if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p1) || message.member.roles.cache.has(p2) || message.member.roles.cache.has(p3) || config.bot.buyer.includes(message.author.id)  ) {
@@ -29,13 +29,13 @@ module.exports = {
         if (args[0] === "pic") {
             let pic = message.guild.iconURL();
             if (pic) {
-                const picembed = new MessageEmbed()
+                const picembed = new EmbedBuilder()
                     .setTitle(`${message.guild.name}`)
                     .setColor(color)
                     .setImage(message.guild.iconURL({ dynamic: true, size: 1024 }));
                 message.channel.send({ embeds: [picembed] });
             } else {
-                const nopic = new MessageEmbed()
+                const nopic = new EmbedBuilder()
                     .setTitle(`${message.guild.name}`)
                     .setColor(color)
                     .setDescription(`Ce serveur ne possède pas d'avatar`);
@@ -44,13 +44,13 @@ module.exports = {
         } else if (args[0] === "banner") {
             let banner = message.guild.bannerURL();
             if (banner) {
-                const bannerembed = new MessageEmbed()
+                const bannerembed = new EmbedBuilder()
                     .setTitle(`${message.guild.name}`)
                     .setColor(color)
                     .setImage(message.guild.bannerURL({ dynamic: true, size: 512 }));
                 message.channel.send({ embeds: [bannerembed] });
             } else {
-                const nobanner = new MessageEmbed()
+                const nobanner = new EmbedBuilder()
                     .setTitle(`${message.guild.name}`)
                     .setColor(color)
                     .setDescription('Ce serveur ne possède pas de bannière');
@@ -80,7 +80,7 @@ module.exports = {
             let desc = message.guild.description;
             if (desc == null) desc = "Le serveur ne possède pas de description !";
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(color)
                 .setThumbnail(message.guild.iconURL({ dynamic: true }))
                 .setImage(message.guild.bannerURL({ dynamic: true, size: 512 }))

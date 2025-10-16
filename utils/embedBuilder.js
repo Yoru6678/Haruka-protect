@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const config = require("../config");
 
-class EmbedBuilder {
+class CustomEmbedBuilder {
     static success(desc) {
         return new EmbedBuilder()
             .setDescription("✅ " + desc)
@@ -29,31 +29,6 @@ class EmbedBuilder {
             .setColor(config.bot.couleur)
             .setTimestamp();
     }
-    
-    static modLog(mod, action, target, reason = "Aucune raison") {
-        return new EmbedBuilder()
-            .setTitle("🛡️ Modération")
-            .addFields(
-                { name: "Modérateur", value: `${mod.tag} (${mod.id})`, inline: true },
-                { name: "Cible", value: `${target.tag} (${target.id})`, inline: true },
-                { name: "Action", value: action, inline: true },
-                { name: "Raison", value: reason }
-            )
-            .setColor("#ffa500")
-            .setTimestamp();
-    }
-    
-    static securityAlert(action, target, details = "") {
-        return new EmbedBuilder()
-            .setTitle("🚨 Alerte Sécurité")
-            .addFields(
-                { name: "Action", value: action, inline: true },
-                { name: "Cible", value: `${target.tag} (${target.id})`, inline: true },
-                { name: "Détails", value: details || "Aucun détail supplémentaire" }
-            )
-            .setColor("#ff4444")
-            .setTimestamp();
-    }
 }
 
-module.exports = EmbedBuilder;
+module.exports = CustomEmbedBuilder;

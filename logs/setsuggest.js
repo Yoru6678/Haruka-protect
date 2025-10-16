@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const Discord = require('discord.js')
 
 const config = require("../config")
@@ -13,7 +13,7 @@ module.exports = {
     name: 'setsuggest',
     usage: 'setsuggest <id>',
     description: `Permet de changer le salon des suggestions.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) || config.bot.funny.includes(message.author.id) === true) {
 
@@ -30,7 +30,7 @@ module.exports = {
 
                 const channellogs = db.get(`${message.guild.id}.suggestions`)
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle(`${message.author.tag} a défini ce salon commme salon des suggestions`)
                     .setDescription(`❓ Ce salon est désormais utilisé pour __toutes__ **les suggestions** du serveur\nExécuteur : <@${message.author.id}>`)
                     .setTimestamp()

@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const ownercount = db.table("Ownercount")
@@ -13,7 +13,7 @@ module.exports = {
     usage: 'unowner',
     category: "owner",
     description: `Permet de gérer les owners du bot.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
 

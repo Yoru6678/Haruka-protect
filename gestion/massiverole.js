@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const cl = db.table("Color")
 const owner = db.table("Owner")
@@ -11,7 +11,7 @@ module.exports = {
   name: 'massiverole',
   usage: 'massiverole',
   description: `Permet d'ajouter un rôle à tous les membres du serveur`,
-  async execute(client, message, args) {
+  async execute(message, args) {
 
     if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 

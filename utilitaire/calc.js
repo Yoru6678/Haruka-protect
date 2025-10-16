@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const cl = db.table("Color");
@@ -11,7 +11,7 @@ module.exports = {
     name: 'calc',
     usage: 'calc <calcul>',
     description: `Permet d'effectuer un calcul.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         if (!args.length) {
@@ -31,7 +31,7 @@ module.exports = {
         try {
             const result = safeEval(expression);
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new (require("discord.js").EmbedBuilder)()
                 .setDescription(`Le résultat de \`${expression}\` est: **${result}**`)
                 .setColor(color)
 

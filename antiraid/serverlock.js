@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 const config = require("../config")
 
 const owner = db.table("Owner")
@@ -12,7 +12,7 @@ module.exports = {
     name: 'server',
     usage: 'server',
     description: `Permet de fermer l'accès au serveur`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
         if (color == null) color = config.bot.couleur

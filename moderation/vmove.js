@@ -14,7 +14,7 @@ module.exports = {
     name: 'vmove',
     usage: 'vmove <membre/salon> [salon]',
     description: 'Déplace un membre ou un salon vocal entier vers un autre salon vocal.',
-    async execute(client, message, args) {
+    async execute(message, args) {
         const pf = config.bot.prefixe;
         const perm2 = await p2.get(`perm2_${message.guild.id}`);
         const perm3 = await p3.get(`perm3_${message.guild.id}`);
@@ -60,7 +60,7 @@ module.exports = {
         let color = await cl.get(`color_${message.guild.id}`);
         if (color == null) color = config.bot.couleur;
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setColor(color)
             .setDescription(`<@${message.author.id}> a déplacé un membre/salon vocal vers ${destinationChannel}`)
             .setTimestamp()

@@ -48,7 +48,7 @@ module.exports = {
                     }
                 }
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new (require("discord.js").EmbedBuilder)()
                     .setDescription(`<@${audit.executor.id}> a retiré des rôles à ${newMember.user.tag}`)
                     .setTimestamp()
                     .setColor(config.bot.couleur);

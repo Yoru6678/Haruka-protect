@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 
 
 const cl = db.table("Color");
@@ -10,7 +10,7 @@ module.exports = {
     name: 'find',
     usage: 'find [membre/ID]',
     description: `Permet de chercher un membre en vocal dans le serveur.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
@@ -21,7 +21,7 @@ module.exports = {
 
         const voiceChannel = member.voice.channel;
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new (require("discord.js").EmbedBuilder)()
             .setColor(color)
             .addField(
                 ` `,

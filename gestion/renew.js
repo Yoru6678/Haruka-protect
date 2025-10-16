@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const db = require("../db.js");
 const config = require("../config");
 
@@ -9,7 +9,7 @@ module.exports = {
     name: 'renew',
     usage: 'renew',
     description: 'Recrée le salon actuel',
-    async execute(client, message, args) {
+    async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)) {

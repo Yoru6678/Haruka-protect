@@ -1,21 +1,21 @@
 const db = require("../db.js");
-const Discord = require("discord.js")
+const Discord = require("discord.js").default || require("discord.js")
 
 const owner = db.table("Owner")
 const cl = db.table("Color")
 const config = require("../config")
 const footer = config.bot.footer
 const {
-    MessageEmbed,
-    MessageSelectMenu,
-    MessageActionRow, MessageButton
+    EmbedBuilder,
+    StringSelectMenuBuilder,
+    ActionRowBuilder, ButtonBuilder
 } = require(`discord.js`);
 
 module.exports = {
     name: 'soutien',
     usage: 'soutien',
     description: `Permet de configurer le rôle soutien.`,
-    async execute(client, message, args) {
+    async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -26,7 +26,7 @@ module.exports = {
 
                 first_layer()
                 async function first_layer() {
-                    let menuoptions = new MessageSelectMenu()
+                    let menuoptions = new StringSelectMenuBuilder()
                         .setCustomId('MenuSelection')
                         .setMaxValues(1)
                         .setMinValues(1)
@@ -65,13 +65,13 @@ module.exports = {
                         ])
 
 
-                    let MenuEmbed = new MessageEmbed()
+                    let MenuEmbed = new EmbedBuilder()
                         .setColor(color)
                         .setTitle("Soutien")
                         .setDescription(`**Choisissez une option pour configurer le rôle soutien et son statut**`)
                     let used1 = false;
 
-                    const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                    const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
 
                     async function menuselection(i) {
                         used1 = true;
@@ -80,19 +80,19 @@ module.exports = {
                     //Event
                     let msg = menumsg
 
-                    const antichannel = new MessageEmbed()
+                    const antichannel = new EmbedBuilder()
                         .setTitle(`Configurer le rôle`)
                         .setDescription("**Sélectionnez l'option qui vous correspond**")
                         .setColor(color)
                         .setImage('https://cdn.discordapp.com/attachments/904084986536276059/991543407694585866/role.gif')
 
-                    const antichanneldelete = new MessageEmbed()
+                    const antichanneldelete = new EmbedBuilder()
                         .setTitle(`Configurer le statut`)
                         .setDescription("**Indiquez le statut à avoir pour obtenir le rôle soutien**")
                         .setColor(color)
 
 
-                    let options = new MessageSelectMenu()
+                    let options = new StringSelectMenuBuilder()
                         .setCustomId('MenuOn')
                         .setMaxValues(1)
                         .setMinValues(1)
@@ -118,7 +118,7 @@ module.exports = {
 
 
 
-                    let AntiChannelDelete = new MessageSelectMenu()
+                    let AntiChannelDelete = new StringSelectMenuBuilder()
                         .setCustomId('MenuOn')
                         .setMaxValues(1)
                         .setMinValues(1)
@@ -149,7 +149,7 @@ module.exports = {
                     let filter1 = (i) => i.user.id === message.author.id;
                     const col = await msg.createMessageComponentCollector({
                         filter: filter1,
-                        componentType: "SELECT_MENU"
+                        componentType: ComponentType.StringSelect
                     })
 
                     col.on("collect", async (i) => {
@@ -157,7 +157,7 @@ module.exports = {
                             menumsg.delete()
                         }
                         else if (i.values[0] === "Role") {
-                            menumsg.edit({ embeds: [antichannel], components: [new MessageActionRow().addComponents([options])] })
+                            menumsg.edit({ embeds: [antichannel], components: [new ActionRowBuilder().addComponents([options])] })
                             await i.deferUpdate().catch(() => false)
                         }
                         if (i.values[0] == "active") {
@@ -186,7 +186,7 @@ module.exports = {
                                         // db.set('support' + message.guild.id,true)
                                         collected.first().delete().catch(() => false)
                                         if (!role) return message.channel.send('Role invalide')
-                                        if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("ADMINISTRATOR") || role.permissions.has("MANAGE_CHANNELS") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("MANAGE_ROLES"))
+                                        if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("Administrator") || role.permissions.has("ManageChannels") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("ManageRoles"))
                                             return message.channel.send("Ce rôle ne peut pas être défini en rôle de \`soutien\` car il possède des permissions dangereuses")
 
                                         db.set('role' + message.guild.id, role.id)
@@ -198,7 +198,7 @@ module.exports = {
                             }
 
                         } else if (i.values[0] == "Retour") {
-                            menumsg.edit({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                            menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactive') {
@@ -224,7 +224,7 @@ module.exports = {
 
                         //Statut
                         else if (i.values[0] === "Statut") {
-                            menumsg.edit({ embeds: [antichanneldelete], components: [new MessageActionRow().addComponents([AntiChannelDelete])] })
+                            menumsg.edit({ embeds: [antichanneldelete], components: [new ActionRowBuilder().addComponents([AntiChannelDelete])] })
                             await i.deferUpdate().catch(() => false)
                         } if (i.values[0] == "activedel") {
                             await i.deferUpdate().catch(() => false)
@@ -256,7 +256,7 @@ module.exports = {
                                 })
                             }
                         } else if (i.values[0] == "Retourdel") {
-                            menumsg.edit({ embeds: [MenuEmbed], components: [new MessageActionRow().addComponents([menuoptions])] })
+                            menumsg.edit({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
                             await i.deferUpdate().catch(() => false)
 
                         } else if (i.values[0] == 'desactivedel') {
@@ -313,12 +313,12 @@ module.exports = {
                         //remove
                         if (i.values[0] === "Settings") {
                             await i.deferUpdate().catch(() => false)
-                            const paramètre = new MessageEmbed()
+                            const paramètre = new EmbedBuilder()
                                 .setTitle('Soutien')
                                 .setColor(color)
                                 .setDescription(`**Voici la configuration du soutien**\n\n**Rôle Soutien:** <@&${role}>\n**Statut à avoir**: __${statut}__`)
 
-                            menumsg.edit({ embeds: [paramètre], components: [new MessageActionRow().addComponents([menuoptions])] })
+                            menumsg.edit({ embeds: [paramètre], components: [new ActionRowBuilder().addComponents([menuoptions])] })
 
                         }
 
@@ -329,7 +329,7 @@ module.exports = {
             catch (e) {
                 console.log(e)
                 return message.channel.send({
-                    embeds: [new MessageEmbed()
+                    embeds: [new EmbedBuilder()
                         .setColor(color)
                         .setTitle("Une erreur est survenu")
                         .setDescription('Erreur inattendue')

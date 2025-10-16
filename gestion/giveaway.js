@@ -1,5 +1,5 @@
 const db = require("../db.js");
-const Discord = require("discord.js");
+const Discord = require("discord.js").default || require("discord.js");
 const config = require("../config");
 const ms = require("ms");
 
@@ -10,7 +10,7 @@ module.exports = {
     name: 'giveaway',
     usage: 'giveaway <durée> <gagnants> <prix>',
     description: 'Lance un giveaway',
-    async execute(client, message, args) {
+    async execute(message, args) {
         let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)) {

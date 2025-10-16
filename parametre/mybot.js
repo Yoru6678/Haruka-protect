@@ -1,6 +1,6 @@
 (async () => {
 const db = require("../db.js");
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 require("moment-duration-format");
 const config = require("../config")
 
@@ -16,7 +16,7 @@ module.exports = {
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setTitle('Votre Bot')
                 .setDescription(`Cliquez ici pour inviter votre bot [${client.user.tag}](https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
                 .setFooter({text: footer})
