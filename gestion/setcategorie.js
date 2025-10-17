@@ -13,22 +13,22 @@ const footer = config.bot.footer
 module.exports = {
     name: 'setcategorie',
     usage: 'setcategorie <id>',
-    description: `Permet de changer la catégorie des tickets.`,
+    description: 'Permet de changer la catégorie des tickets.',
     async execute(message, args) {
 
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
 
-            let color = await cl.get(`color_${message.guild.id}`)
+            let color = await cl.get(`color_${message.guild.id}')
             if (color == null) color = config.bot.couleur
 
             const funny = message.guild.channels.cache.filter(x => x.type === "Category")
 
             const newCategorie = message.guild.channels.cache.get(args[0] || funny.id);
             if (!newCategorie) return message.channel.send({ content: "Aucun catégorie trouvée !" })
-            if (ct.get(`${message.guild.id}.categorie`) === newCategorie) return message.channel.send(`📧 | __Nouvelle catégorie :__ \`${ct.get(`${message.guild.id}.categorie`)}\``)
+            if (ct.get(`${message.guild.id}.categorie`) === newCategorie) return message.channel.send('📧 | __Nouvelle catégorie :__ '${ct.get(`${message.guild.id}.categorie`)}'')
             else {
-                ct.set(`${message.guild.id}.categorie`, args[0])
-                message.channel.send(`📧 | __Nouvelle catégorie :__ ${newCategorie.name}`)
+                ct.set(`${message.guild.id}.categorie', args[0])
+                message.channel.send('📧 | __Nouvelle catégorie :__ ${newCategorie.name}`)
             }
 
         }

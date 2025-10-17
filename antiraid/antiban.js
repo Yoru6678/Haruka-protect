@@ -11,7 +11,7 @@ const ab = db.table("Antiban")
 module.exports = {
     name: 'antiban',
     usage: 'antiban',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,13 +22,13 @@ module.exports = {
             if (args[0] == 'on') {
                 ab.set(`config.${message.guild.id}.antiban`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiban** est maintenant **activéé**`)
+                    .setDescription(`**L'antiban** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 ab.set(`config.${message.guild.id}.antiban`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiban** est maintenant **désactivéé**`)
+                    .setDescription(`**L'antiban** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

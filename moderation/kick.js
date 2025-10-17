@@ -11,13 +11,13 @@ const cl = db.table("Color");
 module.exports = {
     name: 'kick',
     usage: 'kick <@user> [raison]',
-    description: 'Expulse un membre du serveur',
+    description: 'Expulse un membre du serveur`,
     async execute(message, args) {
-        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
+        let color = await cl.get(`color_${message.guild.id}') || config.bot.couleur;
 
         if (owner.get(`owners.${message.author.id}`) || 
             message.member.roles.cache.has(p1.get(`perm1_${message.guild.id}`)) ||
-            message.member.roles.cache.has(p2.get(`perm2_${message.guild.id}`)) ||
+            message.member.roles.cache.has(p2.get(`perm2_${message.guild.id}')) ||
             message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`)) ||
             config.bot.buyer.includes(message.author.id)) {
 
@@ -28,8 +28,8 @@ module.exports = {
 
             member.kick(reason).then(() => {
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`✅ ${member.user.tag} a été expulsé
-Raison: ${reason}`)
+                    .setDescription('✅ ${member.user.tag} a été expulsé')
+Raison: ${reason}')
                     .setColor(color);
                 message.channel.send({ embeds: [embed] });
             }).catch(() => {

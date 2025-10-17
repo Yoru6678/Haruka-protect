@@ -9,27 +9,27 @@ const atc = db.table("antichannelcreate");
 const config = require('../config');
 
 module.exports = {
-    name: 'channelCreate',
+    name: 'channelCreate`,
     once: false,
 
     async execute(client, channel) {
-        if (atc.get(`config.${channel.guild.id}.antichannelcreate`) === true) {
+        if (atc.get(`config.${channel.guild.id}.antichannelcreate') === true) {
             const audit = await channel.guild.fetchAuditLogs({type: "CHANNEL_CREATE"}).then((audit) => audit.entries.first());
             if (!audit || !audit.executor) return;
             if (audit.executor.id === client.user.id) return;
-            if (owner.get(`owners.${audit.executor.id}`) || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id || client.user.id === audit.executor.id) return;
+            if (owner.get(`owners.${audit.executor.id}') || wl.get(`${channel.guild.id}.${audit.executor.id}.wl`) || config.bot.buyer === audit.executor.id || client.user.id === audit.executor.id) return;
             
             channel.delete().catch(() => false);
 
-            if (punish.get(`sanction_${channel.guild.id}`) === "ban") {
-                channel.guild.members.ban(audit.executor.id, { reason: `AntiChannel Create` }).catch(() => false);
+            if (punish.get(`sanction_${channel.guild.id}') === "ban") {
+                channel.guild.members.ban(audit.executor.id, { reason: 'AntiChannel Create' }).catch(() => false);
             } else if (punish.get(`sanction_${channel.guild.id}`) === "kick") {
-                channel.guild.members.kick(audit.executor.id, { reason: `AntiChannel Create` }).catch(() => false);
-            } else if (punish.get(`sanction_${channel.guild.id}`) === "derank") {
+                channel.guild.members.kick(audit.executor.id, { reason: 'AntiChannel Create' }).catch(() => false);
+            } else if (punish.get(`sanction_${channel.guild.id}') === "derank") {
                 const member = await channel.guild.members.fetch(audit.executor.id).catch(() => null);
                 if (member) {
                     member.roles.cache.forEach(role => {
-                        if (role.name !== '@everyone') {
+                        if (role.name !== '@everyone`) {
                             member.roles.remove(role).catch(() => false);
                         }
                     });
@@ -37,7 +37,7 @@ module.exports = {
             }
 
             const embed = new (require("discord.js").EmbedBuilder)()
-                .setDescription(`<@${audit.executor.id}> a créé le salon `${channel.name}`, je l'ai supprimé`)
+                .setDescription(`<@${audit.executor.id}> a créé le salon `${channel.name}`, je l'ai supprimé')')
                 .setTimestamp()
                 .setColor(config.bot.couleur);
             

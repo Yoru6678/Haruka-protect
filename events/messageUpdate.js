@@ -28,7 +28,7 @@ const links = [
 
 
 module.exports = {
-    name: 'messageUpdate',
+    name: 'messageUpdate`,
     once: false,
 
     async execute(client, oldMessage, newMessage) {
@@ -49,12 +49,12 @@ module.exports = {
             if (isLink == true) {
                 newMessage.delete()
                 newMessage.member.timeout(15000)
-                newMessage.channel.send({ content: `<@${newMessage.author.id}> Tu n'as pas le droit d'envoyer de liens dans ce serveur.` }).then(msg => {
+                newMessage.channel.send({ content: `<@${newMessage.author.id}> Tu n`as pas le droit d`envoyer de liens dans ce serveur.` }).then(msg => {
                     setTimeout(() => msg.delete(), 6000)
                 })
 
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${newMessage.author.id}> a envoyé un `lien` dans `${newMessage.channel.name}`, j'ai supprimé son message`)
+                    .setDescription(`<@${newMessage.author.id}> a envoyé un 'lien' dans `${newMessage.channel.name}', j'ai supprimé son message')')
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${newMessage.guild.id}.raidlog`);
 const raidlogChannel = const chan = client.channels.cache.get(raidlogId);
@@ -73,9 +73,9 @@ if (chan) chan.send({ embeds: [embed] }).catch(() => false)
         if (!oldMessage.author | !newMessage.author) return
 
         const embed = new (require("discord.js").EmbedBuilder)()
-            .setTitle(`📝 Message édité`)
-            .setDescription(`**${oldMessage.author.username}**#${oldMessage.author.discriminator} (`${oldMessage.author.id}`) a édité son message dans [`${oldMessage.channel.name}`](https://discord.com/channels/${oldMessage.guild.id}/${oldMessage.channel.id}) 
-  **Avant**: ```${oldMessage.content}``` **Après:** ```${newMessage.content}````)
+            .setTitle('📝 Message édité')
+            .setDescription(`**${oldMessage.author.username}**#${oldMessage.author.discriminator} (`${oldMessage.author.id}') a édité son message dans [`${oldMessage.channel.name}`](https://discord.com/channels/${oldMessage.guild.id}/${oldMessage.channel.id}) 
+  **Avant**: ''`${oldMessage.content}''' **Après:** '`${newMessage.content}'`)
             .setFooter({ text: `🕙 ${getNow().time}` })
             .setColor(color)
 

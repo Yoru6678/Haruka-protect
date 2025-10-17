@@ -9,15 +9,15 @@ const {
     EmbedBuilder,
     StringSelectMenuBuilder,
     ActionRowBuilder, ButtonBuilder
-} = require(`discord.js`);
+} = require(`discord.js');
 
 module.exports = {
     name: 'soutien',
     usage: 'soutien',
-    description: `Permet de configurer le rôle soutien.`,
+    description: 'Permet de configurer le rôle soutien.',
     async execute(message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true) {
+        if (owner.get(`owners.${message.author.id}') || config.bot.buyer.includes(message.author.id)   === true) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
@@ -34,12 +34,12 @@ module.exports = {
                         .addOptions([
                             {
                                 label: "Rôle",
-                                value: `Role`,
+                                value: 'Role',
                                 emoji: "👥",
                             },
                             {
                                 label: 'Statut',
-                                value: `Statut`,
+                                value: 'Statut',
                                 emoji: "💬",
                             },
                             {
@@ -68,7 +68,7 @@ module.exports = {
                     let MenuEmbed = new EmbedBuilder()
                         .setColor(color)
                         .setTitle("Soutien")
-                        .setDescription(`**Choisissez une option pour configurer le rôle soutien et son statut**`)
+                        .setDescription('**Choisissez une option pour configurer le rôle soutien et son statut**')
                     let used1 = false;
 
                     const menumsg = await message.channel.send({ embeds: [MenuEmbed], components: [new ActionRowBuilder().addComponents([menuoptions])] })
@@ -81,13 +81,13 @@ module.exports = {
                     let msg = menumsg
 
                     const antichannel = new EmbedBuilder()
-                        .setTitle(`Configurer le rôle`)
+                        .setTitle('Configurer le rôle')
                         .setDescription("**Sélectionnez l'option qui vous correspond**")
                         .setColor(color)
                         .setImage('https://cdn.discordapp.com/attachments/904084986536276059/991543407694585866/role.gif')
 
                     const antichanneldelete = new EmbedBuilder()
-                        .setTitle(`Configurer le statut`)
+                        .setTitle(`Configurer le statut')
                         .setDescription("**Indiquez le statut à avoir pour obtenir le rôle soutien**")
                         .setColor(color)
 
@@ -100,12 +100,12 @@ module.exports = {
                         .addOptions([
                             {
                                 label: "Définir un rôle",
-                                value: `active`,
+                                value: 'active',
                                 emoji: '✅',
                             },
                             {
                                 label: 'Réinitialiser',
-                                value: `desactive`,
+                                value: 'desactive',
                                 emoji: '❌',
                             },
                             {
@@ -126,12 +126,12 @@ module.exports = {
                         .addOptions([
                             {
                                 label: "Définir un statut",
-                                value: `activedel`,
+                                value: 'activedel',
                                 emoji: '✅',
                             },
                             {
                                 label: 'Réinitialiser',
-                                value: `desactivedel`,
+                                value: 'desactivedel',
                                 emoji: '❌',
                             },
                             {
@@ -163,7 +163,7 @@ module.exports = {
                         if (i.values[0] == "active") {
                             let link = await db.get("role" + message.guild.id)
                             if (link == true) {
-                                message.channel.send(`✅ | Un \`rôle\` est déjà setup`).then(msg => {
+                                message.channel.send('✅ | Un 'rôle' est déjà setup').then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -187,11 +187,11 @@ module.exports = {
                                         collected.first().delete().catch(() => false)
                                         if (!role) return message.channel.send('Role invalide')
                                         if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("Administrator") || role.permissions.has("ManageChannels") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("ManageRoles"))
-                                            return message.channel.send("Ce rôle ne peut pas être défini en rôle de \`soutien\` car il possède des permissions dangereuses")
+                                            return message.channel.send("Ce rôle ne peut pas être défini en rôle de 'soutien' car il possède des permissions dangereuses")
 
                                         db.set('role' + message.guild.id, role.id)
 
-                                        message.channel.send(`✅ | Le module \`soutien\` a été activé avec succès, rôle soutien : **${role.name}**`).then(msg => {
+                                        message.channel.send('✅ | Le module 'soutien` a été activé avec succès, rôle soutien : **${role.name}**').then(msg => {
                                             setTimeout(() => msg.delete(), 3000)
                                         }).catch(() => false);
                                     })
@@ -206,14 +206,14 @@ module.exports = {
                             if (link == true) {
                                 //     db.set("support"+ message.guild.id , null)
                                 db.delete("role" + message.guild.id)
-                                message.channel.send(`❌ | Le \`rôle de soutien\` vient d'être réinitialiser`).then(msg => {
+                                message.channel.send('❌ | Le 'rôle de soutien' vient d'être réinitialiser`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
                                 await i.deferUpdate().catch(() => false)
 
                             } else if (link == null) {
-                                message.channel.send(`❌ | Le \`rôle de soutien\` est déjà réinitialiser`).then(msg => {
+                                message.channel.send(`❌ | Le 'rôle de soutien' est déjà réinitialiser').then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -228,9 +228,9 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                         } if (i.values[0] == "activedel") {
                             await i.deferUpdate().catch(() => false)
-                            let link = await db.get(`status${message.guild.id}`)
+                            let link = await db.get(`status${message.guild.id}')
                             if (link == true) {
-                                message.channel.send(`✅ | Le module de \`statut\` est déjà activé`).then(msg => {
+                                message.channel.send('✅ | Le module de 'statut' est déjà activé').then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -248,7 +248,7 @@ module.exports = {
                                     const status = collected.first().content
                                     db.set("status" + message.guild.id, status)
                                     //  db.set("support"+ message.guild.id , true)
-                                    message.channel.send(`✅ | Le \`statut\` a été configuré avec comme statut ${status}`).then(msg => {
+                                    message.channel.send('✅ | Le 'statut` a été configuré avec comme statut ${status}').then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                     collected.first().delete().catch(() => false)
@@ -263,7 +263,7 @@ module.exports = {
                             let link = await db.get(`support${message.guild.id}`)
                             if (link == true) {
                                 db.delete('status' + message.guild.id)
-                                message.channel.send(`❌ |Le \`statut\` vient d'être réinitialisé`).then(msg => {
+                                message.channel.send(`❌ |Le 'statut' vient d'être réinitialisé').then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -271,7 +271,7 @@ module.exports = {
 
 
                             } else {
-                                message.channel.send(`❌ | Le \`statut\` est déjà réinitialisé`).then(msg => {
+                                message.channel.send('❌ | Le 'statut' est déjà réinitialisé`).then(msg => {
                                     setTimeout(() => msg.delete(), 10000)
                                 })
                                     .catch(() => false);
@@ -285,12 +285,12 @@ module.exports = {
                             await i.deferUpdate().catch(() => false)
                             let soutien = await db.get("support" + message.guild.id)
                             if (soutien === true) {
-                                return message.channel.send("Le module de \`soutien\` est déjà activé").then(msg => {
+                                return message.channel.send("Le module de 'soutien' est déjà activé").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
                             } else {
                                 db.set("support" + message.guild.id, true)
-                                return message.channel.send("✅ | Le module de \`soutien\` vient d'être activé.").then(msg => {
+                                return message.channel.send("✅ | Le module de 'soutien' vient d'être activé.").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
                             }
@@ -299,10 +299,10 @@ module.exports = {
                             let soutien = await db.get("support" + message.guild.id)
                             if (soutien == true) {
                                 db.set("support" + message.guild.id, null)
-                                return message.channel.send("❌ | Le module de \`soutien\` vient d'être désactivé.").then(msg => {
+                                return message.channel.send("❌ | Le module de 'soutien' vient d'être désactivé.").then(msg => {
                                     setTimeout(() => msg.delete(), 5000)
                                 })
-                            } else return message.channel.send('✅ | Le module de \`soutien\` est déjà désactivé.').then(msg => {
+                            } else return message.channel.send('✅ | Le module de 'soutien' est déjà désactivé.').then(msg => {
                                 setTimeout(() => msg.delete(), 5000)
                             })
                         }
@@ -316,7 +316,7 @@ module.exports = {
                             const paramètre = new EmbedBuilder()
                                 .setTitle('Soutien')
                                 .setColor(color)
-                                .setDescription(`**Voici la configuration du soutien**\n\n**Rôle Soutien:** <@&${role}>\n**Statut à avoir**: __${statut}__`)
+                                .setDescription('**Voici la configuration du soutien**\n\n**Rôle Soutien:** <@&${role}>\n**Statut à avoir**: __${statut}__')
 
                             menumsg.edit({ embeds: [paramètre], components: [new ActionRowBuilder().addComponents([menuoptions])] })
 

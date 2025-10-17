@@ -29,13 +29,13 @@ module.exports = {
         }
 
         try {
-            await member.timeout(duration * 60 * 1000, \`Mute par \${message.author.tag}\`);
+            await member.timeout(duration * 60 * 1000, `Mute par ${message.author.tag}`);
             
             message.channel.send({ 
-                embeds: [EmbedBuilder.success(\`\${member} a été muté pour \${duration} minutes.\`)]
+                embeds: [EmbedBuilder.success(`${member} a été muté pour ${duration} minutes.`)]
             });
             
-            Logger.moderation("MUTE", message.author, member, \`Durée: \${duration} minutes\`);
+            Logger.moderation("MUTE", message.author, member, `Durée: ${duration} minutes`);
 
         } catch (error) {
             console.error(error);

@@ -10,29 +10,29 @@ const footer = config.bot.footer;
 module.exports = {
     name: 'bl',
     usage: 'bl <membre/clear>',
-    description: `Permet de mettre dans la blacklist des membres.`,
+    description: `Permet de mettre dans la blacklist des membres.',
     async execute(message, args) {
         if (config.bot.buyer.includes(message.author.id)) {
-            let color = await cl.get(`color_${message.guild.id}`);
+            let color = await cl.get(`color_${message.guild.id}');
             if (color == null) color = config.bot.couleur;
 
             if (args[0] === 'clear') {
-                db.delete(`${config.bot.blacklist}.blacklist`);
-                return message.channel.send(`La liste noire a été effacée.`);
+                db.delete('${config.bot.blacklist}.blacklist');
+                return message.channel.send('La liste noire a été effacée.`);
             }
 
             if (args[0]) {
                 const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
-                if (!member) return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``);
+                if (!member) return message.channel.send('Aucun membre trouvé pour '${args[0] || "rien"}'');
 
                 if (db.get(`${config.bot.blacklist}.${member.id}`) === member.id) { 
                     return message.channel.send(`${member.user.username} est déjà blacklisté.`); 
                 }
 
-                db.push(`${config.bot.blacklist}.blacklist`, member.id);
-                db.set(`${config.bot.blacklist}.${member.id}`, member.id);
-                member.kick(`Blacklisté par ${message.author.username}`);
+                db.push(`${config.bot.blacklist}.blacklist', member.id);
+                db.set('${config.bot.blacklist}.${member.id}', member.id);
+                member.kick(`Blacklisté par ${message.author.username}');
                 return message.channel.send(`<@${member.id}> est maintenant dans la blacklist.`);
             } else {
                 let own = db.get(`${config.bot.blacklist}.blacklist`);

@@ -26,7 +26,7 @@ module.exports = {
                     value: "embeddescription", emoji: "💬"
                 }, {
                     label: "Modifier l'Auteur",
-                    value: "embedauthor", emoji: "🕵️‍♂️"
+                    value: "embedauthor", emoji: "🕵️♂️"
                 }, {
                     label: "Modifier le Footer",
                     value: "embedfooter", emoji: "🔻"

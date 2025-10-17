@@ -11,7 +11,7 @@ const ad = db.table("Antidown")
 module.exports = {
     name: 'antidown',
     usage: 'antidownn',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,14 +22,14 @@ module.exports = {
             if (args[0] == 'on') {
                 ad.set(`config.${message.guild.id}.antidown`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'anti down** est maintenant **activéé**`)
+                    .setDescription(`**L'anti down** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
                 
             } else if (args[0] == 'off') {
                 ad.set(`config.${message.guild.id}.antidown`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'anti down** est maintenant **désactivéé**`)
+                    .setDescription(`**L'anti down** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

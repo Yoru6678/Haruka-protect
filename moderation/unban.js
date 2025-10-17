@@ -9,9 +9,9 @@ const p3 = db.table("Perm3");
 module.exports = {
     name: 'unban',
     usage: 'unban [membre/all]',
-    description: `Permet de débannir un membre ou tous les membres.`,
+    description: 'Permet de débannir un membre ou tous les membres.',
     async execute(message, args) {
-        const perm3 = await p3.get(`perm3_${message.guild.id}`);
+        const perm3 = await p3.get(`perm3_${message.guild.id}');
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)  ) {
             if (!args[0]) {
@@ -21,7 +21,7 @@ module.exports = {
             if (args[0].toLowerCase() === 'all') {
                
                 const bans = await message.guild.bans.fetch();
-                if (bans.size === 0) return message.reply("Il n'y a pas de membres bannis.");
+                if (bans.size === 0) return message.reply("Il n`y a pas de membres bannis.");
 
                 bans.forEach(ban => {
                     message.guild.bans.remove(ban.user.id).catch(() => {
@@ -37,7 +37,7 @@ module.exports = {
                     const alert = new (require("discord.js").EmbedBuilder)()
                         .setColor("#6495ED")
                         .setTitle(`${message.author.tag} a débanni tous les membres`)
-                        .setDescription(`Tous les membres bannis ont été débannis
+                        .setDescription(`Tous les membres bannis ont été débannis`)
 Exécuteur : <@${message.author.id}>`)
                         .setTimestamp();
                     logchannel.send({ embeds: [alert] }).catch(() => false);
@@ -49,13 +49,13 @@ Exécuteur : <@${message.author.id}>`)
                 const isBanned = bans.has(user);
                 
                 if (!isBanned) {
-                    return message.reply(`ID invalide ou l'utilisateur n'est pas banni.`);
+                    return message.reply('ID invalide ou l'utilisateur n`est pas banni.`);
                 }
 
                 message.guild.bans.remove(user).then(() => {
                     message.reply(`<@${user}> a été débanni.`);
                 }).catch(() => {
-                    message.reply(`Impossible de débannir l'utilisateur avec l'ID ${user}.`);
+                    message.reply(`Impossible de débannir l'utilisateur avec l`ID ${user}.`);
                 });
 
                 const channellogs = config.bot.channellogs; 
@@ -64,14 +64,14 @@ Exécuteur : <@${message.author.id}>`)
                     const alert = new (require("discord.js").EmbedBuilder)()
                         .setColor("#6495ED")
                         .setTitle(`${message.author.tag} a débanni un membre`)
-                        .setDescription(`<@${user}> a été débanni
+                        .setDescription(`<@${user}> a été débanni`)
 Exécuteur : <@${message.author.id}>`)
                         .setTimestamp();
                     logchannel.send({ embeds: [alert] }).catch(() => false);
                 }
             }
         } else {
-            message.reply("Vous n'avez pas la permission d'utiliser cette commande.");
+            message.reply("Vous n`avez pas la permission d`utiliser cette commande.");
         }
     }
 };

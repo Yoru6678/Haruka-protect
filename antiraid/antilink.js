@@ -11,7 +11,7 @@ const al = db.table("AntiLink")
 module.exports = {
     name: 'antilink',
     usage: 'antilink',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -39,7 +39,7 @@ module.exports = {
                 al.set(`config.${message.guild.id}.antilinkinvite`, false)
                 al.set(`config.${message.guild.id}.antilinkall`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'Antilink** est maintenant **désactivéé**`)
+                    .setDescription(`**L'Antilink** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

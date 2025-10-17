@@ -12,7 +12,7 @@ module.exports = {
     name: 'owner',
     usage: 'owner',
     category: "owner",
-    description: `Permet de gérer les owners du bot.`,
+    description: 'Permet de gérer les owners du bot.',
     async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
@@ -25,19 +25,19 @@ module.exports = {
                 if (args[0]) {
                     member = client.users.cache.get(args[0]);
                 } else {
-                    return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
+                    return message.channel.send('Aucun membre trouvé pour `${args[0] || "rien"}'')
 
                 }
                 if (message.mentions.members.first()) {
                     member = client.users.cache.get(message.mentions.members.first().id);
                 }
-                if (!member) return message.channel.send(`Aucun membre trouvé pour \`${args[0] || "rien"}\``)
+                if (!member) return message.channel.send('Aucun membre trouvé pour '${args[0] || "rien"}'')
 
                 if (owner.get(`owners.${member.id}}`) === member.id) {
                     return message.channel.send({ content: `__${member.username}__ est déjà owner` })
                 } else {
-                    owner.set(`owners.${member.id}`, member.id)
-                    message.channel.send({ content: `__${member.username}__ est maintenant owner` })
+                    owner.set(`owners.${member.id}', member.id)
+                    message.channel.send({ content: '__${member.username}__ est maintenant owner' })
                 }
 
 

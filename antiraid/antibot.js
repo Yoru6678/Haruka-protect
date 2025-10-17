@@ -11,7 +11,7 @@ const atb = db.table("Antibot")
 module.exports = {
     name: 'antibot',
     usage: 'antibot',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,13 +22,13 @@ module.exports = {
             if (args[0] == 'on') {
                 atb.set(`config.${message.guild.id}.antibot`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antibot** est maintenant **activéé**`)
+                    .setDescription(`**L'antibot** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 atb.set(`config.${message.guild.id}.antibot`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antibot** est maintenant **désactivéé**`)
+                    .setDescription(`**L'antibot** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

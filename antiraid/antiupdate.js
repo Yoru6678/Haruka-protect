@@ -11,7 +11,7 @@ const agu = db.table("Guildupdate")
 module.exports = {
     name: 'antiupdate',
     usage: 'antiupdate',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,13 +22,13 @@ module.exports = {
             if (args[0] == 'on') {
                 agu.set(`guildupdate_${message.guild.id}`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**guildupdate** est maintenant **activéé**`)
+                    .setDescription(`**guildupdate** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 agu.set(`guildupdate_${message.guild.id}`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**guildupdate** est maintenant **désactivéé**`)
+                    .setDescription(`**guildupdate** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

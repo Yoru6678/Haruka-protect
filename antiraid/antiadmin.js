@@ -11,7 +11,7 @@ const aa = db.table("Antiadmin")
 module.exports = {
     name: 'antiadmin',
     usage: 'antiadmin',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,13 +22,13 @@ module.exports = {
             if (args[0] == 'on') {
                 aa.set(`config.${message.guild.id}.antiadmin`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'anti admin** est maintenant **activéé**`)
+                    .setDescription(`**L'anti admin** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 aa.set(`config.${message.guild.id}.antiadmin`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'anti admin** est maintenant **désactivéé**`)
+                    .setDescription(`**L'anti admin** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

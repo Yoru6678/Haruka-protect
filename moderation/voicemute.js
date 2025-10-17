@@ -15,12 +15,12 @@ const footer = config.bot.footer
 module.exports = {
     name: 'voicemute',
     usage: 'voicemute <@>',
-    description: `Permet de rendre muet un membre dans un salon vocal sur le serveur.`,
+    description: `Permet de rendre muet un membre dans un salon vocal sur le serveur.',
     async execute(client, message, args, member) {
 
-        const perm1 = await p1.get(`perm1_${message.guild.id}`)
+        const perm1 = await p1.get(`perm1_${message.guild.id}')
         const perm2 = await p2.get(`perm2_${message.guild.id}`)
-        const perm3 = await p3.get(`perm3_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}')
 
         if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm1) || message.member.roles.cache.has(perm2) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id)   === true) {
 
@@ -30,7 +30,7 @@ module.exports = {
             const muteUser = message.mentions.members.first() || message.guild.members.cache.get(args[0])
             
             /*   if (muteUser.roles.highest.position >= message.muteUser.roles.highest.position || message.author.id !== message.guild.owner.id) {
-            return message.reply(`Vous ne pouvez pas ban un membre au dessus de vous`)
+            return message.reply('Vous ne pouvez pas ban un membre au dessus de vous`)
             }       */
 
             const muteReason = args.join(" ").slice(23);
@@ -45,13 +45,13 @@ module.exports = {
             } catch (err) {
                 console.error(err);
                 message
-                    .reply("Je n'ai pas pu désactivéer le son de cet utilisateur, veuillez vérifier mes permissions et réessayer.
+                    .reply("Je n`ai pas pu désactiver le son de cet utilisateur, veuillez vérifier mes permissions et réessayer."
 " + err)
             }
 
             try {
                 muteUser.user.send(
-                    `Vous avez été **mute** sur **${message.guild.name}**, raison: **${muteReason || "Aucune"}**.`
+                    `Vous avez été **mute** sur **${message.guild.name}**, raison: **${muteReason || "Aucune"}**.'
                 );
             } catch (err) {
                 console.err(err);
@@ -59,7 +59,7 @@ module.exports = {
             }
 
             message.channel.send(
-                `**${muteUser.user.tag}** a été mute avec succès sur le serveur. Raison: **${muteReason || "Aucune"}**. `
+                '**${muteUser.user.tag}** a été mute avec succès sur le serveur. Raison: **${muteReason || "Aucune"}**. `
             )
 
             let color = await cl.get(`color_${message.guild.id}`)
@@ -67,10 +67,10 @@ module.exports = {
 
             const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
-                .setDescription(`<@${message.author.id}> a `voicemute` ${muteUser}
-Raison: ${muteReason}`)
+                .setDescription(`<@${message.author.id}> a `voicemute' ${muteUser}
+Raison: ${muteReason}')
                 .setTimestamp()
-                .setFooter({ text: `📚` })
+                .setFooter({ text: '📚` })
             const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 

@@ -12,7 +12,7 @@ const p3 = db.table("Perm3")
 module.exports = {
     name: 'hide',
     usage: 'hide',
-    description: `Permet de cacher un salon`,
+    description: `Permet de cacher un salon',
     async execute(client, message, args, color) {
 
         const perm3 = await p3.get(`perm3_${message.guild.id}`)
@@ -33,9 +33,9 @@ module.exports = {
 
             const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(ecolor)
-                .setDescription(`<@${message.author.id}> a utilisé la commande `hide` le salon <#${message.channel.id}>`)
+                .setDescription(`<@${message.author.id}> a utilisé la commande `hide' le salon <#${message.channel.id}>')
                 .setTimestamp()
-                .setFooter({ text: `📚` })
+                .setFooter({ text: '📚` })
             const modlog = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));
             if (modlog) modlog.send({ embeds: [embed] }).catch(() => false)
     }

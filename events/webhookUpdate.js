@@ -17,7 +17,7 @@ module.exports = {
         const audit = await channel.guild.fetchAuditLogs({typr: "WEBHOOK_CREATE"}).then((audit) => audit.entries.first())
         if (audit?.executor?.id == client.user.id) return
 
-        if (await aw.get(`config.${channel.guild.id}.antiwebhook`) == true) {
+        if (await aw.get(`config.${channel.guild.id}.antiwebhook') == true) {
 
             if (owner.get(`owners.${audit.executor.id}`) || config.bot.buyer === audit.executor.id === true || client.user.id === audit.executor.id === true) return
 
@@ -32,10 +32,10 @@ module.exports = {
                     )
                 })
 
-                if (punish.get(`sanction_${channel.guild.id}`) === "ban") {
-                    channel.guild.members.ban(audit.executor.id, { reason: `Anti Webhook` })
+                if (punish.get(`sanction_${channel.guild.id}') === "ban") {
+                    channel.guild.members.ban(audit.executor.id, { reason: 'Anti Webhook' })
 
-                } else if (punish.get(`sanction_${channel.guild.id}`) === "derank") {
+                } else if (punish.get(`sanction_${channel.guild.id}') === "derank") {
 
                     channel.guild.members.resolve(audit.executor).roles.cache.forEach(role => {
                         if (role.name !== '@everyone') {
@@ -45,10 +45,10 @@ module.exports = {
 
                 } else if (punish.get(`sanction_${channel.guild.id}`) === "kick") {
 
-                    channel.guild.members.kick(audit.executor.id, { reason: `Anti Webhook` })
+                    channel.guild.members.kick(audit.executor.id, { reason: 'Anti Webhook` })
                 }
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${audit.executor.id}> a tenté de créer un `webhook`, il a été sanctionné`)
+                    .setDescription(`<@${audit.executor.id}> a tenté de créer un `webhook', il a été sanctionné')
                     .setTimestamp()
                 const raidlogId = await rlog.get(`${channel.guild.id}.raidlog`);
 const logchannel = client.channels.cache.get(raidlogId);

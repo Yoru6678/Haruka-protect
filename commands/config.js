@@ -23,14 +23,14 @@ module.exports = {
                 .addFields(
                     { 
                         name: "🔧 Paramètres Généraux", 
-                        value: \`Prefix: \${serverConfig.prefix || '+'}\`
-Salon de logs: \${serverConfig.logChannel ? \`<#\${serverConfig.logChannel}>\` : "Non configuré"}\`, 
+                        value: `Prefix: ${serverConfig.prefix || '+'}'
+Salon de logs: ${serverConfig.logChannel ? '<#${serverConfig.logChannel}>' : "Non configuré"}`, 
                         inline: true 
                     },
                     { 
                         name: "🛡️ Auto-Modération", 
-                        value: \`Anti-Liens: \${serverConfig.autoMod?.antiLink ? '✅' : '❌'}
-Anti-Spam: \${serverConfig.autoMod?.antiSpam ? '✅' : '❌'}\`, 
+                        value: `Anti-Liens: ${serverConfig.autoMod?.antiLink ? '✅' : '❌'}
+Anti-Spam: ${serverConfig.autoMod?.antiSpam ? '✅' : '❌'}', 
                         inline: true 
                     }
                 )
@@ -59,7 +59,7 @@ Anti-Spam: \${serverConfig.autoMod?.antiSpam ? '✅' : '❌'}\`,
                     return message.reply("❌ Le prefix doit faire entre 1 et 3 caractères.");
                 }
                 await config.set('prefix', value);
-                message.reply(\`✅ Prefix mis à jour: \${value}\`);
+                message.reply('✅ Prefix mis à jour: ${value}');
                 break;
                 
             case 'logs':
@@ -68,11 +68,11 @@ Anti-Spam: \${serverConfig.autoMod?.antiSpam ? '✅' : '❌'}\`,
                     return message.reply("❌ Mentionne un salon valide.");
                 }
                 await config.set('logChannel', channel.id);
-                message.reply(\`✅ Salon de logs défini: \${channel}\`);
+                message.reply('✅ Salon de logs défini: ${channel}');
                 break;
                 
             default:
-                message.reply("❌ Paramètre inconnu. Paramètres disponibles: \`prefix\`, \`logs\`");
+                message.reply("❌ Paramètre inconnu. Paramètres disponibles: 'prefix', 'logs'");
         }
     }
-};
+}

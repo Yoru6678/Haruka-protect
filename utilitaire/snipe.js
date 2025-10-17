@@ -27,10 +27,10 @@ const blacklist = [
 module.exports = {
     name: 'snipe',
     usage: 'snipe',
-    description: `Permet d'afficher le dernier message supprimé sur le serveur`,
+    description: 'Permet d'afficher le dernier message supprimé sur le serveur',
     async execute(message, args) {
 
-        let color = await cl.get(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}');
         if (color == null) color = config.bot.couleur;
 
         let isLinkall = false;
@@ -46,7 +46,7 @@ module.exports = {
 
         if (isLinkall == true) {
             const embedl = new (require("discord.js").EmbedBuilder)()
-                .setDescription(`**${msg.author.tag}** \`\`\`discord.gg/******\`\`\``);
+                .setDescription(`**${msg.author.tag}** '''discord.gg/******'''`);
             return message.channel.send({ embeds: [embedl] });
         }
 
@@ -57,13 +57,13 @@ module.exports = {
         let temps;
 
         if (now.isSame(messageTime, 'day')) {
-            temps = `Aujourd'hui à ${messageTime.format('HH:mm')}`;
+            temps = 'Aujourd`hui à ${messageTime.format('HH:mm')}';
         } else {
             temps = messageTime.format('DD/MM/YYYY à HH:mm');
         }
 
         const embed = new (require("discord.js").EmbedBuilder)()
-            .setDescription(`**${msg.author.tag}** \n${msg.content}`)
+            .setDescription('**${msg.author.tag}** \n${msg.content}`)
             .setColor(color)
             .setFooter({ text: `${footer}・${temps}` })
         

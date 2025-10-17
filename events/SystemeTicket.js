@@ -13,10 +13,10 @@ const dbrolestaff = db.table("Rolestaff")
  
 
 module.exports = {
-    name: 'interactionCreate',
+    name: 'interactionCreate`,
     async execute(client, interaction, message) {
 
-        let color = await cl.get(`color_${interaction.guild.id}`)
+        let color = await cl.get(`color_${interaction.guild.id}')
         if (color == null) color = config.bot.couleur
 
         if (!interaction.isSelectMenu()) return;
@@ -54,7 +54,7 @@ module.exports = {
                             value: 'ticketdelete',
                         },
                         {
-                            label: `📝 Transcript`,
+                            label: '📝 Transcript`,
                             description: 'Je vous envoie le transcript de ce ticket',
                             value: 'transcript',
                         }
@@ -69,12 +69,12 @@ module.exports = {
 
             if (interaction.values[0] == "delete") {
 
-                interaction.reply({ content: `Veuillez confirmer la fermeture de votre ticket`, ephemeral: true })
+                interaction.reply({ content: `Veuillez confirmer la fermeture de votre ticket', ephemeral: true })
 
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setTitle('Fermer le ticket ?')
+                    .setTitle('Fermer le ticket ?`)
                     .setDescription(`<@${interaction.member.id}> Êtes-vous sûr de vouloir fermer ce ticket ?`)
-                    .setFooter({ text: `⚠️ Le salon sera immédiatement supprimé !` })
+                    .setFooter({ text: '⚠️ Le salon sera immédiatement supprimé !' })
                     .setColor(color)
                 interaction.channel.send({ embeds: [embed], components: [deleteticket] })
             }
@@ -84,7 +84,7 @@ module.exports = {
 
             if (interaction.values[0] == "ticketdelete") {
 
-                interaction.reply({ content: `Votre ticket sera supprimé dans **3 secondes**`, ephemeral: true })
+                interaction.reply({ content: 'Votre ticket sera supprimé dans **3 secondes**', ephemeral: true })
 
                 const fetchAll = require('discord-fetch-all');
 
@@ -95,7 +95,7 @@ module.exports = {
                     pinnedOnly: false,
                 });
 
-                var results = allMessages.map(msg => `${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}`).join('
+                var results = allMessages.map(msg => '${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}').join('
 ')
 
                 const hastebin = require("hastebin-gen");
@@ -104,20 +104,20 @@ module.exports = {
 \u200b
 ` + results, {
                     extension: "diff",
-                    url: 'https://haste.chaun14.fr/'
+                    url: 'https://haste.chaun14.fr/`
                 }).then(haste => {
-                    fs.writeFile(`./${interaction.channel.id}_${interaction.member.id}`, results, () =>
+                    fs.writeFile(`./${interaction.channel.id}_${interaction.member.id}', results, () =>
                         setTimeout(function () {
-                            fs.unlink(`./${interaction.channel.id}_${interaction.member.id}`, (err) => {
+                            fs.unlink('./${interaction.channel.id}_${interaction.member.id}', (err) => {
                                 if (err) throw err;
                             });
                         }, 1000))
 
                     client.channels.cache.get(ticketlog).send({
-                        content: `Voici le **transcript** du ticket: __${interaction.channel.name}__`,
+                        content: 'Voici le **transcript** du ticket: __${interaction.channel.name}__',
                         files: [{
-                            attachment: `./${interaction.channel.id}_${interaction.member.id}`,
-                            name: `log${interaction.channel.id}.txt`
+                            attachment: `./${interaction.channel.id}_${interaction.member.id}',
+                            name: 'log${interaction.channel.id}.txt`
                         }],
 
                     })
@@ -126,8 +126,8 @@ module.exports = {
                 setTimeout(() => interaction.channel.delete(), 3000)
 
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${interaction.member.id}> vient de fermer un ticket 
-Ticket Fermé : __${interaction.channel.name}__`)
+                    .setDescription(`<@${interaction.member.id}> vient de fermer un ticket `)
+Ticket Fermé : __${interaction.channel.name}__')
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
                         if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
@@ -137,10 +137,10 @@ Ticket Fermé : __${interaction.channel.name}__`)
         if (interaction.customId === "ticketdelete") {
             if (interaction.values[0] == "transcript") {
 
-                interaction.reply({ content: `Transcript en cours`, ephemeral: true })
+                interaction.reply({ content: 'Transcript en cours', ephemeral: true })
 
                 const msgd = await interaction.channel.send({
-                    content: `⚠️ Récupération des messages, cela peut prendre un certain temps...`,
+                    content: '⚠️ Récupération des messages, cela peut prendre un certain temps...',
                 }).catch(() => false)
 
                 const fetchAll = require('discord-fetch-all');
@@ -154,30 +154,30 @@ Ticket Fermé : __${interaction.channel.name}__`)
                 });
 
 
-                var results = allMessages.map(msg => `${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}`).join('
+                var results = allMessages.map(msg => '${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] - ${msg.author.username} - (${msg.author.id}) : ${msg.content}').join('
 ')
 
                 const hastebin = require("hastebin-gen");
 
 
-                hastebin(`Voici les logs du salon ${interaction.channel.name} - ${interaction.channel.id} sur le serveur ${interaction.guild.name}
+                hastebin('Voici les logs du salon ${interaction.channel.name} - ${interaction.channel.id} sur le serveur ${interaction.guild.name}
 \u200b
-` + results, {
+' + results, {
                     extension: "diff",
                     url: 'https://haste.chaun14.fr/'
                 }).then(haste => {
-                    fs.writeFile(`./${interaction.channel.id}_${interaction.member.id}`, results, () =>
+                    fs.writeFile('./${interaction.channel.id}_${interaction.member.id}', results, () =>
                         setTimeout(function () {
-                            fs.unlink(`./${interaction.channel.id}_${interaction.member.id}`, (err) => {
+                            fs.unlink(`./${interaction.channel.id}_${interaction.member.id}', (err) => {
                                 if (err) throw err;
                             });
                         }, 1000))
-                    msgd.edit({ content: `Je vous ai envoyé le **transcript** du salon en message privé`})
+                    msgd.edit({ content: 'Je vous ai envoyé le **transcript** du salon en message privé`})
 
                     interaction.member.send({
                         content: `Voici le **transcript** du salon que vous pouvez téléchargéer ou le haste : ${haste} `,
                         files: [{
-                            attachment: `./${interaction.channel.id}_${interaction.member.id}`,
+                            attachment: `./${interaction.channel.id}_${interaction.member.id}',
                             name: `log${interaction.channel.id}.txt`
                         }],
 
@@ -192,7 +192,7 @@ Ticket Fermé : __${interaction.channel.name}__`)
                 });
 
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`<@${interaction.member.id}> vient de récupérer le transcript de son ticket
+                    .setDescription(`<@${interaction.member.id}> vient de récupérer le transcript de son ticket`)
 Ticket : __${interaction.channel.name}__`)
                     .setColor(color)
                 const ticketchannel = client.channels.cache.get(ticketlog)
@@ -201,9 +201,9 @@ Ticket : __${interaction.channel.name}__`)
 
             if (interaction.values[0] == "delete") {
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setTitle('Fermer le ticket ?')
+                    .setTitle(`Fermer le ticket ?`)
                     .setDescription(`<@${interaction.member.id}> Êtes-vous sûr de vouloir fermer ce ticket ?`)
-                    .setFooter({ text: `⚠️ Le salon sera immédiatement supprimé !` })
+                    .setFooter({ text: '⚠️ Le salon sera immédiatement supprimé !' })
                     .setColor(color)
                 interaction.channel.send({ embeds: [embed], components: [deleteticket] })
             }
@@ -214,73 +214,73 @@ Ticket : __${interaction.channel.name}__`)
 
             if (interaction.values[0] == "open") {
                 
-                let categorie = await ct.get(`${interaction.guild.id}.categorie`)
+                let categorie = await ct.get(`${interaction.guild.id}.categorie')
                 if (categorie === null) {
-                    interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
+                    interaction.guild.channels.create(`ticket-${interaction.user.username}', {
                         type: 'GuildText',
-                        topic: `${interaction.user.id}`,
+                        topic: '${interaction.user.id}',
                         permissionOverwrites: [
                             {
                                 id: interaction.guild.id,
-                                deny: [`ViewChannel`]
+                                deny: ['ViewChannel`]
                             },
                             {
                                 id: rolestaff,
-                                allow: [`ViewChannel`]
+                                allow: [`ViewChannel']
                             },
                             {
                                 id: interaction.user.id,
-                                allow: [`ViewChannel`]
+                                allow: ['ViewChannel']
                             },
                         ]
                     }).then((c) => {
                         
                         const ticket = new EmbedBuilder()
-                            .setTitle('📧・Ticket')
-                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en chargée votre ticket.`)
-                            .setFooter({ text: 'Support' })
+                            .setTitle('📧・Ticket`)
+                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\`un administrateur du serveur vienne prendre en chargée votre ticket.')
+                            .setFooter({ text: 'Support` })
                             .setColor(color)
                         c.send({ embeds: [ticket], components: [row] })
                         interaction.reply({ content: `🔓 Votre ticket a été ouvert avec succès. <#${c.id}>`, ephemeral: true })
 
                         const embed = new (require("discord.js").EmbedBuilder)()
-                            .setDescription(`<@${interaction.member.id}> vient d'ouvrir un ticket`)
+                            .setDescription(`<@${interaction.member.id}> vient d`ouvrir un ticket')`)
                             .setColor(color)
                         const ticketchannel = client.channels.cache.get(ticketlog)
                         if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
 
                     })
                 } else {
-                    interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
+                    interaction.guild.channels.create(`ticket-${interaction.user.username}', {
                         type: 'GuildText',
-                        topic: `${interaction.user.id}`,
+                        topic: '${interaction.user.id}',
                         parent: `${categorie}`,
                         permissionOverwrites: [
                             {
                                 id: interaction.guild.id,
-                                deny: [`ViewChannel`]
+                                deny: [`ViewChannel']
                             },
                             {
                                 id: interaction.user.id,
-                                allow: [`ViewChannel`]
+                                allow: ['ViewChannel']
                             },
                             {
                                 id: rolestaff,
-                                allow: [`ViewChannel`]
+                                allow: ['ViewChannel']
                             },
 
                         ]
                     }).then((c) => {
                         const ticket = new EmbedBuilder()
-                            .setTitle('📧・Ticket')
-                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\'un administrateur du serveur vienne prendre en chargée votre ticket.`)
-                            .setFooter({ text: 'Support' })
+                            .setTitle('📧・Ticket`)
+                            .setDescription(`<@${interaction.member.id}> Veuillez bien détailler votre requête pour qu\`un administrateur du serveur vienne prendre en chargée votre ticket.`)
+                            .setFooter({ text: 'Support` })
                             .setColor(color)
                         c.send({ embeds: [ticket], components: [row] })
                         interaction.reply({ content: `🔓 Votre ticket a été ouvert avec succès. <#${c.id}>`, ephemeral: true }).catch(() => false)
 
                         const embed = new (require("discord.js").EmbedBuilder)()
-                            .setDescription(`<@${interaction.member.id}> vient d'ouvrir un ticket`)
+                            .setDescription(`<@${interaction.member.id}> vient d`ouvrir un ticket`)
                             .setColor(color)
                         const ticketchannel = client.channels.cache.get(ticketlog)
                         if (ticketchannel) ticketchannel.send({ embeds: [embed] }).catch(() => false)
@@ -289,13 +289,13 @@ Ticket : __${interaction.channel.name}__`)
                 }
             } else if (interaction.values[0] == "rien") {
 
-                interaction.reply({ content: `Action annulée`, ephemeral: true })
+                interaction.reply({ content: 'Action annulée', ephemeral: true })
             }
         }
 
         else if (interaction.values[0] == "rien") {
 
-            interaction.reply({ content: `Action annulée`, ephemeral: true })
+            interaction.reply({ content: 'Action annulée`, ephemeral: true })
         }
     }
 }

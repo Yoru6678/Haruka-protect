@@ -10,10 +10,10 @@ const footer = config.bot.footer
 module.exports = {
     name: 'serverlist',
     usage: 'serverlist',
-    description: `Permet d'afficher les serveurs où est le bot.`,
+    description: `Permet d'afficher les serveurs où est le bot.',
     async execute(client, message, args, color) {
 
-        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)) {
+        if (owner.get(`owners.${message.author.id}') || config.bot.buyer.includes(message.author.id)) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
@@ -23,9 +23,9 @@ module.exports = {
             let i1 = 10
             let page = 1
             let description =
-                `**Nombre de serveurs :** \`${this.client.guilds.cache.size - 1}\`\n\n` +
+                '**Nombre de serveurs :** '${this.client.guilds.cache.size - 1}'\n\n' +
                 this.client.guilds.cache.sort((a, b) => b.memberCount - a.memberCount).map((r) => r)
-                    .map((r, i) => `**${i + 1}** - ${r.name} \`[${r.memberCount}]\`・ \`(${r.id})\``)
+                    .map((r, i) => '**${i + 1}** - ${r.name} '[${r.memberCount}]'・ '(${r.id})'`)
                     .slice(0, 10)
                     .join("\n")
 

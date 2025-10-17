@@ -14,7 +14,7 @@ module.exports = {
 
     async execute(client, message) {
         if (!message.author) return
-        let chan = `${await msglog.get(`${message.guild.id}.messagelog`)}`
+        let chan = `${await msglog.get(`${message.guild.id}.messagelog`)}'
         if (chan == null) return
 
         let channel = message.guild.channels.cache.get(chan)
@@ -29,18 +29,18 @@ module.exports = {
             deletionLog = fetchedLogs.entries.first();
             const { executor, target } = deletionLog;
         const embed1 = new (require("discord.js").EmbedBuilder)()
-            .setTitle(`❌ Suppression`)
-            .setDescription(`Message supprimé de <@${message.author.id}> dans [`${message.channel.name}`](https://discord.com/channels/${message.guild.id}/${message.channel.id})
-`${mess}``)
-            .setFooter({ text: `🕙 ${getNow().time}` })
+            .setTitle('❌ Suppression')
+            .setDescription(`Message supprimé de <@${message.author.id}> dans [`${message.channel.name}'](https://discord.com/channels/${message.guild.id}/${message.channel.id})
+'${mess}'`)
+            .setFooter({ text: `🕙 ${getNow().time}' })
             .setColor(color)
         if (!deletionLog) return channel.send({ embeds: [embed1] })
 
 
         const embed = new (require("discord.js").EmbedBuilder)()
-            .setTitle(`❌ Suppression`)
-            .setDescription(`Message supprimé de <@${message.author.id}> dans [`${message.channel.name}`](https://discord.com/channels/${message.guild.id}/${message.channel.id})
-`${mess}``)
+            .setTitle('❌ Suppression')
+            .setDescription(`Message supprimé de <@${message.author.id}> dans [`${message.channel.name}'](https://discord.com/channels/${message.guild.id}/${message.channel.id})
+`${mess}`)
             .setFooter({ text: `🕙 ${getNow().time}` })
             .setColor(color)
 

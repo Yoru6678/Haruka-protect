@@ -28,7 +28,7 @@ module.exports = {
         }
 
         if (lock.get(`serverlock_${member.guild.id}`) === "lock") {
-            member.kick("Serveur verrouilléé").catch(() => false);
+            member.kick("Serveur verrouillé").catch(() => false);
         }
     }
 };

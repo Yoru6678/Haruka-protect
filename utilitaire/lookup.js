@@ -17,7 +17,7 @@ module.exports = {
 
     async execute(message, args) {
 
-        let color = await cl.get(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}');
         if (color == null) color = config.bot.couleur;
 
          if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p1) || message.member.roles.cache.has(p2) || message.member.roles.cache.has(p3) || config.bot.buyer.includes(message.author.id)  ) {
@@ -59,7 +59,7 @@ module.exports = {
         const mentionPermissions = mention.permissions.toArray();
         const finalPermissions = [];
         for (const permission in permissions) {
-            if (mentionPermissions.includes(permission)) finalPermissions.push(`${permissions[permission]}`);
+            if (mentionPermissions.includes(permission)) finalPermissions.push(`${permissions[permission]}');
         }
 
         const userFlags = mention.user.flags ? mention.user.flags.toArray() : [];
@@ -68,13 +68,13 @@ module.exports = {
         const bot = mention.user.bot ? "L'utilisateur est un bot" : "L'utilisateur est un humain";
 
         const userlol = new (require("discord.js").EmbedBuilder)()
-            .setAuthor(`Informations`, usericon)
+            .setAuthor('Informations', usericon)
             .setThumbnail(usericon)
-            .addField(`General`, `Nom: \`${mention.user.username}\` \nSurnom: \`${nick}\``)
-            .addField(`Aperçu`, `Badges: \`${userBadges}\`\nBot: \`${bot}\``)
-            .addField(`Informations relatives au serveur`, `Roles: ${roles} \nPermissions: \`${finalPermissions.join(', ')}\``)
-            .addField(`Info`, `Compte créé le: \`${moment(mention.user.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}\` \nA rejoint le serveur: \`${moment(mention.joinedAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}\``)
-            .setFooter(`ID: ${mention.user.id}`, usericon)
+            .addField('General', 'Nom: `${mention.user.username}' \nSurnom: '${nick}'')
+            .addField('Aperçu', 'Badges: `${userBadges}'\nBot: '${bot}'')
+            .addField('Informations relatives au serveur', 'Roles: ${roles} \nPermissions: `${finalPermissions.join(', ')}'')
+            .addField('Info', 'Compte créé le: '${moment(mention.user.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}' \nA rejoint le serveur: '${moment(mention.joinedAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}`')
+            .setFooter('ID: ${mention.user.id}`, usericon)
             .setColor(color);
 
         message.channel.send({ embeds: [userlol] });

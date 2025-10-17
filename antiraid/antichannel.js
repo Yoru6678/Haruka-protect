@@ -13,7 +13,7 @@ const acu = db.table("antichannelupdate")
 module.exports = {
     name: 'antichannel',
     usage: 'antichannel',
-    description: `Permet de configuréer l'antichannel.`,
+    description: `Permet de configurer l'antichannel.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -27,7 +27,7 @@ module.exports = {
                 atd.set(`config.${message.guild.id}.antichanneldelete`, true)
                 acu.set(`config.${message.guild.id}.antichannelupdate`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiChannel** est maintenant **activéé**`)
+                    .setDescription(`**L'antiChannel** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
 
@@ -39,7 +39,7 @@ module.exports = {
                 atd.set(`config.${message.guild.id}.antichanneldelete`, false)
                 acu.set(`config.${message.guild.id}.antichannelupdate`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiChannel** est maintenant **désactivéé**`)
+                    .setDescription(`**L'antiChannel** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
 
@@ -51,7 +51,7 @@ module.exports = {
 
                     atc.set(`config.${message.guild.id}.antichannelcreate`, true)
                     const embed = new (require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antiChannel Create** est maintenant **activéé**`)
+                        .setDescription(`**L'antiChannel Create** est maintenant **activé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -60,7 +60,7 @@ module.exports = {
 
                     atc.set(`config.${message.guild.id}.antichannelcreate`, false)
                     const embed = new (require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antiChannel Create** est maintenant **désactivéé**`)
+                        .setDescription(`**L'antiChannel Create** est maintenant **désactivé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -71,7 +71,7 @@ module.exports = {
 
                     atd.set(`config.${message.guild.id}.antichanneldelete`, true)
                     const embed = new (require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antichannel Delete** est maintenant **activéé**`)
+                        .setDescription(`**L'antichannel Delete** est maintenant **activé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -80,7 +80,7 @@ module.exports = {
 
                     atd.set(`config.${message.guild.id}.antichanneldelete`, false)
                     const embed = new (require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antichannel Delete** est maintenant **désactivéé**`)
+                        .setDescription(`**L'antichannel Delete** est maintenant **désactivé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -90,7 +90,7 @@ module.exports = {
 
                     acu.set(`config.${message.guild.id}.antichannelupdate`, true)
                     const embed = new (require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antiChannel Update** est maintenant **activéé**`)
+                        .setDescription(`**L'antiChannel Update** est maintenant **activé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }
@@ -99,7 +99,7 @@ module.exports = {
 
                     acu.set(`config.${message.guild.id}.antichannelupdate`, false)
                     const embed = new (require("discord.js").EmbedBuilder)()
-                        .setDescription(`**L'antiChannel Update** est maintenant **désactivéé**`)
+                        .setDescription(`**L'antiChannel Update** est maintenant **désactivé**`)
                         .setColor(color)
                     message.channel.send({ embeds: [embed] })
                 }

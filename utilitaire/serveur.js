@@ -16,9 +16,9 @@ moment.locale('fr');
 module.exports = {
     name: 'serveur',
     usage: 'serveur <pic/banner/info>',
-    description: `Permet d'afficher des informations relatives au serveur`,
+    description: 'Permet d'afficher des informations relatives au serveur',
     async execute(message, args) {
-        let color = await cl.get(`color_${message.guild.id}`);
+        let color = await cl.get(`color_${message.guild.id}');
         if (color == null) color = config.bot.couleur;
          if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(p1) || message.member.roles.cache.has(p2) || message.member.roles.cache.has(p3) || config.bot.buyer.includes(message.author.id)  ) {
 
@@ -30,28 +30,28 @@ module.exports = {
             let pic = message.guild.iconURL();
             if (pic) {
                 const picembed = new EmbedBuilder()
-                    .setTitle(`${message.guild.name}`)
+                    .setTitle('${message.guild.name}')
                     .setColor(color)
                     .setImage(message.guild.iconURL({ dynamic: true, size: 1024 }));
                 message.channel.send({ embeds: [picembed] });
             } else {
                 const nopic = new EmbedBuilder()
-                    .setTitle(`${message.guild.name}`)
+                    .setTitle(`${message.guild.name}')
                     .setColor(color)
-                    .setDescription(`Ce serveur ne possède pas d'avatar`);
+                    .setDescription('Ce serveur ne possède pas d'avatar`);
                 message.channel.send({ embeds: [nopic] });
             }
         } else if (args[0] === "banner") {
             let banner = message.guild.bannerURL();
             if (banner) {
                 const bannerembed = new EmbedBuilder()
-                    .setTitle(`${message.guild.name}`)
+                    .setTitle(`${message.guild.name}')
                     .setColor(color)
                     .setImage(message.guild.bannerURL({ dynamic: true, size: 512 }));
                 message.channel.send({ embeds: [bannerembed] });
             } else {
                 const nobanner = new EmbedBuilder()
-                    .setTitle(`${message.guild.name}`)
+                    .setTitle('${message.guild.name}')
                     .setColor(color)
                     .setDescription('Ce serveur ne possède pas de bannière');
                 message.channel.send({ embeds: [nobanner] });
@@ -84,22 +84,22 @@ module.exports = {
                 .setColor(color)
                 .setThumbnail(message.guild.iconURL({ dynamic: true }))
                 .setImage(message.guild.bannerURL({ dynamic: true, size: 512 }))
-                .setTitle(`Informations sur \`${message.guild.name}\``)
-                .setDescription(`**Description**\n ${desc}`)
+                .setTitle('Informations sur '${message.guild.name}'')
+                .setDescription('**Description**\n ${desc}')
                 .addFields(
-                    { name: `ℹ️ ID du serveur`, value: `${message.guild.id}`, inline: true },
-                    { name: `👑 Propriétaire`, value: `<@${message.guild.ownerId}>`, inline: true },
-                    { name: `ℹ️ ID Propriétaire`, value: `${message.guild.ownerId}`, inline: true },
-                    { name: `👥 Nombre de Membres`, value: `${message.guild.memberCount || '0'}`, inline: true },
-                    { name: "Nombre de Boosts", value: `${message.guild.premiumSubscriptionCount || '0'}`, inline: true },
-                    { name: `🔮 Niveau de Boost`, value: `${premiumTier[message.guild.premiumTier]}`, inline: true },
-                    { name: `🤖 Nombre de Bots`, value: `${membersGuild.filter(member => member.user.bot).size}`, inline: true },
-                    { name: `👤 Nombre de Rôles`, value: `${rolesGuild.length}`, inline: true },
-                    { name: `️⃣ Nombres de Salons`, value: `${channelsGuild.size}`, inline: true },
-                    { name: `🎈 Nombre d'Emojis`, value: `${emojisGuild.size}`, inline: true },
-                    { name: `❕ Date de création`, value: `${moment(message.guild.createdAt).format('LLLL')}`, inline: true },
-                    { name: `🔗 URL Personnalisée`, value: message.guild.vanityURLCode ? `discord.gg/${message.guild.vanityURLCode}` : `Le serveur ne possède pas d'URL`, inline: true },
-                    { name: `⚙️ Vérification du serveur`, value: `${verifLevels[message.guild.verificationLevel]}`, inline: true }
+                    { name: 'ℹ️ ID du serveur', value: '${message.guild.id}', inline: true },
+                    { name: '👑 Propriétaire`, value: `<@${message.guild.ownerId}>`, inline: true },
+                    { name: 'ℹ️ ID Propriétaire', value: '${message.guild.ownerId}', inline: true },
+                    { name: '👥 Nombre de Membres', value: '${message.guild.memberCount || '0'}', inline: true },
+                    { name: "Nombre de Boosts", value: '${message.guild.premiumSubscriptionCount || '0'}', inline: true },
+                    { name: '🔮 Niveau de Boost', value: `${premiumTier[message.guild.premiumTier]}`, inline: true },
+                    { name: '🤖 Nombre de Bots', value: `${membersGuild.filter(member => member.user.bot).size}', inline: true },
+                    { name: '👤 Nombre de Rôles', value: `${rolesGuild.length}`, inline: true },
+                    { name: '️⃣ Nombres de Salons', value: `${channelsGuild.size}', inline: true },
+                    { name: '🎈 Nombre d'Emojis', value: `${emojisGuild.size}`, inline: true },
+                    { name: '❕ Date de création', value: `${moment(message.guild.createdAt).format('LLLL')}', inline: true },
+                    { name: '🔗 URL Personnalisée', value: message.guild.vanityURLCode ? `discord.gg/${message.guild.vanityURLCode}` : 'Le serveur ne possède pas d'URL', inline: true },
+                    { name: '⚙️ Vérification du serveur', value: '${verifLevels[message.guild.verificationLevel]}', inline: true }
                 )
                 .setFooter({ text: `${config.bot.footer}` });
             message.channel.send({ embeds: [embed] });

@@ -13,14 +13,14 @@ const p3 = db.table("Perm3")
 module.exports = {
     name: 'ban',
     usage: 'ban <membre>',
-    description: `Permet de bannir un membre.`,
+    description: `Permet de bannir un membre.',
     async execute(message, args) {
 
-        let color = await cl.get(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}')
         if (color == null) color = config.bot.couleur
         const perm3 = await p3.get(`perm3_${message.guild.id}`);
 
-        if (owner.get(`owners.${message.author.id}`) || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id) || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) )  === true) {
+        if (owner.get(`owners.${message.author.id}') || message.member.roles.cache.has(perm3) || config.bot.buyer.includes(message.author.id) || message.member.roles.cache.has(pgs.get(`permgs_${message.guild.id}`) )  === true) {
 
             let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
             if (!member) try{
@@ -39,25 +39,25 @@ module.exports = {
             }
 
 
-            let reason = args.slice(1).join(" ") || `Aucune raison`
+            let reason = args.slice(1).join(" ") || 'Aucune raison`
 
-            message.reply({ content: `${member} a été banni du serveur` }).catch(err => err)
-            member.send({ content: `Tu as été banni par ${message.author} pour la raison suivante: 
+            message.reply({ content: `${member} a été banni du serveur' }).catch(err => err)
+            member.send({ content: 'Tu as été banni par ${message.author} pour la raison suivante: 
 
  ${reason}` })
             member.ban({ reason: `${reason}` })
 
             const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
-                .setDescription(`<@${message.author.id}> a `banni` ${member} du serveur
-Raison : ${reason}`)
+                .setDescription(`<@${message.author.id}> a `banni' ${member} du serveur
+Raison : ${reason}')
                 .setTimestamp()
-                .setFooter({ text: `📚` })
+                .setFooter({ text: '📚' })
             const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));
             if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
         }
 
-        else if (p3.get(`perm3_${message.guild.id}`) === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`))) {
+        else if (p3.get(`perm3_${message.guild.id}') === true && message.member.roles.cache.has(p3.get(`perm3_${message.guild.id}`))) {
 
             let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
@@ -70,27 +70,27 @@ Raison : ${reason}`)
             }
 
             if (member.roles.highest.position >= message.member.roles.highest.position || message.author.id !== message.guild.owner.id) {
-                return message.reply(`Vous ne pouvez pas bannir un membre au dessus de vous`)
+                return message.reply('Vous ne pouvez pas bannir un membre au dessus de vous')
             }
 
             
-            if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)   === true)
+            if (owner.get(`owners.${message.author.id}') || config.bot.buyer.includes(message.author.id)   === true)
              return  message.reply("Tu ne peux pas le bannir ! Il est owner du bot.")
              
-            let reason = args.slice(1).join(" ") || `Aucune raison`
+            let reason = args.slice(1).join(" ") || 'Aucune raison`
 
-            message.reply({ content: `${member} a été banni du serveur` }).catch(err => err)
-            member.send({ content: `Tu as été banni par ${message.author} pour la raison suivante: 
+            message.reply({ content: `${member} a été banni du serveur' }).catch(err => err)
+            member.send({ content: 'Tu as été banni par ${message.author} pour la raison suivante: 
 
  ${reason}` })
             member.ban({ reason: `${reason}` })
 
             const embed = new (require("discord.js").EmbedBuilder)()
                 .setColor(color)
-                .setDescription(`<@${message.author.id}> a `banni` ${member} du serveur
-Raison : ${reason}`)
+                .setDescription(`<@${message.author.id}> a `banni' ${member} du serveur
+Raison : ${reason}')
                 .setTimestamp()
-                .setFooter({ text: `📚` })
+                .setFooter({ text: '📚` })
                 const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`));
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 

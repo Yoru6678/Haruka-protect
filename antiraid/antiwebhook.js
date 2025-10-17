@@ -11,7 +11,7 @@ const aw = db.table("antiwebhook")
 module.exports = {
     name: 'antiwebhook',
     usage: 'antiwebhook',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,13 +22,13 @@ module.exports = {
             if (args[0] == 'on') {
                 aw.set(`config.${message.guild.id}.antiwebhook`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiwebhook** est maintenant **activéé**`)
+                    .setDescription(`**L'antiwebhook** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 aw.set(`config.${message.guild.id}.antiwebhook`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'antiwebhook** est maintenant **désactivéé**`)
+                    .setDescription(`**L'antiwebhook** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

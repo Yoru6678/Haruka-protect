@@ -11,9 +11,9 @@ const p3 = db.table("Perm3")
 module.exports = {
     name: 'clear',
     usage: 'clear',
-    description: `Permet de supprimer des messages`,
+    description: `Permet de supprimer des messages',
     async execute(message, args) {
-        const perm3 = await p3.get(`perm3_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}')
 
         if (message.mentions.members.first()) {
 
@@ -38,7 +38,7 @@ module.exports = {
                         amount = 1;
                     } else {
                         message.delete()
-                        amount = message.content.split(' ')[1];
+                        amount = message.content.split(' `)[1];
                         if (amount > 100) {
                             amount = 100;
                         }
@@ -52,9 +52,9 @@ module.exports = {
 
                 const embed = new (require("discord.js").EmbedBuilder)()
                     .setColor(color)
-                    .setDescription(`<@${message.author.id}> a `supprimé` ${args[0]} message(s) dans <#${message.channel.id}>`)
+                    .setDescription(`<@${message.author.id}> a `supprimé' ${args[0]} message(s) dans <#${message.channel.id}>')
                     .setTimestamp()
-                    .setFooter({ text: `📚` })
+                    .setFooter({ text: '📚' })
                 const logchannel = client.channels.cache.get(ml.get(`${message.guild.id}.modlog`))
                 if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
 

@@ -10,7 +10,7 @@ const footer = config.bot.footer
 module.exports = {
     name: 'unbl',
     usage: 'unbl',
-    description: `Permet d'enlever quelqu'un de la liste noire du bot`,
+    description: 'Permet d'enlever quelqu'un de la liste noire du bot',
     async execute(message, args) {
 
         if (config.bot.buyer.includes(message.author.id)) {
@@ -24,11 +24,11 @@ module.exports = {
                     member = await client.users.fetch(args[0])
                 }
                 catch(e){
-                    return message.channel.send(`Aucun utilisateur trouvé pour \`${args[0] || "rien"}\``)
+                    return message.channel.send('Aucun utilisateur trouvé pour `${args[0] || "rien"}'')
                 }            
-                if (db.get(`blacklist.${member.id}`) === null) { return message.channel.send(`${member.username} n'est pas dans la liste noire`) }
-                db.set(`${config.bot.blacklist}.blacklist`, db.get(`${config.bot.blacklist}.blacklist`).filter(s => s !== member.id))
-                db.delete(`blacklist.${member.id}`, member.id)
+                if (db.get(`blacklist.${member.id}`) === null) { return message.channel.send('${member.username} n'est pas dans la liste noire') }
+                db.set('${config.bot.blacklist}.blacklist', db.get(`${config.bot.blacklist}.blacklist`).filter(s => s !== member.id))
+                db.delete(`blacklist.${member.id}', member.id)
 
                 message.channel.send(`**__${member.username}__** n'est plus dans la liste noire`)
 

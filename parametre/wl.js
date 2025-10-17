@@ -14,9 +14,9 @@ module.exports = {
     name: 'wl',
     usage: 'wl [membre/role]',
     category: "owner",
-    description: `Permet de rajouter quelqu'un ou un rôle dans la whitelist du bot.`,
+    description: `Permet de rajouter quelqu'un ou un rôle dans la whitelist du bot.',
     async execute(message, args) {
-        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id)  ) {
+        if (owner.get(`owners.${message.author.id}') || config.bot.buyer.includes(message.author.id)  ) {
             let color = await cl.get(`color_${message.guild.id}`);
             if (color == null) color = config.bot.couleur;
 
@@ -31,30 +31,30 @@ module.exports = {
                     mor = message.guild.members.cache.get(args[0]) || message.guild.roles.cache.get(args[0]);
                 }
 
-                if (!mor) return message.channel.send(`Aucun membre ou rôle trouvé pour \`${args[0] || "rien"}\``);
+                if (!mor) return message.channel.send('Aucun membre ou rôle trouvé pour '${args[0] || "rien"}`');
 
                 if (mor instanceof Discord.Role) {
-                    if (wl.get(`${message.guild.id}.${mor.id}.wl`) === mor.id) {
+                    if (wl.get(`${message.guild.id}.${mor.id}.wl') === mor.id) {
                         return message.channel.send(`Le rôle ${mor.name} est déjà sur la whitelist.`);
                     } else {
-                        wl.set(`${message.guild.id}.${mor.id}.wl`, mor.id);
+                        wl.set('${message.guild.id}.${mor.id}.wl', mor.id);
                         return message.channel.send(`Le rôle ${mor} a été ajouté à la whitelist.`);
                     }
                 } else if (mor instanceof Discord.GuildMember) {
                     if (wl.get(`${message.guild.id}.${mor.id}.wl`) === mor.id) {
                         return message.channel.send(`${mor.user.username} est déjà sur la whitelist.`);
                     } else {
-                        wl.set(`${message.guild.id}.${mor.id}.wl`, mor.id);
+                        wl.set('${message.guild.id}.${mor.id}.wl', mor.id);
                         return message.channel.send(`${mor.user.username} a été ajouté à la whitelist.`);
                     }
                 }
             } else {
-                let membersList = message.guild.members.cache.filter(u => wl.get(`${message.guild.id}.${u.id}.wl`) === u.id).map(a => "<@" + a.user.id + ">");
-                let rolesList = message.guild.roles.cache.filter(r => wl.get(`${message.guild.id}.${r.id}.wl`) === r.id).map(r => `<@&${r.id}>`);
+                let membersList = message.guild.members.cache.filter(u => wl.get(`${message.guild.id}.${u.id}.wl') === u.id).map(a => "<@" + a.user.id + ">");
+                let rolesList = message.guild.roles.cache.filter(r => wl.get(`${message.guild.id}.${r.id}.wl`) === r.id).map(r => '<@&${r.id}>');
 
                 const embed = new (require("discord.js").EmbedBuilder)()
                     .setTitle("Whitelist")
-                    .setDescription(`Membres : ${membersList.join("\n")}\n\nRôles : ${rolesList.join(", ")}`)
+                    .setDescription(`Membres : ${membersList.join("\n")}\n\nRôles : ${rolesList.join(", ")}')')
                     .setColor(color)
                     .setFooter({ text: `${footer}` });
                 return message.channel.send({ embeds: [embed] });

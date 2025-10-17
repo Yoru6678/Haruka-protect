@@ -10,9 +10,9 @@ const footer = config.bot.footer;
 module.exports = {
     name: 'calc',
     usage: 'calc <calcul>',
-    description: `Permet d'effectuer un calcul.`,
+    description: 'Permet d'effectuer un calcul.',
     async execute(message, args) {
-        let color = await cl.get(`color_${message.guild.id}`) || config.bot.couleur;
+        let color = await cl.get(`color_${message.guild.id}') || config.bot.couleur;
 
         if (!args.length) {
             return message.channel.send("Veuillez fournir un calcul.");
@@ -22,7 +22,7 @@ module.exports = {
 
         const safeEval = async (expr) => {
             if (/^[0-9+\-*/().\s]+$/.test(expr)) {
-                return Function(`'use strict'; return (${expr})`)();
+                return Function(''use strict'; return (${expr})')();
             } else {
                 throw new Error("Erreur Maths");
             }
@@ -32,7 +32,7 @@ module.exports = {
             const result = safeEval(expression);
 
             const embed = new (require("discord.js").EmbedBuilder)()
-                .setDescription(`Le résultat de \`${expression}\` est: **${result}**`)
+                .setDescription('Le résultat de '${expression}` est: **${result}**`)
                 .setColor(color)
 
             message.channel.send({ embeds: [embed] });

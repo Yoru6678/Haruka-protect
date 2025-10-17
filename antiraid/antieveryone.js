@@ -11,7 +11,7 @@ const ae = db.table("Antieveryone")
 module.exports = {
     name: 'antieveryone',
     usage: 'antieveryone',
-    description: `Permet de configuréer l'antiraid.`,
+    description: `Permet de configurer l'antiraid.`,
     async execute(message, args) {
 
         let color = await cl.get(`color_${message.guild.id}`)
@@ -22,13 +22,13 @@ module.exports = {
             if (args[0] == 'on') {
                 ae.set(`config.${message.guild.id}.antieveryone`, true)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'Antieveryone** est maintenant **activéé**`)
+                    .setDescription(`**L'Antieveryone** est maintenant **activé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else if (args[0] == 'off') {
                 ae.set(`config.${message.guild.id}.antieveryone`, false)
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**L'Antieveryone** est maintenant **désactivéé**`)
+                    .setDescription(`**L'Antieveryone** est maintenant **désactivé**`)
                     .setColor(color)
                 message.channel.send({ embeds: [embed] })
             } else {

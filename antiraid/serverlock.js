@@ -20,14 +20,14 @@ module.exports = {
         if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) === true) {
 
             if (args[0] === "lock") {
-                if (lock.get(`serverlock_${message.guild.id}`) === "lock") return message.channel.send(`**Le serveur est déjà verrouillééé**`)
+                if (lock.get(`serverlock_${message.guild.id}`) === "lock") return message.channel.send(`**Le serveur est déjà verrouillé**`)
                 lock.set(`serverlock_${message.guild.id}`, "lock")
-                message.channel.send(`Le serveur est maintenant **verrouilléé**`)
+                message.channel.send(`Le serveur est maintenant **verrouillé**`)
 
             } else if (args[0] === "unlock") {
-                if (lock.get(`serverlock_${message.guild.id}`) === "unlock") return message.channel.send(`**Le serveur n'est pas verrouilléé**`)
+                if (lock.get(`serverlock_${message.guild.id}`) === "unlock") return message.channel.send(`**Le serveur n'est pas verrouillé**`)
                 lock.set(`serverlock_${message.guild.id}`, false)
-                message.channel.send(`Le serveur est maintenant **déverrouilléé**`)
+                message.channel.send(`Le serveur est maintenant **déverrouillé**`)
 
             }
         }

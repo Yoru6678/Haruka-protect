@@ -27,10 +27,10 @@ const aa = db.table("Antiadmin")
 module.exports = {
     name: 'secur',
     usage: 'secur',
-    description: `Permet de configuréer les sécurités sur le serveur.`,
+    description: `Permet de configurer les sécurités sur le serveur.',
     async execute(message, args) {
 
-        let color = await cl.get(`color_${message.guild.id}`)
+        let color = await cl.get(`color_${message.guild.id}')
         if (color == null) color = config.bot.couleur
 
         let pf = await p.get(`prefix_${message.guild.id}`)
@@ -41,129 +41,129 @@ module.exports = {
             const emojion = "✅"
             const emojioff = "❌"
 
-            if (args[0] == 'on') {
-                atc.set(`config.${message.guild.id}.antichannelcreate`, true)
-                agu.set(`guildupdate_${message.guild.id}`, true)
-                atd.set(`config.${message.guild.id}.antichanneldelete`, true)
-                acu.set(`config.${message.guild.id}.antichannelupdate`, true)
-                al.set(`config.${message.guild.id}.antilinkall`, true)
-                atr.set(`config.${message.guild.id}.antirolecreate`, true)
-                ard.set(`config.${message.guild.id}.antiroledelete`, true)
-                aru.set(`config.${message.guild.id}.antiroleupdate`, true)
-                aw.set(`config.${message.guild.id}.antiwebhook`, true)
-                atb.set(`config.${message.guild.id}.antibot`, true)
-                aba.set(`config.${message.guild.id}.antiban`, true)
-                ae.set(`config.${message.guild.id}.antieveryone`, true)
-                ad.set(`config.${message.guild.id}.antidown`, true)
-                aa.set(`config.${message.guild.id}.antiadmin`, true)
+            if (args[0] == 'on`) {
+                atc.set(`config.${message.guild.id}.antichannelcreate', true)
+                agu.set('guildupdate_${message.guild.id}', true)
+                atd.set('config.${message.guild.id}.antichanneldelete', true)
+                acu.set(`config.${message.guild.id}.antichannelupdate', true)
+                al.set('config.${message.guild.id}.antilinkall', true)
+                atr.set(`config.${message.guild.id}.antirolecreate', true)
+                ard.set('config.${message.guild.id}.antiroledelete', true)
+                aru.set(`config.${message.guild.id}.antiroleupdate', true)
+                aw.set('config.${message.guild.id}.antiwebhook', true)
+                atb.set(`config.${message.guild.id}.antibot', true)
+                aba.set('config.${message.guild.id}.antiban', true)
+                ae.set(`config.${message.guild.id}.antieveryone', true)
+                ad.set('config.${message.guild.id}.antidown', true)
+                aa.set(`config.${message.guild.id}.antiadmin', true)
             }
 
 
             if (args[0] == 'off') {
-                atc.set(`config.${message.guild.id}.antichannelcreate`, false)
-                agu.set(`guildupdate_${message.guild.id}`, false)
-                atd.set(`config.${message.guild.id}.antichanneldelete`, false)
-                acu.set(`config.${message.guild.id}.antichannelupdate`, false)
-                al.set(`config.${message.guild.id}.antilinkinvite`, false)
-                al.set(`config.${message.guild.id}.antilinkall`, false)
-                atr.set(`config.${message.guild.id}.antirolecreate`, false)
-                ard.set(`config.${message.guild.id}.antiroledelete`, false)
-                aru.set(`config.${message.guild.id}.antiroleupdate`, false)
-                aw.set(`config.${message.guild.id}.antiwebhook`, false)
-                atb.set(`config.${message.guild.id}.antibot`, false)
-                aba.set(`config.${message.guild.id}.antiban`, false)
-                ae.set(`config.${message.guild.id}.antieveryone`, false)
-                ad.set(`config.${message.guild.id}.antidown`, false)
-                aa.set(`config.${message.guild.id}.antiadmin`, false)
+                atc.set('config.${message.guild.id}.antichannelcreate', false)
+                agu.set(`guildupdate_${message.guild.id}', false)
+                atd.set('config.${message.guild.id}.antichanneldelete', false)
+                acu.set(`config.${message.guild.id}.antichannelupdate', false)
+                al.set('config.${message.guild.id}.antilinkinvite', false)
+                al.set(`config.${message.guild.id}.antilinkall', false)
+                atr.set('config.${message.guild.id}.antirolecreate', false)
+                ard.set(`config.${message.guild.id}.antiroledelete', false)
+                aru.set('config.${message.guild.id}.antiroleupdate', false)
+                aw.set(`config.${message.guild.id}.antiwebhook', false)
+                atb.set('config.${message.guild.id}.antibot', false)
+                aba.set(`config.${message.guild.id}.antiban', false)
+                ae.set('config.${message.guild.id}.antieveryone', false)
+                ad.set(`config.${message.guild.id}.antidown', false)
+                aa.set('config.${message.guild.id}.antiadmin', false)
             }
 
 
             //////////////                    antilink                    ///////////////////////////
-            let antilink = await al.get(`config.${message.guild.id}.antilinkinvite`) || al.get(`config.${message.guild.id}.antilinkall`)
-            if (antilink == true) antilink = `${emojion}`
-            if (antilink == false) antilink = `${emojioff}`
-            if (antilink == null) antilink = `${emojioff}`
+            let antilink = await al.get(`config.${message.guild.id}.antilinkinvite') || al.get(`config.${message.guild.id}.antilinkall`)
+            if (antilink == true) antilink = `${emojion}'
+            if (antilink == false) antilink = '${emojioff}'
+            if (antilink == null) antilink = `${emojioff}'
 
             //////////////                    antiwebhook                    ///////////////////////////
             let antiwebhook = await aw.get(`config.${message.guild.id}.antiwebhook`)
-            if (antiwebhook == true) antiwebhook = `${emojion}`
-            if (antiwebhook == false) antiwebhook = `${emojioff}`
-            if (antiwebhook == null) antiwebhook = `${emojioff}`
+            if (antiwebhook == true) antiwebhook = `${emojion}'
+            if (antiwebhook == false) antiwebhook = '${emojioff}'
+            if (antiwebhook == null) antiwebhook = `${emojioff}'
 
             //////////////                    antichannelcreate                    ///////////////////////////
             let antichannelcreate = await atc.get(`config.${message.guild.id}.antichannelcreate`)
-            if (antichannelcreate == true) antichannelcreate = `${emojion}`
-            if (antichannelcreate == false) antichannelcreate = `${emojioff}`
-            if (antichannelcreate == null) antichannelcreate = `${emojioff}`
+            if (antichannelcreate == true) antichannelcreate = `${emojion}'
+            if (antichannelcreate == false) antichannelcreate = '${emojioff}'
+            if (antichannelcreate == null) antichannelcreate = `${emojioff}'
 
 
             //////////////                    antiupdate                    ///////////////////////////
             let antiupdate = await agu.get(`guildupdate_${message.guild.id}`)
-            if (antiupdate == true) antiupdate = `${emojion}`
-            if (antiupdate == false) antiupdate = `${emojioff}`
-            if (antiupdate == null) antiupdate = `${emojioff}`
+            if (antiupdate == true) antiupdate = `${emojion}'
+            if (antiupdate == false) antiupdate = '${emojioff}'
+            if (antiupdate == null) antiupdate = `${emojioff}'
 
 
             //////////////                    antichanneldelete                    ///////////////////////////
             let antichanneldelete = await atd.get(`config.${message.guild.id}.antichanneldelete`)
-            if (antichanneldelete == true) antichanneldelete = `${emojion}`
-            if (antichanneldelete == false) antichanneldelete = `${emojioff}`
-            if (antichanneldelete == null) antichanneldelete = `${emojioff}`
+            if (antichanneldelete == true) antichanneldelete = `${emojion}'
+            if (antichanneldelete == false) antichanneldelete = '${emojioff}'
+            if (antichanneldelete == null) antichanneldelete = `${emojioff}'
 
 
             //////////////                    antichannelupdate                    ///////////////////////////
             let antichannelupdate = await acu.get(`config.${message.guild.id}.antichannelupdate`)
-            if (antichannelupdate == true) antichannelupdate = `${emojion}`
-            if (antichannelupdate == false) antichannelupdate = `${emojioff}`
-            if (antichannelupdate == null) antichannelupdate = `${emojioff}`
+            if (antichannelupdate == true) antichannelupdate = `${emojion}'
+            if (antichannelupdate == false) antichannelupdate = '${emojioff}'
+            if (antichannelupdate == null) antichannelupdate = `${emojioff}'
 
             //////////////                    antirolecreate                    ///////////////////////////
             let antirolecreate = await atr.get(`config.${message.guild.id}.antirolecreate`)
-            if (antirolecreate == true) antirolecreate = `${emojion}`
-            if (antirolecreate == false) antirolecreate = `${emojioff}`
-            if (antirolecreate == null) antirolecreate = `${emojioff}`
+            if (antirolecreate == true) antirolecreate = `${emojion}'
+            if (antirolecreate == false) antirolecreate = '${emojioff}'
+            if (antirolecreate == null) antirolecreate = `${emojioff}'
 
             //////////////                    antiroledelete                    ///////////////////////////
             let antiroledelete = await ard.get(`config.${message.guild.id}.antiroledelete`)
-            if (antiroledelete == true) antiroledelete = `${emojion}`
-            if (antiroledelete == false) antiroledelete = `${emojioff}`
-            if (antiroledelete == null) antiroledelete = `${emojioff}`
+            if (antiroledelete == true) antiroledelete = `${emojion}'
+            if (antiroledelete == false) antiroledelete = '${emojioff}'
+            if (antiroledelete == null) antiroledelete = `${emojioff}'
 
             //////////////                    antiroleupdate                    ///////////////////////////
             let antiroleupdate = await aru.get(`config.${message.guild.id}.antiroleupdate`)
-            if (antiroleupdate == true) antiroleupdate = `${emojion}`
-            if (antiroleupdate == false) antiroleupdate = `${emojioff}`
-            if (antiroleupdate == null) antiroleupdate = `${emojioff}`
+            if (antiroleupdate == true) antiroleupdate = `${emojion}'
+            if (antiroleupdate == false) antiroleupdate = '${emojioff}'
+            if (antiroleupdate == null) antiroleupdate = `${emojioff}'
 
             //////////////                    antibot                    ///////////////////////////
             let antibot = await atb.get(`config.${message.guild.id}.antibot`)
-            if (antibot == true) antibot = `${emojion}`
-            if (antibot == false) antibot = `${emojioff}`
-            if (antibot == null) antibot = `${emojioff}`
+            if (antibot == true) antibot = `${emojion}'
+            if (antibot == false) antibot = '${emojioff}'
+            if (antibot == null) antibot = `${emojioff}'
 
             //////////////                    antiban                    ///////////////////////////
             let antiban = await aba.get(`config.${message.guild.id}.antiban`)
-            if (antiban == true) antiban = `${emojion}`
-            if (antiban == false) antiban = `${emojioff}`
-            if (antiban == null) antiban = `${emojioff}`
+            if (antiban == true) antiban = `${emojion}'
+            if (antiban == false) antiban = '${emojioff}'
+            if (antiban == null) antiban = `${emojioff}'
 
             //////////////                    antieveryone                    ///////////////////////////
             let antieveryone = await ae.get(`config.${message.guild.id}.antieveryone`)
-            if (antieveryone == true) antieveryone = `${emojion}`
-            if (antieveryone == false) antieveryone = `${emojioff}`
-            if (antieveryone == null) antieveryone = `${emojioff}`
+            if (antieveryone == true) antieveryone = `${emojion}'
+            if (antieveryone == false) antieveryone = '${emojioff}'
+            if (antieveryone == null) antieveryone = `${emojioff}'
 
             //////////////                    antidown                    ///////////////////////////
             let antidown = await ad.get(`config.${message.guild.id}.antidown`)
-            if (antidown == true) antidown = `${emojion}`
-            if (antidown == false) antidown = `${emojioff}`
-            if (antidown == null) antidown = `${emojioff}`
+            if (antidown == true) antidown = `${emojion}'
+            if (antidown == false) antidown = '${emojioff}'
+            if (antidown == null) antidown = `${emojioff}'
 
             //////////////                    antiadmin                    ///////////////////////////
             let antiadmin = await aa.get(`config.${message.guild.id}.antiadmin`)
-            if (antiadmin == true) antiadmin = `${emojion}`
-            if (antiadmin == false) antiadmin = `${emojioff}`
-            if (antiadmin == null) antiadmin = `${emojioff}`
+            if (antiadmin == true) antiadmin = `${emojion}'
+            if (antiadmin == false) antiadmin = '${emojioff}'
+            if (antiadmin == null) antiadmin = `${emojioff}'
 
 
 
@@ -177,13 +177,13 @@ module.exports = {
                 .addComponents(
                     new Discord.ButtonBuilder()
                         .setCustomId('desactive')
-                        .setLabel('Désactivéé')
+                        .setLabel('Désactivé')
                         .setStyle('Danger')
                 )
 
             const panel = new (require("discord.js").EmbedBuilder)()
-                .setAuthor({ name: `Panel Antiraid` })
-                .setDescription(`
+                .setAuthor({ name: 'Panel Antiraid' })
+                .setDescription(`)
 
              Antibot : ${antibot}
              Antiadmin : ${antiadmin}
@@ -205,8 +205,8 @@ module.exports = {
                 .setColor(color)
 
             const panelactive = new (require("discord.js").EmbedBuilder)()
-                .setAuthor({ name: `Panel Antiraid` })
-                .setDescription(`
+                .setAuthor({ name: 'Panel Antiraid` })
+                .setDescription(')')
 
                 Antibot : ${emojion}
                 Antiban : ${emojion}
@@ -221,15 +221,15 @@ module.exports = {
                 Anti Everyone : ${emojion}
                 Antilink : ${emojion} 
                 Anti webhook : ${emojion}
-                  `)
+                  ')
 
 
 
                 .setColor(color)
 
             const paneldesactive = new (require("discord.js").EmbedBuilder)()
-                .setAuthor({ name: `Panel Antiraid` })
-                .setDescription(`
+                .setAuthor({ name: 'Panel Antiraid` })
+                .setDescription('`)
 
              Antibot : ${emojioff}
              Antiadmin : ${antiadmin}
@@ -245,7 +245,7 @@ module.exports = {
              Anti Everyone : ${emojioff}
              Antilink : ${emojioff} 
              Anti webhook : ${emojioff}         
-               `)
+               ')
 
 
                 .setColor(color)
@@ -253,72 +253,72 @@ module.exports = {
             const panelselect = new Discord.ActionRowBuilder().addComponents(
                 new Discord.StringSelectMenuBuilder()
                     .setCustomId('Funny')
-                    .setPlaceholder(`Configurer un module`)
+                    .setPlaceholder('Configurer un module`)
                     .addOptions([
                         {
                             label: 'Punition',
                             value: 'punish',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Accès au serveur',
                             value: 'ass',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'AntiBan',
                             value: 'aba',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti Channel Create',
                             value: 'acc',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti Channel Delete',
                             value: 'acd',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti Channel Update',
                             value: 'acu',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti rôle create',
                             value: 'arc',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti rôle delete',
                             value: 'ard',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti rôle update',
                             value: 'aru',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'AntiLink',
                             value: 'al',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti WebHooks',
                             value: 'aw',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti Update',
                             value: 'au',
-                            emoji: '',
+                            
                         },
                         {
                             label: 'Anti Bot',
                             value: 'ab',
-                            emoji: '',
+                            
                         }
 
                     ])
@@ -329,13 +329,13 @@ module.exports = {
 
                 //anti channel create
                 const antichannelembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti channel create__**`)
+                    .setDescription('**Configuration de __l'anti channel create__**')
                     .setColor(color)
 
                 const antichannelrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -356,13 +356,13 @@ module.exports = {
                 )
                 //anti channel delete
                 const antichanneldembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti channel delete__**`)
+                    .setDescription('**Configuration de __l'anti channel delete__**')
                     .setColor(color)
 
                 const antichannedlrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -383,13 +383,13 @@ module.exports = {
                 )
                 //anti channel update
                 const antichanneupdembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti channel update__**`)
+                    .setDescription('**Configuration de __l'anti channel update__**')
                     .setColor(color)
 
                 const antichanneduprow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -410,13 +410,13 @@ module.exports = {
                 )
                 //anti Role create
                 const antirolecreateembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti rôle create__**`)
+                    .setDescription('**Configuration de __l'anti rôle create__**')
                     .setColor(color)
 
                 const antirolecreaterow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -437,13 +437,13 @@ module.exports = {
                 )
                 //anti rôle delete
                 const antiroledeleteembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti rôle delete__**`)
+                    .setDescription('**Configuration de __l'anti rôle delete__**')
                     .setColor(color)
 
                 const antiroledeleterow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -464,13 +464,13 @@ module.exports = {
                 )
                 //anti rôle update
                 const antiroleupembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti rôle update__**`)
+                    .setDescription('**Configuration de __l'anti rôle update__**')
                     .setColor(color)
 
                 const antiroleuprow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -491,13 +491,13 @@ module.exports = {
                 )
                 //anti Link
                 const antilinkembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'antilink__**`)
+                    .setDescription('**Configuration de __l'antilink__**')
                     .setColor(color)
 
                 const antilinkrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -519,13 +519,13 @@ module.exports = {
 
                 //anti wb
                 const antiwbembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de __l'anti WebHook__**`)
+                    .setDescription('**Configuration de __l'anti WebHook__**')
                     .setColor(color)
 
                 const antiwbrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer`)
+                        .setPlaceholder('Configurer')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -546,28 +546,28 @@ module.exports = {
                 )
                 //Punition
                 const punishembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de la __Punition__**`)
+                    .setDescription('**Configuration de la __Punition__**')
                     .setColor(color)
 
                 const punishrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer la punition`)
+                        .setPlaceholder('Configurer la punition')
                         .addOptions([
                             {
                                 label: 'Derank',
                                 value: 'derank',
-                                emoji: '',
+                                
                             },
                             {
                                 label: 'Kick',
                                 value: 'kick',
-                                emoji: '',
+                                
                             },
                             {
                                 label: 'Ban',
                                 value: 'ban',
-                                emoji: '',
+                                
                             },
                             {
                                 label: 'Retour',
@@ -579,13 +579,13 @@ module.exports = {
 
                 //Anti update
                 const antiupdateembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de l' __anti update__**`)
+                    .setDescription('**Configuration de l' __anti update__**')
                     .setColor(color)
 
                 const antiupdaterow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer l'anti update`)
+                        .setPlaceholder('Configurer l'anti update')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -607,13 +607,13 @@ module.exports = {
 
                 //Anti Bot
                 const antibotembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de l'__anti bot__**`)
+                    .setDescription('**Configuration de l'__anti bot__**')
                     .setColor(color)
 
                 const antibotrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer l'anti bot`)
+                        .setPlaceholder('Configurer l'anti bot')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -635,13 +635,13 @@ module.exports = {
 
                 //Server lock/unlock
                 const lockembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Autoriser ou refuser __l'accès au serveur__**`)
+                    .setDescription('**Autoriser ou refuser __l'accès au serveur__**')
                     .setColor(color)
 
                 const lockrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Accès au serveur`)
+                        .setPlaceholder('Accès au serveur')
                         .addOptions([
                             {
                                 label: 'Vérouiller le serveur',
@@ -664,13 +664,13 @@ module.exports = {
 
                 //Anti Ban
                 const antibanembed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription(`**Configuration de l'__antiban__**`)
+                    .setDescription('**Configuration de l'__antiban__**')
                     .setColor(color)
 
                 const antibanrow = new Discord.ActionRowBuilder().addComponents(
                     new Discord.StringSelectMenuBuilder()
                         .setCustomId('Funny')
-                        .setPlaceholder(`Configurer l'anti bot`)
+                        .setPlaceholder('Configurer l'anti bot')
                         .addOptions([
                             {
                                 label: 'Activer',
@@ -702,45 +702,45 @@ module.exports = {
 
                     if (value === "active") {
 
-                        c.reply({ content: `**Toutes les sécurités ont été activéées avec succès**`, ephemeral: true })
+                        c.reply({ content: '**Toutes les sécurités ont été activées avec succès**`, ephemeral: true })
 
-                        atc.set(`config.${message.guild.id}.antichannelcreate`, true)
-                        agu.set(`guildupdate_${message.guild.id}`, true)
-                        atd.set(`config.${message.guild.id}.antichanneldelete`, true)
-                        acu.set(`config.${message.guild.id}.antichannelupdate`, true)
-                        al.set(`config.${message.guild.id}.antilinkall`, true)
-                        atr.set(`config.${message.guild.id}.antirolecreate`, true)
-                        ard.set(`config.${message.guild.id}.antiroledelete`, true)
-                        aru.set(`config.${message.guild.id}.antiroleupdate`, true)
-                        aw.set(`config.${message.guild.id}.antiwebhook`, true)
-                        atb.set(`config.${message.guild.id}.antibot`, true)
-                        aba.set(`config.${message.guild.id}.antiban`, true)
-                        ae.set(`config.${message.guild.id}.antieveryone`, true)
-                        ad.set(`config.${message.guild.id}.antidown`, true)
-                        aa.set(`config.${message.guild.id}.antiadmin`, true)
+                        atc.set(`config.${message.guild.id}.antichannelcreate', true)
+                        agu.set('guildupdate_${message.guild.id}', true)
+                        atd.set(`config.${message.guild.id}.antichanneldelete', true)
+                        acu.set('config.${message.guild.id}.antichannelupdate', true)
+                        al.set(`config.${message.guild.id}.antilinkall', true)
+                        atr.set(`config.${message.guild.id}.antirolecreate', true)
+                        ard.set(`config.${message.guild.id}.antiroledelete', true)
+                        aru.set('config.${message.guild.id}.antiroleupdate', true)
+                        aw.set(`config.${message.guild.id}.antiwebhook', true)
+                        atb.set(`config.${message.guild.id}.antibot', true)
+                        aba.set(`config.${message.guild.id}.antiban', true)
+                        ae.set('config.${message.guild.id}.antieveryone', true)
+                        ad.set(`config.${message.guild.id}.antidown', true)
+                        aa.set(`config.${message.guild.id}.antiadmin', true)
 
                         msg.edit({ embeds: [panelactive] })
                     }
 
                     else if (value === "desactive") {
 
-                        c.reply({ content: `**Toutes les sécurités ont été désactivéées avec succès**`, ephemeral: true })
+                        c.reply({ content: '**Toutes les sécurités ont été désactivées avec succès**`, ephemeral: true })
 
-                        atc.set(`config.${message.guild.id}.antichannelcreate`, false)
-                        agu.set(`guildupdate_${message.guild.id}`, false)
-                        atd.set(`config.${message.guild.id}.antichanneldelete`, false)
-                        acu.set(`config.${message.guild.id}.antichannelupdate`, false)
-                        al.set(`config.${message.guild.id}.antilinkall`, false)
-                        al.set(`config.${message.guild.id}.antilinkinvite`, false)
-                        atr.set(`config.${message.guild.id}.antirolecreate`, false)
-                        ard.set(`config.${message.guild.id}.antiroledelete`, false)
-                        aru.set(`config.${message.guild.id}.antiroleupdate`, false)
-                        aw.set(`config.${message.guild.id}.antiwebhook`, false)
-                        atb.set(`config.${message.guild.id}.antibot`, false)
-                        aba.set(`config.${message.guild.id}.antiban`, false)
-                        ae.set(`config.${message.guild.id}.antieveryone`, false)
-                        ad.set(`config.${message.guild.id}.antidown`, false)
-                        aa.set(`config.${message.guild.id}.antiadmin`, false)
+                        atc.set(`config.${message.guild.id}.antichannelcreate', false)
+                        agu.set(`guildupdate_${message.guild.id}', false)
+                        atd.set(`config.${message.guild.id}.antichanneldelete', false)
+                        acu.set(`config.${message.guild.id}.antichannelupdate', false)
+                        al.set('config.${message.guild.id}.antilinkall', false)
+                        al.set(`config.${message.guild.id}.antilinkinvite', false)
+                        atr.set(`config.${message.guild.id}.antirolecreate', false)
+                        ard.set(`config.${message.guild.id}.antiroledelete', false)
+                        aru.set('config.${message.guild.id}.antiroleupdate', false)
+                        aw.set(`config.${message.guild.id}.antiwebhook', false)
+                        atb.set(`config.${message.guild.id}.antibot', false)
+                        aba.set(`config.${message.guild.id}.antiban', false)
+                        ae.set('config.${message.guild.id}.antieveryone', false)
+                        ad.set(`config.${message.guild.id}.antidown', false)
+                        aa.set('config.${message.guild.id}.antiadmin`, false)
 
                         msg.edit({ embeds: [paneldesactive] })
                     }

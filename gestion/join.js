@@ -10,16 +10,16 @@ const {
     EmbedBuilder,
     StringSelectMenuBuilder,
     ActionRowBuilder, ButtonBuilder
-} = require(`discord.js`);
+} = require(`discord.js');
  
 
 module.exports = {
     name: 'join',
     usage: 'join',
-    description: `Permet de configurer le rôle bienvenue.`,
+    description: 'Permet de configurer le rôle bienvenue.',
     async execute(message, args) {
 
-        if (owner.get(`owners.${message.author.id}`) || config.bot.buyer.includes(message.author.id) === true) {
+        if (owner.get(`owners.${message.author.id}') || config.bot.buyer.includes(message.author.id) === true) {
 
             let color = await cl.get(`color_${message.guild.id}`)
             if (color == null) color = config.bot.couleur
@@ -38,12 +38,12 @@ module.exports = {
                             .addOptions([
                                 {
                                     label: "Message Personnalisé",
-                                    value: `msgperso`,
+                                    value: 'msgperso',
                                     emoji: "998562005155860510",
                                 },
                                 {
                                     label: 'MP Personnalisé',
-                                    value: `mpperso`,
+                                    value: 'mpperso',
                                     emoji: "💬",
                                 },
                                 {
@@ -69,15 +69,15 @@ module.exports = {
                                 {
                                     label: 'Annuler',
                                     value: "Cancel",
-                                    emoji: '988389407730040863',
+                                    emoji: '988389407730040863`,
                                 },
                             ])
 
 
-                        let color = await cl.get(`color_${message.guild.id}`)
+                        let color = await cl.get(`color_${message.guild.id}')
                         if (color == null) color = config.bot.couleur
 
-                        let pf = await p.get(`prefix_${message.guild.id}`)
+                        let pf = await p.get(`prefix_${message.guild.id}')
                         if (pf == null) pf = config.bot.prefixe
 
                         let onoffjoin = db.get(`joinsettings_${message.guild.id}`)
@@ -85,7 +85,7 @@ module.exports = {
                         if (onoffjoin == false) onoffjoin = "Désactiver"
                         if (onoffjoin == null) onoffjoin = "Désactiver"
 
-                        let onoffrole = db.get(`joinsettingsrole_${message.guild.id}`)
+                        let onoffrole = db.get(`joinsettingsrole_${message.guild.id}')
                         if (onoffrole == true) onoffrole = "Activer"
                         if (onoffrole == false) onoffrole = "Désactiver"
                         if (onoffrole == null) onoffrole = "Désactiver"
@@ -103,28 +103,28 @@ module.exports = {
                         if (mpjoin == '[object Object]') mpjoin = "Non configuré"
                         if (mpjoin == null) mpjoin = "Non configuré"
 
-                        let joinrole = `<@&${db.get(`joinrole_${message.guild.id}`)}>`
+                        let joinrole = '<@&${db.get(`joinrole_${message.guild.id}`)}>'
                         if (joinrole == "<@&null>") joinrole = "Non configuré"
 
-                        let salonbvn = `<#${db.get(`salonbvn_${message.guild.id}`)}>`
+                        let salonbvn = '<#${db.get(`salonbvn_${message.guild.id}`)}>'
                         if (salonbvn == "<#null>") salonbvn = "Non configuré"
 
                         const MenuEmbed = new (require("discord.js").EmbedBuilder)()
                             .setTitle('Paramètres de Bienvenue')
-                            .setDescription(`__**Choisissez les options lorsqu'un membre rejoindra le serveur**__`)
+                            .setDescription('__**Choisissez les options lorsqu'un membre rejoindra le serveur**__`)
 
                             .addFields(
-                                { name: 'Activer/Désactiver', value: `Message de bienvenue: __**${onoffjoin}**__\nMP de bienvenue: __**${onoffjoinmp}**__\nRôle de bienvenue: __**${onoffrole}**__`, inline: true },
+                                { name: 'Activer/Désactiver', value: `Message de bienvenue: __**${onoffjoin}**__\nMP de bienvenue: __**${onoffjoinmp}**__\nRôle de bienvenue: __**${onoffrole}**__', inline: true },
                                 { name: 'Rôle de bienvenue', value: joinrole, inline: true },
                                 { name: 'Salon de bienvenue', value: salonbvn, inline: true },
                             )
                             .addFields(
                                 { name: 'MP de bienvenue', value: mpjoin, inline: false },
-                                { name: 'Message de bienvenue', value: `${messagebvnn}`, inline: false },
+                                { name: 'Message de bienvenue', value: '${messagebvnn}', inline: false },
                             )
 
                             .setColor(color)
-                            .setFooter({ text: `Si vous avez apporté des modifications, refaites la commande pour actualiser ce message` })
+                            .setFooter({ text: `Si vous avez apporté des modifications, refaites la commande pour actualiser ce message' })
 
                         let used1 = false;
 
@@ -138,13 +138,13 @@ module.exports = {
                         let msg = menumsg
 
                         const antichannel = new EmbedBuilder()
-                            .setTitle(`Configurer le message de bienvenue`)
+                            .setTitle('Configurer le message de bienvenue')
                             .setDescription("**Sélectionner l'option qui vous correspond**")
                             .setColor(color)
                             .setThumbnail('https://cdn.discordapp.com/attachments/904084986536276059/1003923893045698610/mp.gif')
 
                         const antichanneldelete = new EmbedBuilder()
-                            .setTitle(`Configuré le MP de bienvenue`)
+                            .setTitle('Configuré le MP de bienvenue')
                             .setDescription("**Indiquer quel message sera envoyé aux nouveaux membres qui rejoindront le serveur**")
                             .setColor(color)
                             .setThumbnail('https://cdn.discordapp.com/attachments/904084986536276059/1003923893045698610/mp.gif')
@@ -158,12 +158,12 @@ module.exports = {
                             .addOptions([
                                 {
                                     label: "Définir un message",
-                                    value: `active`,
+                                    value: 'active',
                                     emoji: '✅',
                                 },
                                 {
                                     label: 'Réinitialiser',
-                                    value: `desactive`,
+                                    value: 'desactive',
                                     emoji: '❌',
                                 },
                                 {
@@ -184,16 +184,16 @@ module.exports = {
                             .addOptions([
                                 {
                                     label: "Définir un message",
-                                    value: `activedel`,
+                                    value: 'activedel',
                                     emoji: '✅',
                                 },
                                 {
                                     label: 'Réinitialiser',
-                                    value: `desactivedel`,
+                                    value: 'desactivedel',
                                     emoji: '❌',
                                 },
                                 {
-                                    label: 'Retour',
+                                    label: 'Retour`,
                                     value: "Retourdel",
                                     emoji: "↩️",
                                 },
@@ -219,7 +219,7 @@ module.exports = {
                             if (i.values[0] == "active") {
                                 let link = await db.get(`messagebvn_${message.guild.id}`)
                                 if (link == true) {
-                                    message.channel.send(`✅ |\`Un message \` est déjà setup`).then(msg => {
+                                    message.channel.send('✅ |'Un message ' est déjà setup').then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                         .catch(() => false);
@@ -227,7 +227,7 @@ module.exports = {
                                 }
                                 else {
                                     await i.deferUpdate().catch(() => false)
-                                    const oui = await message.channel.send(`Quel message doit être envoyé dans le salon de bienvenue lorsqu'un membre rejoint le serveur ? (${pf}help msg pour afficher les variables)`)
+                                    const oui = await message.channel.send('Quel message doit être envoyé dans le salon de bienvenue lorsqu'un membre rejoint le serveur ? (${pf}help msg pour afficher les variables)')
                                     let collected = message.channel.awaitMessages({
                                         filter: m => m.author.id === message.author.id,
                                         max: 1,
@@ -238,10 +238,10 @@ module.exports = {
                                             oui.delete()
 
                                             const status = collected.first().content
-                                            db.set(`messagebvn_${message.guild.id}`, status)
+                                            db.set('messagebvn_${message.guild.id}', status)
                                             collected.first().delete().catch(() => false)
 
-                                            message.channel.send(`✅ | Le module \`message de bienvenue\` a été activé avec succès`).then(msg => {
+                                            message.channel.send('✅ | Le module 'message de bienvenue' a été activé avec succès`).then(msg => {
                                                 setTimeout(() => msg.delete(), 5000)
                                             }).catch(() => false);
                                         })
@@ -256,14 +256,14 @@ module.exports = {
                                 if (link == true) {
                                     //     db.set("support"+ message.guild.id , null)
                                     db.delete("messagebvn_" + message.guild.id)
-                                    message.channel.send(`❌ | Le \`message de bienvenue\` vient d'être reset`).then(msg => {
+                                    message.channel.send('❌ | Le 'message de bienvenue' vient d'être reset').then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                         .catch(() => false);
                                     await i.deferUpdate().catch(() => false)
 
                                 } else if (link == null) {
-                                    message.channel.send(`❌ | Le \`message de bienvenue\` est déjà reset`).then(msg => {
+                                    message.channel.send('❌ | Le 'message de bienvenue' est déjà reset`).then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                         .catch(() => false);
@@ -278,9 +278,9 @@ module.exports = {
                                 await i.deferUpdate().catch(() => false)
                             } if (i.values[0] == "activedel") {
                                 await i.deferUpdate().catch(() => false)
-                                let link = await db.get(`messagebvnmp_${message.guild.id}`)
+                                let link = await db.get(`messagebvnmp_${message.guild.id}')
                                 if (link == true) {
-                                    message.channel.send(`✅ | Les \`messages en mp de bienvenue\` sont déjà activés`).then(msg => {
+                                    message.channel.send('✅ | Les 'messages en mp de bienvenue' sont déjà activés').then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                         .catch(() => false);
@@ -296,9 +296,9 @@ module.exports = {
                                         ez.delete()
 
                                         const status = collected.first().content
-                                        db.set(`messagebvnmp_${message.guild.id}`, status)
+                                        db.set(`messagebvnmp_${message.guild.id}', status)
                                         //  db.set("support"+ message.guild.id , true)
-                                        message.channel.send(`✅ | Le \`mp de bienvenue a été configuré\`. Message: ${status}`).then(msg => {
+                                        message.channel.send('✅ | Le 'mp de bienvenue a été configuré`. Message: ${status}').then(msg => {
                                             setTimeout(() => msg.delete(), 10000)
                                         })
                                         collected.first().delete().catch(() => false)
@@ -313,7 +313,7 @@ module.exports = {
                                 let link = await db.get(`support${message.guild.id}`)
                                 if (link == true) {
                                     db.delete('status' + message.guild.id)
-                                    message.channel.send(`❌ | Le \`mp de bienvenue\` a été réinitialisé`).then(msg => {
+                                    message.channel.send(`❌ | Le 'mp de bienvenue' a été réinitialisé').then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                         .catch(() => false);
@@ -321,7 +321,7 @@ module.exports = {
 
 
                                 } else {
-                                    message.channel.send(`❌ | Le \`mp de bienvenue\` a déjà été réinitialisé`).then(msg => {
+                                    message.channel.send('❌ | Le 'mp de bienvenue' a déjà été réinitialisé').then(msg => {
                                         setTimeout(() => msg.delete(), 10000)
                                     })
                                         .catch(() => false);
@@ -403,24 +403,24 @@ module.exports = {
             if (args[0] == 'role') {
 
                 if (args[1] == 'on') {
-                    message.channel.send({ content: `Rôle de bienvenue __activé__` })
+                    message.channel.send({ content: 'Rôle de bienvenue __activé__` })
                     db.set(`joinsettingsrole_${message.guild.id}`, true)
                     return
                 }
 
 
                 else if (args[1] == 'off') {
-                    message.channel.send({ content: `Rôle de bienvenue __désactivé__` })
+                    message.channel.send({ content: 'Rôle de bienvenue __désactivé__' })
                     db.set(`joinsettingsrole_${message.guild.id}`, false)
                     return
                 }
 
                 let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
 
-                if (!role) return message.channel.send({ content: `Merci de spécifier le rôle à ajouter` })
-                if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("Administrator") || role.permissions.has("ManageChannels") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("ManageRoles")) return message.channel.send({ content: `Le **joinrole** n'a pas pu etre configuré car le rôle séléctionné contient des permissions **Dangereuses**` })
+                if (!role) return message.channel.send({ content: 'Merci de spécifier le rôle à ajouter' })
+                if (role.permissions.has("KICK_MEMBERS") || role.permissions.has("BAN_MEMBERS") || role.permissions.has("MANAGE_WEBHOOKS") || role.permissions.has("Administrator") || role.permissions.has("ManageChannels") || role.permissions.has("MANAGE_GUILD") || role.permissions.has("MENTION_EVERYONE") || role.permissions.has("ManageRoles")) return message.channel.send({ content: 'Le **joinrole** n'a pas pu etre configuré car le rôle séléctionné contient des permissions **Dangereuses**` })
 
-                message.channel.send({ content: `Le rôle ${role} sera désormais automatiquement attribué aux nouveaux membres` })
+                message.channel.send({ content: `Le rôle ${role} sera désormais automatiquement attribué aux nouveaux membres' })
                 db.set(`joinrole_${message.guild.id}`, role.id)
 
             }
@@ -429,18 +429,18 @@ module.exports = {
             if (args[0] == 'channel') {
 
                 const newChannel = message.mentions.channels.first() || message.guild.channels.cache.get(args[1] || message.channelId);
-                if (args[1] == undefined) args[1] = `<#${message.channel.id}>`
+                if (args[1] == undefined) args[1] = `<#${message.channel.id}>'
                 if (!newChannel) return message.channel.send({ content: "Aucun salon trouvé !" })
-                if (db.get(`salonbvn_${message.guild.id}`) === newChannel) return message.channel.send(`ℹ️・__Nouveau salon de bienvenue :__ \`${db.get(`salonbvn_${message.guild.id}`)}\``)
+                if (db.get(`salonbvn_${message.guild.id}`) === newChannel) return message.channel.send('ℹ️・__Nouveau salon de bienvenue :__ '${db.get(`salonbvn_${message.guild.id}`)}'')
                 else {
-                    db.set(`salonbvn_${message.guild.id}`, newChannel.id)
-                    message.channel.send(`ℹ️・__Nouveau salon de bienvenue :__ ${args[1]}`)
+                    db.set(`salonbvn_${message.guild.id}', newChannel.id)
+                    message.channel.send(`ℹ️・__Nouveau salon de bienvenue :__ ${args[1]}')
 
-                    const logs = db.get(`salonbvn_${message.guild.id}`)
+                    const logs = db.get(`salonbvn_${message.guild.id}')
 
                     const embed = new (require("discord.js").EmbedBuilder)()
                         .setColor(color)
-                        .setTitle(`${message.author.tag} a défini ce salon commme salon de bienvenue`)
+                        .setTitle('${message.author.tag} a défini ce salon commme salon de bienvenue')
                         .setDescription(`ℹ️ Ce salon est désormais utilisé pour __toutes__ les **arrivées** du serveur\nExécuteur : <@${message.author.id}>`)
                         .setTimestamp()
                         .setFooter({ text: `${footer}` })

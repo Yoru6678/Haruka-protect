@@ -16,7 +16,7 @@ module.exports = {
             message.channel.send(`ℹ️ Reboot en cours ...`).then(async message => {
                 message.edit(`ℹ️ Reboot en cours ...`)
                 client.destroy();
-                await client.login(process.env.token);
+                await client.login(process.env.TOKEN);
                 await message.edit(`ℹ️ Reboot en cours ...`)
                 message.edit(`ℹ️ Reboot terminé`)
 

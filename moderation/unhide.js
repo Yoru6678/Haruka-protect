@@ -12,10 +12,10 @@ const p3 = db.table("Perm3")
 module.exports = {
     name: 'unhide',
     usage: 'unhide',
-    description: `Permet de unhide un salon`,
+    description: `Permet de unhide un salon',
     async execute(client, message, args, color) {
 
-        const perm3 = await p3.get(`perm3_${message.guild.id}`)
+        const perm3 = await p3.get(`perm3_${message.guild.id}')
 
             let ecolor = await db.get(`color_${message.guild.id}`)
             if (ecolor == null) color = config.bot.couleur
@@ -27,7 +27,7 @@ module.exports = {
                         channel.permissionOverwrites.edit(message.guild.id, {
                             ViewChannel: null,
                         });
-                message.channel.send(`Les membres peuvent à nouveau voir le salon <#${channel.id}>`);
+                message.channel.send(`Les membres peuvent à nouveau voir le salon <#${channel.id}>');
                 message.delete();
             }
 
@@ -39,7 +39,7 @@ module.exports = {
                 .setColor(ecolor)
                 .setDescription(`<@${message.author.id}> a utilisé la commande `unhide` le salon <#${message.channel.id}>`)
                 .setTimestamp()
-                .setFooter({ text: `📚` })
+                .setFooter({ text: `📚' })
             const logchannel = client.channels.cache.get(channellogs)
             if (logchannel) logchannel.send({ embeds: [embed] }).catch(() => false)
     }

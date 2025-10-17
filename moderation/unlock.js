@@ -25,7 +25,7 @@ module.exports = {
                 SendMessages: null
             }).then(() => {
                 const embed = new (require("discord.js").EmbedBuilder)()
-                    .setDescription("🔓 Salon déverrouilléé")
+                    .setDescription("🔓 Salon déverrouillé")
                     .setColor(color);
                 message.channel.send({ embeds: [embed] });
             }).catch(() => {
