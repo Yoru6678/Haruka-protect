@@ -9,14 +9,14 @@ module.exports = {
         
         if (welcomeChannel) {
             const embed = HarukaEmbeds.custom(
-                \`👋 Bienvenue ${member.user.username}! - ${client.config.bot.footer}\`,
-                \`Nous sommes maintenant ${member.guild.memberCount} membres!\`,
+                `👋 Bienvenue ${member.user.username}! - ${client.config.bot.footer}`,
+                `Nous sommes maintenant ${member.guild.memberCount} membres!`,
                 '#57F287'
             ).setThumbnail(member.user.displayAvatarURL());
 
             await welcomeChannel.send({ embeds: [embed] });
         }
 
-        client.logger.info(\`Nouveau membre: ${member.user.tag} sur ${member.guild.name}\`);
+        client.logger.info(`Nouveau membre: ${member.user.tag} sur ${member.guild.name}`);
     }
 };

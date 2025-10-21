@@ -1,50 +1,50 @@
-🔧c🔧o🔧n🔧s🔧t🔧 🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧 🔧=🔧 🔧r🔧e🔧q🔧u🔧i🔧r🔧e🔧(🔧'🔧.🔧.🔧/🔧.🔧.🔧/🔧u🔧t🔧i🔧l🔧s🔧/🔧e🔧m🔧b🔧e🔧d🔧s🔧'🔧)🔧;🔧
-🔧
-🔧m🔧o🔧d🔧u🔧l🔧e🔧.🔧e🔧x🔧p🔧o🔧r🔧t🔧s🔧 🔧=🔧 🔧{🔧
-🔧 🔧 🔧 🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧m🔧u🔧t🔧e🔧'🔧,🔧
-🔧 🔧 🔧 🔧 🔧d🔧e🔧s🔧c🔧r🔧i🔧p🔧t🔧i🔧o🔧n🔧:🔧 🔧'🔧R🔧e🔧n🔧d🔧r🔧e🔧 🔧m🔧u🔧e🔧t🔧 🔧u🔧n🔧 🔧m🔧e🔧m🔧b🔧r🔧e🔧'🔧,🔧
-🔧 🔧 🔧 🔧 🔧u🔧s🔧a🔧g🔧e🔧:🔧 🔧'🔧+🔧m🔧u🔧t🔧e🔧 🔧@🔧m🔧e🔧m🔧b🔧r🔧e🔧 🔧[🔧d🔧u🔧r🔧é🔧e🔧]🔧 🔧[🔧r🔧a🔧i🔧s🔧o🔧n🔧]🔧'🔧,🔧
-🔧 🔧 🔧 🔧 🔧p🔧e🔧r🔧m🔧i🔧s🔧s🔧i🔧o🔧n🔧s🔧:🔧 🔧[🔧'🔧M🔧o🔧d🔧e🔧r🔧a🔧t🔧e🔧M🔧e🔧m🔧b🔧e🔧r🔧s🔧'🔧]🔧,🔧
-🔧 🔧 🔧 🔧 🔧c🔧a🔧t🔧e🔧g🔧o🔧r🔧y🔧:🔧 🔧'🔧m🔧o🔧d🔧e🔧r🔧a🔧t🔧i🔧o🔧n🔧'🔧,🔧
-🔧
-🔧 🔧 🔧 🔧 🔧a🔧s🔧y🔧n🔧c🔧 🔧e🔧x🔧e🔧c🔧u🔧t🔧e🔧(🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧,🔧 🔧a🔧r🔧g🔧s🔧,🔧 🔧c🔧l🔧i🔧e🔧n🔧t🔧)🔧 🔧{🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧t🔧a🔧r🔧g🔧e🔧t🔧 🔧=🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧m🔧e🔧n🔧t🔧i🔧o🔧n🔧s🔧.🔧m🔧e🔧m🔧b🔧e🔧r🔧s🔧.🔧f🔧i🔧r🔧s🔧t🔧(🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧i🔧f🔧 🔧(🔧!🔧t🔧a🔧r🔧g🔧e🔧t🔧)🔧 🔧{🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧r🔧e🔧t🔧u🔧r🔧n🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧e🔧r🔧r🔧o🔧r🔧(🔧'🔧V🔧e🔧u🔧i🔧l🔧l🔧e🔧z🔧 🔧m🔧e🔧n🔧t🔧i🔧o🔧n🔧n🔧e🔧r🔧 🔧u🔧n🔧 🔧m🔧e🔧m🔧b🔧r🔧e🔧 🔧à🔧 🔧r🔧e🔧n🔧d🔧r🔧e🔧 🔧m🔧u🔧e🔧t🔧.🔧'🔧)🔧]🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧
-🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧d🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧 🔧=🔧 🔧a🔧r🔧g🔧s🔧[🔧1🔧]🔧 🔧|🔧|🔧 🔧'🔧6🔧0🔧m🔧'🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧r🔧e🔧a🔧s🔧o🔧n🔧 🔧=🔧 🔧a🔧r🔧g🔧s🔧.🔧s🔧l🔧i🔧c🔧e🔧(🔧2🔧)🔧.🔧j🔧o🔧i🔧n🔧(🔧'🔧 🔧'🔧)🔧 🔧|🔧|🔧 🔧'🔧A🔧u🔧c🔧u🔧n🔧e🔧 🔧r🔧a🔧i🔧s🔧o🔧n🔧 🔧s🔧p🔧é🔧c🔧i🔧f🔧i🔧é🔧e🔧'🔧;🔧
-🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧t🔧r🔧y🔧 🔧{🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧t🔧i🔧m🔧e🔧o🔧u🔧t🔧D🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧 🔧=🔧 🔧t🔧h🔧i🔧s🔧.🔧p🔧a🔧r🔧s🔧e🔧D🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧(🔧d🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧t🔧i🔧m🔧e🔧o🔧u🔧t🔧(🔧t🔧i🔧m🔧e🔧o🔧u🔧t🔧D🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧,🔧 🔧r🔧e🔧a🔧s🔧o🔧n🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧s🔧u🔧c🔧c🔧e🔧s🔧s🔧(🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧\🔧`🔧$🔧{🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧u🔧s🔧e🔧r🔧.🔧t🔧a🔧g🔧}🔧 🔧a🔧 🔧é🔧t🔧é🔧 🔧r🔧e🔧n🔧d🔧u🔧 🔧m🔧u🔧e🔧t🔧 🔧p🔧o🔧u🔧r🔧 🔧$🔧{🔧d🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧}🔧.🔧\🔧`🔧,🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧`🔧M🔧e🔧m🔧b🔧r🔧e🔧 🔧m🔧u🔧e🔧t🔧 🔧✅🔧 🔧-🔧 🔧H🔧a🔧r🔧u🔧k🔧a🔧 🔧P🔧r🔧o🔧t🔧e🔧c🔧t🔧 🔧⚡🔧'🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧)🔧.🔧a🔧d🔧d🔧F🔧i🔧e🔧l🔧d🔧s🔧(🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧{🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧R🔧a🔧i🔧s🔧o🔧n🔧'🔧,🔧 🔧v🔧a🔧l🔧u🔧e🔧:🔧 🔧r🔧e🔧a🔧s🔧o🔧n🔧 🔧}🔧,🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧{🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧M🔧o🔧d🔧é🔧r🔧a🔧t🔧e🔧u🔧r🔧'🔧,🔧 🔧v🔧a🔧l🔧u🔧e🔧:🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧a🔧u🔧t🔧h🔧o🔧r🔧.🔧t🔧a🔧g🔧 🔧}🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧)🔧]🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
-🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧l🔧i🔧e🔧n🔧t🔧.🔧l🔧o🔧g🔧g🔧e🔧r🔧.🔧c🔧o🔧m🔧m🔧a🔧n🔧d🔧(🔧\🔧`🔧M🔧U🔧T🔧E🔧:🔧 🔧$🔧{🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧u🔧s🔧e🔧r🔧.🔧t🔧a🔧g🔧}🔧 🔧p🔧a🔧r🔧 🔧$🔧{🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧a🔧u🔧t🔧h🔧o🔧r🔧.🔧t🔧a🔧g🔧}🔧 🔧-🔧 🔧$🔧{🔧d🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧}🔧 🔧-🔧 🔧$🔧{🔧r🔧e🔧a🔧s🔧o🔧n🔧}🔧\🔧`🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧 🔧c🔧a🔧t🔧c🔧h🔧 🔧(🔧e🔧r🔧r🔧o🔧r🔧)🔧 🔧{🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧e🔧r🔧r🔧o🔧r🔧(🔧`🔧U🔧n🔧e🔧 🔧e🔧r🔧r🔧e🔧u🔧r🔧 🔧e🔧s🔧t🔧 🔧s🔧u🔧r🔧v🔧e🔧n🔧u🔧e🔧 🔧l🔧o🔧r🔧s🔧 🔧d🔧u🔧 🔧m🔧u🔧t🔧e🔧.🔧'🔧)🔧]🔧 🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧
-🔧 🔧 🔧 🔧 🔧}🔧,🔧
-🔧
-🔧 🔧 🔧 🔧 🔧p🔧a🔧r🔧s🔧e🔧D🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧(🔧d🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧)🔧 🔧{🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧u🔧n🔧i🔧t🔧s🔧 🔧=🔧 🔧{🔧 🔧'🔧s🔧'🔧:🔧 🔧1🔧0🔧0🔧0🔧,🔧 🔧'🔧m🔧'🔧:🔧 🔧6🔧0🔧0🔧0🔧0🔧,🔧 🔧'🔧h🔧'🔧:🔧 🔧3🔧6🔧0🔧0🔧0🔧0🔧0🔧,🔧 🔧'🔧d🔧'🔧:🔧 🔧8🔧6🔧4🔧0🔧0🔧0🔧0🔧0🔧 🔧}🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧m🔧a🔧t🔧c🔧h🔧 🔧=🔧 🔧d🔧u🔧r🔧a🔧t🔧i🔧o🔧n🔧.🔧m🔧a🔧t🔧c🔧h🔧(🔧/🔧^🔧(🔧\🔧d🔧+🔧)🔧(🔧[🔧s🔧m🔧h🔧d🔧]🔧)🔧$🔧/🔧)🔧;🔧
-🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧r🔧e🔧t🔧u🔧r🔧n🔧 🔧m🔧a🔧t🔧c🔧h🔧 🔧?🔧 🔧p🔧a🔧r🔧s🔧e🔧I🔧n🔧t🔧(🔧m🔧a🔧t🔧c🔧h🔧[🔧1🔧]🔧)🔧 🔧*🔧 🔧u🔧n🔧i🔧t🔧s🔧[🔧m🔧a🔧t🔧c🔧h🔧[🔧2🔧]🔧]🔧 🔧:🔧 🔧3🔧6🔧0🔧0🔧0🔧0🔧0🔧;🔧
-🔧 🔧 🔧 🔧 🔧}🔧
-🔧}🔧;🔧
+const HarukaEmbeds = require('../../utils/embeds');
+
+module.exports = {
+    name: 'mute',
+    description: 'Rendre muet un membre',
+    usage: '+mute @membre [durée] [raison]',
+    permissions: ['ModerateMembers'],
+    category: 'moderation',
+
+    async execute(message, args, client) {
+        const target = message.mentions.members.first();
+        
+        if (!target) {
+            return message.reply({ 
+                embeds: [HarukaEmbeds.error('Veuillez mentionner un membre à rendre muet.')] 
+            });
+        }
+
+        const duration = args[1] || '60m';
+        const reason = args.slice(2).join(' ') || 'Aucune raison spécifiée';
+
+        try {
+            const timeoutDuration = this.parseDuration(duration);
+            await target.timeout(timeoutDuration, reason);
+            
+            await message.reply({ 
+                embeds: [HarukaEmbeds.success(
+                    `${target.user.tag} a été rendu muet pour ${duration}.`,
+                    `Membre muet ✅ - Haruka Protect ⚡'
+                ).addFields(
+                    { name: 'Raison', value: reason },
+                    { name: 'Modérateur', value: message.author.tag }
+                )] 
+            });
+
+            client.logger.command(`MUTE: ${target.user.tag} par ${message.author.tag} - ${duration} - ${reason}`);
+            
+        } catch (error) {
+            await message.reply({ 
+                embeds: [HarukaEmbeds.error(`Une erreur est survenue lors du mute.')] 
+            });
+        }
+    },
+
+    parseDuration(duration) {
+        const units = { 's': 1000, 'm': 60000, 'h': 3600000, 'd': 86400000 };
+        const match = duration.match(/^(\d+)([smhd])$/);
+        return match ? parseInt(match[1]) * units[match[2]] : 3600000;
+    }
+};

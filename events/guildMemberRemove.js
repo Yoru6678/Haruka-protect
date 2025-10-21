@@ -9,14 +9,14 @@ module.exports = {
         
         if (goodbyeChannel) {
             const embed = HarukaEmbeds.custom(
-                \`👋 Au revoir ${member.user.username}! - ${client.config.bot.footer}\`,
-                \`Nous sommes maintenant ${member.guild.memberCount} membres.\`,
+                `👋 Au revoir ${member.user.username}! - ${client.config.bot.footer}`,
+                `Nous sommes maintenant ${member.guild.memberCount} membres.`,
                 '#ED4245'
             ).setThumbnail(member.user.displayAvatarURL());
 
             await goodbyeChannel.send({ embeds: [embed] });
         }
 
-        client.logger.info(\`Membre parti: ${member.user.tag} de ${member.guild.name}\`);
+        client.logger.info(`Membre parti: ${member.user.tag} de ${member.guild.name}`);
     }
 };
