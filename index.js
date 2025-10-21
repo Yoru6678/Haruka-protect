@@ -19,8 +19,8 @@ const errorHandler = require('./utils/errorHandler');
 // Serveur Express pour UptimeRobot
 const app = express();
 app.get('/', (req, res) => res.send('🌐 Haruka Protect ⚡ Online'));
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => logger.info('✅ Serveur Express actif sur le port ' + PORT));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => logger.info('✅ Serveur Express actif sur le port ' + PORT));
 
 // Client Discord
 const client = new Client({
@@ -66,7 +66,7 @@ const loadHandlers = async () => {
 // 🔐 CONNEXION SÉCURISÉE
 client.login(process.env.TOKEN)
     .then(async () => {
-        logger.success(\`🟢 ${client.user.tag} connecté avec succès !\`);
+        logger.success(`🟢 ${client.user.tag} connecté avec succès !`);
         await loadHandlers();
         
         // Statut personnalisé Haruka Protect ⚡

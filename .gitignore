@@ -14,3 +14,7 @@ npm-debug.log*
 # Database
 database/*.json
 !database/example.json
+
+# OS
+.DS_Store
+Thumbs.db
