@@ -1,0 +1,16 @@
+# Fichiers sensibles
+.env
+*.env.local
+config.json
+
+# Logs
+*.log
+logs/
+
+# Node modules
+node_modules/
+npm-debug.log*
+
+# Database
+database/*.json
+!database/example.json
