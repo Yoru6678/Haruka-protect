@@ -50,19 +50,16 @@ client.cache = {
 
 // Chargement des handlers
 const loadHandlers = async () => {
-    const handlers = ['commands', 'events'];
-    
-    for (const handler of handlers) {
-        try {
-            const handlerPath = path.join(__dirname, 'handlers', \`${handler}.js\`);
-            if (fs.existsSync(handlerPath)) {
-                const handlerModule = require(handlerPath);
-                await handlerModule(client);
-                logger.success(\`Handler chargé: ${handler}\`);
-            }
-        } catch (error) {
-            logger.error(\`Erreur handler ${handler}:\`, error);
-        }
+    try {
+        const commandsHandler = require('./handlers/commands');
+        await commandsHandler(client);
+        logger.success('Handler chargé: commands');
+        
+        const eventsHandler = require('./handlers/events');
+        await eventsHandler(client);
+        logger.success('Handler chargé: events');
+    } catch (error) {
+        logger.error('Erreur chargement handlers:', error);
     }
 };
 
