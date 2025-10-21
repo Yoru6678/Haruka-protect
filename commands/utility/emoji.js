@@ -1,14 +1,14 @@
-const HarukaEmbeds = require('../../utils/embeds');
-
-module.exports = {
-    name: 'emoji',
-    description: 'Description de la commande emoji',
-    usage: '+emoji',
-    category: 'utility',
-
-    async execute(message, args, client) {
-        await message.reply({ 
-            embeds: [HarukaEmbeds.info('Commande `emoji` en développement.', 'emoji 🔧 - Haruka Protect ⚡')] 
-        });
-    }
-};
+🔧c🔧o🔧n🔧s🔧t🔧 🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧 🔧=🔧 🔧r🔧e🔧q🔧u🔧i🔧r🔧e🔧(🔧'🔧.🔧.🔧/🔧.🔧.🔧/🔧u🔧t🔧i🔧l🔧s🔧/🔧e🔧m🔧b🔧e🔧d🔧s🔧'🔧)🔧;🔧
+🔧
+🔧m🔧o🔧d🔧u🔧l🔧e🔧.🔧e🔧x🔧p🔧o🔧r🔧t🔧s🔧 🔧=🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧e🔧m🔧o🔧j🔧i🔧'🔧,🔧
+🔧 🔧 🔧 🔧 🔧d🔧e🔧s🔧c🔧r🔧i🔧p🔧t🔧i🔧o🔧n🔧:🔧 🔧'🔧D🔧e🔧s🔧c🔧r🔧i🔧p🔧t🔧i🔧o🔧n🔧 🔧d🔧e🔧 🔧l🔧a🔧 🔧c🔧o🔧m🔧m🔧a🔧n🔧d🔧e🔧 🔧e🔧m🔧o🔧j🔧i🔧'🔧,🔧
+🔧 🔧 🔧 🔧 🔧u🔧s🔧a🔧g🔧e🔧:🔧 🔧'🔧+🔧e🔧m🔧o🔧j🔧i🔧'🔧,🔧
+🔧 🔧 🔧 🔧 🔧c🔧a🔧t🔧e🔧g🔧o🔧r🔧y🔧:🔧 🔧'🔧u🔧t🔧i🔧l🔧i🔧t🔧y🔧'🔧,🔧
+🔧
+🔧 🔧 🔧 🔧 🔧a🔧s🔧y🔧n🔧c🔧 🔧e🔧x🔧e🔧c🔧u🔧t🔧e🔧(🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧,🔧 🔧a🔧r🔧g🔧s🔧,🔧 🔧c🔧l🔧i🔧e🔧n🔧t🔧)🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧i🔧n🔧f🔧o🔧(🔧'🔧C🔧o🔧m🔧m🔧a🔧n🔧d🔧e🔧 🔧`🔧e🔧m🔧o🔧j🔧i🔧`🔧 🔧e🔧n🔧 🔧d🔧é🔧v🔧e🔧l🔧o🔧p🔧p🔧e🔧m🔧e🔧n🔧t🔧.🔧'🔧,🔧 🔧'🔧e🔧m🔧o🔧j🔧i🔧 🔧�🔧�🔧 🔧-🔧 🔧H🔧a🔧r🔧u🔧k🔧a🔧 🔧P🔧r🔧o🔧t🔧e🔧c🔧t🔧 🔧⚡🔧'🔧)🔧]🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧}🔧
+🔧}🔧;🔧

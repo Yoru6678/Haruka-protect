@@ -1,48 +1,48 @@
-const HarukaEmbeds = require('../../utils/embeds');
-
-module.exports = {
-    name: 'kick',
-    description: 'Expulser un membre du serveur',
-    usage: '+kick @membre [raison]',
-    permissions: ['KickMembers'],
-    category: 'moderation',
-
-    async execute(message, args, client) {
-        const target = message.mentions.members.first();
-        
-        if (!target) {
-            return message.reply({ 
-                embeds: [HarukaEmbeds.error('Veuillez mentionner un membre à expulser.')] 
-            });
-        }
-
-        if (!target.kickable) {
-            return message.reply({ 
-                embeds: [HarukaEmbeds.error('Je ne peux pas expulser ce membre.')] 
-            });
-        }
-
-        const reason = args.slice(1).join(' ') || 'Aucune raison spécifiée';
-
-        try {
-            await target.kick(reason);
-            
-            await message.reply({ 
-                embeds: [HarukaEmbeds.success(
-                    \`${target.user.tag} a été expulsé du serveur.\`,
-                    'Membre expulsé ✅ - Haruka Protect ⚡'
-                ).addFields(
-                    { name: 'Raison', value: reason },
-                    { name: 'Modérateur', value: message.author.tag }
-                )] 
-            });
-
-            client.logger.command(\`KICK: ${target.user.tag} par ${message.author.tag} - ${reason}\`);
-            
-        } catch (error) {
-            await message.reply({ 
-                embeds: [HarukaEmbeds.error('Une erreur est survenue lors de l\'expulsion.')] 
-            });
-        }
-    }
-};
+🔧c🔧o🔧n🔧s🔧t🔧 🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧 🔧=🔧 🔧r🔧e🔧q🔧u🔧i🔧r🔧e🔧(🔧'🔧.🔧.🔧/🔧.🔧.🔧/🔧u🔧t🔧i🔧l🔧s🔧/🔧e🔧m🔧b🔧e🔧d🔧s🔧'🔧)🔧;🔧
+🔧
+🔧m🔧o🔧d🔧u🔧l🔧e🔧.🔧e🔧x🔧p🔧o🔧r🔧t🔧s🔧 🔧=🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧k🔧i🔧c🔧k🔧'🔧,🔧
+🔧 🔧 🔧 🔧 🔧d🔧e🔧s🔧c🔧r🔧i🔧p🔧t🔧i🔧o🔧n🔧:🔧 🔧'🔧E🔧x🔧p🔧u🔧l🔧s🔧e🔧r🔧 🔧u🔧n🔧 🔧m🔧e🔧m🔧b🔧r🔧e🔧 🔧d🔧u🔧 🔧s🔧e🔧r🔧v🔧e🔧u🔧r🔧'🔧,🔧
+🔧 🔧 🔧 🔧 🔧u🔧s🔧a🔧g🔧e🔧:🔧 🔧'🔧+🔧k🔧i🔧c🔧k🔧 🔧@🔧m🔧e🔧m🔧b🔧r🔧e🔧 🔧[🔧r🔧a🔧i🔧s🔧o🔧n🔧]🔧'🔧,🔧
+🔧 🔧 🔧 🔧 🔧p🔧e🔧r🔧m🔧i🔧s🔧s🔧i🔧o🔧n🔧s🔧:🔧 🔧[🔧'🔧K🔧i🔧c🔧k🔧M🔧e🔧m🔧b🔧e🔧r🔧s🔧'🔧]🔧,🔧
+🔧 🔧 🔧 🔧 🔧c🔧a🔧t🔧e🔧g🔧o🔧r🔧y🔧:🔧 🔧'🔧m🔧o🔧d🔧e🔧r🔧a🔧t🔧i🔧o🔧n🔧'🔧,🔧
+🔧
+🔧 🔧 🔧 🔧 🔧a🔧s🔧y🔧n🔧c🔧 🔧e🔧x🔧e🔧c🔧u🔧t🔧e🔧(🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧,🔧 🔧a🔧r🔧g🔧s🔧,🔧 🔧c🔧l🔧i🔧e🔧n🔧t🔧)🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧t🔧a🔧r🔧g🔧e🔧t🔧 🔧=🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧m🔧e🔧n🔧t🔧i🔧o🔧n🔧s🔧.🔧m🔧e🔧m🔧b🔧e🔧r🔧s🔧.🔧f🔧i🔧r🔧s🔧t🔧(🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧i🔧f🔧 🔧(🔧!🔧t🔧a🔧r🔧g🔧e🔧t🔧)🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧r🔧e🔧t🔧u🔧r🔧n🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧e🔧r🔧r🔧o🔧r🔧(🔧'🔧V🔧e🔧u🔧i🔧l🔧l🔧e🔧z🔧 🔧m🔧e🔧n🔧t🔧i🔧o🔧n🔧n🔧e🔧r🔧 🔧u🔧n🔧 🔧m🔧e🔧m🔧b🔧r🔧e🔧 🔧à🔧 🔧e🔧x🔧p🔧u🔧l🔧s🔧e🔧r🔧.🔧'🔧)🔧]🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧
+🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧i🔧f🔧 🔧(🔧!🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧k🔧i🔧c🔧k🔧a🔧b🔧l🔧e🔧)🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧r🔧e🔧t🔧u🔧r🔧n🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧e🔧r🔧r🔧o🔧r🔧(🔧'🔧J🔧e🔧 🔧n🔧e🔧 🔧p🔧e🔧u🔧x🔧 🔧p🔧a🔧s🔧 🔧e🔧x🔧p🔧u🔧l🔧s🔧e🔧r🔧 🔧c🔧e🔧 🔧m🔧e🔧m🔧b🔧r🔧e🔧.🔧'🔧)🔧]🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧
+🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧o🔧n🔧s🔧t🔧 🔧r🔧e🔧a🔧s🔧o🔧n🔧 🔧=🔧 🔧a🔧r🔧g🔧s🔧.🔧s🔧l🔧i🔧c🔧e🔧(🔧1🔧)🔧.🔧j🔧o🔧i🔧n🔧(🔧'🔧 🔧'🔧)🔧 🔧|🔧|🔧 🔧'🔧A🔧u🔧c🔧u🔧n🔧e🔧 🔧r🔧a🔧i🔧s🔧o🔧n🔧 🔧s🔧p🔧é🔧c🔧i🔧f🔧i🔧é🔧e🔧'🔧;🔧
+🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧t🔧r🔧y🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧k🔧i🔧c🔧k🔧(🔧r🔧e🔧a🔧s🔧o🔧n🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧s🔧u🔧c🔧c🔧e🔧s🔧s🔧(🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧\🔧`🔧$🔧{🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧u🔧s🔧e🔧r🔧.🔧t🔧a🔧g🔧}🔧 🔧a🔧 🔧é🔧t🔧é🔧 🔧e🔧x🔧p🔧u🔧l🔧s🔧é🔧 🔧d🔧u🔧 🔧s🔧e🔧r🔧v🔧e🔧u🔧r🔧.🔧\🔧`🔧,🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧`🔧M🔧e🔧m🔧b🔧r🔧e🔧 🔧e🔧x🔧p🔧u🔧l🔧s🔧é🔧 🔧✅🔧 🔧-🔧 🔧H🔧a🔧r🔧u🔧k🔧a🔧 🔧P🔧r🔧o🔧t🔧e🔧c🔧t🔧 🔧⚡🔧'🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧)🔧.🔧a🔧d🔧d🔧F🔧i🔧e🔧l🔧d🔧s🔧(🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧{🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧R🔧a🔧i🔧s🔧o🔧n🔧'🔧,🔧 🔧v🔧a🔧l🔧u🔧e🔧:🔧 🔧r🔧e🔧a🔧s🔧o🔧n🔧 🔧}🔧,🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧{🔧 🔧n🔧a🔧m🔧e🔧:🔧 🔧'🔧M🔧o🔧d🔧é🔧r🔧a🔧t🔧e🔧u🔧r🔧'🔧,🔧 🔧v🔧a🔧l🔧u🔧e🔧:🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧a🔧u🔧t🔧h🔧o🔧r🔧.🔧t🔧a🔧g🔧 🔧}🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧)🔧]🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
+🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧c🔧l🔧i🔧e🔧n🔧t🔧.🔧l🔧o🔧g🔧g🔧e🔧r🔧.🔧c🔧o🔧m🔧m🔧a🔧n🔧d🔧(🔧\🔧`🔧K🔧I🔧C🔧K🔧:🔧 🔧$🔧{🔧t🔧a🔧r🔧g🔧e🔧t🔧.🔧u🔧s🔧e🔧r🔧.🔧t🔧a🔧g🔧}🔧 🔧p🔧a🔧r🔧 🔧$🔧{🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧a🔧u🔧t🔧h🔧o🔧r🔧.🔧t🔧a🔧g🔧}🔧 🔧-🔧 🔧$🔧{🔧r🔧e🔧a🔧s🔧o🔧n🔧}🔧\🔧`🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧 🔧c🔧a🔧t🔧c🔧h🔧 🔧(🔧e🔧r🔧r🔧o🔧r🔧)🔧 🔧{🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧a🔧w🔧a🔧i🔧t🔧 🔧m🔧e🔧s🔧s🔧a🔧g🔧e🔧.🔧r🔧e🔧p🔧l🔧y🔧(🔧{🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧e🔧m🔧b🔧e🔧d🔧s🔧:🔧 🔧[🔧H🔧a🔧r🔧u🔧k🔧a🔧E🔧m🔧b🔧e🔧d🔧s🔧.🔧e🔧r🔧r🔧o🔧r🔧(🔧`🔧U🔧n🔧e🔧 🔧e🔧r🔧r🔧e🔧u🔧r🔧 🔧e🔧s🔧t🔧 🔧s🔧u🔧r🔧v🔧e🔧n🔧u🔧e🔧 🔧l🔧o🔧r🔧s🔧 🔧d🔧e🔧 🔧l🔧\🔧'🔧e🔧x🔧p🔧u🔧l🔧s🔧i🔧o🔧n🔧.🔧'🔧)🔧]🔧 🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧)🔧;🔧
+🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧 🔧}🔧
+🔧 🔧 🔧 🔧 🔧}🔧
+🔧}🔧;🔧
