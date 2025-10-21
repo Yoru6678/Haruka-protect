@@ -20,7 +20,7 @@ module.exports = {
         const warnId = parseInt(args[1]);
         if (!warnId) {
             return message.reply({ 
-                embeds: [HarukaEmbeds.error('Veuillez spécifier l'ID de l'avertissement.')] 
+                embeds: [HarukaEmbeds.error('Veuillez spécifier l\'ID de l\'avertissement.')] 
             });
         }
 

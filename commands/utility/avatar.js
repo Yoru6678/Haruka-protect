@@ -3,7 +3,7 @@ const HarukaEmbeds = require('../../utils/embeds');
 
 module.exports = {
     name: 'avatar',
-    description: 'Afficher l'avatar d'un membre',
+    description: 'Afficher l\'avatar d\'un membre',
     usage: '+avatar [@membre]',
     category: 'utility',
 
@@ -12,13 +12,13 @@ module.exports = {
         
         const embed = new EmbedBuilder()
             .setColor(client.config.bot.color)
-            .setTitle(`��️ Avatar de ${target.tag} - Haruka Protect ⚡`)
+            .setTitle(`🖼️ Avatar de ${target.tag} - Haruka Protect ⚡`)
             .setImage(target.displayAvatarURL({ size: 4096, dynamic: true }))
             .setFooter({ text: `Demandé par ${message.author.tag}` });
 
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
-                .setLabel(`Télécharger')
+                .setLabel('Télécharger')
                 .setStyle(ButtonStyle.Link)
                 .setURL(target.displayAvatarURL({ size: 4096 }))
         );

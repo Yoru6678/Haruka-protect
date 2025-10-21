@@ -26,7 +26,7 @@ module.exports = {
             await message.reply({ 
                 embeds: [HarukaEmbeds.success(
                     `${target.user.tag} a été rendu muet pour ${duration}.`,
-                    `Membre muet ✅ - Haruka Protect ⚡'
+                    'Membre muet ✅ - Haruka Protect ⚡'
                 ).addFields(
                     { name: 'Raison', value: reason },
                     { name: 'Modérateur', value: message.author.tag }
@@ -37,7 +37,7 @@ module.exports = {
             
         } catch (error) {
             await message.reply({ 
-                embeds: [HarukaEmbeds.error(`Une erreur est survenue lors du mute.')] 
+                embeds: [HarukaEmbeds.error('Une erreur est survenue lors du mute.')] 
             });
         }
     },

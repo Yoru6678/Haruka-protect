@@ -20,21 +20,21 @@ module.exports = {
 
         if (!whitelistRole || !message.member.roles.cache.has(whitelistRole.id)) {
             return message.reply({ 
-                embeds: [HarukaEmbeds.error('Tu n'es pas dans la whitelist vanish.')] 
+                embeds: [HarukaEmbeds.error('Tu n\'es pas dans la whitelist vanish.')] 
             });
         }
 
         if (!vanishRole) {
             return message.reply({ 
                 embeds: [HarukaEmbeds.error(
-                    'Le rôle vanish n'existe pas. Utilise `+setvanishrole @role` pour le configurer.\n\n**Rôle par défaut:** `vanish`'
+                    'Le rôle vanish n\'existe pas. Utilise `+setvanishrole @role` pour le configurer.\n\n**Rôle par défaut:** `vanish`'
                 )] 
             });
         }
 
         if (!message.member.roles.cache.has(vanishRole.id)) {
             return message.reply({ 
-                embeds: [HarukaEmbeds.warn(`Tu n'as pas le rôle vanish.')] 
+                embeds: [HarukaEmbeds.warn('Tu n\'as pas le rôle vanish.')] 
             });
         }
 
@@ -45,8 +45,8 @@ module.exports = {
             
             return message.reply({ 
                 embeds: [HarukaEmbeds.success(
-                    `Ton rôle vanish a été retiré. Tu es maintenant invisible! ��\n\nUtilise `+unvanish` pour réapparaître.',
-                    `Vanish activé ✅ - Haruka Protect ⚡'
+                    'Ton rôle vanish a été retiré. Tu es maintenant invisible! 👻\n\nUtilise `+unvanish` pour réapparaître.',
+                    'Vanish activé ✅ - Haruka Protect ⚡'
                 )] 
             });
         } catch (error) {

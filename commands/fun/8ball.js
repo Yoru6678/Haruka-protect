@@ -15,29 +15,28 @@ module.exports = {
         }
 
         const responses = [
-            '�� Oui, certainement.',
-            '�� C'est décidément ainsi.',
-            '�� Sans aucun doute.',
-            '�� Oui définitivement.',
-            '�� Vous pouvez compter dessus.',
-            '�� Probablement.',
-            '�� Les signes indiquent que oui.',
-            '�� Mieux vaut ne pas te le dire maintenant.',
-            '�� Impossible de prédire maintenant.',
-            '�� Concentre-toi et demande à nouveau.',
-            '�� Ne compte pas dessus.',
-            '�� Ma réponse est non.',
-            '�� Mes sources disent que non.',
-            '�� Les perspectives ne sont pas bonnes.',
-            '�� Très douteux.'
+            '🎱 Oui, certainement.',
+            '🎱 C\'est décidément ainsi.',
+            '🎱 Sans aucun doute.',
+            '🎱 Oui définitivement.',
+            '🎱 Vous pouvez compter dessus.',
+            '🎱 Probablement.',
+            '🎱 Les signes indiquent que oui.',
+            '🎱 Mieux vaut ne pas te le dire maintenant.',
+            '🎱 Impossible de prédire maintenant.',
+            '🎱 Concentre-toi et demande à nouveau.',
+            '🎱 Ne compte pas dessus.',
+            '🎱 Ma réponse est non.',
+            '🎱 Mes sources disent que non.',
+            '🎱 Les perspectives ne sont pas bonnes.',
+            '🎱 Très douteux.'
         ];
 
         const response = responses[Math.floor(Math.random() * responses.length)];
         
         const embed = HarukaEmbeds.custom(
-            '�� Boule Magique - Haruka Protect ⚡',
-            `**Question:** ${question}\
-**Réponse:** ${response}`
+            '🎱 Boule Magique - Haruka Protect ⚡',
+            `**Question:** ${question}\n**Réponse:** ${response}`
         );
 
         await message.reply({ embeds: [embed] });

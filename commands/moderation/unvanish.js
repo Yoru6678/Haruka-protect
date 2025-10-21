@@ -20,21 +20,21 @@ module.exports = {
 
         if (!whitelistRole || !message.member.roles.cache.has(whitelistRole.id)) {
             return message.reply({ 
-                embeds: [HarukaEmbeds.error('Tu n'es pas autorisé à utiliser cette commande.')] 
+                embeds: [HarukaEmbeds.error('Tu n\'es pas autorisé à utiliser cette commande.')] 
             });
         }
 
         if (!vanishRole) {
             return message.reply({ 
                 embeds: [HarukaEmbeds.error(
-                    'Le rôle vanish n'existe pas. Utilise `+setvanishrole @role` pour le configurer.\n\n**Rôle par défaut:** `vanish`'
+                    'Le rôle vanish n\'existe pas. Utilise `+setvanishrole @role` pour le configurer.\n\n**Rôle par défaut:** `vanish`'
                 )] 
             });
         }
 
         if (message.member.roles.cache.has(vanishRole.id)) {
             return message.reply({ 
-                embeds: [HarukaEmbeds.warn(`Tu as déjà le rôle vanish.')] 
+                embeds: [HarukaEmbeds.warn('Tu as déjà le rôle vanish.')] 
             });
         }
 
@@ -45,14 +45,14 @@ module.exports = {
             
             return message.reply({ 
                 embeds: [HarukaEmbeds.success(
-                    `Ton rôle vanish t'a été redonné. Tu es maintenant visible! ��\n\nUtilise `+vanish` pour disparaître à nouveau.',
-                    `Vanish désactivé ✅ - Haruka Protect ⚡'
+                    'Ton rôle vanish t\'a été redonné. Tu es maintenant visible! 👁️\n\nUtilise `+vanish` pour disparaître à nouveau.',
+                    'Vanish désactivé ✅ - Haruka Protect ⚡'
                 )] 
             });
         } catch (error) {
             client.logger.error('Erreur unvanish:', error);
             return message.reply({ 
-                embeds: [HarukaEmbeds.error('Impossible d'ajouter le rôle vanish.')] 
+                embeds: [HarukaEmbeds.error('Impossible d\'ajouter le rôle vanish.')] 
             });
         }
     }

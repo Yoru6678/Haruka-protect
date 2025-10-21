@@ -2,7 +2,7 @@ const HarukaEmbeds = require('../../utils/embeds');
 
 module.exports = {
     name: 'unmute',
-    description: 'Lever le mute d'un membre',
+    description: 'Lever le mute d\'un membre',
     usage: '+unmute @membre',
     permissions: ['ModerateMembers'],
     category: 'moderation',
@@ -22,7 +22,7 @@ module.exports = {
             await message.reply({ 
                 embeds: [HarukaEmbeds.success(
                     `${target.user.tag} n'est plus muet.`,
-                    `Mute levé ✅ - Haruka Protect ⚡'
+                    'Mute levé ✅ - Haruka Protect ⚡'
                 )] 
             });
 
@@ -30,7 +30,7 @@ module.exports = {
             
         } catch (error) {
             await message.reply({ 
-                embeds: [HarukaEmbeds.error(`Une erreur est survenue lors du unmute.')] 
+                embeds: [HarukaEmbeds.error('Une erreur est survenue lors du unmute.')] 
             });
         }
     }

@@ -18,15 +18,15 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor(client.config.bot.color)
-            .setTitle('❓ Centre d\\'Aide - Haruka Protect ⚡')
-            .setDescription(`**${totalCommands} commandes disponibles**\nUtilise le menu déroulant pour explorer ou `${client.config.bot.prefix}help [commande]` pour plus d'infos`)
+            .setTitle('❓ Centre d\'Aide - Haruka Protect ⚡')
+            .setDescription(`**${totalCommands} commandes disponibles**\nUtilise le menu déroulant pour explorer ou \`${client.config.bot.prefix}help [commande]\` pour plus d'infos`)
             .addFields(
-                { name: '🛡️ Modération', value: ``${categories.moderation.length}`` commandes`, inline: true },
-                { name: '🔧 Utilitaires', value: ``${categories.utility.length}`` commandes`, inline: true },
-                { name: '🎫 Tickets', value: ``${categories.tickets.length}`` commandes`, inline: true },
-                { name: '🎉 Fun', value: ``${categories.fun.length}`` commandes`, inline: true },
-                { name: '💰 Économie', value: ``${categories.economy.length}`` commandes`, inline: true },
-                { name: '🎵 Musique', value: ``${categories.music.length}`` commandes`, inline: true }
+                { name: '🛡️ Modération', value: `\`${categories.moderation.length}\` commandes`, inline: true },
+                { name: '🔧 Utilitaires', value: `\`${categories.utility.length}\` commandes`, inline: true },
+                { name: '🎫 Tickets', value: `\`${categories.tickets.length}\` commandes`, inline: true },
+                { name: '🎉 Fun', value: `\`${categories.fun.length}\` commandes`, inline: true },
+                { name: '💰 Économie', value: `\`${categories.economy.length}\` commandes`, inline: true },
+                { name: '🎵 Musique', value: `\`${categories.music.length}\` commandes`, inline: true }
             )
             .setFooter({ text: `${client.config.bot.footer} • Version ${client.config.bot.version}` });
 
@@ -84,7 +84,7 @@ module.exports = {
         collector.on('collect', async (interaction) => {
             if (interaction.user.id !== userId) {
                 return interaction.reply({ 
-                    embeds: [HarukaEmbeds.error('Seul l\\'auteur de la commande peut utiliser ce menu.')],
+                    embeds: [HarukaEmbeds.error('Seul l\'auteur de la commande peut utiliser ce menu.')],
                     ephemeral: true 
                 });
             }
@@ -103,7 +103,7 @@ module.exports = {
         if (!category) return;
 
         const commandsList = category.map(cmd => 
-            `• `${cmd.name}` - ${cmd.description || 'Aucune description'}`
+            `• \`${cmd.name}\` - ${cmd.description || 'Aucune description'}`
         ).join('\n');
 
         const categoryEmbed = new EmbedBuilder()
@@ -132,7 +132,7 @@ module.exports = {
         const command = client.commands.get(commandName.toLowerCase());
         if (!command) {
             return message.reply({ 
-                embeds: [HarukaEmbeds.error(`La commande `${commandName}` n'existe pas.`)] 
+                embeds: [HarukaEmbeds.error(`La commande \`${commandName}\` n'existe pas.`)] 
             });
         }
 
@@ -141,10 +141,10 @@ module.exports = {
             .setTitle(`❓ Aide: ${command.name} - Haruka Protect ⚡`)
             .setDescription(command.description || 'Aucune description disponible')
             .addFields(
-                { name: 'Utilisation', value: ``${command.usage || `${client.config.bot.prefix}${command.name}`}``, inline: true },
-                { name: 'Catégorie', value: ``${command.category || 'Non classée'}``, inline: true },
-                { name: 'Permissions', value: command.permissions ? command.permissions.map(p => ``${p}``).join(', ') : 'Aucune', inline: true },
-                { name: 'Alias', value: command.aliases ? command.aliases.map(a => ``${a}``).join(', ') : 'Aucun', inline: false }
+                { name: 'Utilisation', value: `\`${command.usage || `${client.config.bot.prefix}${command.name}`}\``, inline: true },
+                { name: 'Catégorie', value: `\`${command.category || 'Non classée'}\``, inline: true },
+                { name: 'Permissions', value: command.permissions ? command.permissions.map(p => `\`${p}\``).join(', ') : 'Aucune', inline: true },
+                { name: 'Alias', value: command.aliases ? command.aliases.map(a => `\`${a}\``).join(', ') : 'Aucun', inline: false }
             )
             .setFooter({ text: `${client.config.bot.footer} • Syntaxe: < > = requis, [ ] = optionnel` });
 

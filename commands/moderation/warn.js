@@ -34,7 +34,7 @@ module.exports = {
             'Avertissement ✅ - Haruka Protect ⚡'
         ).addFields(
             { name: 'Raison', value: reason },
-            { name: 'Total d'avertissements', value: `${warnData.warns.length}`, inline: true }
+            { name: 'Total d\'avertissements', value: `${warnData.warns.length}`, inline: true }
         );
 
         await message.reply({ embeds: [embed] });

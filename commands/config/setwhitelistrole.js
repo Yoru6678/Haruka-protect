@@ -22,15 +22,15 @@ module.exports = {
             
             await message.reply({ 
                 embeds: [HarukaEmbeds.success(
-                    `Le rôle ${role} a été défini comme whitelist vanish.\n\n**Rôle par défaut:** `whitelist``,
-                    `Rôle whitelist configuré ✅ - Haruka Protect ⚡'
+                    `Le rôle ${role} a été défini comme whitelist vanish.\n\n**Rôle par défaut:** \`whitelist\``,
+                    'Rôle whitelist configuré ✅ - Haruka Protect ⚡'
                 )] 
             });
 
             client.logger.command(`SETWHITELISTROLE: ${message.author.tag} a défini le rôle whitelist: ${role.name}`);
 
         } catch (error) {
-            client.logger.error(`Erreur setwhitelistrole:', error);
+            client.logger.error('Erreur setwhitelistrole:', error);
             await message.reply({ 
                 embeds: [HarukaEmbeds.error('Une erreur est survenue lors de la configuration du rôle whitelist.')] 
             });

@@ -22,15 +22,15 @@ module.exports = {
             
             await message.reply({ 
                 embeds: [HarukaEmbeds.success(
-                    `Le rôle ${role} a été défini comme rôle vanish.\n\n**Rôle par défaut:** `vanish``,
-                    `Rôle vanish configuré ✅ - Haruka Protect ⚡'
+                    `Le rôle ${role} a été défini comme rôle vanish.\n\n**Rôle par défaut:** \`vanish\``,
+                    'Rôle vanish configuré ✅ - Haruka Protect ⚡'
                 )] 
             });
 
             client.logger.command(`SETVANISHROLE: ${message.author.tag} a défini le rôle vanish: ${role.name}`);
 
         } catch (error) {
-            client.logger.error(`Erreur setvanishrole:', error);
+            client.logger.error('Erreur setvanishrole:', error);
             await message.reply({ 
                 embeds: [HarukaEmbeds.error('Une erreur est survenue lors de la configuration du rôle vanish.')] 
             });

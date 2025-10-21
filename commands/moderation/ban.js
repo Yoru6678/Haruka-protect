@@ -30,7 +30,7 @@ module.exports = {
             await message.reply({ 
                 embeds: [HarukaEmbeds.success(
                     `${target.user.tag} a été banni du serveur.`,
-                    `Membre banni ✅ - Haruka Protect ⚡'
+                    'Membre banni ✅ - Haruka Protect ⚡'
                 ).addFields(
                     { name: 'Raison', value: reason },
                     { name: 'Modérateur', value: message.author.tag }
@@ -41,7 +41,7 @@ module.exports = {
             
         } catch (error) {
             await message.reply({ 
-                embeds: [HarukaEmbeds.error(`Une erreur est survenue lors du bannissement.')] 
+                embeds: [HarukaEmbeds.error('Une erreur est survenue lors du bannissement.')] 
             });
         }
     }

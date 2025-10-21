@@ -25,7 +25,7 @@ module.exports = {
             setTimeout(() => reply.delete(), 5000);
         } catch (error) {
             await message.reply({ 
-                embeds: [HarukaEmbeds.error(`Je ne peux pas supprimer ces messages.')] 
+                embeds: [HarukaEmbeds.error('Je ne peux pas supprimer ces messages.')] 
             });
         }
     }

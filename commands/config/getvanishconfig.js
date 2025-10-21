@@ -15,21 +15,21 @@ module.exports = {
         const whitelistRole = config.whitelistRole ? message.guild.roles.cache.get(config.whitelistRole) : null;
 
         const embed = HarukaEmbeds.custom(
-            'Configuration Vanish �� - Haruka Protect ⚡',
+            'Configuration Vanish 🔹 - Haruka Protect ⚡',
             'Statut de la configuration du système vanish:'
         ).addFields(
             { 
-                name: '�� Rôle Vanish', 
-                value: vanishRole ? `${vanishRole} (`${vanishRole.id}`)` : '❌ Non configuré\n**Par défaut:** `vanish`', 
+                name: '🔹 Rôle Vanish', 
+                value: vanishRole ? `${vanishRole} (\`${vanishRole.id}\`)` : '❌ Non configuré\n**Par défaut:** `vanish`', 
                 inline: true 
             },
             { 
-                name: '�� Rôle Whitelist', 
-                value: whitelistRole ? `${whitelistRole} (`${whitelistRole.id}`)` : '❌ Non configuré\n**Par défaut:** `whitelist`', 
+                name: '🔹 Rôle Whitelist', 
+                value: whitelistRole ? `${whitelistRole} (\`${whitelistRole.id}\`)` : '❌ Non configuré\n**Par défaut:** `whitelist`', 
                 inline: true 
             },
             { 
-                name: '�� Commandes disponibles', 
+                name: '🔹 Commandes disponibles', 
                 value: '`+vanish` - Disparaître\n`+unvanish` - Réapparaître\n`+setvanishrole` - Configurer le rôle\n`+setwhitelistrole` - Configurer la whitelist', 
                 inline: false 
             }

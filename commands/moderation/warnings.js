@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
     name: 'warnings',
-    description: 'Voir les avertissements d'un membre',
+    description: 'Voir les avertissements d\'un membre',
     usage: '+warnings @membre',
     permissions: ['ModerateMembers'],
     category: 'moderation',
@@ -22,15 +22,14 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor(client.config.bot.color)
-            .setTitle(`�� Avertissements de ${target.user.tag} - Haruka Protect ⚡`)
+            .setTitle(`⚠️ Avertissements de ${target.user.tag} - Haruka Protect ⚡`)
             .setDescription(`Total: ${warnData.warns.length} avertissement(s)`)
             .setFooter({ text: client.config.bot.footer });
 
         warnData.warns.slice(0, 10).forEach(warn => {
             embed.addFields({
                 name: `#${warn.id} - ${new Date(warn.date).toLocaleDateString('fr-FR')}`,
-                value: `**Raison:** ${warn.reason}\
-**Modérateur:** ${warn.moderator}`,
+                value: `**Raison:** ${warn.reason}\n**Modérateur:** ${warn.moderator}`,
                 inline: false
             });
         });
@@ -43,7 +42,7 @@ module.exports = {
         if (!fs.existsSync(filePath)) return { warns: [] };
         
         try {
-            const data = JSON.parse(fs.readFileSync(filePath, `utf8'));
+            const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
             return data[userId] || { warns: [] };
         } catch {
             return { warns: [] };
