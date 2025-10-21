@@ -39,7 +39,7 @@ module.exports = {
     },
 
     getWarnData(guildId, userId) {
-        const filePath = path.join(__dirname, `../../../database/warns', `${guildId}.json`);
+        const filePath = path.join(__dirname, '../../../database/warns', `${guildId}.json`);
         if (!fs.existsSync(filePath)) return { warns: [] };
         
         try {

@@ -431,13 +431,13 @@ function runCompleteFix() {
     createEssentialFiles();
     checkHandlers();
     
-    console.log(`\n🎉 CORRECTION TERMINÉE !`);
-    console.log(`\n📊 RÉSULTAT FINAL:`);
-    console.log(`✅ ${fixedCount} corrections appliquées`);
-    console.log(`❌ ${errorCount} erreurs rencontrées`);
+    console.log('\n🎉 CORRECTION TERMINÉE !');
+    console.log('\n📊 RÉSULTAT FINAL:');
+    console.log('✅ ' + fixedCount + ' corrections appliquées');
+    console.log('❌ ' + errorCount + ' erreurs rencontrées');
     
     console.log('\n🎯 COMMANDES MAINTENANT FONCTIONNELLES:');
-    console.log('   • +help - Menu d\\'aide complet');
+    console.log('   • +help - Menu d\'aide complet');
     console.log('   • +userinfo [@membre] - Infos utilisateur');
     console.log('   • +serverinfo - Infos serveur');
     console.log('   • +ban @membre [raison] - Bannir');
@@ -461,8 +461,8 @@ function runCompleteFix() {
     console.log('2. Testez la commande: +help');
     console.log('3. Toutes les commandes principales devraient fonctionner!');
     console.log('\n💡 Si certaines commandes montrent encore "en développement",');
-    console.log('   c\\'est qu\\'elles n\\'ont pas encore été implémentées.');
+    console.log('   c\'est qu\'elles n\'ont pas encore été implémentées.');
 }
 
 // Lancer la correction
-runCompleteFix();
+runCompleteFix(); 

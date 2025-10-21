@@ -9,24 +9,35 @@ module.exports = {
 
     async execute(message, args, client) {
         const guild = message.guild;
-        
+
         const embed = new EmbedBuilder()
             .setColor(client.config.bot.color)
-            .setTitle(`�� ${guild.name} - Haruka Protect ⚡`)
-            .setThumbnail(guild.iconURL({ dynamic: true, size: 512 }))
+            .setTitle(`🏠 Informations du serveur - ${guild.name}`)
+            .setThumbnail(guild.iconURL({ dynamic: true }))
             .addFields(
-                { name: `�� ID', value: guild.id, inline: true },
-                { name: '�� Propriétaire', value: `<@${guild.ownerId}>`, inline: true },
-                { name: `�� Créé le', value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:D>`, inline: true },
-                { name: `�� Membres', value: `${guild.memberCount}`, inline: true },
-                { name: `�� Statistiques', value: `�� Salons: ${guild.channels.cache.size}\
-�� Rôles: ${guild.roles.cache.size}\
-�� Émojis: ${guild.emojis.cache.size}`, inline: true },
-                { name: `�� Boost', value: `Niveau: ${guild.premiumTier}\
-Boosts: ${guild.premiumSubscriptionCount || 0}`, inline: true }
+                { name: '📛 Nom', value: guild.name, inline: true },
+                { name: '🆔 ID', value: guild.id, inline: true },
+                { name: '👑 Propriétaire', value: `${(await guild.fetchOwner()).user.tag}`, inline: true },
+                { name: '📅 Créé le', value: `${guild.createdAt.toLocaleDateString('fr-FR')}`, inline: true },
+                { name: '👥 Membres', value: `${guild.memberCount}` + ' membres', inline: true },
+                { name: '🎭 Rôles', value: `${guild.roles.cache.size}` + ' rôles', inline: true },
+                { name: '📁 Salons', value: `${guild.channels.cache.size}` + ' salons', inline: true },
+                { name: '🔐 Niveau de vérification', value: this.getVerificationLevel(guild.verificationLevel), inline: true },
+                { name: '💾 Boost', value: `Niveau ${guild.premiumTier} (${guild.premiumSubscriptionCount} boosts)`, inline: true }
             )
-            .setFooter({ text: `Demandé par ${message.author.tag}` });
+            .setFooter({ text: 'Haruka Protect ⚡' });
 
         await message.reply({ embeds: [embed] });
+    },
+
+    getVerificationLevel(level) {
+        const levels = {
+            NONE: 'Aucune',
+            LOW: 'Faible',
+            MEDIUM: 'Moyenne',
+            HIGH: 'Élevée',
+            VERY_HIGH: 'Très élevée'
+        };
+        return levels[level] || 'Inconnu';
     }
 };

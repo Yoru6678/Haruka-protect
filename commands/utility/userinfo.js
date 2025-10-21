@@ -3,27 +3,38 @@ const HarukaEmbeds = require('../../utils/embeds');
 
 module.exports = {
     name: 'userinfo',
-    description: 'Affiche les informations d'un membre',
+    description: 'Affiche les informations sur un membre',
     usage: '+userinfo [@membre]',
     category: 'utility',
 
     async execute(message, args, client) {
-        const target = message.mentions.members.first() || message.member;
-        
+        const target = message.mentions.members?.first() || message.member;
+        const user = target.user;
+
         const embed = new EmbedBuilder()
             .setColor(client.config.bot.color)
-            .setTitle(`�� Informations de ${target.user.tag} - Haruka Protect ⚡`)
-            .setThumbnail(target.user.displayAvatarURL({ dynamic: true, size: 512 }))
+            .setTitle(`👤 Informations sur ${user.tag} - Haruka Protect ⚡`)
+            .setThumbnail(user.displayAvatarURL({ dynamic: true }))
             .addFields(
-                { name: `�� ID', value: target.user.id, inline: true },
-                { name: '�� Surnom', value: target.nickname || 'Aucun', inline: true },
-                { name: '�� Bot', value: target.user.bot ? 'Oui' : 'Non', inline: true },
-                { name: '�� Compte créé', value: `<t:${Math.floor(target.user.createdTimestamp / 1000)}:R>`, inline: true },
-                { name: `�� A rejoint', value: `<t:${Math.floor(target.joinedTimestamp / 1000)}:R>`, inline: true },
-                { name: `�� Rôles (${target.roles.cache.size - 1})`, value: target.roles.cache.size > 1 ? target.roles.cache.filter(r => r.id !== message.guild.id).map(r => r.toString()).slice(0, 10).join(', ') : 'Aucun', inline: false }
+                { name: '📛 Pseudonyme', value: `${user.tag}`, inline: true },
+                { name: '🆔 ID', value: user.id, inline: true },
+                { name: '📅 Compte créé', value: `${user.createdAt.toLocaleDateString('fr-FR')}`, inline: true },
+                { name: '🔗 Serveur rejoint', value: `${target.joinedAt?.toLocaleDateString('fr-FR') || 'Inconnu'}`, inline: true },
+                { name: '🎭 Rôles', value: `${target.roles.cache.size - 1}` + ' rôles', inline: true },
+                { name: '📊 Statut', value: this.getStatus(target.presence?.status || 'offline'), inline: true }
             )
             .setFooter({ text: `Demandé par ${message.author.tag}` });
 
         await message.reply({ embeds: [embed] });
+    },
+
+    getStatus(status) {
+        const statuses = {
+            online: '🟢 En ligne',
+            idle: '🟡 Inactif',
+            dnd: '🔴 Ne pas déranger',
+            offline: '⚫ Hors ligne'
+        };
+        return statuses[status] || '⚫ Inconnu';
     }
 };

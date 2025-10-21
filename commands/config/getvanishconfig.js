@@ -20,12 +20,12 @@ module.exports = {
         ).addFields(
             { 
                 name: '�� Rôle Vanish', 
-                value: vanishRole ? `${vanishRole} (\`${vanishRole.id}\`)` : '❌ Non configuré\n**Par défaut:** `vanish`', 
+                value: vanishRole ? `${vanishRole} (`${vanishRole.id}`)` : '❌ Non configuré\n**Par défaut:** `vanish`', 
                 inline: true 
             },
             { 
                 name: '�� Rôle Whitelist', 
-                value: whitelistRole ? `${whitelistRole} (\`${whitelistRole.id}\`)` : '❌ Non configuré\n**Par défaut:** `whitelist`', 
+                value: whitelistRole ? `${whitelistRole} (`${whitelistRole.id}`)` : '❌ Non configuré\n**Par défaut:** `whitelist`', 
                 inline: true 
             },
             { 
